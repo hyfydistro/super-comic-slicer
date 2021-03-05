@@ -1,0 +1,242 @@
+@use "../base";
+
+// ====
+// MAIN
+// ====
+
+// # DEFAULT || LGE DEVICES
+
+// L/R margins / paddings
+main h2,
+main h3,
+p {
+    margin-left: 32px;
+}
+
+main {
+    padding-top: base.$desktop-space-lv-2;
+    color: base.$text-color-70;
+}
+
+main h2 {
+    margin-bottom: base.$desktop-space-lv-1;
+}
+
+main h3 {
+    margin-bottom: base.$desktop-space-lv-1;
+}
+
+main p {
+    display: block;
+    margin-bottom: base.$desktop-space-lv-1;
+}
+
+.dropzone {
+    height: 27vh;
+    display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 4px dashed base.$text-color-50;
+    padding: {
+        top: base.$desktop-space-lv-half;
+        bottom: base.$desktop-space-lv-half;
+    }
+    margin-bottom: base.$desktop-space-lv-1;
+    cursor: pointer;
+}
+
+// * Modifier
+.dropzone--over {
+    border: 4px solid base.$primary-color-40;
+}
+
+.dropzone__upload-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: base.$desktop-space-lv-half;
+}
+
+.dropzone p {
+    margin-bottom: base.$desktop-space-lv-half;
+}
+
+// ! WIP button
+// - text position
+// - button aligning to right without other element stacking
+
+.preview {
+    // padding: base.$desktop-space-lv-1 32px;
+    padding: {
+        bottom: base.$desktop-space-lv-1;
+        // L/R margins
+        left: 32px;
+        right: 32px;
+    }
+    border: 1px solid base.$text-color-50;
+    border-radius: 5%;
+    margin-bottom: base.$desktop-space-lv-1;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+// * Used with script
+.preview.hidden {
+    display: none;
+}
+
+// !
+// ? Check is size is similar to webtoon ratio
+.preview__image-block {
+    width: 53.6px;
+    height: 166.8px;
+    background-color: aquamarine;
+    cursor: grab;
+    margin-top: base.$desktop-space-lv-1;
+    margin-right: base.$desktop-space-lv-1;
+}
+
+// * used with script
+.preview__image-block.grabbing {
+    cursor: grabbing;
+}
+
+.preview__clear-btn-container {
+    text-align: right;
+    @include base.tablet-padding-preset;
+}
+
+.preview__clear-btn {
+    outline: none;
+    display: inline-block;
+    // float: right;
+    // clear: both;
+    // display: block;
+    // display: flex;
+    // justify-content: flex-end;
+    // align-items: center;
+    padding: 18px calc(18px * 2);
+    // text-align: center;
+    // vertical-align: middle;
+    // * Hotfix: center the text vertically
+    line-height: 0.8;
+    color: base.$secondary-color-60;
+    border: 1.5px solid base.$secondary-color-60;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    margin-bottom: base.$desktop-space-lv-1;
+}
+
+// ELEMENT STATE:
+
+.preview__clear-btn:hover {
+    color: base.$secondary-color-05;
+    background-color: base.$secondary-color-60;
+}
+
+.preview__clear-btn:focus {
+    color: base.$secondary-color-05;
+    background-color: base.$secondary-color-60;
+}
+
+.preview__clear-btn:active {
+    color: base.$secondary-color-05;
+    background-color: base.$secondary-color-40;
+}
+
+.preview__clear-btn.disabled {
+    // add color
+    // change pointer (?)
+}
+
+.close-btn {
+    position: relative;
+    top: -11px;
+    left: 43px;
+    background: url(images/remove-icon.svg) no-repeat;
+    background-size: 22px 22px;
+    width: 22px;
+    height: 22px;
+    border: none;
+    cursor: pointer;
+
+}
+
+// .close-btn,
+// .close-btn img {
+//     width: 44px;
+//     height: 44px;
+// }
+
+
+// #SML DEVICES
+
+@media all and (max-width: 576px) {
+    // L/R margins / paddings
+    main h2,
+    main h3,
+    p {
+        margin-left: 16px;
+    }
+
+    main {
+        padding-top: base.$mobile-space-lv-2;
+    }
+
+    main h2 {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    main h3 {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    main p {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    .dropzone {
+        padding: {
+            top: base.$desktop-space-lv-half;
+            bottom: base.$desktop-space-lv-half;
+        }
+        margin-bottom: base.$desktop-space-lv-1;
+    }
+
+    .dropzone__upload-icon {
+        margin-bottom: base.$mobile-space-lv-half;
+    }
+
+    .dropzone p {
+        margin-bottom: base.$mobile-space-lv-half;
+    }
+
+    .preview {
+        // padding: base.$mobile-space-lv-1 16px;
+        padding: {
+            bottom: base.$mobile-space-lv-1;
+            // L/R margins
+            left: 16px;
+            right: 16px;
+        }
+        border-radius: 5%;
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    .preview__image-block {
+        margin-top: base.$mobile-space-lv-1;
+        margin-right: base.$mobile-space-lv-1;
+    }
+
+    .preview__clear-btn-container {
+        @include base.mobile-padding-preset;
+    }
+
+    .preview__clear-btn {
+        height: 42px;
+        border: 1.5px solid base.$secondary-color-60;
+        padding: 14px calc(14px * 2);
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+}
