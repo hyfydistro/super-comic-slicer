@@ -4,7 +4,6 @@
 
 // TODO
 // - add style guide typography here
-// - write a responsive design in _header.scss
 
 // # TYPEFACE #1
 // @font-face {
@@ -109,15 +108,15 @@ html {
     }
     h2 {
         font-family: $secondary-fontface;
-        font-weight: normal;
+        font-weight: bold;
         // line-height: calc(1rem * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio} * 1.1);
     }
     h3 {
-        // font-family: "type1";
-        font-weight: bold;
+        font-family: $secondary-fontface;
+        // font-weight: bold;
     }
     p {
-        // font-family: "type2";
+        font-family: $secondary-fontface;
         font-weight: normal;
         font-size: $desktop-base-font-size;
         line-height: 1.5;
