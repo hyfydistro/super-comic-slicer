@@ -113,7 +113,7 @@ html {
     }
     h3 {
         font-family: $secondary-fontface;
-        // font-weight: bold;
+        font-weight: normal;
     }
     p {
         font-family: $secondary-fontface;
@@ -143,7 +143,8 @@ html {
     h2 {
         font-size: calc(1rem * #{$desktop-body-text-scale-ratio} * #{$desktop-body-text-scale-ratio});
     }
-    h3 {
+    h3,
+    .preview__clear-btn {
         font-size: calc(1rem * #{$desktop-body-text-scale-ratio});
     }
     // }
@@ -157,6 +158,10 @@ html {
 // # Font Styles
 .text-bold {
     font-weight: bold;
+}
+
+p.text-small {
+    font-size: 12px;
 }
 
 // ========================
@@ -242,7 +247,8 @@ html {
         h2 {
             font-size: calc(1rem * #{$mobile-body-text-scale-ratio} * #{$mobile-body-text-scale-ratio});
         }
-        h3 {
+        h3,
+        .preview__clear-btn {
             font-size: calc(1rem * #{$mobile-body-text-scale-ratio});
         }
         // }
