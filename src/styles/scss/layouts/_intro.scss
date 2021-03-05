@@ -9,10 +9,13 @@
 .intro {
     padding-bottom: base.$desktop-space-lv-2;
     @include base.tablet-padding-preset;
+    max-width: 992px;
+    margin: 0 auto;
 }
 
 .intro p {
     margin-bottom: base.$desktop-space-lv-1;
+    color: base.$text-color-70;
 }
 
 .intro img {
