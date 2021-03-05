@@ -1,0 +1,256 @@
+// ==========
+// TYPOGRAPHY
+// ==========
+
+// TODO
+// - add style guide typography here
+// - write a responsive design in _header.scss
+
+// # TYPEFACE #1
+// @font-face {
+//     font-family: "type1";
+//     src: url("./fonts/") format("truetype");
+//     font-weight: normal;
+//     font-style: normal;
+// }
+
+// @font-face {
+//     font-family: "type1";
+//     src: url("./fonts/") format("truetype");
+//     font-weight: normal;
+//     font-style: italic;
+// }
+
+// @font-face {
+//     font-family: "type1";
+//     src: url("./fonts/") format("truetype");
+//     font-weight: bold;
+//     font-style: normal;
+// }
+
+// // # TYPEFACE #2
+// @font-face {
+//     font-family: "type2";
+//     src: url("./fonts/") format("");
+//     font-weight: normal;
+//     font-style: normal;
+// }
+
+// @font-face {
+//     font-family: "type2";
+//     src: url("./fonts/") format("");
+//     font-weight: normal;
+//     font-style: italic;
+// }
+
+// @font-face  {
+//     font-family: "type2";
+//     src: url("./fonts/") format("");
+//     font-weight: bold;
+//     font-style: normal;
+// }
+
+// ! e.g. >>
+// FONT FACE
+$primary-fontface: Josefin Sans, sans-serif, "Arial";
+$secondary-fontface: Quicksand, sans-serif, "Arial";
+// $text-fontface: "type2", sans-serif,'Times New Roman';
+
+// BASE VALUE
+$mobile-base-font-size: 14px;
+$desktop-base-font-size: 18px;
+
+// MDOULAR-SCALE
+// Mobile
+// $mobile-header-text-scale-ratio: 1.333;
+$mobile-body-text-scale-ratio: 1.25;
+// Tablet-Desktop
+// $desktop-header-text-scale-ratio: 1.5;
+$desktop-body-text-scale-ratio: 1.25;
+// ! <<
+
+// ================================
+// # DEFAULT || DESKTOP VIEW
+// ================================
+// ! e.g. >>
+// Font base: 18px
+
+// Modular Scale: 1.5
+// h1 - 60.75px | 3.375em
+// h2 - 40.5px | 2.25em
+// h3 - 27px | 1.5em
+// p - 18px | 1em
+// caption - 18px
+
+// Modular Scale: 1.414
+// h1 - 50.889px | 2.827em
+// h2 - 35.989px | 1.999em
+// h3 - 25.452px | 1.414em
+// p - 18px | 1em
+// caption 18px
+// ! <<
+
+// ? Consider:
+// Type
+// - letter spacing / tracking
+// Media query
+// - max-height
+
+html {
+    font-size: $desktop-base-font-size;
+    h1 {
+        font-family: $primary-fontface;
+        font-weight: normal;
+        // line-height: calc(
+        //     1rem * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio} *
+        //         1.1
+        // );
+        text-transform: uppercase;
+    }
+    h2 {
+        font-family: $secondary-fontface;
+        font-weight: normal;
+        // line-height: calc(1rem * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio} * 1.1);
+    }
+    h3 {
+        // font-family: "type1";
+        font-weight: bold;
+    }
+    p {
+        // font-family: "type2";
+        font-weight: normal;
+        font-size: $desktop-base-font-size;
+        line-height: 1.5;
+    }
+    // header {
+    //     h1 {
+    //         font-size: calc(
+    //             1rem * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio}
+    //         );
+    //     }
+    //     h2 {
+    //         font-size: calc(1rem * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio});
+    //     }
+    //     h3 {
+    //         font-size: calc(1rem * #{$desktop-header-text-scale-ratio});
+    //     }
+    // }
+    // main {
+    h1 {
+        font-size: calc(
+            1rem * #{$desktop-body-text-scale-ratio} * #{$desktop-body-text-scale-ratio} * #{$desktop-body-text-scale-ratio}
+        );
+    }
+    h2 {
+        font-size: calc(1rem * #{$desktop-body-text-scale-ratio} * #{$desktop-body-text-scale-ratio});
+    }
+    h3 {
+        font-size: calc(1rem * #{$desktop-body-text-scale-ratio});
+    }
+    // }
+    // footer {
+    //     p {
+    //         font-size: 10px;
+    //     }
+    // }
+}
+
+// # Font Styles
+.text-bold {
+    font-weight: bold;
+}
+
+// ========================
+// # TABLET VIEW AND LIMITS
+// ========================
+// ! e.g. >>
+// Font base: 18px
+
+// Modular Scale: 1.5
+
+// h1 - 60.75px | 3.375em
+// h2 - 40.5px | 2.25em
+// h3 - 27px | 1.5em
+// p - 18px | 1em
+// caption - 18px
+
+// Modular Scale: 1.414
+
+// h1 - 50.889px | 2.827em
+// h2 - 35.989px | 1.999em
+// h3 - 25.452px | 1.414em
+// p - 18px | 1em
+// caption 18px
+// ! <<
+
+@media screen and (max-width: 1024px) {
+}
+
+// styles go here
+
+// ========================
+// # MOBILE VIEW AND LIMITS
+// ========================
+// ! e.g. >>
+// Modular Scale: 1.333
+// h1 - 28.423px | 2.369em
+// h2 - 21.323px | 1.777em
+// h3 - 15.996px | 1.333em
+// p - 12px | 1em
+// caption - 12px
+
+// Modular Scale: 1.2
+// h1 - 20.736px | 1.728em
+// h2 - 17.28px | 1.44em
+// h3 - 14.4px | 1.2em
+// p - 12px | 1em
+// caption - 12px | 1em
+// footer - 10px
+// ! <<
+
+@media screen and (max-width: 576px) {
+    html {
+        font-size: $mobile-base-font-size;
+        p {
+            font-size: $mobile-base-font-size;
+        }
+        // header {
+        //     h1 {
+        //         font-size: calc(
+        //             1rem * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio}
+        //         );
+        //         font-weight: bold;
+        //         text-transform: none;
+        //         line-height: calc(
+        //             1rem * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio} *
+        //                 1.1
+        //         );
+        //     }
+        //     h2 {
+        //         font-size: calc(1rem * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio});
+        //         line-height: calc(1rem * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio} * 1.1);
+        //     }
+        //     h3 {
+        //         font-size: calc(1rem * #{$mobile-header-text-scale-ratio});
+        //     }
+        // }
+        // main {
+        h1 {
+            font-size: calc(
+                1rem * #{$mobile-body-text-scale-ratio} * #{$mobile-body-text-scale-ratio} * #{$mobile-body-text-scale-ratio}
+            );
+        }
+        h2 {
+            font-size: calc(1rem * #{$mobile-body-text-scale-ratio} * #{$mobile-body-text-scale-ratio});
+        }
+        h3 {
+            font-size: calc(1rem * #{$mobile-body-text-scale-ratio});
+        }
+        // }
+        // footer {
+        //     p {
+        //         font-size: $mobile-base-font-size;
+        //     }
+        // }
+    }
+}

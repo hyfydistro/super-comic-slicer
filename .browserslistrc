@@ -1,0 +1,4 @@
+defaults
+last 2 versions
+maintained node versions
+not ie <= 11

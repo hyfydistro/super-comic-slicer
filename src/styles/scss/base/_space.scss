@@ -1,0 +1,57 @@
+// =====
+// SPACE
+// =====
+
+@use 'typography' as *;
+
+$line-height: 1.5;
+// $mobile-base-font-size: xx
+// $desktop-base-font-size: xx
+
+// MOBILE SPATIAL SYSTEM
+$mobile-space-lv-quarter: calc(#{$mobile-base-font-size} / $line-height / #{$line-height});
+$mobile-space-lv-half: calc(#{$mobile-base-font-size} / #{$line-height});
+$mobile-space-lv-1: calc(#{$mobile-base-font-size} * #{$line-height});
+$mobile-space-lv-2: calc(#{$mobile-base-font-size} * #{$line-height} * #{$line-height});
+$mobile-space-lv-3: calc(#{$mobile-base-font-size} * #{$line-height} * #{$line-height} * #{$line-height});
+$mobile-space-lv-4: calc(#{$mobile-base-font-size} * #{$line-height} * #{$line-height} * #{$line-height} * #{$line-height});
+$mobile-space-lv-5: calc(#{$mobile-base-font-size} * #{$line-height} * #{$line-height} * #{$line-height} * #{$line-height} * #{$line-height});
+
+// DESKTOP (AND TABLET) SPATIAL SYSTEM
+$desktop-space-lv-quarter: calc(#{$desktop-base-font-size} / #{$line-height} / #{$line-height});
+$desktop-space-lv-half: calc(#{$desktop-base-font-size} / #{$line-height});
+$desktop-space-lv-1: calc(#{$desktop-base-font-size} * #{$line-height});
+$desktop-space-lv-2: calc(#{$desktop-base-font-size} * #{$line-height} * #{$line-height});
+$desktop-space-lv-3: calc(#{$desktop-base-font-size} * #{$line-height} * #{$line-height} * #{$line-height});
+$desktop-space-lv-4: calc(#{$desktop-base-font-size} * #{$line-height} * #{$line-height} * #{$line-height} * #{$line-height});
+$desktop-space-lv-5: calc(#{$desktop-base-font-size} * #{$line-height} * #{$line-height} * #{$line-height} * #{$line-height} * #{$line-height});
+
+// MARGIN PRESETS
+@mixin mobile-margin-preset {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+@mixin mobile-padding-preset {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+@mixin tablet-margin-preset {
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+@mixin tablet-padding-preset {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+
+// ========================
+// # MOBILE VIEW AND LIMITS
+// ========================
+
+@media (max-width: 600px) {
+
+}

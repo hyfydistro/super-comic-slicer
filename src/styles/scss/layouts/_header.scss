@@ -1,0 +1,42 @@
+// ======
+// HEADER
+// ======
+
+header {
+    display: flex;
+    justify-content: center;
+    background-color: #f8d174;
+}
+
+.header-container {
+    background: url(images/header-bg.png);
+    background-size: 100% 100%;
+    width: 992px;
+    max-width: 992px;
+    padding: {
+        top: 36.2px;
+        bottom: 36.2px;
+    }
+    text-align: center;
+}
+
+
+// # MEDIUM DEVICES
+
+@media all and (max-width: 992px) {
+    .header-container {
+        width: 100%;
+    }
+}
+
+
+// # SMALL DEVICES
+
+@media all and (max-width: 576px) {
+    .header-container {
+        padding: {
+            top: 27.2px;
+            bottom: 27.2px;
+        }
+    }
+}
