@@ -2,37 +2,60 @@
 // COLOR
 // =====
 
-// description color #1
-$primary-color-05: #FFFFFF; // e.g. REJECTED
-$primary-color-10: #FFFFFF; // e.g. USED
-$primary-color-20: #FFFFFF;
-$primary-color-30: #FFFFFF;
-$primary-color-40: #FFFFFF;
-$primary-color-50: #FFFFFF;
-$primary-color-60: #FFFFFF;
-$primary-color-70: #FFFFFF;
-$primary-color-80: #FFFFFF;
-$primary-color-90: #FFFFFF;
+// "Warm Yellow"
+// - also info color: warning
+$primary-color-05: #FEF7E7;
+$primary-color-10: #FDEFCE; // USED
+$primary-color-20: #FADF9E; // USED
+$primary-color-30: #F8D174; // MAIN
+$primary-color-40: #F5BF3D; // USED
+$primary-color-50: #F3AF0C; // USED
+$primary-color-60: #C28C0A;
+$primary-color-70: #926907;
+$primary-color-80: #614605; // USED
+$primary-color-90: #312302;
 
-// description color #2
-$secondary-color-05: #FFFFFF;
-$secondary-color-10: #FFFFFF;
-$secondary-color-20: #FFFFFF;
-$secondary-color-30: #FFFFFF;
-$secondary-color-40: #FFFFFF;
-$secondary-color-50: #FFFFFF;
-$secondary-color-60: #FFFFFF;
-$secondary-color-70: #FFFFFF;
-$secondary-color-80: #FFFFFF;
-$secondary-color-90: #FFFFFF;
+// "Warm Red"
+// - also info color: danger
+$secondary-color-05: #FFE9E6; // USED
+$secondary-color-10: #FED3CD;
+$secondary-color-20: #FDA69B; // MAIN
+$secondary-color-30: #FD8B7C; // USED
+$secondary-color-40: #FC4D36;
+$secondary-color-50: #FB2104;
+$secondary-color-60: #C91A03; // USED
+$secondary-color-70: #971402;
+$secondary-color-80: #640D02; // USED
+$secondary-color-90: #320701;
 
-$text-color-05: #FFFFFF;
-$text-color-10: #FFFFFF;
-$text-color-20: #FFFFFF;
-$text-color-30: #FFFFFF;
-$text-color-40: #FFFFFF;
-$text-color-50: #FFFFFF;
-$text-color-60: #FFFFFF;
-$text-color-70: #FFFFFF;
-$text-color-80: #FFFFFF;
-$text-color-90: #FFFFFF;
+
+// # Text Color
+
+$text-color-05: #EEF3F6;
+$text-color-10: #EEF3F6;
+$text-color-20: #BDCFDB;
+$text-color-30: #9BB8CA;
+$text-color-40: #7AA0B8;
+$text-color-50: #5988A6; // MAIN
+$text-color-60: #476D85;
+$text-color-70: #2F4858;
+$text-color-80: #243642;
+$text-color-90: #121B21;
+
+
+// # Info Color
+
+// Success
+$sucess-color-05: #EFF6F0;
+$sucess-color-10: #DEEDE0; // USED
+$sucess-color-20: #BEDAC2;
+$sucess-color-30: #9DC8A3;
+$sucess-color-40: #7DB584;
+$sucess-color-50: #579A60;
+$sucess-color-60: #4A8251; // USED
+$sucess-color-70: #37623D;
+$sucess-color-80: #254129; // USED
+$sucess-color-90: #122114;
+
+// Focus Input Highligh
+$focus-input-color: #74B1FF
