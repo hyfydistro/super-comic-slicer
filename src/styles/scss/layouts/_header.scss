@@ -1,3 +1,5 @@
+@use "../base";
+
 // ======
 // HEADER
 // ======
@@ -5,7 +7,7 @@
 header {
     display: flex;
     justify-content: center;
-    background-color: #f8d174;
+    background-color: base.$primary-color-30;
 }
 
 .header-container {
