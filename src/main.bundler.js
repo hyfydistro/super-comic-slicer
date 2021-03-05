@@ -11,6 +11,8 @@ import ReactDOM from 'react-dom';
 // e.g.
 import "./images/header-bg.png";
 import "./images/salespitch.svg";
+import "./images/remove-icon.svg";
+import "./images/upload-icon.svg";
 // import "./images/chick.jpg";
 // Favicon
 // import favicon from "./favicon.ico";
