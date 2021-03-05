@@ -8,6 +8,7 @@ header {
     display: flex;
     justify-content: center;
     background-color: base.$primary-color-30;
+    margin-bottom: base.$desktop-space-lv-2;
 }
 
 .header-container {
@@ -35,6 +36,10 @@ header {
 // # SMALL DEVICES
 
 @media all and (max-width: 576px) {
+    header {
+        margin-bottom: base.$mobile-space-lv-2;
+    }
+
     .header-container {
         padding: {
             top: 27.2px;

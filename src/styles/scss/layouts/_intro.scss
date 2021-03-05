@@ -1,0 +1,49 @@
+@use "../base";
+
+// =====
+// INTRO
+// =====
+
+ // # DEFAULT || LGE DEVICES
+
+.intro {
+    padding-bottom: base.$desktop-space-lv-2;
+    @include base.tablet-padding-preset;
+}
+
+.intro p {
+    margin-bottom: base.$desktop-space-lv-1;
+}
+
+.intro img {
+    padding: {
+        top: base.$desktop-space-lv-half;
+        bottom: base.$desktop-space-lv-half;
+    }
+}
+
+
+// # MED DEVICES
+
+@media all and (max-width: 992px) {}
+
+
+// #SML DEVICES
+
+@media all and (max-width: 576px) {
+    .intro {
+        padding-bottom: base.$mobile-space-lv-2;
+        @include base.mobile-padding-preset;
+    }
+
+    .intro p {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    .intro img {
+        padding: {
+            top: base.$mobile-space-lv-half;
+            bottom: base.$mobile-space-lv-half;
+        }
+    }
+}

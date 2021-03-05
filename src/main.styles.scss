@@ -1,11 +1,12 @@
 /* BASE */
 @use 'styles/scss/base/reset';
-@use 'styles/scss/base/typography';
+@use 'styles/scss/base/type';
 @use 'styles/scss/base/space';
 @use 'styles/scss/base/color';
 
 /* LAYOUT */
 @use 'styles/scss/layouts/header';
+@use 'styles/scss/layouts/intro';
 
 // Suggestions...
 /* COMPONENTS */
