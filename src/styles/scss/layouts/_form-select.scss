@@ -61,9 +61,10 @@ input[type="checkbox"] {
     }
 
     &:checked + .select-label::before {
-        // content: "\f14a";
-        content: "\f046";
+        content: "\f14a";
+        // content: "\f046";
         color: base.$primary-color-60;
+        animation: checkpop 180ms ease-in;
     }
 
     &:disabled + .select-label {
@@ -76,6 +77,18 @@ input[type="checkbox"] {
     }
 }
 
+// ANIMATIONS
+@keyframes checkpop {
+    0% {
+        transform: scale(0);
+    }
+    90% {
+        transform: scale(1.4);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 
 
 // #SML DEVICES
