@@ -8,12 +8,11 @@ import ReactDOM from 'react-dom';
 // ======
 // Files
 // ======
-// e.g.
 import "./images/header-bg.png";
 import "./images/salespitch.svg";
 import "./images/remove-icon.svg";
 import "./images/upload-icon.svg";
-// import "./images/chick.jpg";
+import "./images/error-icon.svg";
 // Favicon
 // import favicon from "./favicon.ico";
 // Webmanifest file

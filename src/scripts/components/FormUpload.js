@@ -30,6 +30,7 @@ export default function FormUpload() {
 
             {true
                 ? <div className="alert-message--error">
+                    <img className="alert-icon" src="images/error-icon.svg" alt="" />
                     <span className="alert-message-text--error">
                         {true
                             ? alertMessages.alertFile
