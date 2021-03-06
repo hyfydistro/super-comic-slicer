@@ -1,0 +1,87 @@
+@use "../base";
+
+// =============
+// FORM: OPTIONS
+// =============
+
+
+// # DEFAULT || LGE DEVICES
+
+.form-options {
+    margin-bottom: base.$desktop-space-lv-1;
+}
+
+.radio-option {
+    padding: 18px base.$desktop-space-lv-1;
+    margin-bottom: base.$desktop-space-lv-half;
+}
+
+.radio-option label {
+    display: inline-block;
+}
+
+.radio-option label,
+.radio-option input {
+    cursor: pointer;
+}
+
+// ELEMENT STATE
+input[type="radio"] {
+    visibility: hidden;
+
+    + .select-text::before {
+        content: "\f10c";
+        font-family: "FontAwesome";
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        font-size: 31px;
+        margin-right: base.$desktop-space-lv-1;
+        color: base.$text-color-50;
+    }
+
+    &:checked + .select-text::before {
+        content: "\f192";
+        // content: "\f046";
+        color: base.$primary-color-60;
+        animation: checkpop 230ms ease-in;
+    }
+
+    &:disabled + .select-text {
+        color: base.$text-color-40;
+
+        &::before {
+            content: "\f0c8";
+            color: base.$text-color-20;
+        }
+    }
+}
+
+
+// #SML DEVICES
+
+@media all and (max-width: 576px) {
+    .form-options {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    .radio-option {
+        padding: 18px base.$mobile-space-lv-1;
+        margin-bottom: base.$mobile-space-lv-half;
+    }
+
+    // ELEMENT STATE
+    input[type="radio"] {
+
+        + .select-text::before {
+            margin-right: base.$mobile-space-lv-1;
+        }
+    }
+}
