@@ -117,7 +117,8 @@ html {
     }
     p,
     .alert-message-text--error,
-    .select-text {
+    .select-text,
+    .contact-label {
         font-family: $secondary-fontface;
         font-weight: normal;
         font-size: $desktop-base-font-size;
@@ -219,7 +220,8 @@ p.text-small {
         font-size: $mobile-base-font-size;
         p,
         .alert-message-text--error,
-        .select-text {
+        .select-text,
+        .contact-label {
             font-size: $mobile-base-font-size;
         }
         // header {

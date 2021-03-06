@@ -1,0 +1,79 @@
+@use "../base";
+
+// =============
+// FORM: CONTACT
+// =============
+
+
+// # DEFAULT || LGE DEVICES
+
+.contact {
+    margin: 0 auto;
+    max-width: 992px;
+    padding-top: base.$desktop-space-lv-2;
+    @include base.tablet-padding-preset;
+}
+
+.contact h2 {
+    margin-bottom: base.$desktop-space-lv-1;
+}
+
+.contact-input-wrapper {
+    margin-bottom: base.$desktop-space-lv-1;
+}
+
+.contact p {
+    display: block;
+    margin: auto 0;
+    margin-bottom: base.$desktop-space-lv-1;
+}
+
+.contact-label {
+    display: block;
+    margin-bottom: base.$desktop-space-lv-half;
+}
+
+.contact-input {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid base.$text-color-70;
+}
+
+// STATE ELEMENT
+.contact-input:focus,
+.contact-input:active {
+    border: 1px solid base.$focus-input-color;
+    outline: none;
+}
+
+// #SML DEVICES
+
+@media all and (max-width: 576px) {
+    .contact {
+        padding-top: base.$mobile-space-lv-2;
+        @include base.mobile-padding-preset;
+    }
+
+    .contact h2 {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    .contact-input-wrapper {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    .contact p {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    .contact-label {
+        margin-bottom: base.$mobile-space-lv-half;
+    }
+
+    .contact-input {
+        padding: 14px;
+        border-radius: 14px;
+    }
+}
