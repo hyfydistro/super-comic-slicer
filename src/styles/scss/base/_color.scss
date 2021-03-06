@@ -2,6 +2,7 @@
 // COLOR
 // =====
 
+
 // "Warm Yellow"
 // - also info color: warning
 $primary-color-05: #FEF7E7;
@@ -34,10 +35,10 @@ $secondary-color-90: #320701;
 $text-color-05: #EEF3F6;
 $text-color-10: #EEF3F6;
 $text-color-20: #BDCFDB;
-$text-color-30: #9BB8CA;
+$text-color-30: #9BB8CA; // USED (disabled elements) ?
 $text-color-40: #7AA0B8;
 $text-color-50: #5988A6; // MAIN
-$text-color-60: #476D85;
+$text-color-60: #476D85; // USED (disabled elements) ?
 $text-color-70: #2F4858;
 $text-color-80: #243642;
 $text-color-90: #121B21;
@@ -46,16 +47,16 @@ $text-color-90: #121B21;
 // # Info Color
 
 // Success
-$sucess-color-05: #EFF6F0;
-$sucess-color-10: #DEEDE0; // USED
-$sucess-color-20: #BEDAC2;
-$sucess-color-30: #9DC8A3;
-$sucess-color-40: #7DB584;
-$sucess-color-50: #579A60;
-$sucess-color-60: #4A8251; // USED
-$sucess-color-70: #37623D;
-$sucess-color-80: #254129; // USED
-$sucess-color-90: #122114;
+$success-color-05: #EFF6F0;
+$success-color-10: #DEEDE0; // USED
+$success-color-20: #BEDAC2;
+$success-color-30: #9DC8A3;
+$success-color-40: #7DB584;
+$success-color-50: #579A60;
+$success-color-60: #4A8251; // USED
+$success-color-70: #37623D;
+$success-color-80: #254129; // USED
+$success-color-90: #122114;
 
 // Focus Input Highligh
 $focus-input-color: #74B1FF
