@@ -115,7 +115,8 @@ html {
         font-family: $secondary-fontface;
         font-weight: normal;
     }
-    p {
+    p,
+    .alert-message-text--error {
         font-family: $secondary-fontface;
         font-weight: normal;
         font-size: $desktop-base-font-size;
@@ -215,7 +216,8 @@ p.text-small {
 @media screen and (max-width: 576px) {
     html {
         font-size: $mobile-base-font-size;
-        p {
+        p,
+        .alert-message-text--error {
             font-size: $mobile-base-font-size;
         }
         // header {
