@@ -1,0 +1,49 @@
+@use "../base";
+
+// =============
+// FORM: RESULTS
+// =============
+
+
+// # DEFAULT || LGE DEVICES
+
+.product-container {
+    // margin-bottom: base.$desktop-space-lv-2;
+    padding-bottom: base.$desktop-space-lv-2;
+}
+
+.product {
+    padding: base.$desktop-space-lv-1 32px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product__image-block{
+    width: 161px;
+    height: 501.2px;
+    background-color: aquamarine;
+    margin-right: base.$desktop-space-lv-1;
+    margin-bottom: base.$desktop-space-lv-1;
+}
+
+
+// #SML DEVICES
+
+@media all and (max-width: 576px) {
+    .product-container {
+        // margin-bottom: base.$desktop-space-lv-2;
+        padding-bottom: base.$mobile-space-lv-2;
+    }
+
+    .product {
+        padding: base.$mobile-space-lv-1 32px;
+    }
+
+    .product__image-block{
+        width: 161px;
+        height: 501.2px;
+        margin-right: base.$mobile-space-lv-1;
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+}
