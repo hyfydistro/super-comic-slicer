@@ -11,6 +11,9 @@ export default function Form() {
             <FormUpload />
             <FormSelect />
             <FormOptions />
+            <div className="slice-btn-container">
+                <a className="slice-btn"><h3>Begin Slice!</h3></a>
+            </div>
             <FormResults />
         </main>
     )

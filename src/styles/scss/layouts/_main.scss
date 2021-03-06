@@ -3,7 +3,8 @@
 // ====
 // MAIN
 // ====
-
+// TODO
+// - style "Begin Slice!" button
 
 // L/R margins / paddings
 main h2,
@@ -32,6 +33,38 @@ main p {
     margin-bottom: base.$desktop-space-lv-1;
 }
 
+.slice-btn-container {
+    display: flex;
+    justify-content: center;
+    padding: {
+        top: base.$desktop-space-lv-1;
+        bottom: base.$desktop-space-lv-1;
+    }
+}
+
+.slice-btn {
+    display: inline-block;
+    padding: 18px calc(18px* 2);
+    border-radius: 999px;
+    background-color: base.$primary-color-30;
+    color: base.$primary-color-80;
+    border: solid 1px base.$primary-color-80;
+    cursor: pointer;
+}
+
+.slice-btn:hover,
+.slice-btn:focus {
+    background-color: base.$primary-color-50;
+}
+
+.slice-btn:active {
+    background-color: base.$primary-color-10;
+}
+
+.slice-btn h3 {
+    margin: 0;
+    padding: 0;
+}
 
 // #SML DEVICES
 
