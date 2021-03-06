@@ -2,13 +2,17 @@ import React from 'react'
 
 const alertMessages = {
     alertMax: "Total file sizes is over maximum 20MB. Delete some files, or clear upload and try again with less files.",
-    alertFile: "Oh no! Currently, we accept .png and .jpeg, .jpg image file extensions."
+    alertFile: "Oh no! Currently, we accept .png and .jpeg, .jpg image file extensions.",
 };
 
+const sucessMessages = {
+    successReady: "The following files are accepted."
+}
 // TODO
 // components consideration
 // - dropzone
 // - preview
+
 
 
 export default function FormUpload() {
@@ -28,12 +32,23 @@ export default function FormUpload() {
                 </div>
             </div>
 
-            {true
+            {false
                 ? <div className="alert-message--error">
                     <img className="alert-icon" src="images/error-icon.svg" alt="" />
                     <span className="alert-message-text--error">
                         {true
                             ? alertMessages.alertFile
+                            : null}
+                    </span>
+                </div>
+                : null}
+
+            {true
+                ? <div className="alert-message--success">
+                    <img className="alert-icon" src="images/check-icon.svg" alt="" />
+                    <span className="alert-message-text--success">
+                        {true
+                            ? sucessMessages.successReady
                             : null}
                     </span>
                 </div>

@@ -51,23 +51,6 @@
     margin-bottom: base.$desktop-space-lv-half;
 }
 
-.alert-message--error {
-    display: flex;
-    align-items: center;
-    border: 1px solid base.$secondary-color-40;
-    padding: 18px 18px;
-    border-radius: 18px;
-    background-color: base.$secondary-color-10;
-    color: base.$secondary-color-80;
-    margin-bottom: base.$desktop-space-lv-1;
-}
-
-.alert-icon {
-    width: 22px;
-    height: 22px;
-    margin-right: base.$desktop-space-lv-half;
-}
-
 .preview-wrapper {
     padding: {
         top: base.$desktop-space-lv-half;
@@ -188,16 +171,6 @@
 
     .dropzone p {
         margin-bottom: base.$mobile-space-lv-half;
-    }
-
-    .alert-message--error {
-        padding: 14px 14px;
-        border-radius: 14px;
-        margin-bottom: base.$mobile-space-lv-1;
-    }
-
-    .alert-icon {
-        margin-right: base.$mobile-space-lv-half;
     }
 
     .preview-wrapper {
