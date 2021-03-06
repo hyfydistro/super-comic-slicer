@@ -42,20 +42,25 @@ export default function FormSelect() {
             <div className="select-container">
                 <div className="select-option">
                     <label htmlFor="webtoon">
-                        <input type="checkbox" id="webtoon" />
-                        <span className="select-label">
-                            <img className="select-icon" src="images/webtoon-icon.svg" alt="webtoon icon" />
-                            <span className="select-text">Webtoon</span>
-                        </span>
+                        <div className="select-label--wrapper">
+                            <input type="checkbox" id="webtoon" />
+                            <span className="select-label">
+                                <img className="select-icon" src="images/webtoon-icon.svg" alt="webtoon icon" />
+                                <span className="select-text">Webtoon</span>
+                            </span>
+                        </div>
                     </label>
                 </div>
                 <div className="select-option">
                     <label htmlFor="tapas">
-                        <input type="checkbox" id="tapas" disabled />
-                        <span className="select-label">
-                            <img className="select-icon" src="images/tapas-icon.png" alt="tapas icon" />
-                            <span className="select-text">Tapas</span>
-                        </span>
+                        <div className="select-label--wrapper">
+
+                            <input type="checkbox" id="tapas" disabled />
+                            <span className="select-label">
+                                <img className="select-icon" src="images/tapas-icon.png" alt="tapas icon" />
+                                <span className="select-text">Tapas</span>
+                            </span>
+                        </div>
                     </label>
                 </div>
             </div>
