@@ -9,6 +9,12 @@
 
 .form-options {
     margin-bottom: base.$desktop-space-lv-1;
+    // @include base.tablet-margin-preset;
+}
+
+// * Hotfix: margin compensation
+p.margin-fix {
+    margin-right: 32px;
 }
 
 .radio-option {
@@ -70,6 +76,11 @@ input[type="radio"] {
 @media all and (max-width: 576px) {
     .form-options {
         margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    // * Hotfix: margin compensation
+    p.margin-fix {
+        margin-right: 16px;
     }
 
     .radio-option {

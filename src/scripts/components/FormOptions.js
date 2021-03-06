@@ -30,7 +30,7 @@ export default function FormOptions() {
 
             <p className="text-bold header-four">Squash</p>
 
-            <p>Squash scale down the comic page size. If your file size is big enough it may refine illustrations. Slicing ratio will not be affected - it will yield the same page division.</p>
+            <p className="margin-fix">Squash scale down the comic page size. If your file size is big enough it may refine illustrations. Slicing ratio will not be affected - it will yield the same page division.</p>
 
             <div className="radio-container-squash">
                 <div className="radio-option">
