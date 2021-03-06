@@ -13,6 +13,8 @@ import "./images/salespitch.svg";
 import "./images/remove-icon.svg";
 import "./images/upload-icon.svg";
 import "./images/error-icon.svg";
+import "./images/webtoon-icon.svg";
+import "./images/tapas-icon.png";
 // Favicon
 // import favicon from "./favicon.ico";
 // Webmanifest file
