@@ -1,0 +1,108 @@
+@use "../base";
+
+// ============
+// FORM: UPLOAD
+// ============
+
+
+// # DEFAULT || LGE DEVICES
+
+.form-select {
+    margin-bottom: base.$desktop-space-lv-1;
+}
+
+.select-option {
+    padding: 18px base.$desktop-space-lv-1;
+    margin-bottom: base.$desktop-space-lv-half;
+}
+
+.select-option label {
+    display: flex;
+    align-items: center;
+}
+
+input[type="checkbox"],
+.select-option label {
+    cursor: pointer;
+}
+
+.select-option img {
+    width: 38px;
+    height: 38px;
+    margin-right: base.$desktop-space-lv-1;
+}
+
+.select-label {
+    display: flex;
+    align-items: center;
+}
+
+
+// ELEMENT STATE
+input[type="checkbox"] {
+    visibility: hidden;
+
+    + .select-label::before {
+        content: "\f096";
+        font-family: "FontAwesome";
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        font-size: 31px;
+        margin-right: base.$desktop-space-lv-1;
+        color: base.$text-color-50;
+    }
+
+    &:checked + .select-label::before {
+        // content: "\f14a";
+        content: "\f046";
+        color: base.$primary-color-60;
+    }
+
+    &:disabled + .select-label {
+        color: base.$text-color-40;
+
+        &::before {
+            content: "\f0c8";
+            color: base.$text-color-20;
+        }
+    }
+}
+
+
+
+// #SML DEVICES
+
+@media all and (max-width: 576px) {
+    .form-select {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    .select-option {
+        padding: 18px base.$mobile-space-lv-1;
+        margin-bottom: base.$mobile-space-lv-half;
+    }
+
+    // .select-option input {
+    //     margin-right: base.$mobile-space-lv-1;
+    //     margin-left: base.$mobile-space-lv-1;
+    // }
+
+    .select-option img {
+        margin-right: base.$mobile-space-lv-1;
+    }
+
+    // ELEMENT STATE
+    input[type="checkbox"] {
+        + .select-label::before {
+            margin-right: base.$mobile-space-lv-1;
+        }
+    }
+}
