@@ -16,6 +16,7 @@ import "./images/error-icon.svg";
 import "./images/check-icon.svg";
 import "./images/webtoon-icon.svg";
 import "./images/tapas-icon.png";
+import "./images/bmc-btn.png";
 // Favicon
 // import favicon from "./favicon.ico";
 // Webmanifest file

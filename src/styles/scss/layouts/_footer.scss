@@ -36,6 +36,10 @@ footer {
     color: base.$primary-color-80;
 }
 
+footer a {
+    color: base.$primary-color-80;
+}
+
 .share-icon-stack {
     margin-right: base.$desktop-space-lv-half;
 }
@@ -69,12 +73,35 @@ footer {
 }
 
 // STATE ELEMENTS
+.donate-container,
+.contribute-container,
 .share-icon-stack {
-    transition: color 250ms ease-in;
+    transition: transform 250ms ease-in-out;
 }
 
+.donate-icon-stack:hover > .fa-circle,
 .share-icon-stack:hover > .fa-circle {
-    color: base.$primary-color-30;
+    color: base.$primary-color-40;
+    transform: scale(1.2);
+}
+
+.contribute-icon-stack:hover {
+    transform: scale(1.2);
+}
+
+.contribute-icon-stack:hover > .fa-github {
+    color: base.$primary-color-40;
+}
+
+img.donate-image {
+    height: 54px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;    transition: transform 100ms ease-in-out;
+}
+
+// ELEMENT STATE
+
+img.donate-image:hover {
+    transform: translateY(-4px);
 }
 
 .footer-notes {
