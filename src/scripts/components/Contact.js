@@ -65,6 +65,10 @@ export default function Contact() {
                     </span>
                 </div>
                 : null}
+
+            <div className="send-message-btn-container">
+                <a className="send-message-slice-btn"><h3>Send Message</h3></a>
+            </div>
         </section>
     )
 }
