@@ -1,0 +1,133 @@
+@use "../base";
+
+// ======
+// FOOTER
+// ======
+
+
+// # DEFAULT || LGE DEVICES
+
+footer {
+    background-color: base.$primary-color-30;
+    padding-top: base.$desktop-space-lv-2;
+    padding-bottom: base.$desktop-space-lv-2;
+    @include base.tablet-padding-preset;
+}
+
+.column-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.share-icon-stack,
+.contribute-icon-stack,
+.donate-icon-stack,
+.donate-text,
+.contribute-text {
+    cursor: pointer;
+}
+
+.donate-container h3,
+.contribute-container h3,
+.share-container h3 {
+    margin-bottom: base.$desktop-space-lv-1;
+    color: base.$primary-color-80;
+}
+
+.share-icon-stack {
+    margin-right: base.$desktop-space-lv-half;
+}
+
+.contribute-icon-stack,
+.donate-icon-stack {
+    margin-right: base.$desktop-space-lv-quarter;
+}
+
+.fa-lg {
+    font-size: 21px; // 42x42
+}
+
+.fa-github,
+.fa-circle {
+    color: base.$primary-color-50;
+}
+
+.fa-paypal,
+.contribute-icon-stack .fa-circle,
+.fa-link,
+.fa-tumblr,
+.fa-twitter,
+.fa-facebook {
+    color: base.$primary-color-10;
+}
+
+.contribute-container,
+.share-container {
+    margin-bottom: base.$desktop-space-lv-2;
+}
+
+// STATE ELEMENTS
+.share-icon-stack {
+    transition: color 250ms ease-in;
+}
+
+.share-icon-stack:hover > .fa-circle {
+    color: base.$primary-color-30;
+}
+
+.footer-notes {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-notes a,
+.footer-notes p {
+    color: base.$primary-color-80;
+}
+
+.footer-notes a {
+    text-decoration: underline;
+}
+
+// ELEMENT STATE
+
+.footer-notes a:hover {
+    text-decoration: none;
+}
+
+.footer-notes a:active {
+    color: base.$primary-color-10;
+}
+
+
+// #SML DEVICES
+
+@media all and (max-width: 576px) {
+    footer {
+        padding-top: base.$mobile-space-lv-2;
+        padding-bottom: base.$mobile-space-lv-2;
+        @include base.mobile-padding-preset;
+    }
+
+    .donate-container h3,
+    .contribute-container h3,
+    .share-container h3 {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+
+    .share-icon-stack {
+        margin-right: base.$mobile-space-lv-half;
+    }
+
+    .donate-icon-stack {
+        margin-right: base.$mobile-space-lv-quarter;
+    }
+
+    .contribute-container,
+    .share-container {
+        margin-bottom: base.$mobile-space-lv-2;
+    }
+}

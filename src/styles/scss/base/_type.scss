@@ -119,7 +119,9 @@ html {
     .alert-message-text--error,
     .select-text,
     .contact-label,
-    .alert-message-text--success {
+    .alert-message-text--success,
+    .donate-text,
+    .contribute-text {
         font-family: $secondary-fontface;
         font-weight: normal;
         font-size: $desktop-base-font-size;
@@ -223,7 +225,9 @@ p.text-small {
         .alert-message-text--error,
         .select-text,
         .contact-label,
-        .alert-message-text--success {
+        .alert-message-text--success,
+        .donate-text,
+        .contribute-text {
             font-size: $mobile-base-font-size;
         }
         // header {
