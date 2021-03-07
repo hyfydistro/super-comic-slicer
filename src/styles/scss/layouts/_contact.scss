@@ -11,6 +11,7 @@
     margin: 0 auto;
     max-width: 992px;
     padding-top: base.$desktop-space-lv-2;
+    margin-bottom: base.$desktop-space-lv-2;
     @include base.tablet-padding-preset;
 }
 
@@ -19,7 +20,7 @@
 }
 
 .contact-input-wrapper {
-    margin-bottom: base.$desktop-space-lv-1;
+    padding-bottom: base.$desktop-space-lv-1;
 }
 
 .contact p {
