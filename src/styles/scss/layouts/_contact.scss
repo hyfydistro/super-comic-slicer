@@ -13,6 +13,7 @@
     padding-top: base.$desktop-space-lv-2;
     margin-bottom: base.$desktop-space-lv-2;
     @include base.tablet-padding-preset;
+    color: base.$text-color-70;
 }
 
 .contact h2 {
