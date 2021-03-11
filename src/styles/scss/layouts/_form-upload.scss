@@ -47,6 +47,11 @@
     margin-bottom: base.$desktop-space-lv-half;
 }
 
+.dropzone__input {
+    // display: none;
+    visibility: hidden;
+}
+
 .dropzone p {
     margin-bottom: base.$desktop-space-lv-half;
 }
@@ -82,19 +87,68 @@
     display: none;
 }
 
+.preview__thumbnail img {
+    // display: block;
+    // width: 134.1px; // ! Due to change
+    // min-height: 214.5px; // ! Due to change
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    // overflow: hidden;
+}
+
+// * Larger Size Under "Results"
+// 161 w x 257.6 h px
+
+.preview__thumbnail {
+    position: relative;
+    width: 134.1px; // ! Due to change
+    // width: 100%; // ! Due to change
+    // height: 214.5px; // ! Due to change
+    height: 100%; // ! Due to change
+    overflow: hidden;
+}
+
 // !
 // ? Check is size is similar to webtoon ratio
-.preview__image-block {
-    width: 53.6px;
-    height: 166.8px;
-    background-color: aquamarine;
-    cursor: grab;
+.preview__thumbnail-container {
+    position: relative;
+    width: 134.1px; // ! Due to change
+    height: 214.5px; // ! Due to change
+    // background-color: aquamarine; // ! Due to change
+    // background: url("images/comic2.jpg") no-repeat;
+    // background: no-repeat;
     margin-top: base.$desktop-space-lv-1;
     margin-right: base.$desktop-space-lv-1;
+    cursor: grab;
+    // ! WIP
+    // overflow: hidden;
+    // maintain aspect ratio
+    // background-size: cover; // ! Due to change
+}
+
+// thumbnail label
+// display the text of the attribute
+.preview__thumbnail-container::after {
+// .preview__thumbnail::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 124.1px; // ! Due to change
+    // width: auto; // ! Due to change
+    padding: 5px;
+    color: #ffffff; // ! Due to change
+    background: rgba(0,0,0, 0.75);  // ! Due to change
+    font-size: 14px; // ! Due to change
+    font-family: base.$secondary-fontface;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 // * used with script
-.preview__image-block.grabbing {
+.preview__thumbnail-container.grabbing {
     cursor: grabbing;
 }
 
@@ -134,16 +188,22 @@
 }
 
 .close-btn {
-    position: relative;
+    position: absolute;
     top: -11px;
-    left: 43px;
+    left: 124px;
     background: url(images/remove-icon.svg) no-repeat;
     background-size: 22px 22px;
     width: 22px;
     height: 22px;
     border: none;
     cursor: pointer;
+    transition: 80ms ease-in;
+    z-index: 99;
+    // overflow: visible !important;
+}
 
+.close-btn:hover {
+    transform: scale(1.2);
 }
 
 
@@ -192,7 +252,7 @@
         margin-bottom: base.$mobile-space-lv-1;
     }
 
-    .preview__image-block {
+    .preview__thumbnail {
         margin-top: base.$mobile-space-lv-1;
         margin-right: base.$mobile-space-lv-1;
     }
