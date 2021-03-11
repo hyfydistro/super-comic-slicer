@@ -15,12 +15,18 @@ const sucessMessages = {
 
 // TODO
 // - [ ] roate image function >> on condition
-// i.e. displays WHOLLY (almost) - I don't want cramp
-// horizontal images.
 function Preview(props) {
 
     const files = props.inputFileRead;
-    const id = [0, 1, 2, 3, 4, 5];
+
+    // Create Unique identifier for the following list...
+    let id = [];
+    for (let i = 0; i < files.length; i++) {
+        id.push(i);
+
+        // ! LOG
+        console.log("id :", id);
+    }
 
     // ! LOG
     console.log("INSIDE PREVIEW: ", files);
@@ -74,7 +80,7 @@ function Preview(props) {
         return (
             <div className="preview-wrapper">
                 <div className="preview-container">
-                    <div className="preview">
+                    <div className="preview" id="draggable-area">
 
                         {previewThumbnailElements}
 
