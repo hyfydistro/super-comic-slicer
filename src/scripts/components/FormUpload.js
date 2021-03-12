@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-// import { ReactSortable } from "react-sortablejs";
-// import { ReactSortable } from "https://cdn.jsdelivr.net/npm/react-sortablejs@6.0.0/dist/index.min.js";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const alertMessages = {
     alertMax: "Total file sizes is over maximum 20MB. Delete some files, or clear upload and try again with less files.",
@@ -20,9 +18,13 @@ const sucessMessages = {
 // - Pass Props:
 // - id
 // - name
-function Preview(props) {
 
+// console.log("EXIST", DragDropContext);
+
+function Thumbnails(props) {
     const files = props.inputField;
+
+    let previewThumbnailElements;
 
     if (files) {
 
@@ -30,7 +32,7 @@ function Preview(props) {
         console.log("INSIDE <PREVIEW>: ", props.inputField);
         // console.log("INSIDE <PREVIEW>: ", props.inputField[0]["id"]);
 
-        const previewThumbnailElements = files.map((file, i) => {
+        previewThumbnailElements = files.map((file, index) => {
 
             console.log("INSIDE <PREVIEW> fileRead: ", file.fileRead);
             console.log("INSIDE <PREVIEW> fileRead - name: ", file.fileRead.name);
@@ -43,7 +45,7 @@ function Preview(props) {
             function getDataURL() {
                 console.log("MAKING DATA URL...", reader);
 
-                const currentElement = document.querySelectorAll(".preview__thumbnail-container")[i].lastElementChild.firstElementChild;
+                const currentElement = document.querySelectorAll(".preview__thumbnail-container")[index].lastElementChild.firstElementChild;
 
                 // ! Log
                 console.log(currentElement);
@@ -58,53 +60,61 @@ function Preview(props) {
 
 
             return (
-                <div
-                    key={file.id}
-                    className="preview__thumbnail-container"
-                    data-label={JSON.stringify(file.fileRead.name)}
-                >
-                    <button className="close-btn"></button>
-                    <div className="preview__thumbnail">
-                        <img alt="" />
-                    </div>
-                </div>
+                <Draggable key={file.id} draggableId={file.id.toString()} index={index}>
+                    {
+                        (provided) => (
+                            <div
+                                className="preview__thumbnail-container"
+                                data-label={JSON.stringify(file.fileRead.name)}
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                            >
+                                <button className="close-btn"></button>
+                                <div className="preview__thumbnail">
+                                    <img alt="" />
+                                </div>
+                            </div>
+                        )
+                    }
+                </Draggable>
             )
         })
 
+    }
 
-        return (
-            <div className="preview-wrapper">
-                <div className="preview-container">
-                    <div className="preview">
-                        {/* <ReactSortable> */}
+    return previewThumbnailElements;
+}
 
-                        {previewThumbnailElements}
+function Preview(props) {
 
-                        {/* <div className="preview__thumbnail-container" data-label="myfile.txt">
-                            <button className="close-btn"></button>
-                            <div className="preview__thumbnail">
-                                <img src="images/comic2.jpg" alt="" />
+
+
+    return (
+        <div className="preview-wrapper">
+            <div className="preview-container">
+
+                <DragDropContext onDragEnd={props.handleOnDragEnd}>
+                    <Droppable droppableId="preview">
+                        {(provided) => (
+                            <div className="preview" {...provided.droppableProps} ref={provided.innerRef}>
+                                <Thumbnails inputField={props.inputField} />
+                                {provided.placeholder}
                             </div>
-                        </div>
-
-                        <div className="preview__thumbnail-container" data-label="myfile.txt">
-                            <button className="close-btn"></button>
-                            <div className="preview__thumbnail">
-                                <img src="" alt="" />
-                            </div>
-                        </div> */}
-                        {/* </ReactSortable> */}
-                    </div>
-                    <div className="preview__clear-btn-container">
-                        <button className="preview__clear-btn">Clear Files</button>
-                    </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+                <div className="preview__clear-btn-container">
+                    <button className="preview__clear-btn">Clear Files</button>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 
+// TODO
+// Show total file size
 function Dropzone(props) {
     return (
         <div className="dropzone-container">
@@ -178,6 +188,7 @@ export default function FormUpload(props) {
             <Preview
                 inputFileRead={props.inputFileRead}
                 inputField={props.inputField}
+                handleOnDragEnd={props.handleOnDragEnd}
             />
         </section>
     )

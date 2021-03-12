@@ -171,6 +171,7 @@ export default class Form extends React.Component {
         // Toggle
         this.toggleBegingSliceText = this.toggleBegingSliceText.bind(this);
         // this.setInputField = this.setInputField.bind(this);
+        this.handleOnDragEnd= this.handleOnDragEnd.bind(this);
     }
 
     componentWillUnmount() {
@@ -309,7 +310,7 @@ export default class Form extends React.Component {
             // }
 
         }, () => {
-            console.log("STATE ID: ", this.state.id);
+            // console.log("STATE ID: ", this.state.id);
             console.log("STATE FIELDS: ", this.state.inputField);
         });
 
@@ -487,8 +488,6 @@ export default class Form extends React.Component {
                 processImages.push(result);
             } else {
 
-                let coordinatesY = [];
-
                 // ! LOG
                 console.log("DETERMINED HEIGHT: ", determinedeHeight);
 
@@ -628,6 +627,39 @@ export default class Form extends React.Component {
 
     }
 
+    handleOnDragEnd(result) {
+        // ! LOG
+        console.log("DnD HANDLE EVENT", result);
+
+        // Create shallow copy
+        const items = Array.from(this.state.inputField);
+        // const items = this.state.inputField;
+
+        // ! LOG
+        console.log("DnD HANDLE EVENT - ITEMS", items);
+
+        // ! LOG
+        console.log("DnD HANDLE EVENT - ARR ITEMS", items);
+
+        const [reorderedItem] = items.splice(result.source.index, 1);
+
+        // ! LOG
+        console.log("DnD HANDLE EVENT - reorderedItem", reorderedItem);
+
+        items.splice(result.destination.index, 0, reorderedItem);
+        // ! LOG
+        console.log("DnD HANDLE EVENT - MODIFIED ITEMS", items);
+
+        this.setState({
+            inputField: items
+        })
+    }
+
+    // "Close" button
+    handleRemoveSelf(e) {
+        console.log(e.target);
+    }
+
     render() {
         return (
             <main>
@@ -637,14 +669,14 @@ export default class Form extends React.Component {
                     onHandleDragLeave={this.handleDragLeave}
                     dragOverClass={this.state.isDragOver ? this.state.dragClass.dragOverHiglight : this.state.dragClass.dragOverDefault}
                     onHandleFileDrop={this.handleFileDrop}
-                    // ! WIP
+                    // ? Not sure if in use...
                     inputFileRead={this.state.inputFileRead}
-                    inputField={this.state.inputField}
-                    // inputFileRead={this.state.inputField.fileRead}
-                    // setId={this.setId}
-                    // getId={this.state.id}
-                    // getFileReadArr={this.state.inputFileRead}
                     getFileBlob={this.getFileBlob}
+
+                    // ! WIP
+                    inputField={this.state.inputField}
+                    handleOnDragEnd={this.handleOnDragEnd}
+
                 // onHandleChange={this.handleChange}
 
                 // inputFileElement={this.state.inputDataAvailable
