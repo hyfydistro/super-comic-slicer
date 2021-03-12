@@ -4,6 +4,9 @@ import FormSelect from './FormSelect';
 import FormOptions from './FormOptions';
 import FormResults from './FormResults';
 
+// libs
+import createId from '../libs/createId';
+
 // TODO
 // 1. Listen for drag and drop
 // 2. Detect when a file is dropped on the drop zone
@@ -21,14 +24,6 @@ const fileTypes = [
 
 function validFileType(file) {
     return fileTypes.includes(file);
-}
-
-const createId = function getUniqueId() {
-    if (window.crypto && window.crypto.getRandomValues) {
-        return window.crypto.getRandomValues(new Uint32Array(1))[0];
-    } else {
-        return Math.random()
-    }
 }
 
 // TODO
@@ -55,15 +50,20 @@ export default class Form extends React.Component {
 
         this.state = {
             // # STYLES EVENT
-            // drag events
+            // event: onDragOver
             isDragOver: false,
-            dragClass: {
-                dragOverHiglight: "dropzone dropzone--over",
-                dragOverDefault: "dropzone"
+            dropzoneBordersClass: {
+                highlight: "dropzone dropzone--over",
+                default: "dropzone"
             },
             inputDataAvailable: false,
             // "Begin Slice!" button
             sliceText: "slice-btn",
+            // div class "preview-wrapper"
+            previewWrapperClass: {
+                visible: "preview-wrapper",
+                invisible: "preview-wrapper hidden"
+            },
 
             // # DATA
             // ! WIP
@@ -85,7 +85,7 @@ export default class Form extends React.Component {
         this.processResults = this.processResults.bind(this);
         this.handleBeginSlicBtn = this.handleBeginSlicBtn.bind(this);
         // Toggle Class
-        this.toggleBegingSliceText = this.toggleBegingSliceText.bind(this);
+        this.toggleBeginSliceText = this.toggleBeginSliceText.bind(this);
         this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
         // Delete Data
         this.handleRemoveSelf = this.handleRemoveSelf.bind(this);
@@ -199,6 +199,7 @@ export default class Form extends React.Component {
         });
     }
 
+    // PROCESS FILES
     // ! WIP - Testing
     // ? name change - displayResults() ?
     processResults() {
@@ -413,12 +414,15 @@ export default class Form extends React.Component {
         this.processResults();
 
         console.log("Handle Begin Slice Button")
-        this.toggleBegingSliceText();
+        this.toggleBeginSliceText();
 
     }
 
-    toggleBegingSliceText() {
-        console.log("Toggle...")
+    // # STYLE EVENTS
+
+    // TOGGLE "Begin Slice" Text
+    toggleBeginSliceText() {
+        console.log("TOGGLE 'BEGIN SLICE' TEXT...")
 
         // Toggle class
         if (this.state.sliceText === "slice-btn") {
@@ -516,7 +520,7 @@ export default class Form extends React.Component {
                 <FormUpload
                     onHandleDrag={this.handleDrag}
                     onHandleDragLeave={this.handleDragLeave}
-                    dragOverClass={this.state.isDragOver ? this.state.dragClass.dragOverHiglight : this.state.dragClass.dragOverDefault}
+                    toggleDropzoneBordersClass={this.state.isDragOver ? this.state.dropzoneBordersClass.highlight : this.state.dropzoneBordersClass.default}
                     onHandleFileDrop={this.handleFileDrop}
                     // ? Not sure if in use...
                     inputFileRead={this.state.inputFileRead}
@@ -527,6 +531,8 @@ export default class Form extends React.Component {
                     inputField={this.state.inputField}
                     // ? Rename
                     onhandleOnDragEnd={this.handleOnDragEnd}
+                    // STYLE EVENTS
+                    togglePreviewWrapperClass={this.state.inputDataAvailable ? this.state.previewWrapperClass.visible : this.state.previewWrapperClass.invisible }
 
                 // onHandleChange={this.handleChange}
 

@@ -83,8 +83,10 @@
 }
 
 // * Used with script
-.preview.hidden {
+.preview-wrapper.hidden {
     display: none;
+    margin: 0;
+    padding: 0;
 }
 
 .preview__thumbnail img {

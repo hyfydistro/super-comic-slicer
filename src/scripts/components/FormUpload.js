@@ -18,6 +18,7 @@ const sucessMessages = {
 // - Pass Props:
 // - id
 // - name
+// - [ ] Create alert messages box on CONDITION
 
 // console.log("EXIST", DragDropContext);
 
@@ -89,7 +90,7 @@ function Thumbnails(props) {
 function Preview(props) {
 
     return (
-        <div className="preview-wrapper">
+        <div className={props.togglePreviewWrapperClass}>
             <div className="preview-container">
 
                 <DragDropContext onDragEnd={props.onhandleOnDragEnd}>
@@ -117,7 +118,7 @@ function Dropzone(props) {
     return (
         <div className="dropzone-container">
             <div
-                className={props.dragOverClass}
+                className={props.toggleDropzoneBordersClass}
                 onDragOver={(e) => props.onHandleDrag(e)}
                 onDragEnter={(e) => props.onHandleDrag(e)}
                 onDragEnd={(e) => props.onHandleDragLeave(e)}
@@ -152,7 +153,7 @@ export default function FormUpload(props) {
             <Dropzone
                 onHandleDrag={props.onHandleDrag}
                 onHandleDragLeave={(e) => props.onHandleDragLeave(e)}
-                dragOverClass={props.dragOverClass}
+                toggleDropzoneBordersClass={props.toggleDropzoneBordersClass}
                 onHandleFileDrop={(e) => props.onHandleFileDrop(e)}
 
                 // inputFileElement={props.inputFileElement}
@@ -184,10 +185,10 @@ export default function FormUpload(props) {
             <p>If you have more than one image file, you may drag and re-order.</p>
 
             <Preview
-                inputFileRead={props.inputFileRead}
                 inputField={props.inputField}
                 onhandleOnDragEnd={props.onhandleOnDragEnd}
                 onRemoveSelf={props.onRemoveSelf}
+                togglePreviewWrapperClass={props.togglePreviewWrapperClass}
             />
         </section>
     )
