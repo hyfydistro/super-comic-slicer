@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react';
+// import { ReactSortable } from "react-sortablejs";
+// import { ReactSortable } from "https://cdn.jsdelivr.net/npm/react-sortablejs@6.0.0/dist/index.min.js";
 
 const alertMessages = {
     alertMax: "Total file sizes is over maximum 20MB. Delete some files, or clear upload and try again with less files.",
@@ -15,34 +17,27 @@ const sucessMessages = {
 
 // TODO
 // - [ ] roate image function >> on condition
+// - Pass Props:
+// - id
+// - name
 function Preview(props) {
 
-    const files = props.inputFileRead;
-
-    // Create Unique identifier for the following list...
-    let id = [];
-    for (let i = 0; i < files.length; i++) {
-        id.push(i);
-
-        // ! LOG
-        console.log("id :", id);
-    }
-
-    // ! LOG
-    console.log("INSIDE PREVIEW: ", files);
+    const files = props.inputField;
 
     if (files) {
 
-        // ! log
-        // console.log("PREVIEW LOG #1: ", files);
-        // console.log("PREVIEW LOG #1: ", files["0"]);
-        if (files.length >= 1) {
-            console.log("PREVIEW LOG #2: ", files["0"]["name"]);
-        }
+        // ! LOG
+        console.log("INSIDE <PREVIEW>: ", props.inputField);
+        // console.log("INSIDE <PREVIEW>: ", props.inputField[0]["id"]);
 
         const previewThumbnailElements = files.map((file, i) => {
+
+            console.log("INSIDE <PREVIEW> fileRead: ", file.fileRead);
+            console.log("INSIDE <PREVIEW> fileRead - name: ", file.fileRead.name);
+            console.log("INSIDE <PREVIEW> id: ", file.id);
+
             const reader = new FileReader();
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(file.fileRead);
             reader.addEventListener("load", getDataURL)
 
             function getDataURL() {
@@ -64,9 +59,9 @@ function Preview(props) {
 
             return (
                 <div
-                    key={id[i]}
+                    key={file.id}
                     className="preview__thumbnail-container"
-                    data-label={JSON.stringify(file.name)}
+                    data-label={JSON.stringify(file.fileRead.name)}
                 >
                     <button className="close-btn"></button>
                     <div className="preview__thumbnail">
@@ -80,7 +75,8 @@ function Preview(props) {
         return (
             <div className="preview-wrapper">
                 <div className="preview-container">
-                    <div className="preview" id="draggable-area">
+                    <div className="preview">
+                        {/* <ReactSortable> */}
 
                         {previewThumbnailElements}
 
@@ -97,7 +93,7 @@ function Preview(props) {
                                 <img src="" alt="" />
                             </div>
                         </div> */}
-
+                        {/* </ReactSortable> */}
                     </div>
                     <div className="preview__clear-btn-container">
                         <button className="preview__clear-btn">Clear Files</button>
@@ -181,6 +177,7 @@ export default function FormUpload(props) {
 
             <Preview
                 inputFileRead={props.inputFileRead}
+                inputField={props.inputField}
             />
         </section>
     )
