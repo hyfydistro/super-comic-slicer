@@ -66,8 +66,6 @@ export default class Form extends React.Component {
             },
 
             // # DATA
-            // ! WIP
-            // inputFileRead: [],
             inputFileData: [],
             inputField: []
             // inputField: [
@@ -78,21 +76,26 @@ export default class Form extends React.Component {
             // ]
         };
 
-        // Methods
+        // METHODS
         this.handleDrag = this.handleDrag.bind(this);
         this.handleDragLeave = this.handleDragLeave.bind(this);
         this.handleFileDrop = this.handleFileDrop.bind(this);
         this.processResults = this.processResults.bind(this);
         this.handleBeginSlicBtn = this.handleBeginSlicBtn.bind(this);
-        // Toggle Class
+        // TOGGLE CLASS
         this.toggleBeginSliceText = this.toggleBeginSliceText.bind(this);
-        this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
-        // Delete Data
+        this.handleDragEnd = this.handleDragEnd.bind(this);
+        // DATA MANAGEMENT
+        // DELETE Data
         this.handleRemoveSelf = this.handleRemoveSelf.bind(this);
         // ? I don't know if use this blub
         this.getFileBlob = this.getFileBlob.bind(this);
     }
 
+
+    // ===============
+    // # REACT METHODS
+    // ===============
     componentWillUnmount() {
         console.log("UNMOUNTING...");
     }
@@ -104,6 +107,34 @@ export default class Form extends React.Component {
     componentDidUpdate() {
         console.log("COMPONENT UPDATING...");
     }
+
+
+    // ==============
+    // # STYLE EVENTS
+    // ==============
+    // TOGGLE "Begin Slice" Text
+    toggleBeginSliceText() {
+        console.log("TOGGLE 'BEGIN SLICE' TEXT...")
+
+        if (this.state.sliceText === "slice-btn") {
+            console.log("Toggle: spinner")
+
+            this.setState({
+                sliceText: "fa fa-refresh fa-spin fa-3x fa-fw"
+            })
+        } else if (this.state.sliceText === "fa fa-refresh fa-spin fa-3x fa-fw") {
+            console.log("Toggle: text")
+
+            this.setState({
+                sliceText: "slice-btn"
+            })
+        }
+    }
+
+
+    // ========
+    // # EVENTS
+    // ========
 
     handleDrag(e) {
         e.preventDefault();
@@ -122,6 +153,11 @@ export default class Form extends React.Component {
             isDragOver: false
         })
     }
+
+
+    // =========
+    // # METHODS
+    // =========
 
     // FETCHING FILE READ
     // - VALIDATE
@@ -418,31 +454,9 @@ export default class Form extends React.Component {
 
     }
 
-    // # STYLE EVENTS
-
-    // TOGGLE "Begin Slice" Text
-    toggleBeginSliceText() {
-        console.log("TOGGLE 'BEGIN SLICE' TEXT...")
-
-        // Toggle class
-        if (this.state.sliceText === "slice-btn") {
-            console.log("Toggle: spinner")
-
-            this.setState({
-                sliceText: "fa fa-refresh fa-spin fa-3x fa-fw"
-            })
-        } else if (this.state.sliceText === "fa fa-refresh fa-spin fa-3x fa-fw") {
-            console.log("Toggle: text")
-
-            this.setState({
-                sliceText: "slice-btn"
-            })
-        }
-        // Toggle text to icon, or vice versa
-
-    }
-
-    handleOnDragEnd(result) {
+    // REORDER FILES
+    // event: drag
+    handleDragEnd(result) {
         // ! LOG
         // console.log("DnD HANDLE EVENT", result);
 
@@ -523,26 +537,18 @@ export default class Form extends React.Component {
                     toggleDropzoneBordersClass={this.state.isDragOver ? this.state.dropzoneBordersClass.highlight : this.state.dropzoneBordersClass.default}
                     onHandleFileDrop={this.handleFileDrop}
                     // ? Not sure if in use...
-                    inputFileRead={this.state.inputFileRead}
                     getFileBlob={this.getFileBlob}
 
                     // ! WIP
                     onRemoveSelf={this.handleRemoveSelf}
                     inputField={this.state.inputField}
                     // ? Rename
-                    onhandleOnDragEnd={this.handleOnDragEnd}
+                    onhandleDragEnd={this.handleDragEnd}
                     // STYLE EVENTS
-                    togglePreviewWrapperClass={this.state.inputDataAvailable ? this.state.previewWrapperClass.visible : this.state.previewWrapperClass.invisible }
+                    togglePreviewWrapperClass={this.state.inputDataAvailable ? this.state.previewWrapperClass.visible : this.state.previewWrapperClass.invisible}
 
                 // onHandleChange={this.handleChange}
 
-                // inputFileElement={this.state.inputDataAvailable
-                //     ? <input className="dropzone__input" type="file" accept="image/png, image/jpeg" multiple ref={input => this.fileInput = input} />
-                //     : null}
-
-                //     previewComponent={this.state.inputDataAvailable === true
-                //         ? <Preview inputFileRead={this.state.inputFileRead} />
-                //         : null}
                 />
 
                 <FormSelect />

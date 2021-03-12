@@ -93,7 +93,7 @@ function Preview(props) {
         <div className={props.togglePreviewWrapperClass}>
             <div className="preview-container">
 
-                <DragDropContext onDragEnd={props.onhandleOnDragEnd}>
+                <DragDropContext onDragEnd={props.onhandleDragEnd}>
                     <Droppable droppableId="preview" direction="horizontal">
                         {(provided) => (
                             <div className="preview" {...provided.droppableProps} ref={provided.innerRef}>
@@ -186,7 +186,7 @@ export default function FormUpload(props) {
 
             <Preview
                 inputField={props.inputField}
-                onhandleOnDragEnd={props.onhandleOnDragEnd}
+                onhandleDragEnd={props.onhandleDragEnd}
                 onRemoveSelf={props.onRemoveSelf}
                 togglePreviewWrapperClass={props.togglePreviewWrapperClass}
             />
