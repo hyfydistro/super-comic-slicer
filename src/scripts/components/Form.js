@@ -90,6 +90,10 @@ export default class Form extends React.Component {
         this.handleRemoveSelf = this.handleRemoveSelf.bind(this);
         // ? I don't know if use this blub
         this.getFileBlob = this.getFileBlob.bind(this);
+
+        // ! WIP
+        this.setFilesData = this.setFilesData.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
 
@@ -169,9 +173,27 @@ export default class Form extends React.Component {
 
         const files = e.dataTransfer.files;
 
+        this.setFilesData(files);
+
         // ! LOG
         // console.log("HANDLE FILE DROP: ", files);
 
+        // ? Refactor into a funciton
+        // Set to true when file input is available
+        if (this.state.inputField) {
+            this.setState({
+                inputDataAvailable: true
+            })
+        } else {
+            console.log("Nothing in place")
+        }
+
+        this.setState({
+            isDragOver: false
+        });
+    }
+
+    setFilesData(files) {
         Object.values(files).forEach((obj) => {
             // ! LOG
             // console.log("HANDLE FILE DROP - OBJ: ", obj);
@@ -202,21 +224,7 @@ export default class Form extends React.Component {
                 }), () => console.log("HANDLE FILE DROP LOG UPDATE: ", this.state.inputField))
             }
         })
-
-        // Set to true when file input is available
-        if (this.state.inputField) {
-            this.setState({
-                inputDataAvailable: true
-            })
-        } else {
-            console.log("Nothing in place")
-        }
-
-        this.setState({
-            isDragOver: false
-        });
     }
-
 
 
     // FETCHING FILE BLOB
@@ -486,7 +494,7 @@ export default class Form extends React.Component {
     }
 
     // ! WIP
-    // "Close" button
+    // "X" button
     handleRemoveSelf(e) {
         e.preventDefault();
 
@@ -527,28 +535,67 @@ export default class Form extends React.Component {
         console.log("HANDLE REMOVESELF - CURRENT STATE: ", this.state.inputField)
     }
 
+    handleClearFilesBtn() {
+        // ! LOG
+        console.log("CLICKED - CLEAR FILES...")
+
+    }
+
+    handleClickToUpload() {
+        //! LOG
+        console.log("CLICKED - CLICK TO UPLOAD...")
+
+        const dropzoneInput = document.querySelector(".dropzone__input");
+
+        console.log("dropzoneInput", dropzoneInput);
+        dropzoneInput.click();
+    }
+
+    handleInputChange(e) {
+        // ! LOG
+        console.log("INITIATE - INPUT CHANGE...")
+        console.log(e);
+        console.log(e.target.files);
+
+        const files = e.target.files;
+        this.setFilesData(files);
+
+        // Set to true when file input is available
+        if (this.state.inputField) {
+            this.setState({
+                inputDataAvailable: true
+            })
+        } else {
+            console.log("Nothing in place")
+        }
+    }
+
     render() {
         return (
             <main>
                 <h2>Start Here</h2>
                 <FormUpload
+                    // EVENTS
                     onHandleDrag={this.handleDrag}
                     onHandleDragLeave={this.handleDragLeave}
-                    toggleDropzoneBordersClass={this.state.isDragOver ? this.state.dropzoneBordersClass.highlight : this.state.dropzoneBordersClass.default}
                     onHandleFileDrop={this.handleFileDrop}
+                    onRemoveSelf={this.handleRemoveSelf}
+                    onhandleDragEnd={this.handleDragEnd}
+                    // STYLE EVENTS
+                    toggleDropzoneBordersClass={this.state.isDragOver ? this.state.dropzoneBordersClass.highlight : this.state.dropzoneBordersClass.default}
+                    togglePreviewWrapperClass={this.state.inputDataAvailable ? this.state.previewWrapperClass.visible : this.state.previewWrapperClass.invisible}
+
+                    // DATAS
+                    inputField={this.state.inputField}
+
                     // ? Not sure if in use...
                     getFileBlob={this.getFileBlob}
 
                     // ! WIP
-                    onRemoveSelf={this.handleRemoveSelf}
-                    inputField={this.state.inputField}
-                    // ? Rename
-                    onhandleDragEnd={this.handleDragEnd}
-                    // STYLE EVENTS
-                    togglePreviewWrapperClass={this.state.inputDataAvailable ? this.state.previewWrapperClass.visible : this.state.previewWrapperClass.invisible}
+                    onHandleClickToUpload={this.handleClickToUpload}
+                    onHandleInputChange={this.handleInputChange}
 
                 // onHandleChange={this.handleChange}
-
                 />
 
                 <FormSelect />

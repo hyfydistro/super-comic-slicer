@@ -124,13 +124,14 @@ function Dropzone(props) {
                 onDragEnd={(e) => props.onHandleDragLeave(e)}
                 onDragLeave={(e) => props.onHandleDragLeave(e)}
                 onDrop={(e) => props.onHandleFileDrop(e)}
+                onClick={props.onHandleClickToUpload}
             >
                 <img className="dropzone__upload-icon" src="./images/upload-icon.svg" alt="Drag & Drog Icon" />
                 <p>Drag & Drop or Click here</p>
                 <p className="text-small">to upload your files.(max. 20MB)</p>
                 {/* {props.inputFileElement} */}
 
-                <input onChange={props.onHandleChange} className="dropzone__input" type="file" accept="image/png, image/jpeg" multiple />
+                <input onChange={(e) => props.onHandleInputChange(e)} className="dropzone__input" type="file" accept="image/png, image/jpeg" multiple />
             </div>
 
         </div>
@@ -151,13 +152,18 @@ export default function FormUpload(props) {
             <p>Currently, .png and .jpeg (including .jpg) are accepted. If width of image is larger than height, it will be automatically roated. A "rotate" option will be available on next update. 😗</p>
 
             <Dropzone
+                // EVENTS
                 onHandleDrag={props.onHandleDrag}
                 onHandleDragLeave={(e) => props.onHandleDragLeave(e)}
-                toggleDropzoneBordersClass={props.toggleDropzoneBordersClass}
                 onHandleFileDrop={(e) => props.onHandleFileDrop(e)}
+                onHandleInputChange={(e) => props.onHandleInputChange(e)}
+                // STYLE EVENTS
+                toggleDropzoneBordersClass={props.toggleDropzoneBordersClass}
 
-                // inputFileElement={props.inputFileElement}
+                // ! WIP
+                onHandleClickToUpload={props.onHandleClickToUpload}
                 onHandleChange={props.onHandleChange}
+
             />
 
             {false
