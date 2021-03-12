@@ -13,95 +13,6 @@ import FormResults from './FormResults';
 // 6. Preview images withvalid file types
 // 7. Upload images
 
-// TODO
-// - [ ] roate image function >> on condition
-// i.e. displays WHOLLY (almost) - I don't want cramp
-// horizontal images.
-function Preview(props) {
-
-    const files = props.inputFileRead;
-    const id = [0, 1, 2, 3, 4, 5];
-
-    // ! LOG
-    console.log("INSIDE PREVIEW: ", files);
-
-    if (files) {
-
-        // ! log
-        // console.log("PREVIEW LOG #1: ", files);
-        // console.log("PREVIEW LOG #1: ", files["0"]);
-        if (files.length >= 1) {
-            console.log("PREVIEW LOG #2: ", files["0"]["name"]);
-        }
-
-        const previewThumbnailElements = files.map((file, i) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.addEventListener("load", getDataURL)
-
-            function getDataURL() {
-                console.log("MAKING DATA URL...", reader);
-
-                const currentElement = document.querySelectorAll(".preview__thumbnail-container")[i].lastElementChild.firstElementChild;
-
-                // ! Log
-                console.log(currentElement);
-
-                currentElement.src = reader.result;
-            }
-
-            // ! LOG
-            // console.log("READER: ", reader);
-            // console.log("SOURCE: ", dataURLs);
-            // console.log("SOURCE: 0", dataURLs[0]);
-
-
-            return (
-                <div
-                    key={id[i]}
-                    className="preview__thumbnail-container"
-                    data-label={JSON.stringify(file.name)}
-                >
-                    <button className="close-btn"></button>
-                    <div className="preview__thumbnail">
-                        <img alt="" />
-                    </div>
-                </div>
-            )
-        })
-
-
-        return (
-            <div className="preview-wrapper">
-                <div className="preview-container">
-                    <div className="preview">
-
-                        {previewThumbnailElements}
-
-                        {/* <div className="preview__thumbnail-container" data-label="myfile.txt">
-                            <button className="close-btn"></button>
-                            <div className="preview__thumbnail">
-                                <img src="images/comic2.jpg" alt="" />
-                            </div>
-                        </div>
-
-                        <div className="preview__thumbnail-container" data-label="myfile.txt">
-                            <button className="close-btn"></button>
-                            <div className="preview__thumbnail">
-                                <img src="" alt="" />
-                            </div>
-                        </div> */}
-
-                    </div>
-                    <div className="preview__clear-btn-container">
-                        <button className="preview__clear-btn">Clear Files</button>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
-
 const fileTypes = [
     'image/jpeg',
     'image/jpg',
@@ -110,6 +21,14 @@ const fileTypes = [
 
 function validFileType(file) {
     return fileTypes.includes(file);
+}
+
+const createId = function getUniqueId() {
+    if (window.crypto && window.crypto.getRandomValues) {
+        return window.crypto.getRandomValues(new Uint32Array(1))[0];
+    } else {
+        return Math.random()
+    }
 }
 
 // TODO
@@ -148,8 +67,6 @@ export default class Form extends React.Component {
             // ! WIP
             inputFileRead: [],
             inputFileData: [],
-            // ! WIP
-            // id: [],
 
             // ! WIP
             inputField: []
@@ -171,7 +88,8 @@ export default class Form extends React.Component {
         // Toggle
         this.toggleBegingSliceText = this.toggleBegingSliceText.bind(this);
         // this.setInputField = this.setInputField.bind(this);
-        this.handleOnDragEnd= this.handleOnDragEnd.bind(this);
+        this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
+        this.handleRemoveSelf = this.handleRemoveSelf.bind(this);
     }
 
     componentWillUnmount() {
@@ -184,6 +102,7 @@ export default class Form extends React.Component {
 
     componentDidUpdate() {
         console.log("COMPONENT UPDATING...");
+        // console.log("COMPONENT UPDATING...CHECKING", this.state.inputField);
     }
 
     handleDrag(e) {
@@ -215,7 +134,14 @@ export default class Form extends React.Component {
 
         const files = e.dataTransfer.files;
 
+        // ! LOG
+        console.log("HANDLE FILE DROP: ", files);
+
         Object.values(files).forEach((obj) => {
+            // ! LOG
+            console.log("HANDLE FILE DROP - OBJ: ", obj);
+            console.log("HANDLE FILE DROP - OBJ-TYPE: ", obj.type);
+
             // VALIDATE
             if (!validFileType(obj.type)) {
                 // TODO
@@ -228,91 +154,119 @@ export default class Form extends React.Component {
                 // console.log("Valid file!");
 
                 // VALIDATED FILES
-                const arrFiles = Object.values(files);
-                const acceptedFiles = arrFiles.filter((file) => validFileType(file.type))
+                // const arrFiles = Object.values(obj);
+
+
+                // const acceptedFiles = arrFiles.filter((file) => validFileType(file.type))
 
                 // ! LOG
-                console.log("ACCEPTED", acceptedFiles);
+                console.log("ACCEPTED", obj.type, obj);
 
                 // Get input Element
                 // const inputElement = e.target.lastElementChild;
                 // console.log("ELEMENT", inputElement);
 
                 // Updata data array
-                if (acceptedFiles) {
-                    this.setState((currentState) => ({
-                        inputFileRead: [...currentState.inputFileRead, ...acceptedFiles]
-                    }), () => {
-                        console.log("LOG UPDATE STATE 'fileRead'", this.state.inputFileRead);
-                    })
 
-                    // Set to true when file input is available
-                    if (this.state.inputFileRead) {
-                        this.setState({
-                            inputDataAvailable: true
-                        })
-                    } else {
-                        console.log("Nothing in place")
-                    }
-                }
+                // ! WIP
+                // if (acceptedFiles.length > 1) {
 
+                //     acceptedFiles.forEach((currentFile) => {
+
+                //         this.setState((currentState) => ({
+                //             inputField: [
+                //                 ...currentState,
+                //                 {
+                //                     fileRead: currentFile,
+                //                     id: createId()
+                //                 }
+                //             ]
+                //         }));
+                //     });
+
+                // } else {
+
+                //     this.setState((currentState) => ({
+                //         inputField: [
+                //             ...currentState,
+                //             {
+                //                 fileRead: acceptedFiles,
+                //                 id: createId()
+                //             }
+                //         ]
+                //     }))
+                // };
+
+                this.setState((currentState) => ({
+                    inputField: [
+                        ...currentState.inputField,
+                        {
+                            fileRead: obj,
+                            id: createId()
+                        }
+                    ]
+                }), () => console.log("HANDLE FILE DROP LOG UPDATE: ", this.state.inputField))
             }
         })
 
 
-        // ! WIP
-        this.setState((currentState) => {
-            let fileLength = currentState.inputFileRead.length;
 
-            console.log("SET STATE - FILE LENGTH", fileLength);
-            console.log("SET STATE - FILE READ", currentState.inputFileRead);
 
-            let updatedInputFields = [];
-            let idArr = [];
-            let fileReadArr = currentState.inputFileRead;
+        // this.setState((currentState) => ({
+        //     inputFileRead: [...currentState.inputFileRead, ...acceptedFiles]
+        // }), () => {
+        //     console.log("LOG UPDATE STATE 'fileRead'", this.state.inputFileRead);
+        // })
 
-            // Create idArr
-            for (let i = 0; i < fileLength; i++) {
-                idArr.push(i);
-            }
-
-            // Create new Update Input Fields
-            for (let i = 0; i < fileLength; i++) {
-                const objId = {};
-                const objFileRead = {};
-
-                objId["id"] = idArr[i];
-                objFileRead["fileRead"] = fileReadArr[i];
-
-                updatedInputFields.push({...objId, ...objFileRead});
-            }
-
-            // return ({
-            //     id: [...idArr]
-            // })
-
-            // Seems like I have updated the entire field
-            return ({
-                inputField: [
-                    ...updatedInputFields
-                ]
+        // Set to true when file input is available
+        if (this.state.inputField) {
+            this.setState({
+                inputDataAvailable: true
             })
+        } else {
+            console.log("Nothing in place")
+        }
 
-            // if (fileLength === 0) {
-            //     return ({
-            //         id: [...currentState.id, (fileLength)]
-            //     })
 
-            // } else {
-            //     return ({
-            //         id: [...currentState.id, (fileLength + 1)]
-            //     })
-            // }
+        // !! DRAFTING
+        // ! WIP
+        // this.setState((currentState) => {
+        //     let fileLength = currentState.inputFileRead.length;
 
-        }, () => {
-            // console.log("STATE ID: ", this.state.id);
-            console.log("STATE FIELDS: ", this.state.inputField);
-        });
+        //     console.log("SET STATE - FILE LENGTH", fileLength);
+        //     console.log("SET STATE - FILE READ", currentState.inputFileRead);
+
+        //     let updatedInputFields = [];
+        //     let idArr = [];
+        //     let fileReadArr = currentState.inputFileRead;
+
+        //     // !! TRY / TEST w/ Unique ID
+        //     // Create idArr
+        //     for (let i = 0; i < fileLength; i++) {
+        //         idArr.push(i);
+        //     }
+
+        //     // Create new Update Input Fields
+        //     for (let i = 0; i < fileLength; i++) {
+        //         const objId = {};
+        //         const objFileRead = {};
+
+        //         objId["id"] = idArr[i];
+        //         objFileRead["fileRead"] = fileReadArr[i];
+
+        //         updatedInputFields.push({ ...objId, ...objFileRead });
+        //     }
+
+        //     return ({
+        //         inputField: [
+        //             ...updatedInputFields
+        //         ]
+        //     })
+
+        // }, () => {
+        //     // console.log("STATE ID: ", this.state.id);
+        //     console.log("STATE FIELDS: ", this.state.inputField);
+        // });
 
 
         // ! WIP >>
@@ -359,14 +313,12 @@ export default class Form extends React.Component {
         // console.log("HANDLE FILE DROP #SPREAD: ", ...files);
         // console.log("HANDLE FILE DROP #SPREAD: ", ...files);
 
-        // ! Log
-        // console.log(e.dataTransfer.files);
-        // console.log("LOG UPDATE STATE 'fileRead'", this.state.inputFileUpload.fileRead);
-
         this.setState({
             isDragOver: false
-        })
+        });
     }
+
+
 
     // FETCHING FILE BLOB
     getFileBlob(blob) {
@@ -629,35 +581,75 @@ export default class Form extends React.Component {
 
     handleOnDragEnd(result) {
         // ! LOG
-        console.log("DnD HANDLE EVENT", result);
+        // console.log("DnD HANDLE EVENT", result);
 
         // Create shallow copy
         const items = Array.from(this.state.inputField);
         // const items = this.state.inputField;
 
         // ! LOG
-        console.log("DnD HANDLE EVENT - ITEMS", items);
+        // console.log("DnD HANDLE EVENT - ITEMS", items);
 
         // ! LOG
-        console.log("DnD HANDLE EVENT - ARR ITEMS", items);
+        // console.log("DnD HANDLE EVENT - ARR ITEMS", items);
 
         const [reorderedItem] = items.splice(result.source.index, 1);
 
         // ! LOG
-        console.log("DnD HANDLE EVENT - reorderedItem", reorderedItem);
+        // console.log("DnD HANDLE EVENT - reorderedItem", reorderedItem);
 
         items.splice(result.destination.index, 0, reorderedItem);
+
         // ! LOG
-        console.log("DnD HANDLE EVENT - MODIFIED ITEMS", items);
+        // console.log("DnD HANDLE EVENT - MODIFIED ITEMS", items);
 
         this.setState({
             inputField: items
         })
     }
 
+    // ! WIP
     // "Close" button
     handleRemoveSelf(e) {
-        console.log(e.target);
+        e.preventDefault();
+
+        // ! LOG
+        // console.log("HANDLE REMOVESELF: ", e);
+        // console.log("HANDLE REMOVESELF - TARGET: ", e.target);
+        // console.log("HANDLE REMOVESELF - PARENT: ", e.target.parentElement);
+        // console.log("HANDLE REMOVESELF - PARENT PARENT: ", e.target.parentElement.parentElement);
+
+        const sourceThumbnails = document.querySelectorAll(".preview__thumbnail-container");
+        // const attribute = e.target.parentElement.attributes.getNamedItem("data-rbd-draggable-id").value;
+
+        // ! LOG
+        console.log("HANDLE REMOVESELF - ALL CONTENTS: ", sourceThumbnails);
+
+        const arrThumbnails = Array.from(sourceThumbnails);
+
+        // ! LOG
+        console.log("HANDLE REMOVESELF - ALL CONTENTS ARR: ", arrThumbnails);
+
+        // Create shallow copy
+        const items = Array.from(this.state.inputField);
+
+        const removeItemIndex = arrThumbnails.indexOf(e.target.parentElement);
+
+        // ! LOG
+        console.log("HANDLE REMOVESELF - TARGET INDEX: ", removeItemIndex);
+
+        items.splice(removeItemIndex, 1);
+
+        // ! LOG
+        console.log("HANDLE REMOVESELF - NEW ARR: ", items);
+
+        this.setState({
+            inputField: items
+        }, () => console.log("HANDLE REMOVESELF - CURRENT STATE: ", this.state.inputField))
+
+        // this.state.inputField.splice(removeItemIndex, 1);
+
+        console.log("HANDLE REMOVESELF - CURRENT STATE: ", this.state.inputField)
     }
 
     render() {
@@ -674,8 +666,10 @@ export default class Form extends React.Component {
                     getFileBlob={this.getFileBlob}
 
                     // ! WIP
+                    onRemoveSelf={this.handleRemoveSelf}
                     inputField={this.state.inputField}
-                    handleOnDragEnd={this.handleOnDragEnd}
+                    // ? Rename
+                    onhandleOnDragEnd={this.handleOnDragEnd}
 
                 // onHandleChange={this.handleChange}
 

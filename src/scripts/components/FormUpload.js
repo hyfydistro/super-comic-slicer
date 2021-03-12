@@ -70,7 +70,7 @@ function Thumbnails(props) {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                             >
-                                <button className="close-btn"></button>
+                                <button className="close-btn" onClick={(e) => props.onRemoveSelf(e)}></button>
                                 <div className="preview__thumbnail">
                                     <img alt="" />
                                 </div>
@@ -88,17 +88,15 @@ function Thumbnails(props) {
 
 function Preview(props) {
 
-
-
     return (
         <div className="preview-wrapper">
             <div className="preview-container">
 
-                <DragDropContext onDragEnd={props.handleOnDragEnd}>
-                    <Droppable droppableId="preview">
+                <DragDropContext onDragEnd={props.onhandleOnDragEnd}>
+                    <Droppable droppableId="preview" direction="horizontal">
                         {(provided) => (
                             <div className="preview" {...provided.droppableProps} ref={provided.innerRef}>
-                                <Thumbnails inputField={props.inputField} />
+                                <Thumbnails inputField={props.inputField} onRemoveSelf={props.onRemoveSelf} />
                                 {provided.placeholder}
                             </div>
                         )}
@@ -188,7 +186,8 @@ export default function FormUpload(props) {
             <Preview
                 inputFileRead={props.inputFileRead}
                 inputField={props.inputField}
-                handleOnDragEnd={props.handleOnDragEnd}
+                onhandleOnDragEnd={props.onhandleOnDragEnd}
+                onRemoveSelf={props.onRemoveSelf}
             />
         </section>
     )
