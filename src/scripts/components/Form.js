@@ -43,7 +43,8 @@ const createId = function getUniqueId() {
 // - Something to do with fixing border drag on event styles ???
 // - [ ] roate image function >> on condition
 // - [ ] scale image function >> options
-// - [ ] re-order >> on rearranging
+// - [x] re-order >> on rearranging
+// - [ ] Implement Click to browser for upload
 
 // let fileBlobs = [];
 
@@ -63,12 +64,11 @@ export default class Form extends React.Component {
             inputDataAvailable: false,
             // "Begin Slice!" button
             sliceText: "slice-btn",
+
             // # DATA
             // ! WIP
-            inputFileRead: [],
+            // inputFileRead: [],
             inputFileData: [],
-
-            // ! WIP
             inputField: []
             // inputField: [
             //     {
@@ -78,18 +78,19 @@ export default class Form extends React.Component {
             // ]
         };
 
+        // Methods
         this.handleDrag = this.handleDrag.bind(this);
         this.handleDragLeave = this.handleDragLeave.bind(this);
         this.handleFileDrop = this.handleFileDrop.bind(this);
-        this.getFileBlob = this.getFileBlob.bind(this);
         this.processResults = this.processResults.bind(this);
-        // ! WIP
         this.handleBeginSlicBtn = this.handleBeginSlicBtn.bind(this);
-        // Toggle
+        // Toggle Class
         this.toggleBegingSliceText = this.toggleBegingSliceText.bind(this);
-        // this.setInputField = this.setInputField.bind(this);
         this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
+        // Delete Data
         this.handleRemoveSelf = this.handleRemoveSelf.bind(this);
+        // ? I don't know if use this blub
+        this.getFileBlob = this.getFileBlob.bind(this);
     }
 
     componentWillUnmount() {
@@ -102,7 +103,6 @@ export default class Form extends React.Component {
 
     componentDidUpdate() {
         console.log("COMPONENT UPDATING...");
-        // console.log("COMPONENT UPDATING...CHECKING", this.state.inputField);
     }
 
     handleDrag(e) {
@@ -125,7 +125,6 @@ export default class Form extends React.Component {
 
     // FETCHING FILE READ
     // - VALIDATE
-    // - setState to "inputFileRead"
     // - setState to "inputField"
     // - TOGGLE class
     handleFileDrop(e) {
@@ -135,12 +134,12 @@ export default class Form extends React.Component {
         const files = e.dataTransfer.files;
 
         // ! LOG
-        console.log("HANDLE FILE DROP: ", files);
+        // console.log("HANDLE FILE DROP: ", files);
 
         Object.values(files).forEach((obj) => {
             // ! LOG
-            console.log("HANDLE FILE DROP - OBJ: ", obj);
-            console.log("HANDLE FILE DROP - OBJ-TYPE: ", obj.type);
+            // console.log("HANDLE FILE DROP - OBJ: ", obj);
+            // console.log("HANDLE FILE DROP - OBJ-TYPE: ", obj.type);
 
             // VALIDATE
             if (!validFileType(obj.type)) {
@@ -153,49 +152,8 @@ export default class Form extends React.Component {
                 // ! LOG
                 // console.log("Valid file!");
 
-                // VALIDATED FILES
-                // const arrFiles = Object.values(obj);
-
-
-                // const acceptedFiles = arrFiles.filter((file) => validFileType(file.type))
-
                 // ! LOG
-                console.log("ACCEPTED", obj.type, obj);
-
-                // Get input Element
-                // const inputElement = e.target.lastElementChild;
-                // console.log("ELEMENT", inputElement);
-
-                // Updata data array
-
-                // ! WIP
-                // if (acceptedFiles.length > 1) {
-
-                //     acceptedFiles.forEach((currentFile) => {
-
-                //         this.setState((currentState) => ({
-                //             inputField: [
-                //                 ...currentState,
-                //                 {
-                //                     fileRead: currentFile,
-                //                     id: createId()
-                //                 }
-                //             ]
-                //         }));
-                //     });
-
-                // } else {
-
-                //     this.setState((currentState) => ({
-                //         inputField: [
-                //             ...currentState,
-                //             {
-                //                 fileRead: acceptedFiles,
-                //                 id: createId()
-                //             }
-                //         ]
-                //     }))
-                // };
+                // console.log("ACCEPTED", obj.type, obj);
 
                 this.setState((currentState) => ({
                     inputField: [
@@ -209,15 +167,6 @@ export default class Form extends React.Component {
             }
         })
 
-
-
-
-        // this.setState((currentState) => ({
-        //     inputFileRead: [...currentState.inputFileRead, ...acceptedFiles]
-        // }), () => {
-        //     console.log("LOG UPDATE STATE 'fileRead'", this.state.inputFileRead);
-        // })
-
         // Set to true when file input is available
         if (this.state.inputField) {
             this.setState({
@@ -226,92 +175,6 @@ export default class Form extends React.Component {
         } else {
             console.log("Nothing in place")
         }
-
-
-        // !! DRAFTING
-        // ! WIP
-        // this.setState((currentState) => {
-        //     let fileLength = currentState.inputFileRead.length;
-
-        //     console.log("SET STATE - FILE LENGTH", fileLength);
-        //     console.log("SET STATE - FILE READ", currentState.inputFileRead);
-
-        //     let updatedInputFields = [];
-        //     let idArr = [];
-        //     let fileReadArr = currentState.inputFileRead;
-
-        //     // !! TRY / TEST w/ Unique ID
-        //     // Create idArr
-        //     for (let i = 0; i < fileLength; i++) {
-        //         idArr.push(i);
-        //     }
-
-        //     // Create new Update Input Fields
-        //     for (let i = 0; i < fileLength; i++) {
-        //         const objId = {};
-        //         const objFileRead = {};
-
-        //         objId["id"] = idArr[i];
-        //         objFileRead["fileRead"] = fileReadArr[i];
-
-        //         updatedInputFields.push({ ...objId, ...objFileRead });
-        //     }
-
-        //     return ({
-        //         inputField: [
-        //             ...updatedInputFields
-        //         ]
-        //     })
-
-        // }, () => {
-        //     // console.log("STATE ID: ", this.state.id);
-        //     console.log("STATE FIELDS: ", this.state.inputField);
-        // });
-
-
-        // ! WIP >>
-
-        // let fileRead = this.state.inputFileRead;
-
-        // fileRead.forEach((file) => {
-
-        //     if (this.inputField === []) {
-        //         this.setState((currentState) => ({
-        //             inputField: [
-        //                 ...currentState.inputField,
-        //                 {
-        //                     fileRead: file,
-        //                     id: 0
-        //                 }
-        //             ]
-        //         }), () => {
-        //             console.log("LOG UPDATE STATE 'fileRead'", this.state.inputField.fileRead);
-        //             console.log("LOG UPDATE STATE 'fileRead'", this.state.inputField.id);
-        //         })
-        //     } else {
-        //         this.setState((currentState) => ({
-        //             inputField: [
-        //                 ...currentState.inputField,
-        //                 {
-        //                     fileRead: file,
-        //                     id: currentState.inputField.length + 1
-        //                 }
-        //             ]
-        //         }), () => {
-        //             console.log("LOG UPDATE STATE 'fileRead'", this.state.inputField.fileRead);
-        //             console.log("LOG UPDATE STATE 'fileRead'", this.state.inputField.id);
-        //         })
-        //     }
-
-        // });
-
-        // ! <<
-
-        // ! Log
-        // console.log("HANDLE FILE DROP #NAME: ", files["0"]["name"]);
-        // console.log("HANDLE FILE DROP #DEFAUTL: ", files);
-        // console.log("HANDLE FILE DROP #SPREAD: ", ...files);
-        // console.log("HANDLE FILE DROP #SPREAD: ", ...files);
 
         this.setState({
             isDragOver: false
@@ -460,8 +323,8 @@ export default class Form extends React.Component {
 
                 let slicedImages = [];
 
+                // * CONDITION: Longer length images
                 while (timesToSlice > currentSlice) {
-                    // currentSlice++;
 
                     newYPosition = determinedeHeight * currentSlice;
                     // CROP HERE
@@ -472,14 +335,11 @@ export default class Form extends React.Component {
                         img, 0, newYPosition, width, determinedeHeight, 0, 0, width, determinedeHeight
                     );
 
-                    // let result = canvas.toDataURL();
-
                     // !LOG
                     // console.log("RESULT ", currentSlice, " ", result);
                     // console.log("RESULT ", currentSlice, " ", result);
 
                     slicedImages.push(canvas.toDataURL());
-                    // processImages.push(result);
 
                     currentSlice++;
                 }
@@ -542,7 +402,6 @@ export default class Form extends React.Component {
 
                 saveAs(blob, "example.zip");
             })
-
     }
 
     // "Begin Slice!" button
@@ -646,8 +505,6 @@ export default class Form extends React.Component {
         this.setState({
             inputField: items
         }, () => console.log("HANDLE REMOVESELF - CURRENT STATE: ", this.state.inputField))
-
-        // this.state.inputField.splice(removeItemIndex, 1);
 
         console.log("HANDLE REMOVESELF - CURRENT STATE: ", this.state.inputField)
     }
