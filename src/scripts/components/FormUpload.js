@@ -20,6 +20,13 @@ const sucessMessages = {
 // - name
 // - [ ] Create alert messages box on CONDITION
 
+// TODO: ALERT MESSAGES
+// - [ ] (success) When "Clear Files" is clicked, notify w/ setTimeout Files removed
+// - [ ] (error) When unaccepted files are chose, notify w/ setTimeout
+// - [ ] (warning) When file size is near maximum, notify w/ setTimeout
+// - [ ] (error) When file size is over maximum, notify w/ setTimeout
+// Disable "begin Slice!" button
+
 // console.log("EXIST", DragDropContext);
 
 function Thumbnails(props) {
@@ -104,7 +111,7 @@ function Preview(props) {
                     </Droppable>
                 </DragDropContext>
                 <div className="preview__clear-btn-container">
-                    <button className="preview__clear-btn">Clear Files</button>
+                    <button className="preview__clear-btn" onClick={props.onHandleClickToRemoveAll}>Clear Files</button>
                 </div>
             </div>
         </div>
@@ -188,14 +195,19 @@ export default function FormUpload(props) {
                 </div>
                 : null}
 
-            <p>If you have more than one image file, you may drag and re-order.</p>
+            {props.inputField.length !== 0
+            ? <p>If you have more than one image file, you may drag and re-order.</p>
+            : null}
 
-            <Preview
+            {props.inputField.length !== 0
+            ?             <Preview
                 inputField={props.inputField}
                 onhandleDragEnd={props.onhandleDragEnd}
                 onRemoveSelf={props.onRemoveSelf}
                 togglePreviewWrapperClass={props.togglePreviewWrapperClass}
+                onHandleClickToRemoveAll={props.onHandleClickToRemoveAll}
             />
+            : null}
         </section>
     )
 }
