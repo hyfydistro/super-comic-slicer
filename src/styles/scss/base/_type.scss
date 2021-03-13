@@ -116,10 +116,12 @@ html {
         font-weight: normal;
     }
     p,
+    .file-size-text,
+    .alert-message-text--success,
+    .alert-message-text--warning,
     .alert-message-text--error,
     .select-text,
     .contact-label,
-    .alert-message-text--success,
     .donate-text,
     .contribute-text {
         font-family: $secondary-fontface;
@@ -222,10 +224,12 @@ p.text-small {
     html {
         font-size: $mobile-base-font-size;
         p,
+        .file-size-text,
+        .alert-message-text--success,
+        .alert-message-text--warning
         .alert-message-text--error,
         .select-text,
         .contact-label,
-        .alert-message-text--success,
         .donate-text,
         .contribute-text {
             font-size: $mobile-base-font-size;

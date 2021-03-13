@@ -32,6 +32,7 @@ main p {
 }
 
 // # ALERT MESSAGES
+.alert-message--warning,
 .alert-message--error,
 .alert-message--success {
     display: flex;
@@ -65,6 +66,13 @@ main p {
     color: base.$success-color-80;
 }
 
+// WARNING
+.alert-message--warning {
+    background-color: base.$primary-color-10;
+    border: 1px solid base.$primary-color-40;
+    color: base.$primary-color-80
+}
+
 .send-message-btn-container,
 .slice-btn-container {
     display: flex;
@@ -82,7 +90,7 @@ main p {
 .send-message-slice-btn,
 .slice-btn {
     display: inline-block;
-    padding: 18px calc(18px* 2);
+    padding: 18px calc(18px * 2);
     border-radius: 999px;
     cursor: pointer;
 }
@@ -93,7 +101,6 @@ main p {
     color: base.$primary-color-80;
     border: solid 1px base.$primary-color-80;
 }
-
 
 .send-message-slice-btn:hover,
 .send-message-slice-btn:focus,
@@ -112,7 +119,6 @@ main p {
     margin: 0;
     padding: 0;
 }
-
 
 // #SML DEVICES
 
@@ -141,8 +147,9 @@ main p {
     }
 
     // ALERT MESSAGES
-    // ERROR
-    .alert-message--error {
+    .alert-message--warning,
+    .alert-message--error,
+    .alert-message--succes {
         padding: 14px 14px;
         border-radius: 14px;
         margin-bottom: base.$mobile-space-lv-1;

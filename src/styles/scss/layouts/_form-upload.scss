@@ -154,7 +154,8 @@
 }
 
 .preview__clear-btn-container {
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
     @include base.tablet-padding-preset;
 }
 
@@ -186,6 +187,12 @@
 .preview__clear-btn:active {
     color: base.$secondary-color-05;
     background-color: base.$secondary-color-40;
+}
+
+// Total Bytes Text
+.file-size__container {
+    display: flex;
+    align-items: center;
 }
 
 .close-btn {
