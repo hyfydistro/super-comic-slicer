@@ -22,6 +22,20 @@ const fileTypes = [
     'image/png',
 ];
 
+const alertMessages = {
+    onSuccess: {
+        filesRemoved: "Files were cleared.",
+    },
+    onError: {
+        unacceptableFileType: "File extensions not supported! Only PNG and JPEG (or JPG) allowed.",
+        overMaxFileSize: "Total file size is over maximum. Remove some files to continue. "
+
+    },
+    onWarning: {
+        nearMaxFileSize: "Total file size is near maximum",
+    }
+}
+
 function validFileType(file) {
     return fileTypes.includes(file);
 }
@@ -65,15 +79,24 @@ export default class Form extends React.Component {
                 invisible: "preview-wrapper hidden"
             },
 
+            // ! WIP
+            isAlertMessageSuccess: false,
+            alertMessageSuccess: "",
+            isAlertMessageError: false,
+            alertMessageError: "",
+            isAlertMessageWarning: false,
+            alertMessageWarning: "",
+
             // # DATA
             inputFileData: [],
-            inputField: []
+            inputField: [],
             // inputField: [
             //     {
             //         fileRead: [],
             //         id: <number>
             //     }
             // ]
+            totalFileSize: 0
         };
 
         // METHODS
@@ -205,6 +228,24 @@ export default class Form extends React.Component {
                 // TODO
                 // ! Alert timeout error
                 console.log("Invalid file!");
+
+                // Invalid file found!
+
+                // Display Alert Message on Error w/ setTimeout
+                // SET Alert Message
+                // SET Class
+                // ADD setTimeout
+                this.setState({
+                    alertMessageError: alertMessages.onError.unacceptableFileType,
+                    isAlertMessageError: true
+                })
+
+                setTimeout(() => {
+                    this.setState({
+                        alertMessageError: "",
+                        isAlertMessageError: false
+                    })
+                }, 8000);
 
                 return false;
             } else {
@@ -545,8 +586,18 @@ export default class Form extends React.Component {
 
         this.setState({
             inputField: [],
-            inputDataAvailable: false
-        })
+            inputDataAvailable: false,
+            isAlertMessageSuccess: true,
+            alertMessageSuccess: alertMessages.onSuccess.filesRemoved
+        });
+
+
+        setTimeout(() => {
+            this.setState({
+                isAlertMessageSuccess: false,
+                alertMessageSuccess: ""
+            });
+        }, 3000);
     }
 
     handleClickToUpload() {
@@ -593,6 +644,7 @@ export default class Form extends React.Component {
                     toggleDropzoneBordersClass={this.state.isDragOver ? this.state.dropzoneBordersClass.highlight : this.state.dropzoneBordersClass.default}
                     togglePreviewWrapperClass={this.state.inputDataAvailable ? this.state.previewWrapperClass.visible : this.state.previewWrapperClass.invisible}
 
+
                     // DATAS
                     inputField={this.state.inputField}
 
@@ -603,6 +655,10 @@ export default class Form extends React.Component {
                     onHandleClickToUpload={this.handleClickToUpload}
                     onHandleInputChange={this.handleInputChange}
                     onHandleClickToRemoveAll={this.handleClickToRemoveAll}
+                    getAlertErrorText={this.state.alertMessageError}
+                    isAlertMessageError={this.state.isAlertMessageError}
+                    getAlertSuccessText={this.state.alertMessageSuccess}
+                    isAlertMessageSuccess={this.state.isAlertMessageSuccess}
                 />
 
                 <FormSelect />

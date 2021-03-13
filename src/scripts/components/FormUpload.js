@@ -21,8 +21,9 @@ const sucessMessages = {
 // - [ ] Create alert messages box on CONDITION
 
 // TODO: ALERT MESSAGES
-// - [ ] (success) When "Clear Files" is clicked, notify w/ setTimeout Files removed
-// - [ ] (error) When unaccepted files are chose, notify w/ setTimeout
+// - [x] (success) When "Clear Files" is clicked, notify w/ setTimeout Files removed
+// - [ ] (success) When there is files...
+// - [x] (error) When unaccepted files are chose, notify w/ setTimeout
 // - [ ] (warning) When file size is near maximum, notify w/ setTimeout
 // - [ ] (error) When file size is over maximum, notify w/ setTimeout
 // Disable "begin Slice!" button
@@ -173,41 +174,48 @@ export default function FormUpload(props) {
 
             />
 
-            {false
+            {props.isAlertMessageError === true
                 ? <div className="alert-message--error">
-                    <img className="alert-icon" src="images/error-icon.svg" alt="" />
+                    <img className="alert-icon" src="images/error-icon.svg" alt="icon" />
                     <span className="alert-message-text--error">
-                        {true
-                            ? alertMessages.alertFile
-                            : null}
+                        {props.getAlertErrorText}
                     </span>
                 </div>
                 : null}
 
-            {false
+            {props.isAlertMessageSuccess === true
                 ? <div className="alert-message--success">
-                    <img className="alert-icon" src="images/check-icon.svg" alt="" />
+                    <img className="alert-icon" src="images/check-icon.svg" alt="icon" />
                     <span className="alert-message-text--success">
-                        {true
-                            ? sucessMessages.successReady
-                            : null}
+                        {props.getAlertSuccessText}
+                    </span>
+                </div>
+                : null}
+
+            {props.isAlertMessageWarning === true
+                ? <div className="alert-message--success">
+                    <img className="alert-icon" src="images/check-icon.svg" alt="icon" />
+                    <span className="alert-message-text--success">
+                        {props.getAlertWarningText}
                     </span>
                 </div>
                 : null}
 
             {props.inputField.length !== 0
-            ? <p>If you have more than one image file, you may drag and re-order.</p>
-            : null}
+                ? <p>If you have more than one image file, you may drag and re-order.</p>
+                : null}
 
             {props.inputField.length !== 0
-            ?             <Preview
-                inputField={props.inputField}
-                onhandleDragEnd={props.onhandleDragEnd}
-                onRemoveSelf={props.onRemoveSelf}
-                togglePreviewWrapperClass={props.togglePreviewWrapperClass}
-                onHandleClickToRemoveAll={props.onHandleClickToRemoveAll}
-            />
-            : null}
+                ? <Preview
+                    inputField={props.inputField}
+                    onhandleDragEnd={props.onhandleDragEnd}
+                    onRemoveSelf={props.onRemoveSelf}
+                    togglePreviewWrapperClass={props.togglePreviewWrapperClass}
+                    onHandleClickToRemoveAll={props.onHandleClickToRemoveAll}
+                />
+                : null}
+
+
         </section>
     )
 }
