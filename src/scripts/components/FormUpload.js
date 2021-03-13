@@ -8,6 +8,17 @@ const alertMessages = {
 const sucessMessages = {
     successReady: "The following files are accepted."
 }
+
+function returnFileSize(number) {
+    if (number < 1024) {
+        return number + 'bytes';
+    } else if (number > 1024 && number < 1048576) {
+        return (number / 1024).toFixed(1) + 'KB';
+    } else if (number > 1048576) {
+        return (number / 1048576).toFixed(1) + 'MB';
+    }
+}
+
 // TODO
 // components consideration
 // - dropzone
@@ -22,10 +33,10 @@ const sucessMessages = {
 
 // TODO: ALERT MESSAGES
 // - [x] (success) When "Clear Files" is clicked, notify w/ setTimeout Files removed
-// - [ ] (success) When there is files...
 // - [x] (error) When unaccepted files are chose, notify w/ setTimeout
-// - [ ] (warning) When file size is near maximum, notify w/ setTimeout
-// - [ ] (error) When file size is over maximum, notify w/ setTimeout
+// - [x] (warning) When file size is near maximum, notify w/ setTimeout
+// - Disable "Let's Slice" button
+// - [x] (error) When file size is over maximum, notify w/ setTimeout
 // Disable "begin Slice!" button
 
 // console.log("EXIST", DragDropContext);
@@ -112,6 +123,9 @@ function Preview(props) {
                     </Droppable>
                 </DragDropContext>
                 <div className="preview__clear-btn-container">
+                <div className="file-size__container">
+                    <span className="file-size-text">Total File Size: {returnFileSize(props.getTotalFileSize)}</span>
+                </div>
                     <button className="preview__clear-btn" onClick={props.onHandleClickToRemoveAll}>Clear Files</button>
                 </div>
             </div>
@@ -136,8 +150,7 @@ function Dropzone(props) {
             >
                 <img className="dropzone__upload-icon" src="./images/upload-icon.svg" alt="Drag & Drog Icon" />
                 <p>Drag & Drop or Click here</p>
-                <p className="text-small">to upload your files.(max. 20MB)</p>
-                {/* {props.inputFileElement} */}
+                <p className="text-small">to upload your files (max. 20MB)</p>
 
                 <input onChange={(e) => props.onHandleInputChange(e)} className="dropzone__input" type="file" accept="image/png, image/jpeg" multiple />
             </div>
@@ -157,6 +170,17 @@ export default function FormUpload(props) {
 
             <h3>1. Upload</h3>
 
+            {/*
+            TODO
+            - Style
+            - Bullet list points
+            */}
+                <ul>
+                <li>Currently, PNG and JPEG (including JPG) are accepted.</li>
+                <li>If width of image is larger than height, it will be returned as is.</li>
+                <li></li>
+            </ul>
+
             <p>Currently, .png and .jpeg (including .jpg) are accepted. If width of image is larger than height, it will be automatically roated. A "rotate" option will be available on next update. 😗</p>
 
             <Dropzone
@@ -171,7 +195,6 @@ export default function FormUpload(props) {
                 // ! WIP
                 onHandleClickToUpload={props.onHandleClickToUpload}
                 onHandleChange={props.onHandleChange}
-
             />
 
             {props.isAlertMessageError === true
@@ -193,9 +216,9 @@ export default function FormUpload(props) {
                 : null}
 
             {props.isAlertMessageWarning === true
-                ? <div className="alert-message--success">
-                    <img className="alert-icon" src="images/check-icon.svg" alt="icon" />
-                    <span className="alert-message-text--success">
+                ? <div className="alert-message--warning">
+                    <img className="alert-icon" src="images/warning-icon.svg" alt="icon" />
+                    <span className="alert-message-text--warning">
                         {props.getAlertWarningText}
                     </span>
                 </div>
@@ -212,6 +235,7 @@ export default function FormUpload(props) {
                     onRemoveSelf={props.onRemoveSelf}
                     togglePreviewWrapperClass={props.togglePreviewWrapperClass}
                     onHandleClickToRemoveAll={props.onHandleClickToRemoveAll}
+                    getTotalFileSize={props.getTotalFileSize}
                 />
                 : null}
 
