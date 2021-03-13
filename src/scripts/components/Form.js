@@ -26,6 +26,7 @@ const fileTypes = [
 const alertMessages = {
     onSuccess: {
         filesRemoved: "Files were cleared.",
+        completedProcess: "Process completed!"
     },
     onError: {
         unacceptableFileType: "File extensions not supported! Only PNG and JPEG (or JPG) allowed.",
@@ -89,12 +90,15 @@ export default class Form extends React.Component {
             // Error
             isAlertMessageError: false,
             alertMessageError: "",
-            // Error on "Begin Slice!"
-            isAlertMessageErrorOnBeginSliceBtn: false,
-            alertMessageErrorOnBeginSliceBtn: "",
             // Warning
             isAlertMessageWarning: false,
             alertMessageWarning: "",
+            // Error on "Begin Slice!"
+            isAlertMessageErrorOnBeginSliceBtn: false,
+            alertMessageErrorOnBeginSliceBtn: "",
+            // Success on "Begin Slice!"
+            isAlertMessageSuccessOnBeginSliceBtn: false,
+            alertMessageSuccessOnBeginSliceBtn: "",
 
             // # DATA
             inputFileData: [],
@@ -558,6 +562,20 @@ export default class Form extends React.Component {
 
                 saveAs(blob, "example.zip");
             })
+
+        // TODO
+        // Alert User Process Completed
+        this.setState({
+            isAlertMessageSuccessOnBeginSliceBtn: true,
+            alertMessageSuccessOnBeginSliceBtn: alertMessages.onSuccess.completedProcess
+        });
+
+        setTimeout(() => {
+            this.setState({
+                isAlertMessageSuccessOnBeginSliceBtn: false,
+                alertMessageSuccessOnBeginSliceBtn: "",
+            });
+        }, 3000);
     }
 
     // "Begin Slice!" button
@@ -587,6 +605,10 @@ export default class Form extends React.Component {
 
             console.log("Handle Begin Slice Button")
             this.toggleBeginSliceText();
+
+            setTimeout(() => {
+                this.toggleBeginSliceText();
+            }, 1500);
         }
     }
 
@@ -808,11 +830,21 @@ export default class Form extends React.Component {
                         </h3>
                     </a>
                 </div>
+                {/* CONDITION */}
                 {this.state.isAlertMessageErrorOnBeginSliceBtn === true
                     ? <div className="alert-message--error">
                         <img className="alert-icon" src="images/error-icon.svg" alt="icon" />
                         <span className="alert-message-text--error">
                             {this.state.alertMessageErrorOnBeginSliceBtn}
+                        </span>
+                    </div>
+                    : null}
+                {/* CONDITION */}
+                {this.state.isAlertMessageSuccessOnBeginSliceBtn === true
+                    ? <div className="alert-message--success">
+                        <img className="alert-icon" src="images/check-icon.svg" alt="icon" />
+                        <span className="alert-message-text--success">
+                            {this.state.alertMessageSuccessOnBeginSliceBtn}
                         </span>
                     </div>
                     : null}
