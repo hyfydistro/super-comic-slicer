@@ -6,6 +6,7 @@ import FormResults from './FormResults';
 
 // libs
 import createId from '../libs/createId';
+import convertBytes from '../libs/convertBytes';
 
 // TODO
 // 1. Listen for drag and drop
@@ -28,11 +29,12 @@ const alertMessages = {
     },
     onError: {
         unacceptableFileType: "File extensions not supported! Only PNG and JPEG (or JPG) allowed.",
-        overMaxFileSize: "Total file size is over maximum. Remove some files to continue. "
+        overMaxFileSize: "Total file size is over maximum. Remove some files to continue.",
+        noFilesFound: "No images found to process. Upload some images to 'Begin Slice'!"
 
     },
     onWarning: {
-        nearMaxFileSize: "Total file size is near maximum",
+        nearMaxFileSize: "Total file size is near maximum!",
     }
 }
 
@@ -80,10 +82,17 @@ export default class Form extends React.Component {
             },
 
             // ! WIP
+            // Alert Messages and State
+            // Success
             isAlertMessageSuccess: false,
             alertMessageSuccess: "",
+            // Error
             isAlertMessageError: false,
             alertMessageError: "",
+            // Error on "Begin Slice!"
+            isAlertMessageErrorOnBeginSliceBtn: false,
+            alertMessageErrorOnBeginSliceBtn: "",
+            // Warning
             isAlertMessageWarning: false,
             alertMessageWarning: "",
 
@@ -94,6 +103,7 @@ export default class Form extends React.Component {
             //     {
             //         fileRead: [],
             //         id: <number>
+            //         fileSize: <number>
             //     }
             // ]
             totalFileSize: 0
@@ -118,6 +128,7 @@ export default class Form extends React.Component {
         this.setFilesData = this.setFilesData.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleClickToRemoveAll = this.handleClickToRemoveAll.bind(this);
+        this.checkTotalFileSize = this.checkTotalFileSize.bind(this);
     }
 
 
@@ -254,20 +265,78 @@ export default class Form extends React.Component {
 
                 // ! LOG
                 // console.log("ACCEPTED", obj.type, obj);
+                // console.log("ACCEPTED ", obj);
+                console.log("ACCEPTED ", obj.size);
 
                 this.setState((currentState) => ({
                     inputField: [
                         ...currentState.inputField,
                         {
                             fileRead: obj,
-                            id: createId()
+                            id: createId(),
+                            fileSize: obj.size
                         }
                     ]
                 }), () => console.log("HANDLE FILE DROP LOG UPDATE: ", this.state.inputField))
+
+                // Display Total File in the Input Field
+
+                this.setState((currentState) => {
+                    // Get all file sizes
+                    // sum it up
+                    // Display on UI
+                    const sourceInputField = currentState.inputField;
+
+                    // ! LOG
+                    console.log("TOTALING...", sourceInputField);
+
+                    const fileSizesArr = sourceInputField.map((file) => {
+                        return file.fileSize;
+                    });
+
+                    // ! WIP
+                    // TRY arr.reduce()
+                    const totalFileByte = fileSizesArr.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+                    // ! LOG
+                    console.log("TOTAL FILE - BYTE:", totalFileByte);
+                    console.log("TOTAL FILE - CONVERSION:", convertBytes(totalFileByte));
+
+                    return ({
+                        totalFileSize: totalFileByte
+                    })
+                }, this.checkTotalFileSize());
+
             }
+
+
         })
     }
 
+    checkTotalFileSize() {
+        console.log("CHECKING TOTAL FILE SIZE...", this.state.totalFileSize);
+
+        // CONDITION
+        // near max
+        // pass 18MB
+        if (this.state.totalFileSize >= 18874368) {
+            this.setState({
+                isAlertMessageWarning: true,
+                alertMessageWarning: alertMessages.onWarning.nearMaxFileSize
+            })
+        }
+
+        // CONDITION
+        // over max
+        // pass 20MB
+        if (this.state.totalFileSize >= 20971520) {
+            this.setState({
+                isAlertMessageError: true,
+                alertMessageError: alertMessages.onError.overMaxFileSize
+            })
+        }
+
+    }
 
     // FETCHING FILE BLOB
     getFileBlob(blob) {
@@ -494,14 +563,31 @@ export default class Form extends React.Component {
     // "Begin Slice!" button
     handleBeginSlicBtn(e) {
         e.preventDefault();
+        console.log("BEGIN SLICE FILE: ", this.state.inputField);
 
-        //! LOG
-        console.log("Processing results...");
-        this.processResults();
+        if (this.state.inputField.length === 0) {
+            console.log("BEGIN SLICE - NO DATA FOUND");
 
-        console.log("Handle Begin Slice Button")
-        this.toggleBeginSliceText();
+            // Display Alert Message
+            this.setState({
+                isAlertMessageErrorOnBeginSliceBtn: true,
+                alertMessageErrorOnBeginSliceBtn: alertMessages.onError.noFilesFound
+            })
 
+            setTimeout(() => {
+                this.setState({
+                    isAlertMessageErrorOnBeginSliceBtn: false,
+                    alertMessageErrorOnBeginSliceBtn: "",
+                });
+            }, 8000);
+        } else {
+            //! LOG
+            console.log("Processing results...");
+            this.processResults();
+
+            console.log("Handle Begin Slice Button")
+            this.toggleBeginSliceText();
+        }
     }
 
     // REORDER FILES
@@ -561,6 +647,45 @@ export default class Form extends React.Component {
         const items = Array.from(this.state.inputField);
 
         const removeItemIndex = arrThumbnails.indexOf(e.target.parentElement);
+
+        // ! WIP
+        // UPDATE state totalFileSize
+        // get target obj.size
+        // total obj.size minus target obj.size
+        this.setState((currentState) => {
+            // ! LOG
+            // console.log("RECALCULATING FILE SIZE...", )
+            // Get all file sizes
+            // sum it up
+            // Display on UI
+            const sourceInputField = Array.from(currentState.inputField);
+
+            // ! LOG
+            // console.log("RECALCULATING FILE: ", sourceInputField);
+
+            const fileSizesArr = sourceInputField.map((file) => {
+                // ! LOG
+                // console.log("RECALCULATING FILE OBJ: ", file);
+                return file.fileSize;
+            });
+
+            // ! WIP
+            // TRY arr.reduce()
+            const totalFileByte = fileSizesArr.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+            const removedItemFileSize = sourceInputField[removeItemIndex]["fileSize"];
+
+            const newTotalFileSize = totalFileByte - removedItemFileSize;
+
+            // ! LOG
+            // console.log("TOTAL FILE - REMOVED:", removedItemFileSize);
+            // console.log("TOTAL FILE - UPDATE:", removedItemFileSize);
+            // console.log("TOTAL FILE - CONVERSION:", convertBytes(newTotalFileSize));
+
+            return ({
+                totalFileSize: newTotalFileSize
+            })
+        }, this.checkTotalFileSize());
 
         // ! LOG
         // console.log("HANDLE REMOVESELF - TARGET INDEX: ", removeItemIndex);
@@ -647,6 +772,7 @@ export default class Form extends React.Component {
 
                     // DATAS
                     inputField={this.state.inputField}
+                    getTotalFileSize={this.state.totalFileSize}
 
                     // ? Not sure if in use...
                     getFileBlob={this.getFileBlob}
@@ -659,7 +785,15 @@ export default class Form extends React.Component {
                     isAlertMessageError={this.state.isAlertMessageError}
                     getAlertSuccessText={this.state.alertMessageSuccess}
                     isAlertMessageSuccess={this.state.isAlertMessageSuccess}
+                    isAlertMessageWarning={this.state.isAlertMessageWarning}
+                    getAlertWarningText={this.state.alertMessageWarning}
                 />
+                {/* <button onClick={() => {
+                    this.setState({
+                        isAlertMessageError: true,
+                        alertMessageError: alertMessages.onError.overMaxFileSize
+                    })
+                }}>test</button> */}
 
                 <FormSelect />
                 <FormOptions />
@@ -674,7 +808,18 @@ export default class Form extends React.Component {
                         </h3>
                     </a>
                 </div>
-                <FormResults />
+                {this.state.isAlertMessageErrorOnBeginSliceBtn === true
+                    ? <div className="alert-message--error">
+                        <img className="alert-icon" src="images/error-icon.svg" alt="icon" />
+                        <span className="alert-message-text--error">
+                            {this.state.alertMessageErrorOnBeginSliceBtn}
+                        </span>
+                    </div>
+                    : null}
+                <FormResults
+                    getAlertErrorText={this.state.alertMessageError}
+                    isAlertMessageError={this.state.isAlertMessageError}
+                />
             </main>
         )
     }
