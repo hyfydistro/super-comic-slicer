@@ -94,6 +94,7 @@ export default class Form extends React.Component {
         // ! WIP
         this.setFilesData = this.setFilesData.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleClickToRemoveAll = this.handleClickToRemoveAll.bind(this);
     }
 
 
@@ -508,12 +509,12 @@ export default class Form extends React.Component {
         // const attribute = e.target.parentElement.attributes.getNamedItem("data-rbd-draggable-id").value;
 
         // ! LOG
-        console.log("HANDLE REMOVESELF - ALL CONTENTS: ", sourceThumbnails);
+        // console.log("HANDLE REMOVESELF - ALL CONTENTS: ", sourceThumbnails);
 
         const arrThumbnails = Array.from(sourceThumbnails);
 
         // ! LOG
-        console.log("HANDLE REMOVESELF - ALL CONTENTS ARR: ", arrThumbnails);
+        // console.log("HANDLE REMOVESELF - ALL CONTENTS ARR: ", arrThumbnails);
 
         // Create shallow copy
         const items = Array.from(this.state.inputField);
@@ -521,7 +522,7 @@ export default class Form extends React.Component {
         const removeItemIndex = arrThumbnails.indexOf(e.target.parentElement);
 
         // ! LOG
-        console.log("HANDLE REMOVESELF - TARGET INDEX: ", removeItemIndex);
+        // console.log("HANDLE REMOVESELF - TARGET INDEX: ", removeItemIndex);
 
         items.splice(removeItemIndex, 1);
 
@@ -532,13 +533,20 @@ export default class Form extends React.Component {
             inputField: items
         }, () => console.log("HANDLE REMOVESELF - CURRENT STATE: ", this.state.inputField))
 
-        console.log("HANDLE REMOVESELF - CURRENT STATE: ", this.state.inputField)
+        console.log("HANDLE REMOVESELF - CURRENT STATE OUTSIDE: ", this.state.inputField)
     }
 
-    handleClearFilesBtn() {
+    // CLEAR DATA
+    // Empty state "inputField"
+    // "Clear Files" button
+    handleClickToRemoveAll() {
         // ! LOG
         console.log("CLICKED - CLEAR FILES...")
 
+        this.setState({
+            inputField: [],
+            inputDataAvailable: false
+        })
     }
 
     handleClickToUpload() {
@@ -594,8 +602,7 @@ export default class Form extends React.Component {
                     // ! WIP
                     onHandleClickToUpload={this.handleClickToUpload}
                     onHandleInputChange={this.handleInputChange}
-
-                // onHandleChange={this.handleChange}
+                    onHandleClickToRemoveAll={this.handleClickToRemoveAll}
                 />
 
                 <FormSelect />
