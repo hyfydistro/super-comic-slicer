@@ -1,10 +1,5 @@
 import React from 'react'
 
-// TODO
-// Create component for select options
-// Options should return data
-
-
 function WebcomicsOptions(props) {
 
     const webcomicsList = props.getWebcomicsModel.map((currentWebcomic, tabindex) => {
@@ -56,36 +51,10 @@ export default function FormSelect(props) {
             *Currently, Webtoon is only available.</p>
 
             <div className="select-container">
-
                 <WebcomicsOptions
                     getWebcomicsModel={props.getWebcomicsModel}
                     onHandleSelectedWebcomic={props.onHandleSelectedWebcomic}
                 />
-
-                {/* <div className="select-option">
-                    <label htmlFor="webtoon">
-                        <div className="select-label--wrapper">
-                            <input type="checkbox" id="webtoon" />
-                            <span className="select-label">
-                                <img className="select-icon" src="images/webtoon-icon.svg" alt="webtoon icon" />
-                                <span className="select-text">Webtoon</span>
-                            </span>
-                        </div>
-                    </label>
-                </div>
-
-                <div className="select-option">
-                    <label htmlFor="tapas">
-                        <div className="select-label--wrapper">
-                            <input type="checkbox" id="tapas" disabled />
-                            <span className="select-label">
-                                <img className="select-icon" src="images/tapas-icon.png" alt="tapas icon" />
-                                <span className="select-text">Tapas</span>
-                            </span>
-                        </div>
-                    </label>
-                </div> */}
-
             </div>
 
             {/* CONDITION */}
