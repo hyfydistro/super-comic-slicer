@@ -521,29 +521,24 @@ export default class Form extends React.Component {
                 // (CONDITION) IF image file is long enough or as scale, proceed
                 // OTHERWISE, return file as is.
 
-                // const maxHeight = imgHeight;
-                // const width = imgWidth;
-
-                // New SCALED images
-                // let maxHeight = 700 / (imgWidth / imgHeight);
                 let scaleWidth = 700;
-                // let newScaleRatio = scaleWidth / maxHeight;
-
-                // ! LOG
-                console.log("PROCESS - SCALED WIDTH: ", Selectedwebcomics[i], scaleWidth);
-                // console.log("PROCESS - SCALED MAX HEIGHT: ", Selectedwebcomics[i], maxHeight);
-
 
                 // ! WIP
                 // # (1) OPTIONS - SCALE
                 // void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
                 switch (this.state.selectedSquashLevel) {
                     case 400:
+                        scaleWidth = 400;
+                        break;
                     case 500:
                     case 600:
                     case 700:
                     default:
                 }
+
+                // ! LOG
+                console.log("PROCESS - SCALED WIDTH: ", Selectedwebcomics[i], scaleWidth);
+
 
                 // Images are cropped, and
                 // pushed into "pages" array
@@ -567,9 +562,6 @@ export default class Form extends React.Component {
                 let webcomicMaxWidth;
                 let webcomicMaxHeight;
 
-                // webcomicMaxWidth = 800;
-                // webcomicMaxHeight = 1280;
-
                 // Current Webcomic Platform Available...
                 // ! tapas in the works...
                 switch (Selectedwebcomics[i]) {
@@ -588,9 +580,9 @@ export default class Form extends React.Component {
                 // ! <<
 
                 // ! LOG
-                console.log("PROCESS - ASPECT RATIO: ", Selectedwebcomics[i], aspectRatio);
-                console.log("PROCESS - MAX WIDTH: ", Selectedwebcomics[i], webcomicMaxWidth);
-                console.log("PROCESS - MAX HEIGHT: ", Selectedwebcomics[i], webcomicMaxHeight);
+                // console.log("PROCESS - ASPECT RATIO: ", Selectedwebcomics[i], aspectRatio);
+                // console.log("PROCESS - MAX WIDTH: ", Selectedwebcomics[i], webcomicMaxWidth);
+                // console.log("PROCESS - MAX HEIGHT: ", Selectedwebcomics[i], webcomicMaxHeight);
 
                 // ! WIP
                 // based on aspect ratio, what the height should be...
@@ -610,16 +602,17 @@ export default class Form extends React.Component {
                     // ! LOG
                     console.log("PROCESS - HEIGHT TOO SHORT: ", Selectedwebcomics[i]);
 
-
-
                     // TODO for Option: scale
                     // canvas.width = imgWidth;
                     // canvas.height = imgHeight;
+                    const scaleMaxHeight = scaleWidth / (width / maxHeight);
+                    canvas.width = scaleWidth;
+                    canvas.height = scaleMaxHeight;
                     // context.drawImage(
                     //     img, 0, 0, imgWidth, imgHeight
                     // );
                     context.drawImage(
-                        img, 0, 0, width, maxHeight
+                        img, 0, 0, scaleWidth, scaleMaxHeight
                     );
 
                     const result = canvas.toDataURL();
@@ -651,10 +644,6 @@ export default class Form extends React.Component {
                     while (timesToSlice > currentSlice) {
                         // ! LOG
                         console.log("PROCESS - NEW Y POS: ", currentSlice, newYPosition);
-
-                        // 200 %
-                        // const scaleY = 2;
-                        // const scaleX = 2;
 
                         newYPosition = determinedeHeight * currentSlice;
                         // CROP HERE
