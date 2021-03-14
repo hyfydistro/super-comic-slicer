@@ -3,9 +3,47 @@ import React from 'react';
 // TODO
 // Create a list component for the following data
 
-const fileTypes = ["jpeg", "png"];
+function FileExtensionOptions(props) {
 
-export default function FormOptions() {
+    const fileExtensionsList = props.getFilExtensionsModel.map((fileExtObj, index) => {
+        if (props.getFilExtensionsModel[0] === fileExtObj) {
+            return (
+                <div className="radio-option" key={index}>
+                    <label htmlFor={fileExtObj.htmlLabel}>
+                        <input
+                        defaultChecked
+                        type="radio"
+                        name="filetype"
+                        value={fileExtObj.htmlLabel}
+                        id={fileExtObj.htmlLabel}
+                            onClick={(e)  => props.onHandleOptionsFileExtenions(e)}
+                        />
+                        <span className="select-text">{fileExtObj.text}</span>
+                    </label>
+                </div>
+            )
+        } else {
+            return (
+                <div className="radio-option" key={index}>
+                    <label htmlFor={fileExtObj.htmlLabel}>
+                        <input
+                        type="radio"
+                        name="filetype"
+                        value={fileExtObj.htmlLabel}
+                        id={fileExtObj.htmlLabel}
+                            onClick={(e)  => props.onHandleOptionsFileExtenions(e)}
+                        />
+                        <span className="select-text">{fileExtObj.text}</span>
+                    </label>
+                </div>
+            )
+        }
+    });
+
+    return fileExtensionsList;
+}
+
+export default function FormOptions(props) {
     return (
         <section className="form-options">
             <h3>3. Options</h3>
@@ -13,18 +51,10 @@ export default function FormOptions() {
             <p className="text-bold header-four">File Extensions</p>
 
             <div className="radio-container-filetype">
-                <div className="radio-option">
-                    <label htmlFor="jpeg">
-                        <input type="radio" name="filetype" value="" id="jpeg" />
-                        <span className="select-text">JPEG</span>
-                    </label>
-                </div>
-                <div className="radio-option">
-                    <label htmlFor="png">
-                        <input type="radio" name="filetype" value="" id="png" />
-                        <span className="select-text">PNG</span>
-                    </label>
-                </div>
+                <FileExtensionOptions
+                    getFilExtensionsModel={props.getFilExtensionsModel}
+                    onHandleOptionsFileExtenions={props.onHandleOptionsFileExtenions}
+                />
             </div>
 
 

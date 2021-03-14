@@ -12,16 +12,16 @@ function WebcomicsOptions(props) {
         if (currentWebcomic.disabled) {
             return (
                 <div className="select-option" key={tabindex}>
-                <label htmlFor={currentWebcomic.htmlLabel}>
-                    <div className="select-label--wrapper">
-                        <input type="checkbox" id={currentWebcomic.htmlLabel} disabled />
-                        <span className="select-label">
-                            <img className="select-icon" src={currentWebcomic.imageSource} alt={currentWebcomic.htmlAlt} />
-                            <span className="select-text">{currentWebcomic.text}</span>
-                        </span>
-                    </div>
-                </label>
-            </div>
+                    <label htmlFor={currentWebcomic.htmlLabel}>
+                        <div className="select-label--wrapper">
+                            <input type="checkbox" id={currentWebcomic.htmlLabel} disabled />
+                            <span className="select-label">
+                                <img className="select-icon" src={currentWebcomic.imageSource} alt={currentWebcomic.htmlAlt} />
+                                <span className="select-text">{currentWebcomic.text}</span>
+                            </span>
+                        </div>
+                    </label>
+                </div>
             )
         } else {
             return (
@@ -29,10 +29,10 @@ function WebcomicsOptions(props) {
                     <label htmlFor={currentWebcomic.htmlLabel}>
                         <div className="select-label--wrapper">
                             <input
-                            type="checkbox"
-                            id={currentWebcomic.htmlLabel}
-                            value={currentWebcomic.htmlLabel}
-                            onClick={(e) => props.onHandleSelectedWebcomic(e)}
+                                type="checkbox"
+                                id={currentWebcomic.htmlLabel}
+                                value={currentWebcomic.htmlLabel}
+                                onClick={(e) => props.onHandleSelectedWebcomic(e)}
                             />
                             <span className="select-label">
                                 <img className="select-icon" src={currentWebcomic.imageSource} alt={currentWebcomic.htmlAlt} />
@@ -58,8 +58,9 @@ export default function FormSelect(props) {
             <div className="select-container">
 
                 <WebcomicsOptions
-                getWebcomicsModel={props.getWebcomicsModel}
-                onHandleSelectedWebcomic={props.onHandleSelectedWebcomic} />
+                    getWebcomicsModel={props.getWebcomicsModel}
+                    onHandleSelectedWebcomic={props.onHandleSelectedWebcomic}
+                />
 
                 {/* <div className="select-option">
                     <label htmlFor="webtoon">
@@ -86,6 +87,16 @@ export default function FormSelect(props) {
                 </div> */}
 
             </div>
+
+            {/* CONDITION */}
+            {props.isAlertMessageSelectFormError === true
+                ? <div className="alert-message--error">
+                    <img className="alert-icon" src="images/error-icon.svg" alt="icon" />
+                    <span className="alert-message-text--error">
+                        {props.getAlertMessageSelectFormText}
+                    </span>
+                </div>
+                : null}
 
             {false
                 ? <div className="alert-message--error">

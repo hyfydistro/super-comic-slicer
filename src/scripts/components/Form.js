@@ -19,18 +19,14 @@ import convertBytes from '../libs/convertBytes';
 
 // Collect data on User options
 // - [ ] webcomic platform
-    // - [ ] alert message when none selected
-    // persist until next click
-        // - [ ] at "Begin Slice!"
-        // - [ ] at Select Form
+// - [ ] alert message when none selected
+// persist until next click
+// - [ ] at "Begin Slice!"
+// - [ ] at Select Form
 // - [ ] file type
 // - [ ] Squash level
 
-const fileTypes = [
-    'image/jpeg',
-    'image/jpg',
-    'image/png',
-];
+
 
 const alertMessages = {
     onSuccess: {
@@ -41,7 +37,8 @@ const alertMessages = {
         unacceptableFileType: "File extensions not supported! Only PNG and JPEG (or JPG) allowed.",
         overMaxFileSize: "Total file size is over maximum. Remove some files to continue.",
         noFilesFound: "No images found to process. Upload some images to 'Begin Slice'!",
-        selectFormMandatory: "Please select at least one."
+        selectFormMandatory: "Please check at least one webcomic platform under '2. Select'.",
+        selectFormMandatoryTarget: "Check at least one in order to continue."
 
     },
     onWarning: {
@@ -64,6 +61,24 @@ const webcomicsModel = [
         text: "Tapas",
         disabled: false
     },
+];
+
+const filExtensionsModel = [
+    {
+        htmlLabel: "jpeg",
+        text: "JPEG"
+    },
+    {
+        htmlLabel: "png",
+        text: "PNG"
+    }
+];
+
+// Accepted file types
+const fileTypes = [
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
 ];
 
 function validFileType(file) {
@@ -128,6 +143,10 @@ export default class Form extends React.Component {
             // Success on "Begin Slice!"
             isAlertMessageSuccessOnBeginSliceBtn: false,
             alertMessageSuccessOnBeginSliceBtn: "",
+            // Error on none webcomic platform selected
+            isAlertMessageErrorOnSelectForm: false,
+            alertMessageErrorOnSelectForm: "",
+
             // # DATA
             inputFileData: [],
             inputField: [],
@@ -140,7 +159,7 @@ export default class Form extends React.Component {
             // ]
             totalFileSize: 0,
             selectedWebcomics: [],
-            selectedFileType: "",
+            selectedFileExtension: "jpeg", // default value
             selectedSquashLevel: ""
         };
 
@@ -166,6 +185,7 @@ export default class Form extends React.Component {
 
         // ! WIP
         this.handleSelectedWebcomic = this.handleSelectedWebcomic.bind(this);
+        this.handleOptionsFileExtenions = this.handleOptionsFileExtenions.bind(this);
 
         // ? I don't know if use this blub
         this.getFileBlob = this.getFileBlob.bind(this);
@@ -633,9 +653,13 @@ export default class Form extends React.Component {
                 console.log("NEW IMAGES: ", processImages);
 
                 const zip = new JSZip();
+                const selectedFileExt = this.state.selectedFileExtension;
+
+                // ! LOG
+                console.log("NEW FILE EXT: ", selectedFileExt);
 
                 for (let i = 0; i < processImages.length; i++) {
-                    zip.file(`PG_${i}.jpg`, processImages[i].substr(processImages[i].indexOf(',') + 1), { base64: true });
+                    zip.file(`PG_${i}.${selectedFileExt}`, processImages[i].substr(processImages[i].indexOf(',') + 1), { base64: true });
                 }
 
                 zip.generateAsync({ type: "blob", mimeType: "image/jpeg" })
@@ -693,16 +717,41 @@ export default class Form extends React.Component {
                 });
             }, 8000);
         } else {
-            //! LOG
-            console.log("Processing results...");
-            this.processResults();
+            if (this.state.selectedWebcomics.length === 0) {
 
-            console.log("Handle Begin Slice Button")
-            this.toggleBeginSliceText();
+                // ! LOG
+                console.log("PASS - REJECTED: NO WEBCOMIC PLAT SELECTED");
+                // Display Alert Message
+                // Persist
+                this.setState({
+                    isAlertMessageErrorOnBeginSliceBtn: true,
+                    alertMessageErrorOnBeginSliceBtn: alertMessages.onError.selectFormMandatory,
+                    isAlertMessageErrorOnSelectForm: true,
+                    alertMessageErrorOnSelectForm: alertMessages.onError.selectFormMandatoryTarget
+                })
+            } else {
+                // ! LOG
+                console.log("PASS - WEBCOMIC PLAT SELECTED");
 
-            setTimeout(() => {
+                // Remove any error message
+                this.setState({
+                    isAlertMessageErrorOnBeginSliceBtn: false,
+                    alertMessageErrorOnBeginSliceBtn: "",
+                    isAlertMessageErrorOnSelectForm: false,
+                    alertMessageErrorOnSelectForm: "",
+                });
+
+                //! LOG
+                console.log("Processing results...");
+                this.processResults();
+
+                console.log("Handle Begin Slice Button")
                 this.toggleBeginSliceText();
-            }, 1500);
+
+                setTimeout(() => {
+                    this.toggleBeginSliceText();
+                }, 1500);
+            }
         }
     }
 
@@ -898,6 +947,18 @@ export default class Form extends React.Component {
         }
     }
 
+    handleOptionsFileExtenions(e) {
+        // ! LOG
+        console.log("HANDLE WEBCOMIC - CLICK", e.target);
+        console.log("HANDLE WEBCOMIC - CLICK", e.target.value);
+
+        const newSelectedFileExtension = e.target.value;
+
+        this.setState({
+            selectedFileExtension: newSelectedFileExtension
+        });
+    }
+
     render() {
         return (
             <main>
@@ -912,8 +973,6 @@ export default class Form extends React.Component {
                     // STYLE EVENTS
                     toggleDropzoneBordersClass={this.state.isDragOver ? this.state.dropzoneBordersClass.highlight : this.state.dropzoneBordersClass.default}
                     togglePreviewWrapperClass={this.state.inputDataAvailable ? this.state.previewWrapperClass.visible : this.state.previewWrapperClass.invisible}
-
-
                     // DATAS
                     inputField={this.state.inputField}
                     getTotalFileSize={this.state.totalFileSize}
@@ -932,17 +991,17 @@ export default class Form extends React.Component {
                     isAlertMessageWarning={this.state.isAlertMessageWarning}
                     getAlertWarningText={this.state.alertMessageWarning}
                 />
-                {/* <button onClick={() => {
-                    this.setState({
-                        isAlertMessageError: true,
-                        alertMessageError: alertMessages.onError.overMaxFileSize
-                    })
-                }}>test</button> */}
 
                 <FormSelect
                     getWebcomicsModel={webcomicsModel}
-                    onHandleSelectedWebcomic={this.handleSelectedWebcomic} />
-                <FormOptions />
+                    onHandleSelectedWebcomic={this.handleSelectedWebcomic}
+                    isAlertMessageSelectFormError={this.state.isAlertMessageErrorOnSelectForm}
+                    getAlertMessageSelectFormText={this.state.alertMessageErrorOnSelectForm}
+                />
+                <FormOptions
+                    getFilExtensionsModel={filExtensionsModel}
+                    onHandleOptionsFileExtenions={this.handleOptionsFileExtenions}
+                />
                 <div className="slice-btn-container">
                     <a
                         className="slice-btn"
