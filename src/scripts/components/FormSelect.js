@@ -3,36 +3,52 @@ import React from 'react'
 // TODO
 // Create component for select options
 // Options should return data
-// Add checkbox animation
-
-// ! WIP - data should be in parent (?)
-const selectOptions = [
-    {
-        displayName: "Webtoon",
-        idName: "webtoon",
-        // ratioWidth: "",
-        // ratioHeight: ""
-        icon: "",
-        available: true
-    },
-    {
-        displayName: "tapas",
-        idName: "tapas",
-        // ratioWidth: "",
-        // ratioHeight: ""
-        icon: "",
-        available: false
-    }
-];
-
-const alertMessages = {
-    alertMax: "Total file sizes is over maximum 20MB. Delete some files, or clear upload and try again with less files.",
-    alertFile: "Oh no! Currently, we accept .png and .jpeg, .jpg image file extensions.",
-    alertSelectMandatory: "Please select at least one."
-};
 
 
-export default function FormSelect() {
+function WebcomicsOptions(props) {
+
+    const webcomicsList = props.getWebcomicsModel.map((currentWebcomic, tabindex) => {
+
+        if (currentWebcomic.disabled) {
+            return (
+                <div className="select-option" key={tabindex}>
+                <label htmlFor={currentWebcomic.htmlLabel}>
+                    <div className="select-label--wrapper">
+                        <input type="checkbox" id={currentWebcomic.htmlLabel} disabled />
+                        <span className="select-label">
+                            <img className="select-icon" src={currentWebcomic.imageSource} alt={currentWebcomic.htmlAlt} />
+                            <span className="select-text">{currentWebcomic.text}</span>
+                        </span>
+                    </div>
+                </label>
+            </div>
+            )
+        } else {
+            return (
+                <div className="select-option" key={tabindex}>
+                    <label htmlFor={currentWebcomic.htmlLabel}>
+                        <div className="select-label--wrapper">
+                            <input
+                            type="checkbox"
+                            id={currentWebcomic.htmlLabel}
+                            value={currentWebcomic.htmlLabel}
+                            onClick={(e) => props.onHandleSelectedWebcomic(e)}
+                            />
+                            <span className="select-label">
+                                <img className="select-icon" src={currentWebcomic.imageSource} alt={currentWebcomic.htmlAlt} />
+                                <span className="select-text">{currentWebcomic.text}</span>
+                            </span>
+                        </div>
+                    </label>
+                </div>
+            )
+        }
+    });
+
+    return webcomicsList;
+}
+
+export default function FormSelect(props) {
     return (
         <section className="form-select">
             <h3>2. Select</h3>
@@ -40,7 +56,12 @@ export default function FormSelect() {
             *Currently, Webtoon is only available.</p>
 
             <div className="select-container">
-                <div className="select-option">
+
+                <WebcomicsOptions
+                getWebcomicsModel={props.getWebcomicsModel}
+                onHandleSelectedWebcomic={props.onHandleSelectedWebcomic} />
+
+                {/* <div className="select-option">
                     <label htmlFor="webtoon">
                         <div className="select-label--wrapper">
                             <input type="checkbox" id="webtoon" />
@@ -51,10 +72,10 @@ export default function FormSelect() {
                         </div>
                     </label>
                 </div>
+
                 <div className="select-option">
                     <label htmlFor="tapas">
                         <div className="select-label--wrapper">
-
                             <input type="checkbox" id="tapas" disabled />
                             <span className="select-label">
                                 <img className="select-icon" src="images/tapas-icon.png" alt="tapas icon" />
@@ -62,7 +83,8 @@ export default function FormSelect() {
                             </span>
                         </div>
                     </label>
-                </div>
+                </div> */}
+
             </div>
 
             {false

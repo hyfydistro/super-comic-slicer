@@ -17,6 +17,15 @@ import convertBytes from '../libs/convertBytes';
 // 6. Preview images withvalid file types
 // 7. Upload images
 
+// Collect data on User options
+// - [ ] webcomic platform
+    // - [ ] alert message when none selected
+    // persist until next click
+        // - [ ] at "Begin Slice!"
+        // - [ ] at Select Form
+// - [ ] file type
+// - [ ] Squash level
+
 const fileTypes = [
     'image/jpeg',
     'image/jpg',
@@ -31,7 +40,8 @@ const alertMessages = {
     onError: {
         unacceptableFileType: "File extensions not supported! Only PNG and JPEG (or JPG) allowed.",
         overMaxFileSize: "Total file size is over maximum. Remove some files to continue.",
-        noFilesFound: "No images found to process. Upload some images to 'Begin Slice'!"
+        noFilesFound: "No images found to process. Upload some images to 'Begin Slice'!",
+        selectFormMandatory: "Please select at least one."
 
     },
     onWarning: {
@@ -39,9 +49,28 @@ const alertMessages = {
     }
 }
 
+const webcomicsModel = [
+    {
+        htmlLabel: "webtoon",
+        imageSource: "images/webtoon-icon.svg",
+        htmlAlt: "webtoon icon",
+        text: "Webtoon",
+        disabled: false
+    },
+    {
+        htmlLabel: "tapas",
+        imageSource: "images/tapas-icon.png",
+        htmlAlt: "tapas icon",
+        text: "Tapas",
+        disabled: false
+    },
+];
+
 function validFileType(file) {
     return fileTypes.includes(file);
 }
+
+
 
 // TODO
 // - Store as one object
@@ -67,23 +96,23 @@ export default class Form extends React.Component {
 
         this.state = {
             // # STYLES EVENT
-            // event: onDragOver
+            // EVENT: onDragOver
             isDragOver: false,
             dropzoneBordersClass: {
                 highlight: "dropzone dropzone--over",
                 default: "dropzone"
             },
             inputDataAvailable: false,
+            // EVENT: onClick
             // "Begin Slice!" button
             sliceText: "slice-btn",
+            // EVENT: conditional
             // div class "preview-wrapper"
             previewWrapperClass: {
                 visible: "preview-wrapper",
                 invisible: "preview-wrapper hidden"
             },
-
-            // ! WIP
-            // Alert Messages and State
+            // ALERT MESSAGES AND STATE
             // Success
             isAlertMessageSuccess: false,
             alertMessageSuccess: "",
@@ -99,7 +128,6 @@ export default class Form extends React.Component {
             // Success on "Begin Slice!"
             isAlertMessageSuccessOnBeginSliceBtn: false,
             alertMessageSuccessOnBeginSliceBtn: "",
-
             // # DATA
             inputFileData: [],
             inputField: [],
@@ -110,7 +138,10 @@ export default class Form extends React.Component {
             //         fileSize: <number>
             //     }
             // ]
-            totalFileSize: 0
+            totalFileSize: 0,
+            selectedWebcomics: [],
+            selectedFileType: "",
+            selectedSquashLevel: ""
         };
 
         // METHODS
@@ -125,14 +156,19 @@ export default class Form extends React.Component {
         // DATA MANAGEMENT
         // DELETE Data
         this.handleRemoveSelf = this.handleRemoveSelf.bind(this);
-        // ? I don't know if use this blub
-        this.getFileBlob = this.getFileBlob.bind(this);
+        this.handleClickToRemoveAll = this.handleClickToRemoveAll.bind(this);
+        // SET file data
+        this.setFilesData = this.setFilesData.bind(this);
+        // GET total file size
+        this.checkTotalFileSize = this.checkTotalFileSize.bind(this);
+        // UPLOAD on file browse
+        this.handleInputChange = this.handleInputChange.bind(this);
 
         // ! WIP
-        this.setFilesData = this.setFilesData.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleClickToRemoveAll = this.handleClickToRemoveAll.bind(this);
-        this.checkTotalFileSize = this.checkTotalFileSize.bind(this);
+        this.handleSelectedWebcomic = this.handleSelectedWebcomic.bind(this);
+
+        // ? I don't know if use this blub
+        this.getFileBlob = this.getFileBlob.bind(this);
     }
 
 
@@ -217,14 +253,11 @@ export default class Form extends React.Component {
         // ! LOG
         // console.log("HANDLE FILE DROP: ", files);
 
-        // ? Refactor into a funciton
         // Set to true when file input is available
         if (this.state.inputField) {
             this.setState({
                 inputDataAvailable: true
             })
-        } else {
-            console.log("Nothing in place")
         }
 
         this.setState({
@@ -240,16 +273,14 @@ export default class Form extends React.Component {
 
             // VALIDATE
             if (!validFileType(obj.type)) {
-                // TODO
-                // ! Alert timeout error
-                console.log("Invalid file!");
-
-                // Invalid file found!
-
                 // Display Alert Message on Error w/ setTimeout
-                // SET Alert Message
-                // SET Class
-                // ADD setTimeout
+                // - SET Alert Message
+                // - SET Class
+                // - ADD setTimeout
+
+                // ! LOG
+                // console.log("Invalid file!");
+
                 this.setState({
                     alertMessageError: alertMessages.onError.unacceptableFileType,
                     isAlertMessageError: true
@@ -270,7 +301,7 @@ export default class Form extends React.Component {
                 // ! LOG
                 // console.log("ACCEPTED", obj.type, obj);
                 // console.log("ACCEPTED ", obj);
-                console.log("ACCEPTED ", obj.size);
+                // console.log("ACCEPTED ", obj.size);
 
                 this.setState((currentState) => ({
                     inputField: [
@@ -283,42 +314,38 @@ export default class Form extends React.Component {
                     ]
                 }), () => console.log("HANDLE FILE DROP LOG UPDATE: ", this.state.inputField))
 
-                // Display Total File in the Input Field
-
+                // Display total file size
                 this.setState((currentState) => {
-                    // Get all file sizes
-                    // sum it up
-                    // Display on UI
+                    // GET all file size
+                    // SUM it all up
+                    // DISPLAY on UI
+
                     const sourceInputField = currentState.inputField;
 
                     // ! LOG
-                    console.log("TOTALING...", sourceInputField);
+                    // console.log("TOTALING...", sourceInputField);
 
                     const fileSizesArr = sourceInputField.map((file) => {
                         return file.fileSize;
                     });
 
-                    // ! WIP
-                    // TRY arr.reduce()
                     const totalFileByte = fileSizesArr.reduce((accumulator, currentValue) => accumulator + currentValue);
 
                     // ! LOG
-                    console.log("TOTAL FILE - BYTE:", totalFileByte);
-                    console.log("TOTAL FILE - CONVERSION:", convertBytes(totalFileByte));
+                    // console.log("TOTAL FILE - BYTE:", totalFileByte);
+                    // console.log("TOTAL FILE - CONVERSION:", convertBytes(totalFileByte));
 
                     return ({
                         totalFileSize: totalFileByte
                     })
                 }, this.checkTotalFileSize());
-
             }
-
-
         })
     }
 
     checkTotalFileSize() {
-        console.log("CHECKING TOTAL FILE SIZE...", this.state.totalFileSize);
+        // ! LOG
+        // console.log("CHECKING TOTAL FILE SIZE...", this.state.totalFileSize);
 
         // CONDITION
         // near max
@@ -339,17 +366,13 @@ export default class Form extends React.Component {
                 alertMessageError: alertMessages.onError.overMaxFileSize
             })
         }
-
     }
 
     // FETCHING FILE BLOB
     getFileBlob(blob) {
-
         // ! LOG
-        // console.log("RECEIVING :", blob);
-
-        // ! LOG
-        console.log("BLOB ARR :", fileBlobs);
+        console.log("RECEIVING :", blob);
+        // console.log("BLOB ARR :", fileBlobs);
 
         this.setState((currentState) => ({
             inputFileData: [...currentState.inputFileData, blob]
@@ -395,176 +418,247 @@ export default class Form extends React.Component {
         const sourceImages = Array.from(sourceImagesRaw);
 
         // ! LOG
-        console.log("IMAGES AVAILABLE RAW: ", sourceImagesRaw);
-        console.log("IMAGES AVAILABLE ARR: ", sourceImages);
-        console.log("IMAGES AVAILABLE ARR [0]: ", sourceImages[0]);
+        // console.log("IMAGES AVAILABLE RAW: ", sourceImagesRaw);
+        console.log("PROCESS - IMAGES AVAILABLE ARR: ", sourceImages);
+        // console.log("IMAGES AVAILABLE ARR [0]: ", sourceImages[0]);
 
-        let processImages = [];
-
-        sourceImages.forEach((img) => {
-            const imgWidth = img.naturalWidth;
-            const imgHeight = img.naturalHeight;
-
-            // ! IF width > height, ROTATE
-            // 2. Check ratio
-            // 3. Divide (slice)
-            if (imgWidth > imgHeight) {
-                // ! LOG
-                console.log("CONDITION PASS: WIDTH > HEIGHT")
-                // Rotate
-                // Bottom surface would be pointed left, and
-                // Top surface would be pointed right
-
-                canvas.width = imgHeight;
-                canvas.height = imgWidth;
-                context.rotate(Math.PI / 2);
-                context.drawImage(
-                    img, 0, -(imgHeight)
-                );
-            }
-
-            // "SLICE" PROCESS
-            // (CONDITION) IF image file is long enough or as scale, proceed
-            // OTHERWISE, return file as is.
-
-            // Images are cropped, and
-            // pushed into "pages" array
-            // ? RETURN destructured array
-            // ? Consider naming pattern
-            // 01, 02, 03, ..., etc.
-            const maxHeight = imgHeight;
-            const width = imgWidth;
-            // pixel based
-            const webtoonMaxWidth = 800;
-            const webtoonMaxHeight = 1280;
-            const aspectRatio = webtoonMaxWidth / webtoonMaxHeight;
-
-            // ! LOG
-            // console.log("ASPECT RATIO: ", aspectRatio);
-
-            // based on aspect ratio, what the height should be...
-            const determinedeHeight = width / aspectRatio;
-
-            // CONDITION:
-            // If file image naturalHeight is shorter than determinedHeight,
-            // return as is
-            if (determinedeHeight > maxHeight) {
-                // ! WIP
-                console.log("CONDITION PASS: determinedeHeight > maxHeight", "DETERMINED", determinedeHeight, "MAX", maxHeight)
-
-                canvas.width = imgWidth;
-                canvas.height = imgHeight;
-                context.drawImage(
-                    img, 0, 0, imgWidth, imgHeight
-                );
-
-                const result = canvas.toDataURL();
-
-                processImages.push(result);
-            } else {
-
-                // ! LOG
-                console.log("DETERMINED HEIGHT: ", determinedeHeight);
-
-                let timesToSlice = Math.floor(maxHeight / determinedeHeight);
-
-                // ! LOG
-                console.log("SLICE X: ", timesToSlice);
-
-                let currentSlice = 0;
-                let newYPosition = 0;
-                // let newYPosition = determinedeHeight * currentSlice;
-
-                // ! LOG
-                console.log("NEW Y POS: ", newYPosition);
-
-                // ! WIP
-                // - Test with longer images
-
-                let slicedImages = [];
-
-                // * CONDITION: Longer length images
-                while (timesToSlice > currentSlice) {
-
-                    newYPosition = determinedeHeight * currentSlice;
-                    // CROP HERE
-                    // ? Refactor to a function
-                    canvas.width = width;
-                    canvas.height = determinedeHeight;
-                    context.drawImage(
-                        img, 0, newYPosition, width, determinedeHeight, 0, 0, width, determinedeHeight
-                    );
-
-                    // !LOG
-                    // console.log("RESULT ", currentSlice, " ", result);
-                    // console.log("RESULT ", currentSlice, " ", result);
-
-                    slicedImages.push(canvas.toDataURL());
-
-                    currentSlice++;
-                }
-
-                // * CONDTION: Odd number
-                // Get last coordinate
-                const remainCoordinateY = timesToSlice * determinedeHeight;
-                // ! WIP >>
-                const remainHeight = maxHeight - remainCoordinateY;
-
-                // ! LOG
-                console.log(remainHeight);
-                // ! <<
-
-                if (remainHeight !== 0) {
-                    console.log("REMAINING PIECES...");
-
-
-                    newYPosition = remainCoordinateY;
-                    // CROP HERE
-                    // ? Refactor to a function
-                    canvas.width = width;
-                    canvas.height = remainHeight;
-                    context.drawImage(
-                        img, 0, newYPosition, width, remainHeight, 0, 0, width, remainHeight
-                    );
-
-
-                    slicedImages.push(canvas.toDataURL());
-                }
-
-
-                // ! LOG
-                console.log("SLICED IMAGES", slicedImages);
-
-                processImages.push(...slicedImages);
-            }
-
-
-
-        });
+        // ! WIP
+        // !! Process from here for webcomic platform selected
+        // Process
+        const Selectedwebcomics = this.state.selectedWebcomics;
 
         // ! LOG
-        // return data URL
-        console.log("NEW IMAGES: ", processImages);
+        console.log("PROCESS - SELECTED WEBCOMICS DATA", Selectedwebcomics)
 
-        const zip = new JSZip();
+        if (Selectedwebcomics.length == 0) {
+            // TODO
+            // write fix warning on where to address the issue
+            // when addressed, warnings may disappear
 
-        for (let i = 0; i < processImages.length; i++) {
+            console.log("PROCESS - No selected webcomic platforms found...", Selectedwebcomics);
+            // "Select a webcomic platform to base slicing process."
 
-            zip.file(`PG_${i}.jpg`, processImages[i].substr(processImages[i].indexOf(',') + 1), { base64: true });
+        } else {
+
+            for (let i = 0; i < Selectedwebcomics.length; i++) {
+                let processImages = [];
+
+                console.log("PROCESS - FOR LOOPING: ", Selectedwebcomics[i]);
+                // Process for each webcomic platform
+
+                // Check if there is selected webcomic before processing
+                // CONDITION Write warning if selectedWebcomics is empty
+                // ! LOG
+                console.log("PROCESSING: ", Selectedwebcomics[i]);
+                // TODO
+                // TRY...
+                // ? Change to for-loop
+                sourceImages.forEach((img) => {
+                    const imgWidth = img.naturalWidth;
+                    const imgHeight = img.naturalHeight;
+
+                    // * CONDITION
+                    // ! IF width > height, ROTATE
+                    // 2. Check ratio
+                    // 3. Divide (slice)
+                    if (imgWidth > imgHeight) {
+                        // ! LOG
+                        console.log("CONDITION PASS: WIDTH > HEIGHT")
+                        // Rotate
+                        // Bottom surface would be pointed left, and
+                        // Top surface would be pointed right
+
+                        canvas.width = imgHeight;
+                        canvas.height = imgWidth;
+                        context.rotate(Math.PI / 2);
+                        context.drawImage(
+                            img, 0, -(imgHeight)
+                        );
+                    }
+
+                    // "SLICE" PROCESS
+                    // (CONDITION) IF image file is long enough or as scale, proceed
+                    // OTHERWISE, return file as is.
+
+                    // Images are cropped, and
+                    // pushed into "pages" array
+                    // ? RETURN destructured array
+                    // ? Consider naming pattern
+                    // 01, 02, 03, ..., etc.
+                    const maxHeight = imgHeight;
+                    const width = imgWidth;
+
+                    // ! LOG
+                    console.log("PROCESS - ORIGINAL WIDTH: ", Selectedwebcomics[i], width);
+
+                    // * CONDITION
+                    //
+                    // ! WIP >>
+                    // !!
+                    // - Selected File Types
+                    // - Selected Squash Level
+
+                    let webcomicMaxWidth;
+                    let webcomicMaxHeight;
+
+                    // webcomicMaxWidth = 800;
+                    // webcomicMaxHeight = 1280;
+
+                    // Current Webcomic Platform Available...
+                    // ! tapas in the works...
+                    switch (Selectedwebcomics[i]) {
+                        case "webtoon":
+                            webcomicMaxWidth = 800;
+                            webcomicMaxHeight = 1280;
+                            break;
+                        case "tapas":
+                            webcomicMaxWidth = 960;
+                            webcomicMaxHeight = 1440;
+                            break;
+                    }
+
+                    const aspectRatio = webcomicMaxWidth / webcomicMaxHeight;
+
+                    // ! <<
+
+                    // ! LOG
+                    console.log("PROCESS - ASPECT RATIO: ", Selectedwebcomics[i], aspectRatio);
+                    console.log("PROCESS - MAX WIDTH: ", Selectedwebcomics[i], webcomicMaxWidth);
+                    console.log("PROCESS - MAX HEIGHT: ", Selectedwebcomics[i], webcomicMaxHeight);
+
+                    // based on aspect ratio, what the height should be...
+                    const determinedeHeight = width / aspectRatio;
+
+                    // ! LOG
+                    console.log("PROCESS - determinedeHeight: ", Selectedwebcomics[i], determinedeHeight);
+
+                    // CONDITION:
+                    // If file image naturalHeight is shorter than determinedHeight,
+                    // return as is
+                    if (determinedeHeight > maxHeight) {
+                        // ! LOG
+                        console.log("PROCESS - HEIGHT TOO SHORT: ", Selectedwebcomics[i]);
+
+                        canvas.width = imgWidth;
+                        canvas.height = imgHeight;
+                        context.drawImage(
+                            img, 0, 0, imgWidth, imgHeight
+                        );
+
+                        const result = canvas.toDataURL();
+
+                        processImages.push(result);
+                    } else {
+
+                        // ! LOG
+                        // console.log("DETERMINED HEIGHT: ", determinedeHeight);
+
+                        let timesToSlice = Math.floor(maxHeight / determinedeHeight);
+
+                        // ! LOG
+                        // console.log("SLICE X: ", timesToSlice);
+
+                        let currentSlice = 0;
+                        let newYPosition = 0;
+                        // let newYPosition = determinedeHeight * currentSlice;
+
+                        // ! LOG
+                        // console.log("NEW Y POS: ", newYPosition);
+
+                        // ! WIP
+                        // - Test with longer images
+
+                        let slicedImages = [];
+
+                        // * CONDITION: Longer length images
+                        while (timesToSlice > currentSlice) {
+
+                            newYPosition = determinedeHeight * currentSlice;
+                            // CROP HERE
+                            // ? Refactor to a function
+                            canvas.width = width;
+                            canvas.height = determinedeHeight;
+                            context.drawImage(
+                                img, 0, newYPosition, width, determinedeHeight, 0, 0, width, determinedeHeight
+                            );
+
+                            // !LOG
+                            // console.log("RESULT ", currentSlice, " ", result);
+
+                            slicedImages.push(canvas.toDataURL());
+
+                            currentSlice++;
+                        }
+
+
+                        // * CONDTION: Odd number
+                        // Get last coordinate
+                        const remainCoordinateY = timesToSlice * determinedeHeight;
+                        const remainHeight = maxHeight - remainCoordinateY;
+
+                        // ! LOG
+                        // console.log(remainHeight);
+                        // ! <<
+
+                        if (remainHeight !== 0) {
+                            console.log("REMAINING PIECES...");
+
+                            newYPosition = remainCoordinateY;
+                            // CROP HERE
+                            // ? Refactor to a function
+                            canvas.width = width;
+                            canvas.height = remainHeight;
+                            context.drawImage(
+                                img, 0, newYPosition, width, remainHeight, 0, 0, width, remainHeight
+                            );
+
+
+                            slicedImages.push(canvas.toDataURL());
+                        }
+
+
+                        // ! LOG
+                        console.log("PROCESS - SLICED IMAGES", slicedImages);
+
+                        processImages.push(...slicedImages);
+                    }
+
+                });
+
+                // ! LOG
+                // return data URL
+                // TODO
+                // - rename with 00 padding
+                // - user option preference
+                console.log("NEW IMAGES: ", processImages);
+
+                const zip = new JSZip();
+
+                for (let i = 0; i < processImages.length; i++) {
+                    zip.file(`PG_${i}.jpg`, processImages[i].substr(processImages[i].indexOf(',') + 1), { base64: true });
+                }
+
+                zip.generateAsync({ type: "blob", mimeType: "image/jpeg" })
+                    .then(function (blob) {
+
+                        // ! LOG
+                        console.log("BLOB #2", blob);
+
+                        saveAs(blob, "example.zip");
+                    })
+
+                // ? Synchronize zip?
+
+                // ! LOG
+                // console.log("PROCESS - processImages ARR: ", processImages)
+            }
 
         }
 
-        zip.generateAsync({ type: "blob", mimeType: "image/jpeg" })
-            .then(function (blob) {
-
-                // ! LOG
-                console.log("BLOB #2", blob);
-
-                saveAs(blob, "example.zip");
-            })
 
         // TODO
-        // Alert User Process Completed
+        // Write condition when notiching is selected...
+        // write err
         this.setState({
             isAlertMessageSuccessOnBeginSliceBtn: true,
             alertMessageSuccessOnBeginSliceBtn: alertMessages.onSuccess.completedProcess
@@ -776,6 +870,34 @@ export default class Form extends React.Component {
         }
     }
 
+    handleSelectedWebcomic(e) {
+        // ! LOG
+        // console.log("HANDLE WEBCOMIC - CLICK", e.target);
+        // console.log("HANDLE WEBCOMIC - CLICK", e.target.value);
+
+        const selectedWebcomicValue = e.target.value;
+
+        // console.log("HANDLE WEBCOMIC - DATA", this.state.selectedWebcomics);
+        const currentSelectedWebcomics = this.state.selectedWebcomics;
+
+        if (currentSelectedWebcomics.includes(selectedWebcomicValue)) {
+            // UNCHECK
+            const removeItemIndex = currentSelectedWebcomics.indexOf(selectedWebcomicValue);
+            currentSelectedWebcomics.splice(removeItemIndex, 1);
+
+            // ? Refactor to simple setState for production
+            this.setState({
+                selectedWebcomics: currentSelectedWebcomics
+            });
+        } else {
+            // CHECK
+            this.setState((currentState) => ({
+                selectedWebcomics: [...currentState.selectedWebcomics, selectedWebcomicValue]
+
+            }), () => console.log("HANDLE WEBCOMIC - UPDATED DATA ", this.state.selectedWebcomics));
+        }
+    }
+
     render() {
         return (
             <main>
@@ -817,7 +939,9 @@ export default class Form extends React.Component {
                     })
                 }}>test</button> */}
 
-                <FormSelect />
+                <FormSelect
+                    getWebcomicsModel={webcomicsModel}
+                    onHandleSelectedWebcomic={this.handleSelectedWebcomic} />
                 <FormOptions />
                 <div className="slice-btn-container">
                     <a
