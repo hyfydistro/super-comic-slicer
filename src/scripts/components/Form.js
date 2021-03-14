@@ -192,7 +192,7 @@ export default class Form extends React.Component {
             totalFileSize: 0,
             selectedWebcomics: [],
             selectedFileExtension: "jpeg", // default value
-            selectedSquashLevel: 0
+            selectedSquashLevel: "none"
         };
 
         // METHODS
@@ -521,19 +521,27 @@ export default class Form extends React.Component {
                 // (CONDITION) IF image file is long enough or as scale, proceed
                 // OTHERWISE, return file as is.
 
-                let scaleWidth = 700;
+                let scaleWidth;
 
                 // ! WIP
                 // # (1) OPTIONS - SCALE
                 // void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
                 switch (this.state.selectedSquashLevel) {
+                    case "none":
+                        scaleWidth = width;
+                        break;
                     case 400:
                         scaleWidth = 400;
                         break;
                     case 500:
+                        scaleWidth = 500;
+                        break;
                     case 600:
+                        scaleWidth = 600;
+                        break;
                     case 700:
-                    default:
+                        scaleWidth = 700;
+                        break;
                 }
 
                 // ! LOG
@@ -550,7 +558,7 @@ export default class Form extends React.Component {
                 const width = imgWidth;
 
                 // ! LOG
-                // console.log("PROCESS - ORIGINAL WIDTH: ", Selectedwebcomics[i], width);
+                console.log("PROCESS - ORIGINAL WIDTH: ", Selectedwebcomics[i], width);
 
                 // * CONDITION
                 //
@@ -587,24 +595,25 @@ export default class Form extends React.Component {
                 // ! WIP
                 // based on aspect ratio, what the height should be...
                 const determinedeHeight = width / aspectRatio;
-                const scaledDeterminedeHeight = scaleWidth / aspectRatio;
+
+                let scaleDeterminedeHeight = determinedeHeight;
+                if (scaleWidth !== width) {
+                    scaleDeterminedeHeight = scaleWidth / aspectRatio;
+                }
 
                 // ! LOG
                 console.log("PROCESS - determinedeHeight: ", Selectedwebcomics[i], determinedeHeight);
 
-                console.log("PROCESS - SCALED DETERMINED HEIGHT: ", Selectedwebcomics[i], scaledDeterminedeHeight);
+                console.log("PROCESS - SCALED DETERMINED HEIGHT: ", Selectedwebcomics[i], scaleDeterminedeHeight);
 
 
                 // CONDITION:
                 // If file image naturalHeight is shorter than determinedHeight,
-                // return as is
+                // return as is... unless Options scale applied
                 if (determinedeHeight > maxHeight) {
                     // ! LOG
                     console.log("PROCESS - HEIGHT TOO SHORT: ", Selectedwebcomics[i]);
 
-                    // TODO for Option: scale
-                    // canvas.width = imgWidth;
-                    // canvas.height = imgHeight;
                     const scaleMaxHeight = scaleWidth / (width / maxHeight);
                     canvas.width = scaleWidth;
                     canvas.height = scaleMaxHeight;
@@ -654,13 +663,13 @@ export default class Form extends React.Component {
                         // canvas.width = width * scaleX;
                         // canvas.height = determinedeHeight * scaleY;
                         canvas.width = scaleWidth;
-                        canvas.height = scaledDeterminedeHeight;
+                        canvas.height = scaleDeterminedeHeight;
                         // context.scale(scaleX, scaleY);
                         // context.drawImage(
                         //     img, 0, newYPosition, width, determinedeHeight, 0, 0, width, determinedeHeight
                         // );
                         context.drawImage(
-                            img, 0, newYPosition, width, determinedeHeight, 0, 0, scaleWidth, scaledDeterminedeHeight
+                            img, 0, newYPosition, width, determinedeHeight, 0, 0, scaleWidth, scaleDeterminedeHeight
                         );
 
                         // !LOG
@@ -682,16 +691,23 @@ export default class Form extends React.Component {
                     console.log("PROCESS - REMAIN Y COORD: ", remainCoordinateY);
                     // ! <<
 
+                    let scaleRemaineHeight = remainHeight;
+                    if (scaleWidth == width) {
+                        scaleRemaineHeight = scaleWidth / (width / remainHeight);
+                        // ! LOG
+                        console.log("PROCESS - SCALE REMAIN HEIGHT: ", scaleRemaineHeight);
+                    }
+
                     if (remainHeight !== 0) {
                         console.log("PROCESS - REMAINING PIECES...");
 
                         newYPosition = remainCoordinateY;
                         // CROP HERE
                         // ? Refactor to a function
-                        canvas.width = width;
-                        canvas.height = remainHeight;
+                        canvas.width = scaleWidth;
+                        canvas.height = scaleRemaineHeight;
                         context.drawImage(
-                            img, 0, newYPosition, width, remainHeight, 0, 0, width, remainHeight
+                            img, 0, newYPosition, width, remainHeight, 0, 0, scaleWidth, scaleRemaineHeight
                         );
 
 
