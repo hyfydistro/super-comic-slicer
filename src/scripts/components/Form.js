@@ -9,14 +9,6 @@ import createId from '../libs/createId';
 import convertBytes from '../libs/convertBytes';
 
 // TODO
-// 1. Listen for drag and drop
-// 2. Detect when a file is dropped on the drop zone
-// 3. Display image name and file type
-// 4. Validate dropped images
-// 5. Delete images with unsupported file types
-// 6. Preview images withvalid file types
-// 7. Upload images
-
 // Collect data on User options
 // - [x] webcomic platform
 // - [x] alert message when none selected
@@ -77,7 +69,7 @@ const filExtensionsModel = [
 ];
 
 // RADIO OPTIONS
-// Default CHECKED: filExtensionsModel[0]
+// Default CHECKED: squashLevelModel[0]
 const squashLevelModel = [
     {
         htmlLabel: "none",
@@ -117,26 +109,20 @@ function validFileType(file) {
     return fileTypes.includes(file);
 }
 
-
-
 // TODO
-// - Store as one object
-// - Add 'reader' from upload
-// - Add 'File' / 'FileList' from upload
-// - Add Dragging and re-ordering event
-// - update data too!
-// -
 // - [x] validata file
 // If unacceptable, add error message, otherwise green light
 // - Something to do with fixing border drag on event styles ???
-// - [ ] roate image function >> on condition
-// - [ ] scale image function >> options
+// - [x] roate image function >> on condition
+// - [x] scale image function >> options
 // - [x] re-order >> on rearranging
-// - [ ] Implement Click to browser for upload
+// - [x] Implement Click to browser for upload
+// - [ ] Output results in new image element
+    // Don't alter natural image height or width
+    // Let people download as its original dimension
+    // Style image element image on webcomic platform condition
+        // probably output as much as webcomic platform selected
 
-// let fileBlobs = [];
-
-// * NB: React doesn't support nested state.
 export default class Form extends React.Component {
     constructor(props) {
         super(props);
@@ -468,33 +454,8 @@ export default class Form extends React.Component {
         // display results
     }
 
-    // PROCESS FILES
-    //
+    // PROCESS IMAGE FILES
     processResults() {
-        // 1. Get file(s)
-        // 2. Access files in Preview
-        // 3. Loop through
-        // ...
-        // CONDTION: IF width is greater than height, ROTATE
-        // a. Check if user would like to squash images
-        // YES - Check how may pixels to, then proceed scaling
-        // NO - Skip to next step
-        // b.  (CONDITION) Check Image length and fit to ratio, DIVIDE-CROP
-        // This will determine how many times you use the same iamge
-        // Webtoon maximum file size is 800x1280 px
-        // 1. Use modulo divide math operation to find coordinates for each page
-        // Remainin will becutas is
-        // 2. Use ratio for width and height for output,
-        // and push to array for save files and zip output
-        // 3. (CONDITION) The remanings will account for
-        // canvas should be reiterated
-        // Get last coordinate
-        // total height minus height length used
-        // widht is as is
-        // push to array
-        // Automatically download image after set up
-        // Use `ctx.translate()` for repositioning
-
         // GET all image file elements
         const sourceImagesRaw = document.querySelectorAll(".preview__thumbnail img");
         // REFERENCE the canvas
@@ -518,39 +479,28 @@ export default class Form extends React.Component {
                 const imgWidth = img.naturalWidth;
                 const imgHeight = img.naturalHeight;
 
-                // * CONDITION
-                // ! IF width > height, ROTATE
-                // 2. Check ratio
-                // 3. Divide (slice)
+                // * CONDITION: image width > image height
+                // ROTATE image
                 if (imgWidth > imgHeight) {
-                    // ! LOG
-                    console.log("CONDITION PASS: WIDTH > HEIGHT")
-                    // Rotate
+                    // NOTE:
                     // Bottom surface would be pointed left, and
                     // Top surface would be pointed right
 
                     canvas.width = imgHeight;
                     canvas.height = imgWidth;
                     context.rotate(Math.PI / 2);
+
                     context.drawImage(
                         img, 0, -(imgHeight)
                     );
                 }
 
-
-                // ! LOG
-                console.log("PROCESS - FILE", img);
-
-                // "SLICE" PROCESS
-                // (CONDITION) IF image file is long enough or as scale, proceed
-                // OTHERWISE, return file as is.
                 const maxHeight = imgHeight;
                 const width = imgWidth;
 
                 let scaleWidth;
 
                 // # (2) OPTIONS form - "SQUASH"
-                // void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
                 switch (this.state.selectedSquashLevel) {
                     case "none":
                         scaleWidth = width;
@@ -569,15 +519,6 @@ export default class Form extends React.Component {
                         break;
                 }
 
-                // ! LOG
-                console.log("PROCESS - SCALED WIDTH: ", Selectedwebcomics[i], scaleWidth);
-
-
-                // ! LOG
-                console.log("PROCESS - ORIGINAL WIDTH: ", Selectedwebcomics[i], width);
-                // ! LOG
-                console.log("PROCESS - ORIGINAL MAX HEIGHT: ", Selectedwebcomics[i], maxHeight);
-
                 let webcomicMaxWidth;
                 let webcomicMaxHeight;
 
@@ -595,11 +536,6 @@ export default class Form extends React.Component {
                 }
 
                 const aspectRatio = webcomicMaxWidth / webcomicMaxHeight;
-
-                // ! LOG
-                console.log("PROCESS - ASPECT RATIO: ", Selectedwebcomics[i], aspectRatio);
-                // console.log("PROCESS - MAX WIDTH: ", Selectedwebcomics[i], webcomicMaxWidth);
-                // console.log("PROCESS - MAX HEIGHT: ", Selectedwebcomics[i], webcomicMaxHeight);
 
                 // based on aspect ratio, what the height should be...
                 const determinedeHeight = width / aspectRatio;
@@ -646,7 +582,6 @@ export default class Form extends React.Component {
 
                         currentSlice++;
                     }
-
 
                     // * CONDTION: Odd number remaining
                     // GET last coordinate
@@ -839,9 +774,6 @@ export default class Form extends React.Component {
     // EMPTY state "inputField"
     // "Clear Files" button
     handleClickToRemoveAll() {
-        // ! LOG
-        console.log("CLICKED - CLEAR FILES...")
-
         // ALERT MESSAGE
         // UPDATE data
         this.setState({
@@ -894,7 +826,7 @@ export default class Form extends React.Component {
             this.setState((currentState) => ({
                 selectedWebcomics: [...currentState.selectedWebcomics, selectedWebcomicValue]
 
-            }), () => console.log("HANDLE WEBCOMIC - UPDATED DATA ", this.state.selectedWebcomics));
+            }));
         }
     }
 
