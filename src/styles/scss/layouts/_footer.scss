@@ -58,7 +58,6 @@ footer a {
     color: base.$primary-color-50;
 }
 
-.fa-paypal,
 .contribute-icon-stack .fa-circle,
 .fa-link,
 .fa-tumblr,
@@ -102,6 +101,10 @@ img.donate-image {
 
 img.donate-image:hover {
     transform: translateY(-4px);
+}
+
+.twitter-share-button {
+    outline: none;
 }
 
 .footer-notes {
