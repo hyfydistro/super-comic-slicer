@@ -6,22 +6,10 @@ import FormResults from './FormResults';
 
 // libs
 import createId from '../libs/createId';
-import convertBytes from '../libs/convertBytes';
 
 // TODO: FEATURE (NEXT UPDATE)
 // "Rotate" button in Preview thumb
-
-// TODO
-// Collect data on User options
-// - [x] webcomic platform
-// - [x] alert message when none selected
-// persist until next click
-// - [x] at "Begin Slice!"
-// - [x] at Select Form
-// - [x] file type
-// - [x] Squash level
-
-
+// Also see in 'FormUpload.js'
 
 const alertMessages = {
     onSuccess: {
@@ -111,16 +99,6 @@ const fileTypes = [
 function validFileType(file) {
     return fileTypes.includes(file);
 }
-
-// TODO
-// - [x] validata file
-// If unacceptable, add error message, otherwise green light
-// - Something to do with fixing border drag on event styles ???
-// - [x] roate image function >> on condition
-// - [x] scale image function >> options
-// - [x] re-order >> on rearranging
-// - [x] Implement Click to browser for upload
-// - [x] Output results in new image element
 
 export default class Form extends React.Component {
     constructor(props) {
