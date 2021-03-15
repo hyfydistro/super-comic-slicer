@@ -1,45 +1,10 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+// libs
+import convertBytes from '../libs/convertBytes';
 
-const alertMessages = {
-    alertMax: "Total file sizes is over maximum 20MB. Delete some files, or clear upload and try again with less files.",
-    alertFile: "Oh no! Currently, we accept .png and .jpeg, .jpg image file extensions.",
-};
-
-const sucessMessages = {
-    successReady: "The following files are accepted."
-}
-
-function returnFileSize(number) {
-    if (number < 1024) {
-        return number + 'bytes';
-    } else if (number > 1024 && number < 1048576) {
-        return (number / 1024).toFixed(1) + 'KB';
-    } else if (number > 1048576) {
-        return (number / 1048576).toFixed(1) + 'MB';
-    }
-}
-
-// TODO
-// components consideration
-// - dropzone
-// - preview
-
-// TODO
-// - [ ] roate image function >> on condition
-// - Pass Props:
-// - id
-// - name
-// - [ ] Create alert messages box on CONDITION
-
-// TODO: ALERT MESSAGES
-// - [x] (success) When "Clear Files" is clicked, notify w/ setTimeout Files removed
-// - [x] (error) When unaccepted files are chose, notify w/ setTimeout
-// - [x] (warning) When file size is near maximum, notify w/ setTimeout
-// - Disable "Let's Slice" button
-// - [x] (error) When file size is over maximum, notify w/ setTimeout
-// Disable "begin Slice!" button
-
-// console.log("EXIST", DragDropContext);
+// TODO: FEATURE (NEXT UPDATE)
+// "Rotate" button in Preview thumb
+// Also see in 'Form.js'
 
 function Thumbnails(props) {
     const files = props.inputField;
@@ -48,36 +13,17 @@ function Thumbnails(props) {
 
     if (files) {
 
-        // ! LOG
-        console.log("INSIDE <PREVIEW>: ", props.inputField);
-        // console.log("INSIDE <PREVIEW>: ", props.inputField[0]["id"]);
-
         previewThumbnailElements = files.map((file, index) => {
-
-            console.log("INSIDE <PREVIEW> fileRead: ", file.fileRead);
-            console.log("INSIDE <PREVIEW> fileRead - name: ", file.fileRead.name);
-            console.log("INSIDE <PREVIEW> id: ", file.id);
 
             const reader = new FileReader();
             reader.readAsDataURL(file.fileRead);
             reader.addEventListener("load", getDataURL)
 
             function getDataURL() {
-                console.log("MAKING DATA URL...", reader);
-
                 const currentElement = document.querySelectorAll(".preview__thumbnail-container")[index].lastElementChild.firstElementChild;
-
-                // ! Log
-                console.log(currentElement);
 
                 currentElement.src = reader.result;
             }
-
-            // ! LOG
-            // console.log("READER: ", reader);
-            // console.log("SOURCE: ", dataURLs);
-            // console.log("SOURCE: 0", dataURLs[0]);
-
 
             return (
                 <Draggable key={file.id} draggableId={file.id.toString()} index={index}>
@@ -107,7 +53,6 @@ function Thumbnails(props) {
 }
 
 function Preview(props) {
-
     return (
         <div className={props.togglePreviewWrapperClass}>
             <div className="preview-container">
@@ -124,7 +69,7 @@ function Preview(props) {
                 </DragDropContext>
                 <div className="preview__clear-btn-container">
                 <div className="file-size__container">
-                    <span className="file-size-text">Total File Size: {returnFileSize(props.getTotalFileSize)}</span>
+                    <span className="file-size-text">Total File Size: {convertBytes(props.getTotalFileSize)}</span>
                 </div>
                     <button className="preview__clear-btn" onClick={props.onHandleClickToRemoveAll}>Clear Files</button>
                 </div>
@@ -133,9 +78,6 @@ function Preview(props) {
     )
 }
 
-
-// TODO
-// Show total file size
 function Dropzone(props) {
     return (
         <div className="dropzone-container">
@@ -159,11 +101,7 @@ function Dropzone(props) {
     )
 }
 
-
-
 export default function FormUpload(props) {
-    // ! LOG
-    // console.log("INSIDE FORM :", props.previewComponent);
 
     return (
         <section className="form-upload">
@@ -189,12 +127,10 @@ export default function FormUpload(props) {
                 onHandleDragLeave={(e) => props.onHandleDragLeave(e)}
                 onHandleFileDrop={(e) => props.onHandleFileDrop(e)}
                 onHandleInputChange={(e) => props.onHandleInputChange(e)}
-                // STYLE EVENTS
-                toggleDropzoneBordersClass={props.toggleDropzoneBordersClass}
-
-                // ! WIP
                 onHandleClickToUpload={props.onHandleClickToUpload}
                 onHandleChange={props.onHandleChange}
+                // STYLE EVENTS
+                toggleDropzoneBordersClass={props.toggleDropzoneBordersClass}
             />
 
             {props.isAlertMessageError === true
@@ -239,20 +175,6 @@ export default function FormUpload(props) {
                 />
                 : null}
 
-
         </section>
     )
 }
-
-// TODO
-// [x] Create a drop area
-// [x] Preview Image Thumbnail
-// [x] Preview Image Text
-// [ ] "X" event button to
-// Delete itself from UI and data
-// ? or just update array
-// [ ] Creat a click to browse and
-// add to upload list
-
-// Tools
-// - SortableJS
