@@ -5,6 +5,7 @@ import convertBytes from '../libs/convertBytes';
 // TODO: FEATURE (NEXT UPDATE)
 // "Rotate" button in Preview thumb
 // Also see in 'Form.js'
+// ? bullet point guidelines instead of one line paragraph
 
 function Thumbnails(props) {
     const files = props.inputField;
@@ -108,18 +109,7 @@ export default function FormUpload(props) {
 
             <h3>1. Upload</h3>
 
-            {/*
-            TODO
-            - Style
-            - Bullet list points
-            */}
-                <ul>
-                <li>Currently, PNG and JPEG (including JPG) are accepted.</li>
-                <li>If width of image is larger than height, it will be returned as is.</li>
-                <li></li>
-            </ul>
-
-            <p>Currently, .png and .jpeg (including .jpg) are accepted. If width of image is larger than height, it will be automatically roated. A "rotate" option will be available on next update. 😗</p>
+            <p>Currently, PNG and JPEG (including JPG) are accepted. If width of image is larger than height, it will be returned as is unless Options Squash chosen.</p>
 
             <Dropzone
                 // EVENTS
