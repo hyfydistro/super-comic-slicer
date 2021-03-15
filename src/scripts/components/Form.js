@@ -435,6 +435,7 @@ export default class Form extends React.Component {
     // PROCESS FILES
     // ! WIP - Testing
     // ? name change - displayResults() ?
+    // ? Rotate feature
     processResults() {
         // 1. Get file(s)
         // 2. Access files in Preview
@@ -547,13 +548,6 @@ export default class Form extends React.Component {
                 // ! LOG
                 console.log("PROCESS - SCALED WIDTH: ", Selectedwebcomics[i], scaleWidth);
 
-
-                // Images are cropped, and
-                // pushed into "pages" array
-                // ? RETURN destructured array
-                // ? Consider naming pattern
-                // 01, 02, 03, ..., etc.
-                // ! WIP
                 const maxHeight = imgHeight;
                 const width = imgWidth;
 
@@ -561,9 +555,6 @@ export default class Form extends React.Component {
                 console.log("PROCESS - ORIGINAL WIDTH: ", Selectedwebcomics[i], width);
 
                 // * CONDITION
-                //
-                // ! WIP >>
-                // !!
                 // - Selected File Types
                 // - Selected Squash Level
 
@@ -603,11 +594,10 @@ export default class Form extends React.Component {
 
                 // ! LOG
                 console.log("PROCESS - determinedeHeight: ", Selectedwebcomics[i], determinedeHeight);
-
                 console.log("PROCESS - SCALED DETERMINED HEIGHT: ", Selectedwebcomics[i], scaleDeterminedeHeight);
 
 
-                // CONDITION:
+                // * CONDITION:
                 // If file image naturalHeight is shorter than determinedHeight,
                 // return as is... unless Options scale applied
                 if (determinedeHeight > maxHeight) {
@@ -617,9 +607,6 @@ export default class Form extends React.Component {
                     const scaleMaxHeight = scaleWidth / (width / maxHeight);
                     canvas.width = scaleWidth;
                     canvas.height = scaleMaxHeight;
-                    // context.drawImage(
-                    //     img, 0, 0, imgWidth, imgHeight
-                    // );
                     context.drawImage(
                         img, 0, 0, scaleWidth, scaleMaxHeight
                     );
@@ -628,24 +615,10 @@ export default class Form extends React.Component {
 
                     processImages.push(result);
                 } else {
-
-                    // ! LOG
-                    console.log("PROCESS - DETERMINED HEIGHT: ", determinedeHeight);
-
                     let timesToSlice = Math.floor(maxHeight / determinedeHeight);
-
-                    // ! LOG
-                    console.log("PROCESS - SLICE X: ", timesToSlice);
 
                     let currentSlice = 0;
                     let newYPosition = 0;
-                    // let newYPosition = determinedeHeight * currentSlice;
-
-                    // ! LOG
-                    console.log("PROCESS - NEW Y POS: ", newYPosition);
-
-                    // ! WIP
-                    // - Test with longer images
 
                     let slicedImages = [];
 
@@ -655,13 +628,7 @@ export default class Form extends React.Component {
                         console.log("PROCESS - NEW Y POS: ", currentSlice, newYPosition);
 
                         newYPosition = determinedeHeight * currentSlice;
-                        // CROP HERE
                         // ? Refactor to a function
-                        // canvas.width = width;
-                        // canvas.height = determinedeHeight;
-
-                        // canvas.width = width * scaleX;
-                        // canvas.height = determinedeHeight * scaleY;
                         canvas.width = scaleWidth;
                         canvas.height = scaleDeterminedeHeight;
                         // context.scale(scaleX, scaleY);
@@ -681,28 +648,21 @@ export default class Form extends React.Component {
                     }
 
 
-                    // * CONDTION: Odd number
-                    // Get last coordinate
+                    // * CONDTION: Odd number remaining
+                    // GET last coordinate
+                    // GET remaining height
                     const remainCoordinateY = timesToSlice * determinedeHeight;
                     const remainHeight = maxHeight - remainCoordinateY;
 
-                    // ! LOG
-                    console.log("PROCESS - REMAIN HEIGHT: ", remainHeight);
-                    console.log("PROCESS - REMAIN Y COORD: ", remainCoordinateY);
-                    // ! <<
-
+                    // OPTIONS Squash - if available
                     let scaleRemaineHeight = remainHeight;
-                    if (scaleWidth == width) {
+                    if (scaleWidth !== width) {
                         scaleRemaineHeight = scaleWidth / (width / remainHeight);
-                        // ! LOG
-                        console.log("PROCESS - SCALE REMAIN HEIGHT: ", scaleRemaineHeight);
                     }
 
                     if (remainHeight !== 0) {
-                        console.log("PROCESS - REMAINING PIECES...");
-
                         newYPosition = remainCoordinateY;
-                        // CROP HERE
+
                         // ? Refactor to a function
                         canvas.width = scaleWidth;
                         canvas.height = scaleRemaineHeight;
@@ -710,10 +670,8 @@ export default class Form extends React.Component {
                             img, 0, newYPosition, width, remainHeight, 0, 0, scaleWidth, scaleRemaineHeight
                         );
 
-
                         slicedImages.push(canvas.toDataURL());
                     }
-
 
                     // ! LOG
                     console.log("PROCESS - SLICED IMAGES", slicedImages);
@@ -730,6 +688,9 @@ export default class Form extends React.Component {
             // - user option preference
             console.log("NEW IMAGES: ", processImages);
 
+            // CREATE Zip folder
+            // PUSH images to Zip folder
+            // DOWNLOAD to user's PC
             const zip = new JSZip();
             const selectedFileExt = this.state.selectedFileExtension;
 
@@ -748,18 +709,10 @@ export default class Form extends React.Component {
 
                     saveAs(blob, "example.zip");
                 })
-
-            // ? Synchronize zip?
-
-            // ! LOG
-            // console.log("PROCESS - processImages ARR: ", processImages)
         }
 
-
-
-        // TODO
-        // Write condition when notiching is selected...
-        // write err
+        // ALERT MESSAGE
+        // Process completed
         this.setState({
             isAlertMessageSuccessOnBeginSliceBtn: true,
             alertMessageSuccessOnBeginSliceBtn: alertMessages.onSuccess.completedProcess
@@ -776,12 +729,10 @@ export default class Form extends React.Component {
     // "Begin Slice!" button
     handleBeginSlicBtn(e) {
         e.preventDefault();
-        console.log("BEGIN SLICE FILE: ", this.state.inputField);
 
         if (this.state.inputField.length === 0) {
-            console.log("BEGIN SLICE - NO DATA FOUND");
-
-            // Display Alert Message
+            // ALERT MESSAGE
+            // No data (or image file) found
             this.setState({
                 isAlertMessageErrorOnBeginSliceBtn: true,
                 alertMessageErrorOnBeginSliceBtn: alertMessages.onError.noFilesFound
@@ -795,11 +746,8 @@ export default class Form extends React.Component {
             }, 8000);
         } else {
             if (this.state.selectedWebcomics.length === 0) {
-
-                // ! LOG
-                console.log("PASS - REJECTED: NO WEBCOMIC PLAT SELECTED");
-                // Display Alert Message
-                // Persist
+                // ALERT MESSAGE (PERSIST)
+                // No webcomic platform selected
                 this.setState({
                     isAlertMessageErrorOnBeginSliceBtn: true,
                     alertMessageErrorOnBeginSliceBtn: alertMessages.onError.selectFormMandatory,
@@ -807,10 +755,7 @@ export default class Form extends React.Component {
                     alertMessageErrorOnSelectForm: alertMessages.onError.selectFormMandatoryTarget
                 })
             } else {
-                // ! LOG
-                console.log("PASS - WEBCOMIC PLAT SELECTED");
-
-                // Remove any error message
+                // ALERT MESSAGE (PERSIST -> REMOVED)
                 this.setState({
                     isAlertMessageErrorOnBeginSliceBtn: false,
                     alertMessageErrorOnBeginSliceBtn: "",
@@ -818,11 +763,9 @@ export default class Form extends React.Component {
                     alertMessageErrorOnSelectForm: "",
                 });
 
-                //! LOG
-                console.log("Processing results...");
                 this.processResults();
 
-                console.log("Handle Begin Slice Button")
+                // ANIMATION
                 this.toggleBeginSliceText();
 
                 setTimeout(() => {
@@ -835,24 +778,13 @@ export default class Form extends React.Component {
     // REORDER FILES
     // event: drag
     handleDragEnd(result) {
-        // ! LOG
-        // console.log("DnD HANDLE EVENT", result);
-
-        // Create shallow copy
+        // CREATE shallow copy
         const items = Array.from(this.state.inputField);
-        // const items = this.state.inputField;
 
-        // ! LOG
-        // console.log("DnD HANDLE EVENT - ITEMS", items);
-
-        // ! LOG
-        // console.log("DnD HANDLE EVENT - ARR ITEMS", items);
-
+        // EXTRACT targeted item
         const [reorderedItem] = items.splice(result.source.index, 1);
 
-        // ! LOG
-        // console.log("DnD HANDLE EVENT - reorderedItem", reorderedItem);
-
+        // PUSH targeted item into new order
         items.splice(result.destination.index, 0, reorderedItem);
 
         // ! LOG
@@ -868,12 +800,7 @@ export default class Form extends React.Component {
     handleRemoveSelf(e) {
         e.preventDefault();
 
-        // ! LOG
-        // console.log("HANDLE REMOVESELF: ", e);
-        // console.log("HANDLE REMOVESELF - TARGET: ", e.target);
-        // console.log("HANDLE REMOVESELF - PARENT: ", e.target.parentElement);
-        // console.log("HANDLE REMOVESELF - PARENT PARENT: ", e.target.parentElement.parentElement);
-
+        // GRAB all list
         const sourceThumbnails = document.querySelectorAll(".preview__thumbnail-container");
         // const attribute = e.target.parentElement.attributes.getNamedItem("data-rbd-draggable-id").value;
 
