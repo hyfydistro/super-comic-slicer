@@ -306,9 +306,15 @@ export default class Form extends React.Component {
     handleOptionsSquashLevel(e) {
         const newSelectedSquashLevel = parseInt(e.target.value, 10);
 
-        this.setState({
-            selectedSquashLevel: newSelectedSquashLevel
-        });
+        if (newSelectedSquashLevel == 0) {
+            this.setState({
+                selectedSquashLevel: "none"
+            });
+        } else {
+            this.setState({
+                selectedSquashLevel: newSelectedSquashLevel
+            });
+        }
     }
 
 
@@ -531,9 +537,15 @@ export default class Form extends React.Component {
                     );
                 }
 
+
+                // ! LOG
+                console.log("PROCESS - FILE", img);
+
                 // "SLICE" PROCESS
                 // (CONDITION) IF image file is long enough or as scale, proceed
                 // OTHERWISE, return file as is.
+                const maxHeight = imgHeight;
+                const width = imgWidth;
 
                 let scaleWidth;
 
@@ -560,11 +572,11 @@ export default class Form extends React.Component {
                 // ! LOG
                 console.log("PROCESS - SCALED WIDTH: ", Selectedwebcomics[i], scaleWidth);
 
-                const maxHeight = imgHeight;
-                const width = imgWidth;
 
                 // ! LOG
                 console.log("PROCESS - ORIGINAL WIDTH: ", Selectedwebcomics[i], width);
+                // ! LOG
+                console.log("PROCESS - ORIGINAL MAX HEIGHT: ", Selectedwebcomics[i], maxHeight);
 
                 let webcomicMaxWidth;
                 let webcomicMaxHeight;
@@ -585,7 +597,7 @@ export default class Form extends React.Component {
                 const aspectRatio = webcomicMaxWidth / webcomicMaxHeight;
 
                 // ! LOG
-                // console.log("PROCESS - ASPECT RATIO: ", Selectedwebcomics[i], aspectRatio);
+                console.log("PROCESS - ASPECT RATIO: ", Selectedwebcomics[i], aspectRatio);
                 // console.log("PROCESS - MAX WIDTH: ", Selectedwebcomics[i], webcomicMaxWidth);
                 // console.log("PROCESS - MAX HEIGHT: ", Selectedwebcomics[i], webcomicMaxHeight);
 
@@ -597,21 +609,15 @@ export default class Form extends React.Component {
                     scaleDeterminedeHeight = scaleWidth / aspectRatio;
                 }
 
-                // ! LOG
-                console.log("PROCESS - determinedeHeight: ", Selectedwebcomics[i], determinedeHeight);
-                console.log("PROCESS - SCALED DETERMINED HEIGHT: ", Selectedwebcomics[i], scaleDeterminedeHeight);
-
-
                 // * CONDITION:
                 // If file image naturalHeight is shorter than determinedHeight,
                 // return as is... unless Options scale applied
                 if (determinedeHeight > maxHeight) {
-                    // ! LOG
-                    console.log("PROCESS - HEIGHT TOO SHORT: ", Selectedwebcomics[i]);
-
                     const scaleMaxHeight = scaleWidth / (width / maxHeight);
+
                     canvas.width = scaleWidth;
                     canvas.height = scaleMaxHeight;
+
                     context.drawImage(
                         img, 0, 0, scaleWidth, scaleMaxHeight
                     );
@@ -621,10 +627,8 @@ export default class Form extends React.Component {
                     processImages.push(result);
                 } else {
                     let timesToSlice = Math.floor(maxHeight / determinedeHeight);
-
                     let currentSlice = 0;
                     let newYPosition = 0;
-
                     let slicedImages = [];
 
                     // * CONDITION: Longer length (height) images
@@ -674,24 +678,26 @@ export default class Form extends React.Component {
 
             });
 
-            // ! LOG
-            // return data URL
-            // TODO
-            // - rename with 00 padding
-            // - user option preference
-            console.log("NEW IMAGES: ", processImages);
-
             // CREATE Zip folder
+            // NAME images with padded zero if under 10s
+            // GET user file extension prefernce from Options form - File Extensions
             // PUSH images to Zip folder
             // DOWNLOAD to user's PC
             const zip = new JSZip();
             const selectedFileExt = this.state.selectedFileExtension;
 
-            // ! LOG
-            console.log("NEW FILE EXT: ", selectedFileExt);
+            // NOTE: Naming is padded with zero of tens
+            // Over tens are unavailable
 
             for (let i = 0; i < processImages.length; i++) {
-                zip.file(`PG_${i}.${selectedFileExt}`, processImages[i].substr(processImages[i].indexOf(',') + 1), { base64: true });
+                let fileName;
+                if (i > 10) {
+                    fileName = `${i}.${selectedFileExt}`;
+                } else {
+                    fileName = `${i.toString().padStart(2, "0")}.${selectedFileExt}`;
+                }
+
+                zip.file(fileName, processImages[i].substr(processImages[i].indexOf(',') + 1), { base64: true });
             }
 
             zip.generateAsync({ type: "blob", mimeType: "image/jpeg" })
@@ -702,6 +708,9 @@ export default class Form extends React.Component {
 
                     saveAs(blob, "example.zip");
                 })
+
+                // TODO
+                // DISPLAY results
         }
 
         // ALERT MESSAGE
