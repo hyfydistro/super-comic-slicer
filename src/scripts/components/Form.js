@@ -8,6 +8,9 @@ import FormResults from './FormResults';
 import createId from '../libs/createId';
 import convertBytes from '../libs/convertBytes';
 
+// TODO: FEATURE (NEXT UPDATE)
+// "Rotate" button in Preview thumb
+
 // TODO
 // Collect data on User options
 // - [x] webcomic platform
@@ -16,7 +19,7 @@ import convertBytes from '../libs/convertBytes';
 // - [x] at "Begin Slice!"
 // - [x] at Select Form
 // - [x] file type
-// - [ ] Squash level
+// - [x] Squash level
 
 
 
@@ -117,11 +120,7 @@ function validFileType(file) {
 // - [x] scale image function >> options
 // - [x] re-order >> on rearranging
 // - [x] Implement Click to browser for upload
-// - [ ] Output results in new image element
-    // Don't alter natural image height or width
-    // Let people download as its original dimension
-    // Style image element image on webcomic platform condition
-        // probably output as much as webcomic platform selected
+// - [x] Output results in new image element
 
 export default class Form extends React.Component {
     constructor(props) {
@@ -145,7 +144,7 @@ export default class Form extends React.Component {
                 visible: "preview-wrapper",
                 invisible: "preview-wrapper hidden"
             },
-            // ALERT MESSAGES AND STATE
+            // # ALERT MESSAGES AND STATE
             // Success
             isAlertMessageSuccess: false,
             alertMessageSuccess: "",
@@ -166,11 +165,11 @@ export default class Form extends React.Component {
             alertMessageErrorOnSelectForm: "",
 
             // # DATA
-            inputFileData: [],
+            processedFileData: [],
             inputField: [],
             // inputField: [
             //     {
-            //         fileRead: [],
+            //         fileRead: [<obj>],
             //         id: <number>
             //         fileSize: <number>
             //     }
@@ -181,7 +180,7 @@ export default class Form extends React.Component {
             selectedSquashLevel: "none"
         };
 
-        // METHODS
+        // # METHODS
         this.handleDrag = this.handleDrag.bind(this);
         this.handleDragLeave = this.handleDragLeave.bind(this);
         this.handleFileDrop = this.handleFileDrop.bind(this);
@@ -200,14 +199,9 @@ export default class Form extends React.Component {
         this.checkTotalFileSize = this.checkTotalFileSize.bind(this);
         // UPLOAD on file browse
         this.handleInputChange = this.handleInputChange.bind(this);
-
-        // ! WIP
         this.handleSelectedWebcomic = this.handleSelectedWebcomic.bind(this);
         this.handleOptionsFileExtenions = this.handleOptionsFileExtenions.bind(this);
         this.handleOptionsSquashLevel = this.handleOptionsSquashLevel.bind(this);
-
-        // ? I don't know if use this blub
-        this.getFileBlob = this.getFileBlob.bind(this);
     }
 
 
@@ -301,366 +295,6 @@ export default class Form extends React.Component {
                 selectedSquashLevel: newSelectedSquashLevel
             });
         }
-    }
-
-
-    // =========
-    // # METHODS
-    // =========
-
-    // TOGGLE
-    // "Begin Slice" Text
-    toggleBeginSliceText() {
-        console.log("TOGGLE 'BEGIN SLICE' TEXT...")
-
-        if (this.state.sliceText === "slice-btn") {
-            console.log("Toggle: spinner")
-
-            this.setState({
-                sliceText: "fa fa-refresh fa-spin fa-3x fa-fw"
-            })
-        } else if (this.state.sliceText === "fa fa-refresh fa-spin fa-3x fa-fw") {
-            console.log("Toggle: text")
-
-            this.setState({
-                sliceText: "slice-btn"
-            })
-        }
-    }
-
-    // FETCHING FILE READ
-    // - VALIDATE file on upload
-    // - UPDATE state "inputField"
-    // - TOGGLE class
-    handleFileDrop(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const files = e.dataTransfer.files;
-
-        this.setFilesData(files);
-
-        // UPDATE data boolean (for other chain reactions)
-        if (this.state.inputField) {
-            this.setState({
-                inputDataAvailable: true
-            })
-        }
-
-        this.setState({
-            isDragOver: false
-        });
-    }
-
-    setFilesData(files) {
-        Object.values(files).forEach((obj) => {
-
-            // VALIDATE
-            if (!validFileType(obj.type)) {
-
-                // ALERT MESSAGE
-                // User attempted to upload unacceptable files
-                this.setState({
-                    alertMessageError: alertMessages.onError.unacceptableFileType,
-                    isAlertMessageError: true
-                })
-
-                setTimeout(() => {
-                    this.setState({
-                        alertMessageError: "",
-                        isAlertMessageError: false
-                    })
-                }, 8000);
-            } else {
-
-                // CREATE image file data preview container
-                this.setState((currentState) => ({
-                    inputField: [
-                        ...currentState.inputField,
-                        {
-                            fileRead: obj,
-                            id: createId(),
-                            fileSize: obj.size
-                        }
-                    ]
-                }))
-
-                // UPDATE state 'totalFileSize'
-                this.setState((currentState) => {
-
-                    // GET main data
-                    const sourceInputField = currentState.inputField;
-
-                    // GET main data 'fileSize'
-                    const fileSizesArr = sourceInputField.map((file) => {
-                        return file.fileSize;
-                    });
-
-                    // TOTAL main data 'fileSize'
-                    const totalFileByte = fileSizesArr.reduce((accumulator, currentValue) => accumulator + currentValue);
-
-                    return ({
-                        totalFileSize: totalFileByte
-                    })
-
-                    // CHECK CONDITION
-                }, this.checkTotalFileSize());
-            }
-        })
-    }
-
-    // CHECK CONDITION
-    // UPDATE UI if CONDITION are met
-    checkTotalFileSize() {
-
-        // ALERT MESSAGE
-        // CONDITION
-        // near max, pass 18MB
-        if (this.state.totalFileSize >= 18874368) {
-            this.setState({
-                isAlertMessageWarning: true,
-                alertMessageWarning: alertMessages.onWarning.nearMaxFileSize
-            })
-        }
-
-        // ALERT MESSAGE
-        // CONDITION
-        // over max, pass 20MB
-        if (this.state.totalFileSize >= 20971520) {
-            this.setState({
-                isAlertMessageError: true,
-                alertMessageError: alertMessages.onError.overMaxFileSize
-            })
-        }
-    }
-
-    // ? Still haven't found a use case yet...
-    // FETCHING FILE BLOB
-    getFileBlob(blob) {
-        // ! LOG
-        console.log("RECEIVING :", blob);
-        // console.log("BLOB ARR :", fileBlobs);
-
-        this.setState((currentState) => ({
-            inputFileData: [...currentState.inputFileData, blob]
-        }), () => {
-            console.log("LOG UPDATE STATE 'fileData'", this.state.inputFileData);
-        });
-    }
-
-    // ? name change - displayResults() ?
-
-    displayResults() {
-        // display results
-    }
-
-    // PROCESS IMAGE FILES
-    processResults() {
-        // GET all image file elements
-        const sourceImagesRaw = document.querySelectorAll(".preview__thumbnail img");
-        // REFERENCE the canvas
-        const canvas = document.querySelector("#canvas");
-        const context = canvas.getContext("2d");
-
-        // TRANSFORM node into JavaScript objects (array)
-        const sourceImages = Array.from(sourceImagesRaw);
-
-        // GET user selected webcomic platform(s) from SELECT form component
-        const Selectedwebcomics = this.state.selectedWebcomics;
-
-        // # (1) SELECT form
-        // PROCESS files for all selected webcomic platform applied
-        for (let i = 0; i < Selectedwebcomics.length; i++) {
-
-            let processImages = [];
-
-            // PROCESS image file
-            sourceImages.forEach((img) => {
-                const imgWidth = img.naturalWidth;
-                const imgHeight = img.naturalHeight;
-
-                // * CONDITION: image width > image height
-                // ROTATE image
-                if (imgWidth > imgHeight) {
-                    // NOTE:
-                    // Bottom surface would be pointed left, and
-                    // Top surface would be pointed right
-
-                    canvas.width = imgHeight;
-                    canvas.height = imgWidth;
-                    context.rotate(Math.PI / 2);
-
-                    context.drawImage(
-                        img, 0, -(imgHeight)
-                    );
-                }
-
-                const maxHeight = imgHeight;
-                const width = imgWidth;
-
-                let scaleWidth;
-
-                // # (2) OPTIONS form - "SQUASH"
-                switch (this.state.selectedSquashLevel) {
-                    case "none":
-                        scaleWidth = width;
-                        break;
-                    case 400:
-                        scaleWidth = 400;
-                        break;
-                    case 500:
-                        scaleWidth = 500;
-                        break;
-                    case 600:
-                        scaleWidth = 600;
-                        break;
-                    case 700:
-                        scaleWidth = 700;
-                        break;
-                }
-
-                let webcomicMaxWidth;
-                let webcomicMaxHeight;
-
-                // Current Webcomic Platform Available...
-                // ! tapas in the works... (WIP)
-                switch (Selectedwebcomics[i]) {
-                    case "webtoon":
-                        webcomicMaxWidth = 800;
-                        webcomicMaxHeight = 1280;
-                        break;
-                    case "tapas":
-                        webcomicMaxWidth = 960;
-                        webcomicMaxHeight = 1440;
-                        break;
-                }
-
-                const aspectRatio = webcomicMaxWidth / webcomicMaxHeight;
-
-                // based on aspect ratio, what the height should be...
-                const determinedeHeight = width / aspectRatio;
-
-                let scaleDeterminedeHeight = determinedeHeight;
-                if (scaleWidth !== width) {
-                    scaleDeterminedeHeight = scaleWidth / aspectRatio;
-                }
-
-                // * CONDITION:
-                // If file image naturalHeight is shorter than determinedHeight,
-                // return as is... unless Options scale applied
-                if (determinedeHeight > maxHeight) {
-                    const scaleMaxHeight = scaleWidth / (width / maxHeight);
-
-                    canvas.width = scaleWidth;
-                    canvas.height = scaleMaxHeight;
-
-                    context.drawImage(
-                        img, 0, 0, scaleWidth, scaleMaxHeight
-                    );
-
-                    const result = canvas.toDataURL();
-
-                    processImages.push(result);
-                } else {
-                    let timesToSlice = Math.floor(maxHeight / determinedeHeight);
-                    let currentSlice = 0;
-                    let newYPosition = 0;
-                    let slicedImages = [];
-
-                    // * CONDITION: Longer length (height) images
-                    while (timesToSlice > currentSlice) {
-                        newYPosition = determinedeHeight * currentSlice;
-
-                        canvas.width = scaleWidth;
-                        canvas.height = scaleDeterminedeHeight;
-
-                        context.drawImage(
-                            img, 0, newYPosition, width, determinedeHeight, 0, 0, scaleWidth, scaleDeterminedeHeight
-                        );
-
-                        slicedImages.push(canvas.toDataURL());
-
-                        currentSlice++;
-                    }
-
-                    // * CONDTION: Odd number remaining
-                    // GET last coordinate
-                    // GET remaining height
-                    const remainCoordinateY = timesToSlice * determinedeHeight;
-                    const remainHeight = maxHeight - remainCoordinateY;
-
-                    // OPTIONS Squash - if available
-                    let scaleRemaineHeight = remainHeight;
-                    if (scaleWidth !== width) {
-                        scaleRemaineHeight = scaleWidth / (width / remainHeight);
-                    }
-
-                    if (remainHeight !== 0) {
-                        newYPosition = remainCoordinateY;
-
-                        // ? Refactor to a function
-                        canvas.width = scaleWidth;
-                        canvas.height = scaleRemaineHeight;
-                        context.drawImage(
-                            img, 0, newYPosition, width, remainHeight, 0, 0, scaleWidth, scaleRemaineHeight
-                        );
-
-                        slicedImages.push(canvas.toDataURL());
-                    }
-
-                    processImages.push(...slicedImages);
-                }
-
-            });
-
-            // CREATE Zip folder
-            // NAME images with padded zero if under 10s
-            // GET user file extension prefernce from Options form - File Extensions
-            // PUSH images to Zip folder
-            // DOWNLOAD to user's PC
-            const zip = new JSZip();
-            const selectedFileExt = this.state.selectedFileExtension;
-
-            // NOTE: Naming is padded with zero of tens
-            // Over tens are unavailable
-
-            for (let i = 0; i < processImages.length; i++) {
-                let fileName;
-                if (i > 10) {
-                    fileName = `${i}.${selectedFileExt}`;
-                } else {
-                    fileName = `${i.toString().padStart(2, "0")}.${selectedFileExt}`;
-                }
-
-                zip.file(fileName, processImages[i].substr(processImages[i].indexOf(',') + 1), { base64: true });
-            }
-
-            zip.generateAsync({ type: "blob", mimeType: "image/jpeg" })
-                .then(function (blob) {
-
-                    // ! LOG
-                    console.log("BLOB #2", blob);
-
-                    saveAs(blob, "example.zip");
-                })
-
-                // TODO
-                // DISPLAY results
-        }
-
-        // ALERT MESSAGE
-        // Process completed
-        this.setState({
-            isAlertMessageSuccessOnBeginSliceBtn: true,
-            alertMessageSuccessOnBeginSliceBtn: alertMessages.onSuccess.completedProcess
-        });
-
-        setTimeout(() => {
-            this.setState({
-                isAlertMessageSuccessOnBeginSliceBtn: false,
-                alertMessageSuccessOnBeginSliceBtn: "",
-            });
-        }, 3000);
     }
 
     // event: click
@@ -830,6 +464,349 @@ export default class Form extends React.Component {
         }
     }
 
+
+    // =========
+    // # METHODS
+    // =========
+
+    // TOGGLE
+    // "Begin Slice" Text
+    toggleBeginSliceText() {
+        console.log("TOGGLE 'BEGIN SLICE' TEXT...")
+
+        if (this.state.sliceText === "slice-btn") {
+            console.log("Toggle: spinner")
+
+            this.setState({
+                sliceText: "fa fa-refresh fa-spin fa-3x fa-fw"
+            })
+        } else if (this.state.sliceText === "fa fa-refresh fa-spin fa-3x fa-fw") {
+            console.log("Toggle: text")
+
+            this.setState({
+                sliceText: "slice-btn"
+            })
+        }
+    }
+
+    // FETCHING FILE READ
+    // - VALIDATE file on upload
+    // - UPDATE state "inputField"
+    // - TOGGLE class
+    handleFileDrop(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const files = e.dataTransfer.files;
+
+        this.setFilesData(files);
+
+        // UPDATE data boolean (for other chain reactions)
+        if (this.state.inputField) {
+            this.setState({
+                inputDataAvailable: true
+            })
+        }
+
+        this.setState({
+            isDragOver: false
+        });
+    }
+
+    setFilesData(files) {
+        Object.values(files).forEach((obj) => {
+
+            // VALIDATE
+            if (!validFileType(obj.type)) {
+
+                // ALERT MESSAGE
+                // User attempted to upload unacceptable files
+                this.setState({
+                    alertMessageError: alertMessages.onError.unacceptableFileType,
+                    isAlertMessageError: true
+                })
+
+                setTimeout(() => {
+                    this.setState({
+                        alertMessageError: "",
+                        isAlertMessageError: false
+                    })
+                }, 8000);
+            } else {
+
+                // CREATE image file data preview container
+                this.setState((currentState) => ({
+                    inputField: [
+                        ...currentState.inputField,
+                        {
+                            fileRead: obj,
+                            id: createId(),
+                            fileSize: obj.size
+                        }
+                    ]
+                }))
+
+                // UPDATE state 'totalFileSize'
+                this.setState((currentState) => {
+
+                    // GET main data
+                    const sourceInputField = currentState.inputField;
+
+                    // GET main data 'fileSize'
+                    const fileSizesArr = sourceInputField.map((file) => {
+                        return file.fileSize;
+                    });
+
+                    // TOTAL main data 'fileSize'
+                    const totalFileByte = fileSizesArr.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+                    return ({
+                        totalFileSize: totalFileByte
+                    })
+
+                    // CHECK CONDITION
+                }, this.checkTotalFileSize());
+            }
+        })
+    }
+
+    // CHECK CONDITION
+    // UPDATE UI if CONDITION are met
+    checkTotalFileSize() {
+
+        // ALERT MESSAGE
+        // CONDITION
+        // near max, pass 18MB
+        if (this.state.totalFileSize >= 18874368) {
+            this.setState({
+                isAlertMessageWarning: true,
+                alertMessageWarning: alertMessages.onWarning.nearMaxFileSize
+            })
+        }
+
+        // ALERT MESSAGE
+        // CONDITION
+        // over max, pass 20MB
+        if (this.state.totalFileSize >= 20971520) {
+            this.setState({
+                isAlertMessageError: true,
+                alertMessageError: alertMessages.onError.overMaxFileSize
+            })
+        }
+    }
+
+    // PROCESS IMAGE FILES
+    processResults() {
+        // GET all image file elements
+        const sourceImagesRaw = document.querySelectorAll(".preview__thumbnail img");
+        // REFERENCE the canvas
+        const canvas = document.querySelector("#canvas");
+        const context = canvas.getContext("2d");
+
+        // TRANSFORM node into JavaScript objects (array)
+        const sourceImages = Array.from(sourceImagesRaw);
+
+        // GET user selected webcomic platform(s) from SELECT form component
+        const Selectedwebcomics = this.state.selectedWebcomics;
+
+        // # (1) SELECT form
+        // PROCESS files for all selected webcomic platform applied
+        for (let i = 0; i < Selectedwebcomics.length; i++) {
+
+            let processImages = [];
+
+            // PROCESS image file
+            sourceImages.forEach((img) => {
+                const imgWidth = img.naturalWidth;
+                const imgHeight = img.naturalHeight;
+
+                // * CONDITION: image width > image height
+                // ROTATE image
+                if (imgWidth > imgHeight) {
+                    // NOTE:
+                    // Bottom surface would be pointed left, and
+                    // Top surface would be pointed right
+
+                    canvas.width = imgHeight;
+                    canvas.height = imgWidth;
+                    context.rotate(Math.PI / 2);
+
+                    context.drawImage(
+                        img, 0, -(imgHeight)
+                    );
+                }
+
+                const maxHeight = imgHeight;
+                const width = imgWidth;
+
+                let scaleWidth;
+
+                // # (2) OPTIONS form - "SQUASH"
+                switch (this.state.selectedSquashLevel) {
+                    case "none":
+                        scaleWidth = width;
+                        break;
+                    case 400:
+                        scaleWidth = 400;
+                        break;
+                    case 500:
+                        scaleWidth = 500;
+                        break;
+                    case 600:
+                        scaleWidth = 600;
+                        break;
+                    case 700:
+                        scaleWidth = 700;
+                        break;
+                }
+
+                let webcomicMaxWidth;
+                let webcomicMaxHeight;
+
+                // TODO: FEATURE (NEXT UPDATE)
+                // Find out normal tapas ratio
+                // Current Webcomic Platform Available...
+                // ! tapas in the works... (WIP)
+                switch (Selectedwebcomics[i]) {
+                    case "webtoon":
+                        webcomicMaxWidth = 800;
+                        webcomicMaxHeight = 1280;
+                        break;
+                    case "tapas":
+                        webcomicMaxWidth = 960;
+                        webcomicMaxHeight = 1440;
+                        break;
+                }
+
+                const aspectRatio = webcomicMaxWidth / webcomicMaxHeight;
+
+                // based on aspect ratio, what the height should be...
+                const determinedeHeight = width / aspectRatio;
+
+                let scaleDeterminedeHeight = determinedeHeight;
+                if (scaleWidth !== width) {
+                    scaleDeterminedeHeight = scaleWidth / aspectRatio;
+                }
+
+                // * CONDITION:
+                // If file image naturalHeight is shorter than determinedHeight,
+                // return as is... unless Options scale applied
+                if (determinedeHeight > maxHeight) {
+                    const scaleMaxHeight = scaleWidth / (width / maxHeight);
+
+                    canvas.width = scaleWidth;
+                    canvas.height = scaleMaxHeight;
+
+                    context.drawImage(
+                        img, 0, 0, scaleWidth, scaleMaxHeight
+                    );
+
+                    const result = canvas.toDataURL();
+
+                    processImages.push(result);
+                } else {
+                    let timesToSlice = Math.floor(maxHeight / determinedeHeight);
+                    let currentSlice = 0;
+                    let newYPosition = 0;
+                    let slicedImages = [];
+
+                    // * CONDITION: Longer length (height) images
+                    while (timesToSlice > currentSlice) {
+                        newYPosition = determinedeHeight * currentSlice;
+
+                        canvas.width = scaleWidth;
+                        canvas.height = scaleDeterminedeHeight;
+
+                        context.drawImage(
+                            img, 0, newYPosition, width, determinedeHeight, 0, 0, scaleWidth, scaleDeterminedeHeight
+                        );
+
+                        slicedImages.push(canvas.toDataURL());
+
+                        currentSlice++;
+                    }
+
+                    // * CONDTION: Odd number remaining
+                    // GET last coordinate
+                    // GET remaining height
+                    const remainCoordinateY = timesToSlice * determinedeHeight;
+                    const remainHeight = maxHeight - remainCoordinateY;
+
+                    // OPTIONS Squash - if available
+                    let scaleRemaineHeight = remainHeight;
+                    if (scaleWidth !== width) {
+                        scaleRemaineHeight = scaleWidth / (width / remainHeight);
+                    }
+
+                    if (remainHeight !== 0) {
+                        newYPosition = remainCoordinateY;
+
+                        // ? Refactor to a function
+                        canvas.width = scaleWidth;
+                        canvas.height = scaleRemaineHeight;
+                        context.drawImage(
+                            img, 0, newYPosition, width, remainHeight, 0, 0, scaleWidth, scaleRemaineHeight
+                        );
+
+                        slicedImages.push(canvas.toDataURL());
+                    }
+
+                    processImages.push(...slicedImages);
+                }
+
+            });
+
+            // CREATE Zip folder
+            // NAME images with padded zero if under 10s
+            // GET user file extension prefernce from Options form - File Extensions
+            // PUSH images to Zip folder
+            // DOWNLOAD to user's PC
+            const zip = new JSZip();
+            const selectedFileExt = this.state.selectedFileExtension;
+
+            console.log("PROCESS - processImages: ", processImages);
+            // NOTE: Naming is padded with zero of tens
+            // Over tens are unavailable
+
+            for (let i = 0; i < processImages.length; i++) {
+                let fileName;
+                if (i > 10) {
+                    fileName = `${i}.${selectedFileExt}`;
+                } else {
+                    fileName = `${i.toString().padStart(2, "0")}.${selectedFileExt}`;
+                }
+
+                zip.file(fileName, processImages[i].substr(processImages[i].indexOf(',') + 1), { base64: true });
+            }
+
+            zip.generateAsync({ type: "blob", mimeType: "image/jpeg" })
+                .then(function (blob) {
+
+                    saveAs(blob, `${Selectedwebcomics[i]}.zip`);
+                })
+
+            // ADD image 'data:' url arr of processed image files
+            // RESPONDS to display in Result form
+            this.setState({
+                processedFileData: processImages
+            });
+        }
+
+        // ALERT MESSAGE
+        // Process completed
+        this.setState({
+            isAlertMessageSuccessOnBeginSliceBtn: true,
+            alertMessageSuccessOnBeginSliceBtn: alertMessages.onSuccess.completedProcess
+        });
+
+        setTimeout(() => {
+            this.setState({
+                isAlertMessageSuccessOnBeginSliceBtn: false,
+                alertMessageSuccessOnBeginSliceBtn: "",
+            });
+        }, 3000);
+    }
+
     render() {
         return (
             <main>
@@ -857,13 +834,7 @@ export default class Form extends React.Component {
                     // DATAS
                     inputField={this.state.inputField}
                     getTotalFileSize={this.state.totalFileSize}
-
-                    // ? Not sure if in use...
-                    getFileBlob={this.getFileBlob}
-
-                // ! WIP
                 />
-
                 <FormSelect
                     getWebcomicsModel={webcomicsModel}
                     onHandleSelectedWebcomic={this.handleSelectedWebcomic}
@@ -908,6 +879,7 @@ export default class Form extends React.Component {
                 <FormResults
                     getAlertErrorText={this.state.alertMessageError}
                     isAlertMessageError={this.state.isAlertMessageError}
+                    getImageData={this.state.processedFileData}
                 />
             </main>
         )
