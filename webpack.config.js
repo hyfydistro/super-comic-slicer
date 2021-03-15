@@ -166,9 +166,9 @@ module.exports = {
 
     // # File Extensions Options
 
-    // resolve: {
-    //     extensions: [".js", ".jsx"]
-    // },
+    resolve: {
+        extensions: [".js", ".jsx"]
+    },
 
     // # Misc.
     target: target,
