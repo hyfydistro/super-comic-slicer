@@ -13,12 +13,12 @@ import "./images/salespitch.svg";
 import "./images/remove-icon.svg";
 import "./images/upload-icon.svg";
 import "./images/error-icon.svg";
+import "./images/warning-icon.svg";
 import "./images/check-icon.svg";
 import "./images/webtoon-icon.svg";
 import "./images/tapas-icon.png";
 import "./images/bmc-btn.png";
 // ! Temp
-import "./images/comic2.jpg";
 // import "./images/comic1-6pages.jpg";
 // Favicon
 // import favicon from "./favicon.ico";
@@ -40,7 +40,8 @@ import Form from "./scripts/components/Form.js";
 import Contact from "./scripts/components/Contact.js";
 import Footer from "./scripts/components/Footer.js";
 // libs
-import createId from './scripts/libs/createId';
+import createId from './scripts/libs/createId.js';
+import convertBytes from './scripts/libs/convertBytes.js';
 // scripts
 import "./scripts/main.js";
 // e.g.
