@@ -17,6 +17,7 @@
 }
 
 .contact h2 {
+    text-align: center;
     margin-bottom: base.$desktop-space-lv-1;
 }
 
@@ -48,6 +49,21 @@
 .contact-input:active {
     border: 1px solid base.$focus-input-color;
     outline: none;
+}
+
+.contact-form__wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.emai-link {
+    color: base.$link-color;
+    text-decoration: underline;
+}
+
+// STATE ELEMENT
+.emai-link:hover {
+    text-decoration: none;
 }
 
 // #SML DEVICES
