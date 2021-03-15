@@ -189,7 +189,7 @@ export default class Form extends React.Component {
             //         fileSize: <number>
             //     }
             // ]
-            totalFileSize: 0,
+            totalFileSize: 0, // Byte measurement
             selectedWebcomics: [],
             selectedFileExtension: "jpeg", // default value
             selectedSquashLevel: "none"
@@ -241,10 +241,83 @@ export default class Form extends React.Component {
     }
 
 
-    // ==============
-    // # STYLE EVENTS
-    // ==============
-    // TOGGLE "Begin Slice" Text
+    // ========
+    // # EVENTS
+    // ========
+
+    // event: drag
+    handleDrag(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.setState({
+            isDragOver: true
+        })
+    }
+
+    // event: drag
+    handleDragLeave(e) {
+        e.preventDefault(e);
+        e.stopPropagation();
+
+        this.setState({
+            isDragOver: false
+        })
+    }
+
+    // event: drag
+    // Reorder files
+    handleDragEnd(result) {
+        // CREATE shallow copy
+        const items = Array.from(this.state.inputField);
+
+        // EXTRACT targeted item
+        const [reorderedItem] = items.splice(result.source.index, 1);
+
+        // PUSH targeted item into new order
+        items.splice(result.destination.index, 0, reorderedItem);
+
+        this.setState({
+            inputField: items
+        })
+    }
+
+    // event: click
+    // Open browser for files
+    handleClickToUpload() {
+        const dropzoneInput = document.querySelector(".dropzone__input");
+
+        // EMULATE HTML input CLICK event
+        dropzoneInput.click();
+    }
+
+    // event: click
+    // UPDATE state 'selectedFileExtension'
+    handleOptionsFileExtenions(e) {
+        const newSelectedFileExtension = e.target.value;
+
+        this.setState({
+            selectedFileExtension: newSelectedFileExtension
+        });
+    }
+
+    // event: click
+    // UPDATE state 'selectedSquashLevel'
+    handleOptionsSquashLevel(e) {
+        const newSelectedSquashLevel = parseInt(e.target.value, 10);
+
+        this.setState({
+            selectedSquashLevel: newSelectedSquashLevel
+        });
+    }
+
+
+    // =========
+    // # METHODS
+    // =========
+
+    // TOGGLE
+    // "Begin Slice" Text
     toggleBeginSliceText() {
         console.log("TOGGLE 'BEGIN SLICE' TEXT...")
 
@@ -263,37 +336,9 @@ export default class Form extends React.Component {
         }
     }
 
-
-    // ========
-    // # EVENTS
-    // ========
-
-    handleDrag(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        this.setState({
-            isDragOver: true
-        })
-    }
-
-    handleDragLeave(e) {
-        e.preventDefault(e);
-        e.stopPropagation();
-
-        this.setState({
-            isDragOver: false
-        })
-    }
-
-
-    // =========
-    // # METHODS
-    // =========
-
     // FETCHING FILE READ
-    // - VALIDATE
-    // - setState to "inputField"
+    // - VALIDATE file on upload
+    // - UPDATE state "inputField"
     // - TOGGLE class
     handleFileDrop(e) {
         e.preventDefault();
@@ -303,10 +348,7 @@ export default class Form extends React.Component {
 
         this.setFilesData(files);
 
-        // ! LOG
-        // console.log("HANDLE FILE DROP: ", files);
-
-        // Set to true when file input is available
+        // UPDATE data boolean (for other chain reactions)
         if (this.state.inputField) {
             this.setState({
                 inputDataAvailable: true
@@ -320,20 +362,12 @@ export default class Form extends React.Component {
 
     setFilesData(files) {
         Object.values(files).forEach((obj) => {
-            // ! LOG
-            // console.log("HANDLE FILE DROP - OBJ: ", obj);
-            // console.log("HANDLE FILE DROP - OBJ-TYPE: ", obj.type);
 
             // VALIDATE
             if (!validFileType(obj.type)) {
-                // Display Alert Message on Error w/ setTimeout
-                // - SET Alert Message
-                // - SET Class
-                // - ADD setTimeout
 
-                // ! LOG
-                // console.log("Invalid file!");
-
+                // ALERT MESSAGE
+                // User attempted to upload unacceptable files
                 this.setState({
                     alertMessageError: alertMessages.onError.unacceptableFileType,
                     isAlertMessageError: true
@@ -346,14 +380,8 @@ export default class Form extends React.Component {
                     })
                 }, 8000);
             } else {
-                // ! LOG
-                // console.log("Valid file!");
 
-                // ! LOG
-                // console.log("ACCEPTED", obj.type, obj);
-                // console.log("ACCEPTED ", obj);
-                // console.log("ACCEPTED ", obj.size);
-
+                // CREATE image file data preview container
                 this.setState((currentState) => ({
                     inputField: [
                         ...currentState.inputField,
@@ -363,44 +391,39 @@ export default class Form extends React.Component {
                             fileSize: obj.size
                         }
                     ]
-                }), () => console.log("HANDLE FILE DROP LOG UPDATE: ", this.state.inputField))
+                }))
 
-                // Display total file size
+                // UPDATE state 'totalFileSize'
                 this.setState((currentState) => {
-                    // GET all file size
-                    // SUM it all up
-                    // DISPLAY on UI
 
+                    // GET main data
                     const sourceInputField = currentState.inputField;
 
-                    // ! LOG
-                    // console.log("TOTALING...", sourceInputField);
-
+                    // GET main data 'fileSize'
                     const fileSizesArr = sourceInputField.map((file) => {
                         return file.fileSize;
                     });
 
+                    // TOTAL main data 'fileSize'
                     const totalFileByte = fileSizesArr.reduce((accumulator, currentValue) => accumulator + currentValue);
-
-                    // ! LOG
-                    // console.log("TOTAL FILE - BYTE:", totalFileByte);
-                    // console.log("TOTAL FILE - CONVERSION:", convertBytes(totalFileByte));
 
                     return ({
                         totalFileSize: totalFileByte
                     })
+
+                    // CHECK CONDITION
                 }, this.checkTotalFileSize());
             }
         })
     }
 
+    // CHECK CONDITION
+    // UPDATE UI if CONDITION are met
     checkTotalFileSize() {
-        // ! LOG
-        // console.log("CHECKING TOTAL FILE SIZE...", this.state.totalFileSize);
 
+        // ALERT MESSAGE
         // CONDITION
-        // near max
-        // pass 18MB
+        // near max, pass 18MB
         if (this.state.totalFileSize >= 18874368) {
             this.setState({
                 isAlertMessageWarning: true,
@@ -408,9 +431,9 @@ export default class Form extends React.Component {
             })
         }
 
+        // ALERT MESSAGE
         // CONDITION
-        // over max
-        // pass 20MB
+        // over max, pass 20MB
         if (this.state.totalFileSize >= 20971520) {
             this.setState({
                 isAlertMessageError: true,
@@ -419,6 +442,7 @@ export default class Form extends React.Component {
         }
     }
 
+    // ? Still haven't found a use case yet...
     // FETCHING FILE BLOB
     getFileBlob(blob) {
         // ! LOG
@@ -432,10 +456,14 @@ export default class Form extends React.Component {
         });
     }
 
-    // PROCESS FILES
-    // ! WIP - Testing
     // ? name change - displayResults() ?
-    // ? Rotate feature
+
+    displayResults() {
+        // display results
+    }
+
+    // PROCESS FILES
+    //
     processResults() {
         // 1. Get file(s)
         // 2. Access files in Preview
@@ -461,40 +489,25 @@ export default class Form extends React.Component {
         // Automatically download image after set up
         // Use `ctx.translate()` for repositioning
 
-        // Get Image Element
+        // GET all image file elements
         const sourceImagesRaw = document.querySelectorAll(".preview__thumbnail img");
+        // REFERENCE the canvas
         const canvas = document.querySelector("#canvas");
-        // ? rename to 'ctx'
         const context = canvas.getContext("2d");
 
+        // TRANSFORM node into JavaScript objects (array)
         const sourceImages = Array.from(sourceImagesRaw);
 
-        // ! LOG
-        // console.log("IMAGES AVAILABLE RAW: ", sourceImagesRaw);
-        console.log("PROCESS - IMAGES AVAILABLE ARR: ", sourceImages);
-        // console.log("IMAGES AVAILABLE ARR [0]: ", sourceImages[0]);
-
-        // ! WIP
-        // !! Process from here for webcomic platform selected
-        // Process
+        // GET user selected webcomic platform(s) from SELECT form component
         const Selectedwebcomics = this.state.selectedWebcomics;
 
-        // ! LOG
-        console.log("PROCESS - SELECTED WEBCOMICS DATA", Selectedwebcomics)
-
+        // # (1) SELECT form
+        // PROCESS files for all selected webcomic platform applied
         for (let i = 0; i < Selectedwebcomics.length; i++) {
+
             let processImages = [];
 
-            console.log("PROCESS - FOR LOOPING: ", Selectedwebcomics[i]);
-            // Process for each webcomic platform
-
-            // Check if there is selected webcomic before processing
-            // CONDITION Write warning if selectedWebcomics is empty
-            // ! LOG
-            console.log("PROCESSING: ", Selectedwebcomics[i]);
-            // TODO
-            // TRY...
-            // ? Change to for-loop
+            // PROCESS image file
             sourceImages.forEach((img) => {
                 const imgWidth = img.naturalWidth;
                 const imgHeight = img.naturalHeight;
@@ -524,8 +537,7 @@ export default class Form extends React.Component {
 
                 let scaleWidth;
 
-                // ! WIP
-                // # (1) OPTIONS - SCALE
+                // # (2) OPTIONS form - "SQUASH"
                 // void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
                 switch (this.state.selectedSquashLevel) {
                     case "none":
@@ -554,15 +566,11 @@ export default class Form extends React.Component {
                 // ! LOG
                 console.log("PROCESS - ORIGINAL WIDTH: ", Selectedwebcomics[i], width);
 
-                // * CONDITION
-                // - Selected File Types
-                // - Selected Squash Level
-
                 let webcomicMaxWidth;
                 let webcomicMaxHeight;
 
                 // Current Webcomic Platform Available...
-                // ! tapas in the works...
+                // ! tapas in the works... (WIP)
                 switch (Selectedwebcomics[i]) {
                     case "webtoon":
                         webcomicMaxWidth = 800;
@@ -576,14 +584,11 @@ export default class Form extends React.Component {
 
                 const aspectRatio = webcomicMaxWidth / webcomicMaxHeight;
 
-                // ! <<
-
                 // ! LOG
                 // console.log("PROCESS - ASPECT RATIO: ", Selectedwebcomics[i], aspectRatio);
                 // console.log("PROCESS - MAX WIDTH: ", Selectedwebcomics[i], webcomicMaxWidth);
                 // console.log("PROCESS - MAX HEIGHT: ", Selectedwebcomics[i], webcomicMaxHeight);
 
-                // ! WIP
                 // based on aspect ratio, what the height should be...
                 const determinedeHeight = width / aspectRatio;
 
@@ -622,25 +627,16 @@ export default class Form extends React.Component {
 
                     let slicedImages = [];
 
-                    // * CONDITION: Longer length images
+                    // * CONDITION: Longer length (height) images
                     while (timesToSlice > currentSlice) {
-                        // ! LOG
-                        console.log("PROCESS - NEW Y POS: ", currentSlice, newYPosition);
-
                         newYPosition = determinedeHeight * currentSlice;
-                        // ? Refactor to a function
+
                         canvas.width = scaleWidth;
                         canvas.height = scaleDeterminedeHeight;
-                        // context.scale(scaleX, scaleY);
-                        // context.drawImage(
-                        //     img, 0, newYPosition, width, determinedeHeight, 0, 0, width, determinedeHeight
-                        // );
+
                         context.drawImage(
                             img, 0, newYPosition, width, determinedeHeight, 0, 0, scaleWidth, scaleDeterminedeHeight
                         );
-
-                        // !LOG
-                        // console.log("RESULT ", currentSlice, " ", result);
 
                         slicedImages.push(canvas.toDataURL());
 
@@ -672,9 +668,6 @@ export default class Form extends React.Component {
 
                         slicedImages.push(canvas.toDataURL());
                     }
-
-                    // ! LOG
-                    console.log("PROCESS - SLICED IMAGES", slicedImages);
 
                     processImages.push(...slicedImages);
                 }
@@ -726,6 +719,7 @@ export default class Form extends React.Component {
         }, 3000);
     }
 
+    // event: click
     // "Begin Slice!" button
     handleBeginSlicBtn(e) {
         e.preventDefault();
@@ -775,116 +769,78 @@ export default class Form extends React.Component {
         }
     }
 
-    // REORDER FILES
-    // event: drag
-    handleDragEnd(result) {
-        // CREATE shallow copy
-        const items = Array.from(this.state.inputField);
-
-        // EXTRACT targeted item
-        const [reorderedItem] = items.splice(result.source.index, 1);
-
-        // PUSH targeted item into new order
-        items.splice(result.destination.index, 0, reorderedItem);
-
-        // ! LOG
-        // console.log("DnD HANDLE EVENT - MODIFIED ITEMS", items);
-
-        this.setState({
-            inputField: items
-        })
-    }
-
-    // ! WIP
+    // event: click
     // "X" button
+    // REMOVE current thumb UI
+    // REMOVE current thumb data
     handleRemoveSelf(e) {
         e.preventDefault();
 
         // GRAB all list
         const sourceThumbnails = document.querySelectorAll(".preview__thumbnail-container");
-        // const attribute = e.target.parentElement.attributes.getNamedItem("data-rbd-draggable-id").value;
 
-        // ! LOG
-        // console.log("HANDLE REMOVESELF - ALL CONTENTS: ", sourceThumbnails);
-
+        // TRANSFORM node into JavaScript objects (array)
         const arrThumbnails = Array.from(sourceThumbnails);
 
-        // ! LOG
-        // console.log("HANDLE REMOVESELF - ALL CONTENTS ARR: ", arrThumbnails);
-
-        // Create shallow copy
+        // CREATE shallow copy
         const items = Array.from(this.state.inputField);
 
+        // GET index of targeted item
         const removeItemIndex = arrThumbnails.indexOf(e.target.parentElement);
 
-        // ! WIP
         // UPDATE state totalFileSize
-        // get target obj.size
-        // total obj.size minus target obj.size
         this.setState((currentState) => {
-            // ! LOG
-            // console.log("RECALCULATING FILE SIZE...", )
-            // Get all file sizes
-            // sum it up
-            // Display on UI
+
+            // GET data
             const sourceInputField = Array.from(currentState.inputField);
 
-            // ! LOG
-            // console.log("RECALCULATING FILE: ", sourceInputField);
-
+            // GET data 'fileSize'
             const fileSizesArr = sourceInputField.map((file) => {
-                // ! LOG
-                // console.log("RECALCULATING FILE OBJ: ", file);
                 return file.fileSize;
             });
 
-            // ! WIP
-            // TRY arr.reduce()
+            // SUM all data 'fileSize'
             const totalFileByte = fileSizesArr.reduce((accumulator, currentValue) => accumulator + currentValue);
 
+            // EXTRACT targeted item 'fileSize'
             const removedItemFileSize = sourceInputField[removeItemIndex]["fileSize"];
 
+            // SUBTRACT 'totalFileSize' - targeted item 'fileSize'
             const newTotalFileSize = totalFileByte - removedItemFileSize;
-
-            // ! LOG
-            // console.log("TOTAL FILE - REMOVED:", removedItemFileSize);
-            // console.log("TOTAL FILE - UPDATE:", removedItemFileSize);
-            // console.log("TOTAL FILE - CONVERSION:", convertBytes(newTotalFileSize));
 
             return ({
                 totalFileSize: newTotalFileSize
             })
+
+            // UPDATE UI
         }, this.checkTotalFileSize());
 
-        // ! LOG
-        // console.log("HANDLE REMOVESELF - TARGET INDEX: ", removeItemIndex);
-
+        // REMOVE targeted item
         items.splice(removeItemIndex, 1);
 
-        // ! LOG
-        console.log("HANDLE REMOVESELF - NEW ARR: ", items);
 
+        // UPDATE data
         this.setState({
             inputField: items
-        }, () => console.log("HANDLE REMOVESELF - CURRENT STATE: ", this.state.inputField))
-
-        console.log("HANDLE REMOVESELF - CURRENT STATE OUTSIDE: ", this.state.inputField)
+        })
     }
 
-    // CLEAR DATA
-    // Empty state "inputField"
+
+    // event: click
+    // EMPTY state "inputField"
     // "Clear Files" button
     handleClickToRemoveAll() {
         // ! LOG
         console.log("CLICKED - CLEAR FILES...")
 
+        // ALERT MESSAGE
+        // UPDATE data
         this.setState({
             inputField: [],
             inputDataAvailable: false,
             isAlertMessageSuccess: true,
             alertMessageSuccess: alertMessages.onSuccess.filesRemoved
         });
-
 
         setTimeout(() => {
             this.setState({
@@ -894,43 +850,26 @@ export default class Form extends React.Component {
         }, 3000);
     }
 
-    handleClickToUpload() {
-        //! LOG
-        console.log("CLICKED - CLICK TO UPLOAD...")
-
-        const dropzoneInput = document.querySelector(".dropzone__input");
-
-        console.log("dropzoneInput", dropzoneInput);
-        dropzoneInput.click();
-    }
-
+    // event: change
+    // LIStEN to user on CLICK to upload file
+    // if user selects file(s), proceed to process image files methods
     handleInputChange(e) {
-        // ! LOG
-        console.log("INITIATE - INPUT CHANGE...")
-        console.log(e);
-        console.log(e.target.files);
-
         const files = e.target.files;
         this.setFilesData(files);
 
-        // Set to true when file input is available
+        // UPDATE UI on CONDITION
         if (this.state.inputField) {
             this.setState({
                 inputDataAvailable: true
             })
-        } else {
-            console.log("Nothing in place")
         }
     }
 
+    // event: click
+    // UPDATE state 'selectedWebcomics'
     handleSelectedWebcomic(e) {
-        // ! LOG
-        // console.log("HANDLE WEBCOMIC - CLICK", e.target);
-        // console.log("HANDLE WEBCOMIC - CLICK", e.target.value);
-
         const selectedWebcomicValue = e.target.value;
 
-        // console.log("HANDLE WEBCOMIC - DATA", this.state.selectedWebcomics);
         const currentSelectedWebcomics = this.state.selectedWebcomics;
 
         if (currentSelectedWebcomics.includes(selectedWebcomicValue)) {
@@ -938,7 +877,6 @@ export default class Form extends React.Component {
             const removeItemIndex = currentSelectedWebcomics.indexOf(selectedWebcomicValue);
             currentSelectedWebcomics.splice(removeItemIndex, 1);
 
-            // ? Refactor to simple setState for production
             this.setState({
                 selectedWebcomics: currentSelectedWebcomics
             });
@@ -949,32 +887,6 @@ export default class Form extends React.Component {
 
             }), () => console.log("HANDLE WEBCOMIC - UPDATED DATA ", this.state.selectedWebcomics));
         }
-    }
-
-    handleOptionsFileExtenions(e) {
-        // ! LOG
-        // console.log("HANDLE WEBCOMIC - CLICK", e.target);
-        // console.log("HANDLE WEBCOMIC - CLICK", e.target.value);
-
-        const newSelectedFileExtension = e.target.value;
-
-        this.setState({
-            selectedFileExtension: newSelectedFileExtension
-        });
-    }
-
-    handleOptionsSquashLevel(e) {
-        // ! LOG
-        // console.log("HANDLE SQUASH - CLICK", e.target);
-        // console.log("HANDLE SQUASH - CLICK", e.target.value);
-
-        const newSelectedSquashLevel = parseInt(e.target.value, 10);
-
-        console.log("HANDLE SQUASH - VALUE", newSelectedSquashLevel);
-
-        this.setState({
-            selectedSquashLevel: newSelectedSquashLevel
-        });
     }
 
     render() {
@@ -988,9 +900,19 @@ export default class Form extends React.Component {
                     onHandleFileDrop={this.handleFileDrop}
                     onRemoveSelf={this.handleRemoveSelf}
                     onhandleDragEnd={this.handleDragEnd}
-                    // STYLE EVENTS
+                    onHandleClickToUpload={this.handleClickToUpload}
+                    onHandleInputChange={this.handleInputChange}
+                    onHandleClickToRemoveAll={this.handleClickToRemoveAll}
+                    // STYLED EVENTS
                     toggleDropzoneBordersClass={this.state.isDragOver ? this.state.dropzoneBordersClass.highlight : this.state.dropzoneBordersClass.default}
                     togglePreviewWrapperClass={this.state.inputDataAvailable ? this.state.previewWrapperClass.visible : this.state.previewWrapperClass.invisible}
+                    // ALERT MESSAGES
+                    getAlertErrorText={this.state.alertMessageError}
+                    isAlertMessageError={this.state.isAlertMessageError}
+                    getAlertSuccessText={this.state.alertMessageSuccess}
+                    isAlertMessageSuccess={this.state.isAlertMessageSuccess}
+                    isAlertMessageWarning={this.state.isAlertMessageWarning}
+                    getAlertWarningText={this.state.alertMessageWarning}
                     // DATAS
                     inputField={this.state.inputField}
                     getTotalFileSize={this.state.totalFileSize}
@@ -998,16 +920,7 @@ export default class Form extends React.Component {
                     // ? Not sure if in use...
                     getFileBlob={this.getFileBlob}
 
-                    // ! WIP
-                    onHandleClickToUpload={this.handleClickToUpload}
-                    onHandleInputChange={this.handleInputChange}
-                    onHandleClickToRemoveAll={this.handleClickToRemoveAll}
-                    getAlertErrorText={this.state.alertMessageError}
-                    isAlertMessageError={this.state.isAlertMessageError}
-                    getAlertSuccessText={this.state.alertMessageSuccess}
-                    isAlertMessageSuccess={this.state.isAlertMessageSuccess}
-                    isAlertMessageWarning={this.state.isAlertMessageWarning}
-                    getAlertWarningText={this.state.alertMessageWarning}
+                // ! WIP
                 />
 
                 <FormSelect
