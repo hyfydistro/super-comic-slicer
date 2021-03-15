@@ -99,7 +99,7 @@ html {
     font-size: $desktop-base-font-size;
     h1 {
         font-family: $primary-fontface;
-        font-weight: normal;
+        font-weight: 600;
         // line-height: calc(
         //     1rem * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio} *
         //         1.1
@@ -116,6 +116,7 @@ html {
         font-weight: normal;
     }
     p,
+    .emai-link,
     .file-size-text,
     .alert-message-text--success,
     .alert-message-text--warning,
@@ -224,6 +225,7 @@ p.text-small {
     html {
         font-size: $mobile-base-font-size;
         p,
+        .emai-link,
         .file-size-text,
         .alert-message-text--success,
         .alert-message-text--warning
