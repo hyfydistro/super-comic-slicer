@@ -104,3 +104,4 @@ typings/
 
 # Test Results
 coverage/
+build-stats.json
