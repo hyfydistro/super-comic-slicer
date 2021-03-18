@@ -15,8 +15,8 @@ const mode = process.env.NODE_ENV === "production" ? "production" : "development
 const target = process.env.NODE.ENV === "production" ? "browserslist" : "web";
 
 // Runs slow for setup, then fast
-// const sourcemapMode = process.env.NODE.ENV === "production" ? "source-map" : "eval-source-map";
-const sourcemapMode = process.env.NODE.ENV === "production" ? "" : "eval-source-map";
+const sourcemapMode = process.env.NODE.ENV === "production" ? "source-map" : "eval-source-map";
+// const sourcemapMode = process.env.NODE.ENV === "production" ? "" : "eval-source-map";
 
 // ? Option - Complex Configuration:
 // if (process.env.NODE_ENV === "production") {
@@ -45,6 +45,7 @@ module.exports = {
     entry: {
         index: "./src/index.js",
         assets: "./src/assets.js",
+        libs: "./src/libs.js",
     },
     output: {
         filename: "[name].bundle.js",
@@ -152,7 +153,7 @@ module.exports = {
     plugins: [
         // Be aware it will run every time webpack is run
         // Comment `BundleAnalyzerPlugin` for testing purposes ONLY
-        // new BundleAnalyzerPlugin(),
+        new BundleAnalyzerPlugin(),
         new CleanWebpackPlugin(
             // ? Optional - exlucde files to recompiled
             // e.g. UNCHANGE images
