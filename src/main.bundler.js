@@ -18,8 +18,6 @@ import "./images/check-icon.svg";
 import "./images/webtoon-icon.svg";
 import "./images/tapas-icon.png";
 import "./images/bmc-btn.png";
-// ! Temp
-// import "./images/comic1-6pages.jpg";
 // Favicon
 import favicon from "./favicon.ico";
 import "./images/android-chrome-192x192.png";
