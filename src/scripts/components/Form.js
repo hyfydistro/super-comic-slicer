@@ -42,7 +42,7 @@ const webcomicsModel = [
         imageSource: "images/tapas-icon.png",
         htmlAlt: "tapas icon",
         text: "Tapas",
-        disabled: false
+        disabled: true
     },
 ];
 
