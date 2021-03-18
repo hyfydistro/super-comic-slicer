@@ -11,6 +11,7 @@ import "./images/check-icon.svg";
 import "./images/webtoon-icon.svg";
 import "./images/tapas-icon.png";
 import "./images/bmc-btn.png";
+import "./images/og-supercomicslicer.png";
 // Favicon
 import "./images/favicon-32x32.png";
 import "./images/apple-touch-icon.png";
