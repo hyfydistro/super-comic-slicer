@@ -1,5 +1,3 @@
-import React from 'react'
-
 // TODO: FEATURE (NEXT UPDATE)
 // Stimulate client side form with some third party API (research needed)
 // Consider formikk, React Form Hook

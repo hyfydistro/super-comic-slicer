@@ -1,5 +1,3 @@
-import React from 'react'
-
 function WebcomicsOptions(props) {
 
     const webcomicsList = props.getWebcomicsModel.map((currentWebcomic, tabindex) => {

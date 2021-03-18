@@ -1,5 +1,3 @@
-import React from 'react'
-
 // TODO: FEATURE (NEXT UPDATE)
 // adjust to webcomic platform ratio for display
 

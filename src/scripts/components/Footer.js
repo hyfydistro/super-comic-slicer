@@ -1,5 +1,3 @@
-import React from 'react'
-
 // TODO
 // DEPLOY to netlify host
 // ADD &url=

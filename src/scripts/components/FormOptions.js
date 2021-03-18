@@ -1,5 +1,3 @@
-import React from 'react';
-
 function SquashOptions(props) {
 
     const squashLevelList = props.getSquashLevelModel.map((currentSquashLevel, index) => {

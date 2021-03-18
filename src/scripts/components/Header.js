@@ -1,5 +1,3 @@
-import React from 'react'
-
 // TODO
 // - Add bg image
 // - Responsive Design
