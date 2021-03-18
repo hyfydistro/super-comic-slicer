@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
 
 // ? Option (Default) - Simple Configuration:
 // Coupled with setting NODE_ENV via npm "scripts"
@@ -13,7 +15,8 @@ const mode = process.env.NODE_ENV === "production" ? "production" : "development
 const target = process.env.NODE.ENV === "production" ? "browserslist" : "web";
 
 // Runs slow for setup, then fast
-const sourcemapMode = process.env.NODE.ENV === "production" ? "source-map" : "eval-source-map";
+// const sourcemapMode = process.env.NODE.ENV === "production" ? "source-map" : "eval-source-map";
+const sourcemapMode = process.env.NODE.ENV === "production" ? "" : "eval-source-map";
 
 // ? Option - Complex Configuration:
 // if (process.env.NODE_ENV === "production") {
@@ -79,6 +82,15 @@ module.exports = {
             // },
 
 
+            // // # Target: Image files Data URI Injection
+            // {
+            //     test: /\.svg$/i,
+            //     type: "asset",
+            //     generator: {
+            //         filename: "[name][ext][query]"
+            //     }
+            // },
+
             // # Target: favicon
             {
                 test: /\.ico$/i,
@@ -135,6 +147,9 @@ module.exports = {
 
     // # Plugins
     plugins: [
+        // Be aware it will run every time webpack is run
+        // Comment `BundleAnalyzerPlugin` for testing purposes ONLY
+        // new BundleAnalyzerPlugin(),
         new CleanWebpackPlugin(
             // ? Optional - exlucde files to recompiled
             // e.g. UNCHANGE images
@@ -164,9 +179,14 @@ module.exports = {
     ],
 
     // # File Extensions Options
-
     resolve: {
         extensions: [".js", ".jsx"]
+    },
+
+    // # Optimization - Treeshaking Options
+    optimization: {
+        providedExports: true,
+        sideEffects: true
     },
 
     // # Misc.
