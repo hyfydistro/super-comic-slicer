@@ -42,9 +42,12 @@ const sourcemapMode = process.env.NODE.ENV === "production" ? "" : "eval-source-
 
 module.exports = {
     mode: mode,
-    entry: "./src/main.bundler.js",
+    entry: {
+        index: "./src/index.js",
+        assets: "./src/assets.js",
+    },
     output: {
-        filename: "bundler.js",
+        filename: "[name].bundle.js",
         path: path.resolve(__dirname, "dist"),
         assetModuleFilename: "images/[hash][ext][query]"
     },
