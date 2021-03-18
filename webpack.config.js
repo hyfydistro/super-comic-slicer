@@ -69,7 +69,7 @@ module.exports = {
                 ],
             },
 
-            // // # Target: Font files
+            // # Target: Font files
 
             // {
             //     test: /\.(woff|woff2)$/,
@@ -131,7 +131,6 @@ module.exports = {
             }
         ]
     },
-
 
 
     // # Plugins
