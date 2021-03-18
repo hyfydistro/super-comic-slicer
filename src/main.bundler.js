@@ -43,9 +43,7 @@ import Footer from "./scripts/components/Footer.js";
 import createId from './scripts/libs/createId.js';
 import convertBytes from './scripts/libs/convertBytes.js';
 // scripts
-import "./scripts/main.js";
-// e.g.
-// import { greet } from "./scripts/greetings";
+// n/a
 
 // ==========
 // HEADER TAG
