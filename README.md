@@ -157,6 +157,15 @@ npm i -D webpack-bundle-analyzer
 
 Also, write npm script to run server for it.
 
+For a quick peak, create the file via npma `"scripts"`:
+```
+"scripts": {
+    "stats": "webpack --json build-stats.json"
+}
+```
+
+`build-stats.json` file will be created. Head over to [Webpack Visualizer](https://chrisbateman.github.io/webpack-visualizer/) (by Chris Bateman) and drop the file there to see results.
+
 
 ###### Styles
 
