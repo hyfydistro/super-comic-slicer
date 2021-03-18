@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import FormUpload from './FormUpload';
 import FormSelect from './FormSelect';
 import FormOptions from './FormOptions';
@@ -100,7 +100,7 @@ function validFileType(file) {
     return fileTypes.includes(file);
 }
 
-export default class Form extends React.Component {
+export default class Form extends Component {
     constructor(props) {
         super(props);
 
