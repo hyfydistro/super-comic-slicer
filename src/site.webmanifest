@@ -13,7 +13,7 @@
 
     "icons": [
         {
-          "src": "images/example-150wx150h.png",
+          "src": "images/favicon-32x32.png",
           "sizes": "150x150",
           "type": "image/png"
         },
