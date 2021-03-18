@@ -20,6 +20,7 @@ import "./images/tapas-icon.png";
 import "./images/bmc-btn.png";
 // Favicon
 import favicon from "./favicon.ico";
+import "./images/favicon-32x32.png";
 import "./images/android-chrome-192x192.png";
 import "./images/android-chrome-512x512.png";
 // Webmanifest file
