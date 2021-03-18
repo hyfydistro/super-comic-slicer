@@ -186,17 +186,17 @@ export default class Form extends React.Component {
     // ===============
     // # REACT METHODS
     // ===============
-    componentWillUnmount() {
-        console.log("UNMOUNTING...");
-    }
+    // componentWillUnmount() {
+    //     console.log("UNMOUNTING...");
+    // }
 
-    componentDidMount() {
-        console.log("MOUNTING...");
-    }
+    // componentDidMount() {
+    //     console.log("MOUNTING...");
+    // }
 
-    componentDidUpdate() {
-        console.log("COMPONENT UPDATING...");
-    }
+    // componentDidUpdate() {
+    //     console.log("COMPONENT UPDATING...");
+    // }
 
 
     // ========
@@ -450,16 +450,12 @@ export default class Form extends React.Component {
     // TOGGLE
     // "Begin Slice" Text
     toggleBeginSliceText() {
-        console.log("TOGGLE 'BEGIN SLICE' TEXT...")
-
         if (this.state.sliceText === "slice-btn") {
-            console.log("Toggle: spinner")
 
             this.setState({
                 sliceText: "fa fa-refresh fa-spin fa-3x fa-fw"
             })
         } else if (this.state.sliceText === "fa fa-refresh fa-spin fa-3x fa-fw") {
-            console.log("Toggle: text")
 
             this.setState({
                 sliceText: "slice-btn"
@@ -742,7 +738,6 @@ export default class Form extends React.Component {
             const zip = new JSZip();
             const selectedFileExt = this.state.selectedFileExtension;
 
-            console.log("PROCESS - processImages: ", processImages);
             // NOTE: Naming is padded with zero of tens
             // Over tens are unavailable
 
