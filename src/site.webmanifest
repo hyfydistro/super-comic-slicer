@@ -1,0 +1,31 @@
+{
+    "short_name": "SCS",
+    "name": "Super Comic Slicer",
+    "description": "An artist's long comic page cutter into their desired webcomic platform.",
+    "start_url": "/index.html",
+
+    "theme_color": "#F8D174",
+    "background_color": "#FFFFFF",
+
+    "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/",
+
+    "icons": [
+        {
+          "src": "images/example-150wx150h.png",
+          "sizes": "150x150",
+          "type": "image/png"
+        },
+        {
+          "src": "images/android-chrome-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+      },
+      {
+          "src": "images/android-chrome-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+      }
+    ]
+  }

@@ -21,9 +21,11 @@ import "./images/bmc-btn.png";
 // ! Temp
 // import "./images/comic1-6pages.jpg";
 // Favicon
-// import favicon from "./favicon.ico";
+import favicon from "./favicon.ico";
+import "./images/android-chrome-192x192.png";
+import "./images/android-chrome-512x512.png";
 // Webmanifest file
-// import "./manifest.webmanifest";
+import "./site.webmanifest";
 
 // ======
 // Styles
@@ -50,8 +52,8 @@ import convertBytes from './scripts/libs/convertBytes.js';
 // ==========
 // - link element
 // Append 'favicon' to head link tag
-// const faviconElement = document.querySelector("link[href='favicon.ico']");
-// faviconElement.href = favicon;
+const faviconElement = document.querySelector("link[href='favicon.ico']");
+faviconElement.href = favicon;
 
 class App extends React.Component {
     render() {
