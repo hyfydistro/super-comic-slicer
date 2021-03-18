@@ -26,7 +26,7 @@ export default function Footer() {
                         <h3>Share</h3>
                         <div className="share-icon-container">
                             <a class="twitter-share-button"
-                                href="https://twitter.com/intent/tweet?text=Do you need to crop and divide your really long webcomic page? Super Comic Slicer will do the job for you! 💖  Also, features scaling down size. 🎉 Share and support this handy tool. Created by @Spectredox&hashtags=SuperComicSlicer,cropper,comics,webtoon,scaler&url=www.google.com"
+                                href="https://twitter.com/intent/tweet?text=Do you need to crop and divide your really long webcomic page? Super Comic Slicer will do the job for you! 💖  Also, features scaling down size. 🎉 Share and support this handy tool. Created by @Spectredox&hashtags=SuperComicSlicer,cropper,comics,webtoon,scaler&url=https://supercomicslicer.netlify.app/"
                                 target="_blank"
                                 title="Share on Twitter">
                                 <span className="share-icon-stack fa-stack fa-lg">
@@ -38,7 +38,7 @@ export default function Footer() {
                                 // href="http://www.facebook.com/sharer.php?s=100&p[title]=Super Comic Slicer&p[summary]=Do you need to crop and divide your really long webcomic page? Super Comic Slicer will do the job for you! 💖  Also, features scaling down size. 🎉 Share and support this handy tool. Created by Spectredox&p[url]=YOUR_URL&p[images][0]=YOUR_IMAGE_TO_SHARE_OBJECT"
                                 // ! ADD link to end 'ul='
                                 // href="https://www.facebook.com/sharer/sharer.php?u=https://tapas.io/"
-                                href="https://www.facebook.com/sharer/sharer.php?u=https://tapas.io/"
+                                href="https://www.facebook.com/sharer/sharer.php?u=https://supercomicslicer.netlify.app/"
                                 target="_blank">
                                 <span className="share-icon-stack fa-stack fa-lg">
                                     <i className="fa fa-circle fa-stack-2x"></i>
@@ -46,7 +46,7 @@ export default function Footer() {
                                 </span>
                             </a>
                             <a title="Share on Tumblr"
-                                href="http://tumblr.com/widgets/share/tool?canonicalUrl=http://cats.com"
+                                href="http://tumblr.com/widgets/share/tool?canonicalUrl=https://supercomicslicer.netlify.app/"
                                 target="_blank"
                             >
                                 <span className="share-icon-stack fa-stack fa-lg">
