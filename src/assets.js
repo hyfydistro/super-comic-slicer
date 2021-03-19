@@ -15,6 +15,7 @@ import "./images/og-supercomicslicer.png";
 // Favicon
 import "./images/favicon-32x32.png";
 import "./images/apple-touch-icon.png";
+import "./favicon.ico";
 // Webmanifest file
 import "./site.webmanifest";
 
