@@ -61,7 +61,7 @@ export default function Footer() {
                                 <span className="share-icon-stack fa-stack fa-lg">
                                     <i className="fa fa-circle fa-stack-2x"></i>
                                     <i className="fa fa-link fa-stack-1x"></i>
-                                    <input type="text" defaultValue="Hello World" id="copy-link" />
+                                    <input type="text" defaultValue="https://supercomicslicer.netlify.app/" id="copy-link" />
                                 </span>
                             </a>
                         </div>
