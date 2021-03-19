@@ -1,38 +1,29 @@
 # Changelog
 
-## 00/00/00 (Current)
-
-### Bug Fixes
-
-* text
-* text
-* text
-
+## 19/03/2021 (Current)
 
 ### Features
 
-* text
-* text
+* Drag and reorder image files align with output.
+* scale image files accordingly to the selected options available.
 
+### Bug Fixes
+
+n/a
 
 ### BREAKING CHANGES
 
-* text
-* text
+n/a
 
 ### Performance Improvements
 
-* text
-* text
-
-
+n/a
 ## 00/00/00 (older versions)
 
 ### Bug Fixes
 
 n/a
 
-
 ### Features
 
 n/a
@@ -42,9 +33,6 @@ n/a
 
 n/a
 
-
 ### Performance Improvements
 
 n/a
-
-etc.
