@@ -153,7 +153,7 @@ module.exports = {
     plugins: [
         // Be aware it will run every time webpack is run
         // Comment `BundleAnalyzerPlugin` for testing purposes ONLY
-        new BundleAnalyzerPlugin(),
+        // new BundleAnalyzerPlugin(),
         new CleanWebpackPlugin(
             // ? Optional - exlucde files to recompiled
             // e.g. UNCHANGE images
