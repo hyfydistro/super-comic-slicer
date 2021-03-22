@@ -84,6 +84,17 @@ module.exports = {
             //         loader: "url-loader"
             //     }
             // },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "fonts/[name].[ext]",
+                        }
+                    },
+                ],
+            },
 
 
             // // # Target: Image files Data URI Injection
