@@ -42,9 +42,11 @@
 }
 
 .dropzone__upload-icon {
-    width: 40px;
-    height: 40px;
     margin-bottom: base.$desktop-space-lv-half;
+}
+
+.icon-upload::before {
+    font-size: 40px;
 }
 
 .dropzone__input {
@@ -199,14 +201,14 @@
     position: absolute;
     top: -11px;
     left: 124px;
-    background: url(images/remove-icon.svg) no-repeat;
-    background-size: 22px 22px;
+    background-color: transparent;
     width: 22px;
     height: 22px;
     border: none;
     cursor: pointer;
     transition: 80ms ease-in;
     z-index: 99;
+    outline: none;
     // overflow: visible !important;
 }
 
@@ -214,6 +216,10 @@
     transform: scale(1.2);
 }
 
+.icon-remove {
+    font-size: 22px;
+    pointer-events: none;
+}
 
 // #SML DEVICES
 

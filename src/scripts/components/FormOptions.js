@@ -96,7 +96,7 @@ export default function FormOptions(props) {
 
             <p className="text-bold header-four">Squash</p>
 
-            <p className="margin-fix">Squash scale down the comic page size. If your file size is big enough it may refine illustrations. Slicing ratio will not be affected - it will yield the same page division. However, if your file is smaller than the selected squash option, it will expand your image and attempt to yield to the same aspect ratio of your chosen webcomic platform.</p>
+            <p className="margin-fix">Squash scale down the comic page size. If your file size is big enough it may refine illustrations. Slicing ratio will not be affected - it will yield the same page division. *if your file is smaller than the selected squash option, it will expand your image and attempt to yield to the same aspect ratio of your chosen webcomic platform.</p>
 
             <div className="radio-container-squash">
                 <SquashOptions

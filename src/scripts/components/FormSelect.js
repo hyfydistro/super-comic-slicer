@@ -58,20 +58,9 @@ export default function FormSelect(props) {
             {/* CONDITION */}
             {props.isAlertMessageSelectFormError === true
                 ? <div className="alert-message--error">
-                    <img className="alert-icon" src="images/error-icon.svg" alt="icon" />
+                    <i className="alert-icon alert-icon--error icon-warning"></i>
                     <span className="alert-message-text--error">
                         {props.getAlertMessageSelectFormText}
-                    </span>
-                </div>
-                : null}
-
-            {false
-                ? <div className="alert-message--error">
-                    <img className="alert-icon" src="images/error-icon.svg" alt="" />
-                    <span className="alert-message-text--error">
-                        {true
-                            ? alertMessages.alertSelectMandatory
-                            : null}
                     </span>
                 </div>
                 : null}

@@ -4,7 +4,6 @@
 // FOOTER
 // ======
 
-
 // # DEFAULT || LGE DEVICES
 
 footer {
@@ -21,12 +20,91 @@ footer {
     grid-template-columns: 1fr 1fr;
 }
 
-.share-icon-stack,
-.contribute-icon-stack,
-.donate-icon-stack,
-.donate-text,
 .contribute-text {
     cursor: pointer;
+    transition: transform 250ms ease-in-out;
+}
+
+.contribute-icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.icon__wrapper {
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: base.$desktop-space-lv-half;
+    transition: transform 250ms ease-in-out;
+}
+
+.share-icon {
+    padding: 10px;
+    background-color: base.$primary-color-50;
+}
+
+.contribute-icon {
+    width: auto;
+    height: 42px;
+    background-color: base.$primary-color-10;
+    transition: text-decoration 250ms ease-in-out, transform 250ms ease-in-out;
+}
+
+.icon-github::before,
+.icon-facebook::before,
+.icon-twitter::before,
+.icon-link::before,
+.icon-tumblr::before {
+    padding: 0;
+    margin: 0;
+}
+
+.icon-facebook::before,
+.icon-twitter::before,
+.icon-link::before,
+.icon-tumblr::before {
+    font-size: 22px;
+}
+
+.icon-github::before {
+    font-size: 42px;
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    line-height: 0.85 !important;
+    color: base.$primary-color-50;
+    // * Hotfix: align github icon with background element
+    position: relative;
+    top: 3px;
+}
+
+.icon {
+    color: base.$primary-color-10;
+}
+
+.icon-github {
+    width: 42px;
+}
+
+// STATE ELEMENTS
+.share-icon:hover {
+    transform: scale(1.2);
+    background-color: base.$primary-color-40;
+}
+
+.contribute-icon-container {
+    transition: transform 250ms ease-in-out;
+}
+
+.contribute-icon-container:hover .icon-github::before {
+    color: base.$primary-color-40;
+}
+
+.contribute-icon-container:hover .contribute-icon {
+    transform: scale(1.2);
+}
+
+.contribute-icon-container:hover .contribute-text {
+    text-decoration: underline;
 }
 
 .donate-container h3,
@@ -40,30 +118,8 @@ footer a {
     color: base.$primary-color-80;
 }
 
-.share-icon-stack {
-    margin-right: base.$desktop-space-lv-half;
-}
-
-.contribute-icon-stack,
 .donate-icon-stack {
     margin-right: base.$desktop-space-lv-quarter;
-}
-
-.fa-lg {
-    font-size: 21px; // 42x42
-}
-
-.fa-github,
-.fa-circle {
-    color: base.$primary-color-50;
-}
-
-.contribute-icon-stack .fa-circle,
-.fa-link,
-.fa-tumblr,
-.fa-twitter,
-.fa-facebook {
-    color: base.$primary-color-10;
 }
 
 .contribute-container,
@@ -82,23 +138,10 @@ footer a {
     transition: transform 250ms ease-in-out;
 }
 
-.donate-icon-stack:hover > .fa-circle,
-.share-icon-stack:hover > .fa-circle {
-    color: base.$primary-color-40;
-    transform: scale(1.2);
-}
-
-.contribute-icon-stack:hover {
-    transform: scale(1.2);
-}
-
-.contribute-icon-stack:hover > .fa-github {
-    color: base.$primary-color-40;
-}
-
 img.donate-image {
     height: 54px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;    transition: transform 100ms ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    transition: transform 100ms ease-in-out;
 }
 
 // ELEMENT STATE
@@ -135,7 +178,6 @@ img.donate-image:hover {
 .footer-notes a:active {
     color: base.$primary-color-10;
 }
-
 
 // #SML DEVICES
 

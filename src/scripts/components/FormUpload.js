@@ -37,7 +37,13 @@ function Thumbnails(props) {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                             >
-                                <button className="close-btn" onClick={(e) => props.onRemoveSelf(e)}></button>
+                                <button className="close-btn" onClick={(e) => props.onRemoveSelf(e)}>
+                                    <span class="icon-remove">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </span>
+                                </button>
                                 <div className="preview__thumbnail">
                                     <img alt="" />
                                 </div>
@@ -69,9 +75,9 @@ function Preview(props) {
                     </Droppable>
                 </DragDropContext>
                 <div className="preview__clear-btn-container">
-                <div className="file-size__container">
-                    <span className="file-size-text">Total File Size: {convertBytes(props.getTotalFileSize)}</span>
-                </div>
+                    <div className="file-size__container">
+                        <span className="file-size-text">Total File Size: {convertBytes(props.getTotalFileSize)}</span>
+                    </div>
                     <button className="preview__clear-btn" onClick={props.onHandleClickToRemoveAll}>Clear Files</button>
                 </div>
             </div>
@@ -91,7 +97,8 @@ function Dropzone(props) {
                 onDrop={(e) => props.onHandleFileDrop(e)}
                 onClick={props.onHandleClickToUpload}
             >
-                <img className="dropzone__upload-icon" src="./images/upload-icon.svg" alt="Drag & Drog Icon" />
+                <i className="dropzone__upload-icon icon-upload"></i>
+
                 <p>Drag & Drop or Click here</p>
                 <p className="text-small">to upload your files (max. 20MB)</p>
 
@@ -125,7 +132,7 @@ export default function FormUpload(props) {
 
             {props.isAlertMessageError === true
                 ? <div className="alert-message--error">
-                    <img className="alert-icon" src="images/error-icon.svg" alt="icon" />
+                    <i className="alert-icon alert-icon--error icon-warning"></i>
                     <span className="alert-message-text--error">
                         {props.getAlertErrorText}
                     </span>
@@ -134,7 +141,7 @@ export default function FormUpload(props) {
 
             {props.isAlertMessageSuccess === true
                 ? <div className="alert-message--success">
-                    <img className="alert-icon" src="images/check-icon.svg" alt="icon" />
+                    <i className="alert-icon alert-icon--success icon-check"></i>
                     <span className="alert-message-text--success">
                         {props.getAlertSuccessText}
                     </span>
@@ -143,7 +150,7 @@ export default function FormUpload(props) {
 
             {props.isAlertMessageWarning === true
                 ? <div className="alert-message--warning">
-                    <img className="alert-icon" src="images/warning-icon.svg" alt="icon" />
+                    <i className="alert-icon alert-icon--warning icon-warning"></i>
                     <span className="alert-message-text--warning">
                         {props.getAlertWarningText}
                     </span>

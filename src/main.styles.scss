@@ -4,7 +4,7 @@
 @use 'styles/scss/base/space';
 @use 'styles/scss/base/color';
 
-/* LAYOUT */
+/* LAYOUTS */
 @use 'styles/scss/layouts/header';
 @use 'styles/scss/layouts/intro';
 @use 'styles/scss/layouts/main';
@@ -14,6 +14,10 @@
 @use 'styles/scss/layouts/form-results';
 @use 'styles/scss/layouts/contact';
 @use 'styles/scss/layouts/footer';
+
+/* VENDORS */
+@use 'styles/scss/vendors/animation.scss';
+@use 'styles/scss/vendors/icomoon.scss';
 
 // Suggestions...
 /* COMPONENTS */

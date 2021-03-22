@@ -3,11 +3,6 @@
 // ======
 import "./images/header-bg.png";
 import "./images/salespitch.svg";
-import "./images/remove-icon.svg";
-import "./images/upload-icon.svg";
-import "./images/error-icon.svg";
-import "./images/warning-icon.svg";
-import "./images/check-icon.svg";
 import "./images/webtoon-icon.svg";
 import "./images/tapas-icon.png";
 import "./images/bmc-btn.png";
@@ -18,6 +13,12 @@ import "./images/apple-touch-icon.png";
 import "./favicon.ico";
 // Webmanifest file
 import "./site.webmanifest";
+// Fonts
+import "./fonts/icomoon.eot";
+import "./fonts/icomoon.ttf";
+import "./fonts/icomoon.woff";
+import "./images/icomoon.svg";
+
 
 // ======
 // Styles

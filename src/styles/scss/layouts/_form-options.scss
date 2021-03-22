@@ -36,8 +36,8 @@ input[type="radio"] {
     visibility: hidden;
 
     + .select-text::before {
-        content: "\f10c";
-        font-family: "FontAwesome";
+        content: "\ea56";
+        font-family: "icomoon";
         speak: none;
         font-style: normal;
         font-weight: normal;
@@ -48,13 +48,13 @@ input[type="radio"] {
         display: inline-block;
         width: 25px;
         height: 25px;
-        font-size: 31px;
+        font-size: 25px;
         margin-right: base.$desktop-space-lv-1;
         color: base.$text-color-50;
     }
 
     &:checked + .select-text::before {
-        content: "\f192";
+        content: "\ea54";
         // content: "\f046";
         color: base.$primary-color-60;
         animation: checkpop 230ms ease-in;

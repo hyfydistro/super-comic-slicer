@@ -47,8 +47,8 @@ input[type="checkbox"] {
     visibility: hidden;
 
     + .select-label::before {
-        content: "\f096";
-        font-family: "FontAwesome";
+        content: "\ea53";
+        font-family: "icomoon";
         speak: none;
         font-style: normal;
         font-weight: normal;
@@ -59,14 +59,13 @@ input[type="checkbox"] {
         display: inline-block;
         width: 25px;
         height: 25px;
-        font-size: 31px;
+        font-size: 25px;
         margin-right: base.$desktop-space-lv-1;
         color: base.$text-color-50;
     }
 
     &:checked + .select-label::before {
-        content: "\f14a";
-        // content: "\f046";
+        content: "\ea52";
         color: base.$primary-color-60;
         animation: checkpop 230ms ease-in;
     }
@@ -75,7 +74,7 @@ input[type="checkbox"] {
         color: base.$text-color-40;
 
         &::before {
-            content: "\f0c8";
+            content: "\e906";
             color: base.$text-color-20;
         }
     }

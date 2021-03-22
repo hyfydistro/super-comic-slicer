@@ -400,7 +400,7 @@ export default class Form extends Component {
                 isAlertMessageSuccess: false,
                 alertMessageSuccess: ""
             });
-        }, 3000);
+        }, 8000);
     }
 
     // event: change
@@ -453,9 +453,9 @@ export default class Form extends Component {
         if (this.state.sliceText === "slice-btn") {
 
             this.setState({
-                sliceText: "fa fa-refresh fa-spin fa-3x fa-fw"
+                sliceText: "icon-spinner8 animate-spin"
             })
-        } else if (this.state.sliceText === "fa fa-refresh fa-spin fa-3x fa-fw") {
+        } else if (this.state.sliceText === "icon-spinner8 animate-spin") {
 
             this.setState({
                 sliceText: "slice-btn"
@@ -777,7 +777,7 @@ export default class Form extends Component {
                 isAlertMessageSuccessOnBeginSliceBtn: false,
                 alertMessageSuccessOnBeginSliceBtn: "",
             });
-        }, 3000);
+        }, 8000);
     }
 
     render() {
@@ -827,14 +827,14 @@ export default class Form extends Component {
                         <h3>
                             {this.state.sliceText === "slice-btn"
                                 ? "Begin Slice!"
-                                : <i className="fa fa-refresh fa-spin fa-fw"></i>}
+                                : <i className="icon-spinner8 animate-spin"></i>}
                         </h3>
                     </a>
                 </div>
                 {/* CONDITION */}
                 {this.state.isAlertMessageErrorOnBeginSliceBtn === true
                     ? <div className="alert-message--error">
-                        <img className="alert-icon" src="images/error-icon.svg" alt="icon" />
+                        <i className="alert-icon alert-icon--error icon-warning"></i>
                         <span className="alert-message-text--error">
                             {this.state.alertMessageErrorOnBeginSliceBtn}
                         </span>
@@ -843,15 +843,13 @@ export default class Form extends Component {
                 {/* CONDITION */}
                 {this.state.isAlertMessageSuccessOnBeginSliceBtn === true
                     ? <div className="alert-message--success">
-                        <img className="alert-icon" src="images/check-icon.svg" alt="icon" />
+                        <i className="alert-icon alert-icon--success icon-check"></i>
                         <span className="alert-message-text--success">
                             {this.state.alertMessageSuccessOnBeginSliceBtn}
                         </span>
                     </div>
                     : null}
                 <FormResults
-                    getAlertErrorText={this.state.alertMessageError}
-                    isAlertMessageError={this.state.isAlertMessageError}
                     getImageData={this.state.processedFileData}
                 />
             </main>

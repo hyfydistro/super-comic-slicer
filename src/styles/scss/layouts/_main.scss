@@ -42,11 +42,21 @@ main p {
     margin-bottom: base.$desktop-space-lv-1;
 }
 
-.alert-icon,
-.success-icon {
-    width: 22px;
-    height: 22px;
+.alert-icon {
+    font-size: 22px;
     margin-right: base.$desktop-space-lv-half;
+}
+
+.alert-icon--error:before {
+    color: base.$secondary-color-40;
+}
+
+.alert-icon--success:before {
+    color: base.$success-color-50;
+}
+
+.alert-icon--warning:before {
+    color: base.$primary-color-60;
 }
 
 // ERROR
