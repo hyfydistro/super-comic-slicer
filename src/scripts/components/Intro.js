@@ -3,10 +3,10 @@ export default function Intro() {
         <>
             <div className="intro--text">
                 <p>
-                    Webcomic publishing platforms, such as Webtoon and Tapas, constrain artists from delivering their comics with uneven ratio and/or file sizes that are too large.
+                    Webcomic publishing platforms, such as Webtoon and Tapas, have some iffy rules on what type of file extensions, width-height ratio and file size allowed to be uploaded.
             </p>
                 <p>
-                    Super Comic Slicer is a web application that handles artists’ long comic page and divides them within the webcomic’s constraint. It also features an option called “squash” which allows to scale down the comic size.
+                    <strong className=".text-bold">Super Comic Slicer</strong> is a web application that handles artists’ long comic page and divides them within the webcomic’s constraint. It also features an option called “squash” which allows to scale down the comic size!
             </p>
                 <p>
                     Finally, you can just get on and just publish the dam comic without all the hassles!
