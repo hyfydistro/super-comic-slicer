@@ -31,6 +31,7 @@ footer {
 }
 
 .icon__wrapper {
+    outline: none;
     display: inline-block;
     border-radius: 50%;
     margin-right: base.$desktop-space-lv-half;
@@ -148,10 +149,6 @@ img.donate-image {
 
 img.donate-image:hover {
     transform: translateY(-4px);
-}
-
-.twitter-share-button {
-    outline: none;
 }
 
 .footer-notes {
