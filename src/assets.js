@@ -1,6 +1,6 @@
-// ======
+// =====
 // Files
-// ======
+// =====
 import "./images/header-bg.png";
 import "./images/salespitch.svg";
 import "./images/webtoon-icon.svg";
