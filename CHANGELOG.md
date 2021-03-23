@@ -12,14 +12,14 @@ Saved 72KB to 4.5KB
 * *Code split* the following components: `Header.js` to `header.js`, `Intro.js` to `intro.js`, `Form.js` into `form.js`, `Footer.js` into `footer.js`, and `Contact.js` to `contact.js`. This will allow larger file uploads to be given in portions rather than waiting for one large file to finish.
 
 
-## 19/03/2021 - Version 1.0.0 (Current)
+## 19/03/2021 - Version 1.0.0 (older versions)
 
 ### Features
 
 * Drag and reorder image files align with output.
 * scale image files accordingly to the selected options available.
 
-## 00/00/00 (older versions)
+## 00/00/00
 
 ### Bug Fixes
 
