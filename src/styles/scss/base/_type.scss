@@ -116,6 +116,7 @@ html {
         font-weight: normal;
     }
     p,
+    ul li,
     .emai-link,
     .file-size-text,
     .alert-message-text--success,
@@ -225,6 +226,7 @@ p.text-small {
     html {
         font-size: $mobile-base-font-size;
         p,
+        ul li,
         .emai-link,
         .file-size-text,
         .alert-message-text--success,

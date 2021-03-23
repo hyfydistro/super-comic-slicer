@@ -16,7 +16,8 @@
 // L/R margins / paddings
 main h2,
 main h3,
-p {
+p,
+ul {
     margin-left: 32px;
 }
 
@@ -35,7 +36,8 @@ main h3 {
     margin-bottom: base.$desktop-space-lv-1;
 }
 
-main p {
+main p,
+ul {
     display: block;
     margin-bottom: base.$desktop-space-lv-1;
 }

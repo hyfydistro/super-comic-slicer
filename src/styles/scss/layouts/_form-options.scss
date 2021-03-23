@@ -70,6 +70,10 @@ input[type="radio"] {
     }
 }
 
+ul {
+    list-style-type: disc;
+}
+
 
 // #SML DEVICES
 
@@ -79,7 +83,7 @@ input[type="radio"] {
     }
 
     // * Hotfix: margin compensation
-    p.margin-fix {
+    .margin-fix {
         margin-right: 16px;
     }
 
