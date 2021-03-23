@@ -43,9 +43,29 @@ const sourcemapMode = process.env.NODE.ENV === "production" ? "source-map" : "ev
 module.exports = {
     mode: mode,
     entry: {
-        index: "./src/index.js",
+        header: {
+            import: "./src/header.js",
+            dependOn: "shared"
+        },
+        intro: {
+            import: "./src/intro.js",
+            dependOn: "shared"
+        },
+        form: {
+            import: "./src/form.js",
+            dependOn: "shared"
+        },
+        contact: {
+            import: "./src/contact.js",
+            dependOn: "shared"
+        },
+        footer: {
+            import: "./src/footer.js",
+            dependOn: "shared"
+        },
         assets: "./src/assets.js",
         libs: "./src/libs.js",
+        shared: ["react", "react-dom"]
     },
     output: {
         filename: "[name].bundle.js",
@@ -184,11 +204,16 @@ module.exports = {
             },
             loader: true
         }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+            linkType: 'text/css',
+            insert: "document.head.appendChild(linkTag);"
+        }),
         new HtmlWebpackPlugin({
             title: "Supporting Modern Browsers with Webpack and React",
             template: "./src/index.html",
             // minify: isProduction,
+            // favicon: "./src/favicon.ico",
             inject: "body",
         })
     ],
@@ -200,8 +225,32 @@ module.exports = {
 
     // # Optimization - Treeshaking Options
     optimization: {
-        providedExports: true,
-        sideEffects: true
+        // providedExports: true, // default - true
+        // usedExports: false, // dev - true; prod - false
+        sideEffects: true,
+        splitChunks: {
+            cacheGroups: {
+                defaultVendors: {
+                    test: /[\\/]node_modules[\\/]((?!react).*)[\\/]/,
+                    name: "defaultVendors",
+                    chunks: "all"
+                },
+                react: {
+                    test: /[\\/]node_modules[\\/](((react).(?!-beautiful-dnd))*)[\\/]/,
+                    name: "react",
+                    chunks: "all"
+                },
+                reactBeautifulDnd: {
+                    test: /[\\/]node_modules[\\/]((react-beautiful-dnd).*)[\\/]/,
+                    name: "reactreactBeautifulDnd",
+                    chunks: "all"
+                },
+            }
+        }
+        // runtimeChunk: "single"
+        // splitChunks: {
+        //     chunks: "all"
+        // }
     },
 
     // # Misc.
