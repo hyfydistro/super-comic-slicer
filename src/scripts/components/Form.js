@@ -1,8 +1,9 @@
-import { Component } from 'react';
+import React, { Suspense } from 'react';
 import FormUpload from './FormUpload';
 import FormSelect from './FormSelect';
 import FormOptions from './FormOptions';
-import FormResults from './FormResults';
+const FormResults = React.lazy(() => import("./FormResults.js"));
+// import FormResults from './FormResults';
 
 // libs
 import createId from '../libs/createId';
@@ -100,7 +101,7 @@ function validFileType(file) {
     return fileTypes.includes(file);
 }
 
-export default class Form extends Component {
+export default class Form extends React.Component {
     constructor(props) {
         super(props);
 
@@ -849,9 +850,11 @@ export default class Form extends Component {
                         </span>
                     </div>
                     : null}
-                <FormResults
-                    getImageData={this.state.processedFileData}
-                />
+                <Suspense fallback={<div><p>Loading...</p></div>}>
+                    <FormResults
+                        getImageData={this.state.processedFileData}
+                    />
+                </Suspense>
             </main>
         )
     }
