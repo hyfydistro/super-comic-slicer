@@ -14,8 +14,13 @@
     "icons": [
         {
           "src": "images/favicon-32x32.png",
-          "sizes": "150x150",
+          "sizes": "32x32",
           "type": "image/png"
+        },
+        {
+          "src": "favicon.ico",
+          "sizes": "48x48",
+          "type": "image/x-icon"
         }
     ]
   }
