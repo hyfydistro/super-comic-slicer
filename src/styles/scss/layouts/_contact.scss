@@ -7,7 +7,7 @@
 
 // # DEFAULT || LGE DEVICES
 
-.contact {
+#contact {
     margin: 0 auto;
     max-width: 992px;
     padding-top: base.$desktop-space-lv-2;
@@ -16,7 +16,7 @@
     color: base.$text-color-70;
 }
 
-.contact h2 {
+#contact h2 {
     text-align: center;
     margin-bottom: base.$desktop-space-lv-1;
 }
@@ -25,7 +25,7 @@
     padding-bottom: base.$desktop-space-lv-1;
 }
 
-.contact p {
+#contact p {
     display: block;
     margin: auto 0;
     margin-bottom: base.$desktop-space-lv-1;
@@ -69,12 +69,12 @@
 // #SML DEVICES
 
 @media all and (max-width: 576px) {
-    .contact {
+    #contact {
         padding-top: base.$mobile-space-lv-2;
         @include base.mobile-padding-preset;
     }
 
-    .contact h2 {
+    #contact h2 {
         margin-bottom: base.$mobile-space-lv-1;
     }
 
@@ -82,7 +82,7 @@
         margin-bottom: base.$mobile-space-lv-1;
     }
 
-    .contact p {
+    #contact p {
         margin-bottom: base.$mobile-space-lv-1;
     }
 

@@ -6,19 +6,19 @@
 
  // # DEFAULT || LGE DEVICES
 
-.intro {
+#intro {
     padding-bottom: base.$desktop-space-lv-2;
     @include base.tablet-padding-preset;
     max-width: 992px;
     margin: 0 auto;
 }
 
-.intro p {
+#intro p {
     margin-bottom: base.$desktop-space-lv-1;
     color: base.$text-color-70;
 }
 
-.intro img {
+#intro img {
     padding: {
         top: base.$desktop-space-lv-half;
         bottom: base.$desktop-space-lv-half;
@@ -36,16 +36,16 @@
 // #SML DEVICES
 
 @media all and (max-width: 576px) {
-    .intro {
+    #intro {
         padding-bottom: base.$mobile-space-lv-2;
         @include base.mobile-padding-preset;
     }
 
-    .intro p {
+    #intro p {
         margin-bottom: base.$mobile-space-lv-1;
     }
 
-    .intro img {
+    #intro img {
         padding: {
             top: base.$mobile-space-lv-half;
             bottom: base.$mobile-space-lv-half;
