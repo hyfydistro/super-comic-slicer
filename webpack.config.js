@@ -200,7 +200,12 @@ module.exports = {
                     }],
                     ["jpegtran", {
                         progressive: true
-                    }]],
+                    }],
+                    ["gifsicle", {
+                        interlaced: true,
+                        optimizationLevel: 3
+                    }]
+                ],
             },
             loader: true
         }),
