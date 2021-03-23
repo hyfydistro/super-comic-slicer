@@ -98,7 +98,7 @@ export default function FormOptions(props) {
 
             <p className="margin-fix">Squash scale down image file size.</p>
 
-            <ul>
+            <ul className="margin-fix">
                 <li>If your file size is big enough it may refine illustrations. Slicing ratio will not be affected - it will produce the same page division.</li>
                 <li>if your file is smaller than the selected squash option, it will expand your image and attempt to produce to the same aspect ratio of your chosen webcomic platform.</li>
             </ul>
