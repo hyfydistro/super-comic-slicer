@@ -1,12 +1,12 @@
 # Super Comic Slicer
 
-* For Modern Browsers
+![og-supercomicslicer](https://user-images.githubusercontent.com/24542308/112158625-ed1bea00-8c1a-11eb-895e-d7fec9ba3c71.png)
 
 ## Brief
 
 Type of website: Blog / Info-site || Product site
 
-An artist's go to for dividing long comic page(s). Plus it features file compression.
+An artist's go to for cropping long comic page(s). Plus it features file compression.
 
 
 ### Demographic
@@ -28,12 +28,12 @@ Mobile, Tablet (also priority) and Desktop (main) devices.
 
 ## Sample
 
-> Image source of website UI
+![SCS - Display UI Portfolio template - 1600x1200](https://user-images.githubusercontent.com/24542308/112167129-cd88bf80-8c22-11eb-817e-2550933ecb6d.png)
 
 
 ## Technical Wesbsite Supports
 
-- [ ] Responsive mobile / tablet / laptop - **R**
+- [x] Responsive mobile / tablet / laptop - **R**
     Recommended:
         - 375w (min)
         - 768w
@@ -47,22 +47,33 @@ Mobile, Tablet (also priority) and Desktop (main) devices.
 
 - [ ] Old Browser Support - **OBS** [REJECTED]
 
-- [ ] Progressive Web Application **PWA** [pending]
+- [x] Progressive Web Application **PWA**
     - [ ] Service Worker
-    - [ ] Manifest file
+    - [x] Manifest file
 
-- [ ] Graceful Degradation / *Progressive Enhancement* **PE** [pending]
+- [ ] Graceful Degradation / *Progressive Enhancement* **PE** [REJECTED]
     - CSS PE
     - JavaScript PE
 
-- [ ] Available at GitHub Pages [pending]
+- [x]  Deployed
+    At Netlify: https://supercomicslicer.netlify.app/
 
-- [ ] Google Analytics **Analytics** [pending]
+- [x] Google Analytics **Analytics**
+
+
+
+## Sample
+
+> Image source of website UI
 
 
 ## Browsers Compatibility
 
-### Modern Browsers
+Automatic download is available due to the module `file-saver` used.
+
+Here's list: [Supported Browsers](https://www.npmjs.com/package/file-saver)
+
+### For Modern Browsers
 
 e.g.
 * Tested on the following browsers:
@@ -71,10 +82,9 @@ e.g.
 
 It is possible Microsoft Edge will work well (because it runs on the same engine as Chrome - the V8 engine).
 
+### For Older Browsers
 
-### Older Browsers
-
-*n/a*
+Not compatible with IE browsers.
 
 
 ## Development Setup
@@ -88,8 +98,7 @@ It is possible Microsoft Edge will work well (because it runs on the same engine
         * It is mandatory Webpack has a `.browserslistrc` file because it does not configure transpile unless it exist.
 * React v17+
 
-
-#### NPM Packages
+### NPM Packages
 
 **dev-dependency**
 
@@ -97,7 +106,7 @@ It is possible Microsoft Edge will work well (because it runs on the same engine
     * [x] webpack
     * [x] webpack-cli
     * [x] webpack-dev-server
-    * webpack-bundle-analyzer (optional; debugging: optimization helper tool)
+    * [x] webpack-bundle-analyzer (optional; debugging: optimization helper tool)
     Loaders
         * [x] css-loader
         * [x] style-loader (option #1 CSS injection method: for inline style)
@@ -123,6 +132,7 @@ Image File Compressions
 * [x] imagemin-jpegtran
 * [x] imagemin-optipng
 * [x] imagemin-svgo
+* [x] imagemin-gifsicle
 
 **dependency**
 * [ ] core-js (mandatory; for further older browsers support such as IE)
@@ -130,476 +140,193 @@ Image File Compressions
 * [x] react-dom
 
 
+## Feature
 
-##### Webpack
+* Drag&Drop and Click to Upload
+* Drag to Re-Organise
+* Webcomic platform options: *Webtoon* available
+* File extensions options: `JEPG`, and `PNG` available
+* Scale to optimize (or expand to lossless pixels)
+* Zip folder
 
-Install webpack setup
-```
-npm install --save-dev webpack webpack-cli webpack-dev-server
-```
+## FAQ
 
+Q. How large can a file be in client side?
 
-**Debugging**
+Internet Explorer v9 - v11, Chrome, Safari, Edge, and Firefox support the HTML5 uploader, which has a max 4GB file size limit.
 
-* Use `devtool` option and set to `source-map` in Webpack configurations . This will allow you to trace and see pre-compile or pre-transpile files in the browser's developer tool. Note, there are more options in Webpack doc.
+Both Chrome and Edge support folder uploads.
 
-* (Optional) Use `hot` option and set to `true` if you want css injection in browser to persist.
+Web browsers are limited by available memory, CPU utilization, network performance, and numerous other factors.
 
 
-**Module Analyzer**
+Q. Can you drag the whole image in a folder?
 
-(WIP)
+When you drag folder with items what is the output?
 
-If you want to try and optimize, check what is bloating your app:
-```
-npm i -D webpack-bundle-analyzer
-```
+- [Upload folder and all its content in JavaScript](https://stackoverflow.com/questions/42239663/upload-folder-and-all-its-content-in-javascript)
 
-Also, write npm script to run server for it.
+Q Can you have more than one single file?
+assume: It won't connect from, but start a newslicing process.
 
-For a quick peak, create the file via npma `"scripts"`:
-```
-"scripts": {
-    "stats": "webpack --json build-stats.json"
-}
-```
 
-`build-stats.json` file will be created. Head over to [Webpack Visualizer](https://chrisbateman.github.io/webpack-visualizer/) (by Chris Bateman) and drop the file there to see results.
+## Reference
 
+### Typography Testing
 
-###### Styles
+- [type-scale](https://type-scale.com/)
 
-* Styles compiler and transpiler
+### Inspirations
 
-If you don't mind inline styling injected to your html, use `style-loader`. Otherwise, exclude it.
-```
-npm install --save-dev css-loader sass-loader
-```
+- (Croppy)[https://knicknic.github.io/croppy/]
 
-Instead, add the plugin Mini CSS Extract Plugin:
-```
-npm i -D mini-css-extract-plugin
-```
 
-Extracts styles and puts it in its own CSS file instead of having it inline with the bundler.js file. Let's you use sourcemap. Better for debugging.
+### Guides and Tutorials
 
-For PostCSS, the following is needed for transpiling:
-```
-npm i -D postcss postcss-loader postcss-preset-env
-```
+- [What is the maximum file size for uploads in a browser?](https://kb.globalscape.com/Knowledgebase/10600/What-is-the-maximum-file-size-for-uploads-in-a-browser-)
 
-**All in one line (excluding `style-loader`):**
-```
-npm install --save-dev css-loader sass sass-loader mini-css-extract-plugin postcss postcss-loader postcss-preset-env
-```
+- [Resizing Considerations](https://www.quackit.com/html/howto/how_to_resize_images_in_html.cfm#:~:text=This%20is%20because%20resizing%20it,it%20to%20your%20website%2Fblog.)
 
+- [Tips for Creating Vertical Scrolling Webtoons](https://www.clipstudio.net/how-to-draw/archives/157055#:~:text=While%20files%20on%20Webtoon%20are,and%20flow%20of%20the%20story.)
 
-###### Scripts
+- [merge two arrays (keys and values) into an object [duplicate]](https://stackoverflow.com/questions/6921962/merge-two-arrays-keys-and-values-into-an-object)
 
-* JavaScript compiler and transpiler
+- [How to merge two objects in JavaScript](https://flaviocopes.com/how-to-merge-objects-javascript/)
 
-```
-npm install -save-dev @babel/core @babel/preset-env babel-loader
-```
+### Error Reference
 
-After adding a cofiguration preset for babel, it will enable transforms for ES2015+.
+- [Updating react nested state properties](https://dev.to/walecloud/updating-react-nested-state-properties-ga6)
 
-If you want to support older browsers such as IE8 or IE11, you will need to install the following dependency.
-
-`core-js` gets all the required polyfills for the list of target browsers. Save as dependency.
-```
-npm i -S core-js
-```
-
-
-##### Misc.
-
-* `html-webpack-plugin`
-
-To change the name of the entry points or add a new one, the generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. We can fix that with `HTMLWebpackPlugin`.
-
-
-* `clean-webpack-plugin`
-
-Removes files for new production files.
-
-
-**All in one line (ONLY `clean-webpack-plugin` + `html-webpack-plugin`):**
-```
-npm install --save-dev html-webpack-plugin clean-webpack-plugin
-```
-
-* `image-minimizer-webpack-plugin`
-
-Brought to you by `imagemin`.
-```
-npm i -D image-minimizer-webpack-plugin
-```
-
-Images can be optimized in two modes:
-
-Lossless (without loss of quality).
-Lossy (with loss of quality).
-
-Recommended imagemin plugins for lossless optimization
-```
-npm install imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo --save-dev
-```
-
-Recommended imagemin plugins for lossy optimization
-```
-npm install imagemin-gifsicle imagemin-mozjpeg imagemin-pngquant imagemin-svgo --save-dev
-```
-
-
-**Mandatory Requirement**
-
-`image-minimizer-webpack-plugin` uses `file-loader` (or `url-loader`) to find the images to use and process.
-
-Install `file-loader`:
-```
-npm install file-loader --save-dev
-
-```
-
-Now you may import image files to your bundler JavaScript file.
-
-
-*Personal Optimization Options*
-
-```
-// `webpack.config.js`
-    plugins: [
-        // ...other plugins ...
-
-        new ImageMinimizerPlugin({
-            exclude: /\.ico$/i,
-            minimizerOptions: {
-                plugins: [
-                    // ! Configure - imagemin plugins must be installed before use
-                    //  ? Use lossless combination
-                    ["gifsicle", {
-                        interlaced: true,
-                        optimizationLevel: 3
-                    }],
-                    ["mozjpeg", {
-                        quality: 90
-                    }],
-                    ["pngquant", {}],
-                    ["pngquant", { // *lossy settings
-                        speed: 1,
-                        quality: [0.95, 1]
-                    }],
-                    ["svgo", {
-                        removeViewBox: false
-                    }],
-
-                    // ? Use lossy combination
-                    ["gifsicle", {
-                        interlaced: true,
-                        optimizationLevel: 3
-                    }],
-                    ["jpegtran", {
-                        progressive: true
-                    }],
-                    ["optipng", {}],
-                    ["svgo", {
-                        removeViewBox: false
-                    }],
-                ],
-            },
-            loader: true
-        }),
-
-        // ...other plugins ...
-    ],
-```
-
-Reference: [This Guy - LoyEgor](https://gist.github.com/LoyEgor/e9dba0725b3ddbb8d1a68c91ca5452b5)
-
-**All in one line (Use loseless optimization; Minimum: PNG, JPEG; including `file-loader`):**
-```
-npm install --save-dev image-minimizer-webpack-plugin imagemin-mozjpeg imagemin-pngquant file-loader
-```
-
-**All in one line (Use loseless optimization; Maximum: all; including `file-loader`):**
-```
-npm install --save-dev image-minimizer-webpack-plugin imagemin-gifsicle imagemin-mozjpeg imagemin-pngquant imagemin-svgo file-loader
-```
-
-**All in one line (use lossy optimization; Maximum: all; including `file-loader`):**
-```
-npm install --save-dev image-minimizer-webpack-plugin imagemin-gifsicle imagemin-mozjpeg imagemin-pngquant imagemin-svgo file-loader
-```
-
-
-##### Unit Testing with Jest (Optional)
-
-Basic unit testing will be done with Jest and vanialla JavaScript.
-```
-npm i -D jest
-```
-
-
-#### React
-
-To use React in webpack and production, it needs to be installled as dependency:
-```
-npm i react react-dom
-```
-
-For further transpile and to allow JSX, install the following babel react preset as dependency:
-```
-npm i -D @babel/preset-react
-```
-
-
-##### Testing with Jest (WIP)
-
-(WIP)
-
-To test React with jest, you'll be working with another environment.
-```
- react-test-renderer
- ```
-
-Ref: [test React with Jest](https://jestjs.io/docs/en/tutorial-react)
-
-
-## Development Configurations
-
-### gitignore
-
-Add production files in `dist` folder to `.gitignore` for development purposes. When it is ready, you may remove it from `.gitignore`. Therefore, you won't have to include in your version control commands all the time.
-
-
-### Browserslist
-
-`.browserslistrc`
-
-**Browsers Data Updating**
-
-`npx browserslist@latest --update-db` updates `caniuse-lite` version in your npm, yarn or pnpm lock file. If you're writing for Modern browsers, this may be necessary. [Reasons found here.](https://github.com/browserslist/browserslist#browsers-data-updating)
-
-
-**Debug**
-
-To csee what browsers was selected by your queries, run the following command in the project directory:
-```
-Run npx browserslist
-```
-
-
-**Older Browsers Support Options**
-
-> Decide how far back are you going to support older browsers. There is as far as IE8 and IE11. Make configuration to your `.browserslistrc`
-
-option 1 (Default)
-```
-last 2 versions
->1%
-ie11
-maintained node versions
-not dead
-```
-
-option 2
-```
-last 3 versions
->0.7%
-ie8
-```
-
-> Remeber the older it is, the more polfills you'll need and the more bloated your website will be!
-
-
-### Babel
-
-`.babelrc` [REjECTED]
-
-In some cases, you may use `.babelrc`. However, with Webpack 5, use `babel.config.js`.
-
-
-`babel.config.js` [ACCEPTED]
-
-For simiplicity sake:
-```
-module.exports = {
-    "presets": [
-        [
-            "@babel/preset-env"
-        ]
-    ]
-}
-```
-
-For more supports for older browsers (and that you don't mind it getting bloated), add the the following option and configure `debug` to `true` to check what modern JavaScript has been targeted, otherwise you can set to `false` or remove it:
-```
-module.exports = {
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "debug": true,
-                "useBuiltIns": "usage",
-                "corejs": 3
-            }
-        ]
-    ]
-}
-```
-
-This will print debugging logs.
-
-Babel will transpile according to the browserlists configurations / options or however you inject the browserlist option. It will ignore size concerns and add as many polyfills for your modern JavaScript.
-
-Warning: For REALLY new cutting edge Modern JavaScript, look further in the Babel docs. Otherwise, build your website simpler.
-
-
-**Babel with React**
-
-For simplicity sake, add the following to the configuration option:
-```
-module.exports = {
-    "presets": [
-        "@babel/preset-env",
-        "@babel/preset-react"
-    ]
-}
-```
-
-There is a way to opt in to not having to import a React whenever you're just using jsx in a file. Under the hood, it is suppose to make a little more efficient. So the only time you need to import React is when you need methods or state - anything like that from the React library.
-
-However, you may opt in the following:
-```
-module.exports = {
-    "presets": [
-        "@babel/preset-env",
-        [
-            "@babel/preset-react",
-            {runtime: "automatic"}
-        ]
-    ]
-}
-```
-
-Since React v17+,  Babel joined with the React team, they added options for the react preset.
-
-
-### PostCSS
-
-`postcss.config.js`
-
-Configure the following to allow transpile:
-```
-module.exports = {
-    plugins: [
-        require("postcss-preset-env")
-    ]
-};
-```
-
-
-### NPM Scripts
-
-```
-"scripts": {
-    "watch": "webpack --watch",
-    "dev": "webpack serve",
-    "build-dev": "webpack",
-    "build": "set NODE_ENV=production&&webpack",
-}
-```
-
-* "watch": "webpack --watch"
-
-Logs change WITHOUT live reload. Code re-compile. For development purpose.
-
-Note: This is 1/3 options available in webpack that help you automatically compile your code whenever it changes. `webpack-dev-server` is 2/3, and `webpack-dev-middleware` is 3/3.
-
-
-* "dev": "webpack serve"
-
-Logs change WITH live reload. For development purpose.
-
-webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the publicPath option in the dev server's configuration.
-
-
-* "build-dev: "webpack"
-
-Outputs files pre-transpile stage where you can read code (no minification either). For development purpose.
-
-
-* "build" "set NODE_ENV=production&&webpack"
-
-Outputs production files, ready to deploy.
-
-**Warning**: This is specific to Windows OS v10. It may differ for your terminal on how you go about setting the environment variable.
-
-
-#### Unit Testing
-
-Basic Unit Testing setup.
-
-```
-"scripts": {
-    "test": "jest",
-    "test:result": "jest --coverage",
-    "test:watch": "jest --watchAll",
-
-}
-```
-
-[To watch a single file, read more about it at Jest docs.](https://jestjs.io/docs/en/jest-platform#jest-changed-files)
-
-
-### Environment Variables
-
-Personal use case:
-* Git Bash Terminal
-* Windows OS
-
-
-Environment variables are used to switch and from development to production mode and set different Webpack configurations.
-
-Use `printenv` to see environment variables used (unordered, short), or use `set` (ordered, long).
-
-
-#### Optional (WIP)
-
-(WIP)
-
-However, this may pose a problem with software that uses different terminal. Use *dotenv* module and create an `.env` file.
-
-`.env`
-```
-NODE_ENV=production
-NODE_ENV=development
-```
-
-
-## Notes on Font types
-
-Modern browsers use the following font types:
-
-* `woff`
-* `woff2`
-
-
-Older and much more diverse browsers will vary, use many fallback if needed:
-
-* `.eot` - `` IE9 Compat Modes
-* `eot?#iefix` - `embedded-opentype` IE6-IE8
-* `.ttf` - `truetype` Safari, Android, iOS
-* `.svg#svgFontName` - `svg` Legacy iOS
-
-Be awre of the following when supporting older browsers:
-
-* [Bug] Fonts won't work in IE if the font-family entry in css is named differently than the font name
-* For IE 6-11, use EOT fonts, but be aware it is not supported by any other browser.
-* For IE >=9 & all other browsers, use woff fonts, as it has the widest support and the best compression, since it was designed specifically for the web.
-
-
-## Biography
+### Polyfills
 
 n/a
+
+### Research
+
+* [HTML Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API)
+* DropzoneJS [REJECTED]
+
+**SortableJS**
+- [Drag & Drop List using HTML CSS & JavaScript | Draggable List in JavaScript | Sortable Js Library](https://youtu.be/4x99_pLVxiA)
+- [Drag and Drop Card Using HTML CSS And JavaScript | SortableJS](https://youtu.be/9uyetVRYk8Q)
+- [react-sortablejs](https://github.com/SortableJS/react-sortablejs)
+- _JS DELIVER_ - [react-sortablejs](https://www.jsdelivr.com/package/npm/react-sortablejs)
+- [react-dnd](https://react-dnd.github.io/react-dnd/about)
+- [react-beautiful-dnd](https://react-beautiful-dnd.netlify.app/?path=/story/custom-drop-animation--funny-drop-animation)
+
+- [How to Add Drag and Drop in React with React Beautiful DnD](https://youtu.be/aYZRRyukuIw)
+- [react-sortablejs - Setting the 'onChange' method on an object with nested arrays](https://stackoverflow.com/questions/57970186/react-sortablejs-setting-the-onchange-method-on-an-object-with-nested-arrays)
+
+**React Beautiful DnD**
+- [react-beautiful-dnd - <Draggable />](https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/draggable.md)
+- [How to Add Drag and Drop in React with React Beautiful DnD](https://www.freecodecamp.org/news/how-to-add-drag-and-drop-in-react-with-react-beautiful-dnd/)
+
+
+**CTA Upload**
+
+* Click to Upload
+- [Javascript Tutorial - Custom File Upload Button | HTML + CSS](https://youtu.be/T3PDgtliezo)
+
+* File size conversion
+
+- [Correct way to convert size in bytes to KB, MB, GB in JavaScript](https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript)
+
+- [Using the File API on Upload Forms - JavaScript Tutorial](https://youtu.be/lbb4FS_mjU0)
+- [Megabytes to Bytes](https://convertlive.com/u/convert/megabytes/to/bytes#18)
+
+
+* Displaying (or previewing) images on upload
+
+- [Previewing Image Before File Upload - JavaScript Tutorial](https://youtu.be/VElnT8EoEEM)
+
+* Re-order elements
+    * Update data order for Processing
+
+- [How To Build Sortable Drag & Drop With Vanilla Javascript](https://youtu.be/jfYWwQrtzzY)
+- [SortableJS]()
+- Howto use SortabaleJS with grids - [Drag & Drop List using HTML CSS & JavaScript | Draggable List in JavaScript | Sortable Js Library](https://youtu.be/4x99_pLVxiA)
+
+* validating file
+- [<input type="file">](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file)
+- [React. this.setState is not a function inside setTimeout [duplicate]](https://stackoverflow.com/questions/42650102/react-this-setstate-is-not-a-function-inside-settimeout)
+
+
+* Other Reference
+- [How To Build Sortable Drag & Drop With Vanilla Javascript](https://youtu.be/jfYWwQrtzzY)
+- [Drag and Drop Card Using HTML CSS And JavaScript | SortableJS](https://youtu.be/9uyetVRYk8Q)
+
+
+**CTA Options**
+
+- [Compress Images Before Uploading for Performance | JavaScript](https://youtu.be/bXf_UdyDzSA)
+- [How to compress image size in JavaScript?](https://stackoverflow.com/questions/43038250/how-to-compress-image-size-in-javascript)
+- [Pixel manipulation with canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas)
+
+
+**Results**
+* Zip Files
+- [ADM-ZIP for NodeJS with added support for electron original-fs](https://www.npmjs.com/package/adm-zip)
+- [JSZip](https://github.com/Stuk/jszip)
+- [How to convert multiple files as zip in nodejs?](https://stackoverflow.com/questions/54944116/how-to-convert-multiple-files-as-zip-in-nodejs)
+- [Quick and Easy Library for Working with Zip Files in Node.js](https://youtu.be/N1I2e-_1cIY)
+- [Saving an image from canvas in a zip](https://stackoverflow.com/questions/15287393/saving-an-image-from-canvas-in-a-zip)
+- [HTMLCanvasElement.toDataURL()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL)
+- [How Do I download all the images generated from canvas using javascript?](https://stackoverflow.com/questions/36522109/how-do-i-download-all-the-images-generated-from-canvas-using-javascript)
+
+* Image Manipulation
+- [Canvas Images and Pixesl](https://codepo8.github.io/canvas-images-and-pixels/)
+- [Canvas Images and Pixesl Github](https://github.com/codepo8/canvas-images-and-pixels)
+- [How do I handle many images in my HTML5 canvas?](https://stackoverflow.com/questions/11579745/how-do-i-handle-many-images-in-my-html5-canvas)
+- [HTMLImageElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
+- [HTML DOM Image Object](https://www.w3schools.com/jsref/dom_obj_image.asp)
+- [What's the algorithm to calculate aspect ratio?](https://stackoverflow.com/questions/1186414/whats-the-algorithm-to-calculate-aspect-ratio)
+- [drawImage and resize to Canvas](https://stackoverflow.com/questions/15192343/drawimage-and-resize-to-canvas)
+
+* Save File
+- [FileSaver.js](https://github.com/eligrey/FileSaver.js/)
+- [FileSaver js Exporting Canvas to Blob and Download it as Image in Javascript](https://youtu.be/hWl79zIetHs)
+- [How to Save Images to Local/Session Storage - JavaScript Tutorial](https://youtu.be/8K2ihr3NC40)
+- [Saving base64 image with Filesaver.js](https://stackoverflow.com/questions/46405773/saving-base64-image-with-filesaver-js)
+- [HTMLCanvasElement.toBlob()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob)
+
+- [FileReader.readAsDataURL()](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL)
+- [HTMLCanvasElement.toDataURL()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL)
+- [Converting a HTML canvas to a PNG file](https://youtu.be/7akcEo_-yQ4)
+- [How To Save Canvas As An Image With canvas.toDataURL()?](https://stackoverflow.com/questions/10673122/how-to-save-canvas-as-an-image-with-canvas-todataurl)
+- [which function should I use? .toDataURL() or .toBlob()?](https://stackoverflow.com/questions/59020799/which-function-should-i-use-todataurl-or-toblob)
+
+**Share**
+
+* Copy to Clipboard
+
+Use input fields (as it is widely more supported).
+- [Copying Text to Clipboard in HTML & JavaScript - Tutorial For Beginners](https://youtu.be/NHg6jQajaMs)
+- [Tweet button](https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/parameter-reference1)
+- [Facebook share button and custom text [closed]](https://stackoverflow.com/questions/6138780/facebook-share-button-and-custom-text)
+- [Making Your Own Custom Facebook and Twitter Share Links/Buttons for Beginners](https://natehoffelder.com/blog/making-your-own-custom-facebook-and-twitter-share-links-buttons-for-beginners/)
+- [How To Add Social Media Sharing Buttons To Tumblr Blog Without Using Javascript Codes?](https://freyayuki.tumblr.com/post/130955097254/tutorial-add-social-media-share-button-javascript-tumblr)
+- [Tumblr's share-button script doesn't work](https://stackoverflow.com/questions/43120449/tumblrs-share-button-script-doesnt-work)
+
+
+**Contact**
+
+- [Mailto on submit button](https://stackoverflow.com/questions/12626940/mailto-on-submit-button)
+- [How to send email from form using Nodemailer](https://stackoverflow.com/questions/34754160/how-to-send-email-from-form-using-nodemailer)
+- [React Hook Form](https://react-hook-form.com/get-started)
+- [The BEST Way To Create Forms In React - React Hook Form Tutorial - How To Create Forms In React](https://www.youtube.com/watch?v=bU_eq8qyjic&ab_channel=MaksimIvanov)
+
+**Validation**
+- _Google_ - [reCAPTCHA](https://www.google.com/recaptcha/about/)
+
+* Contact Form
+- [How to submit a HTML contact form using Node?](https://stackoverflow.com/questions/46111426/how-to-submit-a-html-contact-form-using-node)
+
+**Extra Features Consideration**
+
+* "Meshing"
+Where you you on top and combine images together...??? Reverse side effect anyone?
+- [Upload two images into html5 canvas](https://stackoverflow.com/questions/38859665/upload-two-images-into-html5-canvas#:~:text=You%20can%20use%20multiple%20canvas,many%20images%20as%20you%20want.)
+
+*Optimization Considerations**
+
+- [Tree Shaking](https://webpack.js.org/guides/tree-shaking/)
