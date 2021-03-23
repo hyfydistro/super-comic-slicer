@@ -7,6 +7,7 @@ import "./images/webtoon-icon.svg";
 import "./images/tapas-icon.png";
 import "./images/bmc-btn.png";
 import "./images/og-supercomicslicer.png";
+import "./images/load-hamster.gif";
 // Favicon
 import "./images/favicon-32x32.png";
 import "./images/apple-touch-icon.png";

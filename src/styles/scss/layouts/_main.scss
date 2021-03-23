@@ -4,6 +4,15 @@
 // MAIN
 // ====
 
+.loader {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
 // L/R margins / paddings
 main h2,
 main h3,
