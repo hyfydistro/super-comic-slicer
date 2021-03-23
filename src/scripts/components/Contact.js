@@ -17,7 +17,7 @@
 
 export default function Contact() {
     return (
-        <>
+        <section id="contact">
             <h2>Contact</h2>
             <p>Send me an email and say "Hi"! Feedbacks are welcome. Any known issues found, let me know and I'll see what I can do. If there’s a feature you’d like me to add or more webcomic platforms I know none of, write me a mention. 😃</p>
 
@@ -81,6 +81,6 @@ export default function Contact() {
                     <a className="send-message-slice-btn"><h3>Send Message</h3></a>
                 </button>
             </form> */}
-        </>
+        </section>
     )
 }

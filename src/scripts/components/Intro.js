@@ -1,6 +1,6 @@
 export default function Intro() {
     return (
-        <>
+        <section id="intro">
             <div className="intro--text">
                 <p>
                     Webcomic publishing platforms, such as Webtoon and Tapas, have some iffy rules on what type of file extensions, width-height ratio and file size allowed to be uploaded.
@@ -13,6 +13,6 @@ export default function Intro() {
             </p>
             </div>
             <img src="images/salespitch.svg" alt="Divide. Optmize. Publish." />
-        </>
+        </section>
     )
 }
