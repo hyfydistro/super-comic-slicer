@@ -19,7 +19,6 @@ import "./fonts/icomoon.ttf";
 import "./fonts/icomoon.woff";
 import "./images/icomoon.svg";
 
-
 // ======
 // Styles
 // ======
