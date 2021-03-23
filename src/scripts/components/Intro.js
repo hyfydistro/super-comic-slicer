@@ -1,6 +1,6 @@
 export default function Intro() {
     return (
-        <section className="intro">
+        <>
             <div className="intro--text">
                 <p>
                     Webcomic publishing platforms, such as Webtoon and Tapas, constrain artists from delivering their comics with uneven ratio and/or file sizes that are too large.
@@ -13,6 +13,6 @@ export default function Intro() {
             </p>
             </div>
             <img src="images/salespitch.svg" alt="Divide. Optmize. Publish." />
-        </section>
+        </>
     )
 }

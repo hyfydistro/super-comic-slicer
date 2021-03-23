@@ -782,7 +782,7 @@ export default class Form extends Component {
 
     render() {
         return (
-            <main>
+            <>
                 <h2>Start Here</h2>
                 <FormUpload
                     // EVENTS
@@ -852,7 +852,7 @@ export default class Form extends Component {
                 <FormResults
                     getImageData={this.state.processedFileData}
                 />
-            </main>
+            </>
         )
     }
 }
