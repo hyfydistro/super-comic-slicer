@@ -2,6 +2,13 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 // libs
 import convertBytes from '../libs/convertBytes';
 
+// TODO: PERFORMANCE
+// Setup more dynamic imports
+// let convertBytes;
+// async function fetchConvertBytes() {
+//     convertBytes = await import("../libs/convertBytes");
+// }
+
 // TODO: FEATURE (NEXT UPDATE)
 // "Rotate" button in Preview thumb
 // Also see in 'Form.js'
