@@ -1,6 +1,12 @@
 # Changelog
 
-## 24/03/2021 - Version 1.0.3 (Current)
+## 24/03/2021 - Version 1.0.4 (Current)
+
+### Bug Fixes
+
+* Fix alert message "Process Complete" timing
+
+## 24/03/2021 - Version 1.0.3 (older versions)
 
 ### Performance Improvements
 
@@ -8,7 +14,7 @@
     - `file-saver`
     - `jszip`
 
-## 24/03/2021 - Version 1.0.2 (older versions)
+## 24/03/2021 - Version 1.0.2
 
 ### Performance Improvements
 
