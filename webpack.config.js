@@ -220,11 +220,11 @@ module.exports = {
         sideEffects: true,
         splitChunks: {
             cacheGroups: {
-                defaultVendors: {
-                    test: /[\\/]node_modules[\\/]((?!react).*)[\\/]/,
-                    name: "defaultVendors",
-                    chunks: "all"
-                },
+                // defaultVendors: {
+        //             test: /[\\/]node_modules[\\/]((?!react).*)[\\/]/,
+        //             name: "defaultVendors",
+        //             chunks: "all"
+        //         },
                 // react: {
                 //     test: /[\\/]node_modules[\\/](((react).(?!-beautiful-dnd))*)[\\/]/,
                 //     name: "react",
@@ -234,7 +234,7 @@ module.exports = {
                     test: /[\\/]node_modules[\\/]((react-beautiful-dnd).*)[\\/]/,
                     name: "reactreactBeautifulDnd",
                     chunks: "all"
-                },
+                }
             }
         }
         // runtimeChunk: "single"
