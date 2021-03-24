@@ -138,6 +138,8 @@ Image File Compressions
 * [ ] core-js (mandatory; for further older browsers support such as IE)
 * [x] react
 * [x] react-dom
+* [x] file-saver
+* [x] jszip
 
 
 ## Feature
@@ -160,14 +162,18 @@ Both Chrome and Edge support folder uploads.
 Web browsers are limited by available memory, CPU utilization, network performance, and numerous other factors.
 
 
-Q. Can you drag the whole image in a folder?
+Q. Can you drag a folder full of image?
 
-When you drag folder with items what is the output?
+No.
+
+It is a possible next Update Consideration:
 
 - [Upload folder and all its content in JavaScript](https://stackoverflow.com/questions/42239663/upload-folder-and-all-its-content-in-javascript)
 
-Q Can you have more than one single file?
-assume: It won't connect from, but start a newslicing process.
+
+Q. Can you have more than one single file?
+
+Assume it won't connect from a new image file given, instead it start a newslicing process.
 
 
 ## Reference
