@@ -221,10 +221,10 @@ module.exports = {
         splitChunks: {
             cacheGroups: {
                 // defaultVendors: {
-        //             test: /[\\/]node_modules[\\/]((?!react).*)[\\/]/,
-        //             name: "defaultVendors",
-        //             chunks: "all"
-        //         },
+                //     test: /[\\/]node_modules[\\/]((?!react).*)[\\/]/,
+                //     name: "defaultVendors",
+                //     chunks: "all"
+                // },
                 // react: {
                 //     test: /[\\/]node_modules[\\/](((react).(?!-beautiful-dnd))*)[\\/]/,
                 //     name: "react",
