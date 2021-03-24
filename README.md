@@ -330,3 +330,4 @@ Where you you on top and combine images together...??? Reverse side effect anyon
 *Optimization Considerations**
 
 - [Tree Shaking](https://webpack.js.org/guides/tree-shaking/)
+- [6 tips to optimize bundle size](https://dev.to/mbernardeau/6-tips-to-optimize-bundle-size-50n9#:~:text=Stat%20size%20is%20the%20size,parsed%20by%20the%20client%20browser)
