@@ -769,7 +769,24 @@ export default class Form extends React.Component {
             // GET user file extension prefernce from Options form - File Extensions
             // PUSH images to Zip folder
             // DOWNLOAD to user's PC
-            saveAndDownloadFiles(this.state.selectedFileExtension, processImages, Selectedwebcomics, i);
+            saveAndDownloadFiles(this.state.selectedFileExtension, processImages, Selectedwebcomics, i).then(() => {
+                if (Selectedwebcomics.indexOf(Selectedwebcomics[i]) == Selectedwebcomics.indexOf(Selectedwebcomics[Selectedwebcomics.length - 1])) {
+                    // ALERT MESSAGE
+                    // Process completed
+                    this.setState({
+                        isAlertMessageSuccessOnBeginSliceBtn: true,
+                        alertMessageSuccessOnBeginSliceBtn: alertMessages.onSuccess.completedProcess
+                    });
+
+                    setTimeout(() => {
+                        this.setState({
+                            isAlertMessageSuccessOnBeginSliceBtn: false,
+                            alertMessageSuccessOnBeginSliceBtn: "",
+                        });
+                    }, 8000);
+                }
+            });
+
 
             // ADD image 'data:' url arr of processed image files
             // RESPONDS to display in Result form
@@ -777,20 +794,6 @@ export default class Form extends React.Component {
                 processedFileData: processImages
             });
         }
-
-        // ALERT MESSAGE
-        // Process completed
-        this.setState({
-            isAlertMessageSuccessOnBeginSliceBtn: true,
-            alertMessageSuccessOnBeginSliceBtn: alertMessages.onSuccess.completedProcess
-        });
-
-        setTimeout(() => {
-            this.setState({
-                isAlertMessageSuccessOnBeginSliceBtn: false,
-                alertMessageSuccessOnBeginSliceBtn: "",
-            });
-        }, 8000);
     }
 
     render() {
