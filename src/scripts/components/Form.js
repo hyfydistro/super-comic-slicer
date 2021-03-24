@@ -3,8 +3,40 @@ import FormUpload from "./FormUpload";
 import FormSelect from "./FormSelect";
 import FormOptions from "./FormOptions";
 import FormResults from "./FormResults";
-import { saveAs } from "file-saver";
-import JSZip from "jszip";
+
+// Dynamic imports
+// import { saveAs } from "file-saver";
+// import JSZip from "jszip";
+async function saveAndDownloadFiles(selectedFileExtension, processImages, Selectedwebcomics, webcomicIndex) {
+    const JSZip = await import("jszip/dist/jszip.js");
+    const fileSaver = await import("file-saver");
+
+    const JSZipConstructor = JSZip.default;
+    const saveAs = fileSaver.default;
+
+    const zip = new JSZipConstructor();
+    const selectedFileExt = selectedFileExtension;
+
+    // NOTE: Naming is padded with zero of tens
+    // Over tens are unavailable
+
+    for (let i = 0; i < processImages.length; i++) {
+        let fileName;
+        if (i > 10) {
+            fileName = `${i}.${selectedFileExt}`;
+        } else {
+            fileName = `${i.toString().padStart(2, "0")}.${selectedFileExt}`;
+        }
+
+        zip.file(fileName, processImages[i].substr(processImages[i].indexOf(',') + 1), { base64: true });
+    }
+
+    zip.generateAsync({ type: "blob", mimeType: "image/jpeg" })
+        .then(function (blob) {
+
+            saveAs(blob, `${Selectedwebcomics[webcomicIndex]}.zip`);
+        })
+}
 
 // libs
 import createId from "../libs/createId";
@@ -737,28 +769,7 @@ export default class Form extends React.Component {
             // GET user file extension prefernce from Options form - File Extensions
             // PUSH images to Zip folder
             // DOWNLOAD to user's PC
-            const zip = new JSZip();
-            const selectedFileExt = this.state.selectedFileExtension;
-
-            // NOTE: Naming is padded with zero of tens
-            // Over tens are unavailable
-
-            for (let i = 0; i < processImages.length; i++) {
-                let fileName;
-                if (i > 10) {
-                    fileName = `${i}.${selectedFileExt}`;
-                } else {
-                    fileName = `${i.toString().padStart(2, "0")}.${selectedFileExt}`;
-                }
-
-                zip.file(fileName, processImages[i].substr(processImages[i].indexOf(',') + 1), { base64: true });
-            }
-
-            zip.generateAsync({ type: "blob", mimeType: "image/jpeg" })
-                .then(function (blob) {
-
-                    saveAs(blob, `${Selectedwebcomics[i]}.zip`);
-                })
+            saveAndDownloadFiles(this.state.selectedFileExtension, processImages, Selectedwebcomics, i);
 
             // ADD image 'data:' url arr of processed image files
             // RESPONDS to display in Result form
