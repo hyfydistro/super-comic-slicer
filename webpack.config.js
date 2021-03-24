@@ -15,8 +15,8 @@ const mode = process.env.NODE_ENV === "production" ? "production" : "development
 const target = process.env.NODE.ENV === "production" ? "browserslist" : "web";
 
 // Runs slow for setup, then fast
-const sourcemapMode = process.env.NODE.ENV === "production" ? "source-map" : "eval-source-map";
-// const sourcemapMode = process.env.NODE.ENV === "production" ? "" : "eval-source-map";
+// const sourcemapMode = process.env.NODE.ENV === "production" ? "source-map" : "eval-source-map";
+const sourcemapMode = process.env.NODE.ENV === "production" ? "" : "eval-source-map";
 
 // ? Option - Complex Configuration:
 // if (process.env.NODE_ENV === "production") {
@@ -218,25 +218,25 @@ module.exports = {
         // providedExports: true, // default - true
         // usedExports: false, // dev - true; prod - false
         sideEffects: true,
-        // splitChunks: {
-        //     cacheGroups: {
-        //         defaultVendors: {
-        //             test: /[\\/]node_modules[\\/]((?!react).*)[\\/]/,
-        //             name: "defaultVendors",
-        //             chunks: "all"
-        //         },
-        //         react: {
-        //             test: /[\\/]node_modules[\\/](((react).(?!-beautiful-dnd))*)[\\/]/,
-        //             name: "react",
-        //             chunks: "all"
-        //         },
-        //         reactBeautifulDnd: {
-        //             test: /[\\/]node_modules[\\/]((react-beautiful-dnd).*)[\\/]/,
-        //             name: "reactreactBeautifulDnd",
-        //             chunks: "all"
-        //         },
-        //     }
-        // }
+        splitChunks: {
+            cacheGroups: {
+                defaultVendors: {
+                    test: /[\\/]node_modules[\\/]((?!react).*)[\\/]/,
+                    name: "defaultVendors",
+                    chunks: "all"
+                },
+                // react: {
+                //     test: /[\\/]node_modules[\\/](((react).(?!-beautiful-dnd))*)[\\/]/,
+                //     name: "react",
+                //     chunks: "all"
+                // },
+                reactBeautifulDnd: {
+                    test: /[\\/]node_modules[\\/]((react-beautiful-dnd).*)[\\/]/,
+                    name: "reactreactBeautifulDnd",
+                    chunks: "all"
+                },
+            }
+        }
         // runtimeChunk: "single"
         // splitChunks: {
         //     chunks: "all"
