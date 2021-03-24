@@ -1,6 +1,14 @@
 # Changelog
 
-## 19/03/2021 - Version 1.0.2 (Current)
+## 24/03/2021 - Version 1.0.3 (Current)
+
+### Performance Improvements
+
+* Add dynamic import for the following dependencies:
+    - `file-saver`
+    - `jszip`
+
+## 24/03/2021 - Version 1.0.2 (older versions)
 
 ### Performance Improvements
 
@@ -10,9 +18,9 @@
     - `node_modules` (`file-saver`, `jszip`)
     - `react-beautiful-dnd`
 
-## 19/03/2021 - Version 1.0.1 (Current)
+## 19/03/2021 - Version 1.0.1
 
-### Performance Improvements (older versions)
+### Performance Improvements
 
 * Remove use of CDN FontAwesome 4.7
 * Generate selected icons (from FontAwesome 4.7) with Icomoon
