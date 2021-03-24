@@ -38,10 +38,10 @@ function Thumbnails(props) {
                                 {...provided.dragHandleProps}
                             >
                                 <button className="close-btn" onClick={(e) => props.onRemoveSelf(e)}>
-                                    <span class="icon-remove">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
+                                    <span className="icon-remove">
+                                        <span className="path1"></span>
+                                        <span className="path2"></span>
+                                        <span className="path3"></span>
                                     </span>
                                 </button>
                                 <div className="preview__thumbnail">
