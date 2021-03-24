@@ -61,12 +61,6 @@ Mobile, Tablet (also priority) and Desktop (main) devices.
 - [x] Google Analytics **Analytics**
 
 
-
-## Sample
-
-> Image source of website UI
-
-
 ## Browsers Compatibility
 
 Automatic download is available due to the module `file-saver` used.
