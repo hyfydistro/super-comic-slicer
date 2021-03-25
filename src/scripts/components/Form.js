@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import FormUpload from "./FormUpload";
 import FormSelect from "./FormSelect";
 import FormOptions from "./FormOptions";
-import FormResults from "./FormResults";
+// import FormResults from "./FormResults";
+const FormResults = lazy(() => import("./FormResults"));
 
 // Modules
 // Dynamic imports
@@ -866,9 +867,11 @@ export default class Form extends React.Component {
                         </span>
                     </div>
                     : null}
-                <FormResults
-                    getImageData={this.state.processedFileData}
-                />
+                <Suspense fallback={<div>LOADING... FormResults</div>}>
+                    <FormResults
+                        getImageData={this.state.processedFileData}
+                    />
+                </Suspense>
             </main>
         )
     }
