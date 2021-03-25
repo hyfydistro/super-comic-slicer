@@ -21,7 +21,7 @@ export default function FormResults(props) {
         <section className="form-results">
             <h3>Results</h3>
 
-            <p>For each webcomic platform selected, a zip file will be automatically downloaded after slicing process completed.</p>
+            <p className="margin-fix" >For each webcomic platform selected, a zip file will be automatically downloaded after slicing process completed.</p>
 
             <canvas id="canvas"></canvas>
 
