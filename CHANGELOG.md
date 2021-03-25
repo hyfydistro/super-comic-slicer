@@ -5,6 +5,7 @@
 ### Performance Improvements
 
 * _Lazy load_ import for the following components:
+    - `Header.js`
     - `Intro.js`
     - `FormResults.js`
     - `Contact.js`
