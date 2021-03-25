@@ -1,6 +1,7 @@
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 // libs
-import convertBytes from '../libs/convertBytes';
+import convertBytes from "../libs/convertBytes";
+
 
 // TODO: PERFORMANCE
 // Setup more dynamic imports
