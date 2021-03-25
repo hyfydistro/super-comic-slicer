@@ -1,12 +1,22 @@
 # Changelog
 
-## 24/03/2021 - Version 1.0.4 (Current)
+## 24/03/2021 - Version 1.0.5 (Current)
+
+### Performance Improvements
+
+* _Lazy load_ import for the following components:
+    - `Intro.js`
+    - `FormResults.js`
+    - `Contact.js`
+    - `Footer.js`
+
+## 24/03/2021 - Version 1.0.4 (older versions)
 
 ### Bug Fixes
 
 * Fix alert message "Process Complete" timing
 
-## 24/03/2021 - Version 1.0.3 (older versions)
+## 24/03/2021 - Version 1.0.3
 
 ### Performance Improvements
 
