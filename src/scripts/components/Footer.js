@@ -25,7 +25,9 @@ export default function Footer() {
                             <a className="icon__wrapper share-icon"
                                 href="https://twitter.com/intent/tweet?text=Do you need to crop and divide your really long webcomic page? Super Comic Slicer will do the job for you! 💖  Also, features scaling down size. 🎉 Share and support this handy tool. Created by @Spectredox&hashtags=SuperComicSlicer,cropper,comics,webtoon,scaler&url=https://supercomicslicer.netlify.app/"
                                 target="_blank"
-                                title="Share on Twitter">
+                                title="Share on Twitter"
+                                rel="noopener"
+                                >
                                 <span className="icon__block">
                                     <i className="icon icon-twitter"></i>
                                 </span>
@@ -33,7 +35,9 @@ export default function Footer() {
                             <a title="Share on Facebook"
                                 className="icon__wrapper share-icon"
                                 href="https://www.facebook.com/sharer/sharer.php?u=https://supercomicslicer.netlify.app/"
-                                target="_blank">
+                                target="_blank"
+                                rel="noopener"
+                                >
                                 <span className="icon__block">
                                     <i className="icon icon-facebook"></i>
                                 </span>
@@ -42,6 +46,7 @@ export default function Footer() {
                                 className="icon__wrapper share-icon"
                                 href="http://tumblr.com/widgets/share/tool?canonicalUrl=https://supercomicslicer.netlify.app/"
                                 target="_blank"
+                                rel="noopener"
                             >
                                 <span className="icon__block">
                                     <i className="icon icon-tumblr"></i>
@@ -51,6 +56,7 @@ export default function Footer() {
                                 href="#"
                                 className="icon__wrapper share-icon"
                                 onClick={(e) => handleCopyLink(e)}
+                                rel="noopener"
                             >
                                 <span className="icon__block">
                                     <i className="icon icon-link"></i>
@@ -65,7 +71,7 @@ export default function Footer() {
                         <a
                             href="https://github.com/hyfydistro/super-comic-slicer"
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel="noopener"
                         >
                             <div className="contribute-icon-container">
                                 <span className="contribute-icon icon__wrapper">
@@ -80,7 +86,7 @@ export default function Footer() {
                 <div className="column-two">
                     <div className="donate-container">
                         <h3>Donate</h3>
-                        <a href="https://www.buymeacoffee.com/spectredox" className="donate-image__wrapper">
+                        <a href="https://www.buymeacoffee.com/spectredox" className="donate-image__wrapper" rel="noopener">
                             <img className="donate-image" src="images/bmc-btn.png" alt="Buy me a coffee" />
                         </a>
 
@@ -88,7 +94,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="footer-notes"><p className="text-small">Website developed by Caroline Rozali • <a href="https://twitter.com/Spectredox">Twitter</a> • <a href="https://www.instagram.com/spectredox/">Instagram</a> • <a href="https://github.com/hyfydistro">Github</a> • 2021 • <a href="https://github.com/hyfydistro/super-comic-slicer/blob/main/LICENSE">License</a> • Version 1.0.5</p></div>
+            <div className="footer-notes"><p className="text-small">Website developed by Caroline Rozali • <a href="https://twitter.com/Spectredox" rel="noopener">Twitter</a> • <a href="https://www.instagram.com/spectredox/" rel="noopener">Instagram</a> • <a href="https://github.com/hyfydistro" rel="noopener">Github</a> • 2021 • <a href="https://github.com/hyfydistro/super-comic-slicer/blob/main/LICENSE" rel="noopener">License</a> • Version 1.0.5</p></div>
         </footer>
     )
 }
