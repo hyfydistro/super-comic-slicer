@@ -867,7 +867,7 @@ export default class Form extends React.Component {
                         </span>
                     </div>
                     : null}
-                <Suspense fallback={<div>LOADING... FormResults</div>}>
+                <Suspense fallback={<div><p>LOADING...</p></div>}>
                     <FormResults
                         getImageData={this.state.processedFileData}
                     />

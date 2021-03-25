@@ -18,14 +18,14 @@ class App extends React.Component {
         return (
             <>
                 <Header />
-                <Suspense fallback={<div>LOADING... INTRO</div>}>
+                <Suspense fallback={<div><p>LOADING...</p></div>}>
                     <Intro />
                 </Suspense>
                 <Form />
-                <Suspense fallback={<div>LOADING... CONTACT</div>}>
+                <Suspense fallback={<div><p>LOADING...</p></div>}>
                     <Contact />
                 </Suspense>
-                <Suspense fallback={<div>LOADING... FOOTER</div>}>
+                <Suspense fallback={<div><p>LOADING...</p></div>}>
                     <Footer />
                 </Suspense>
             </>
