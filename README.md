@@ -327,7 +327,12 @@ Use input fields (as it is widely more supported).
 Where you you on top and combine images together...??? Reverse side effect anyone?
 - [Upload two images into html5 canvas](https://stackoverflow.com/questions/38859665/upload-two-images-into-html5-canvas#:~:text=You%20can%20use%20multiple%20canvas,many%20images%20as%20you%20want.)
 
-*Optimization Considerations**
+**Optimization Considerations**
 
 - [Tree Shaking](https://webpack.js.org/guides/tree-shaking/)
 - [6 tips to optimize bundle size](https://dev.to/mbernardeau/6-tips-to-optimize-bundle-size-50n9#:~:text=Stat%20size%20is%20the%20size,parsed%20by%20the%20client%20browser)
+- [How to optimize a React JS app bundle performance to load under 3s | Code splitting | Lazy loading](https://youtu.be/j8NJc60H294)
+
+**Security**
+
+- [Links to cross-origin destinations are unsafe](https://web.dev/external-anchors-use-rel-noopener/#:~:text=rel%3D%22noopener%22%20prevents%20the,sent%20to%20the%20new%20page.)
