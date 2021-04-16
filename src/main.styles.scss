@@ -18,7 +18,12 @@
 /* VENDORS */
 @use 'styles/scss/vendors/animation.scss';
 @use 'styles/scss/vendors/icomoon.scss';
+@use 'styles/scss/vendors/fonts.scss';
+
+/* COMPONENTS */
+@use 'styles/scss/components/buttons.scss';
+@use 'styles/scss/components/loader.scss';
+
 
 // Suggestions...
-/* COMPONENTS */
 /* ANIMATIONS */
