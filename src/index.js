@@ -1,3 +1,8 @@
+// ======
+// Styles
+// ======
+import "./main.styles.scss";
+
 import React, { Suspense, lazy } from "react";
 import * as ReactDOM from "react-dom";
 
@@ -8,7 +13,8 @@ import * as ReactDOM from "react-dom";
 const Header = lazy(() => import("./scripts/components/Header.js"));
 // import Intro from "./scripts/components/Intro.js";
 const Intro = lazy(() => import("./scripts/components/Intro.js"));
-import Form from "./scripts/components/Form.js";
+// import Form from "./scripts/components/Form.js";
+const Form = lazy(() => import("./scripts/components/Form.js"));
 // import Contact from "./scripts/components/Contact.js";
 const Contact = lazy(() => import("./scripts/components/Contact.js"));
 // import Footer from "./scripts/components/Footer.js";
@@ -18,17 +24,19 @@ class App extends React.Component {
     render() {
         return (
             <>
-                <Suspense fallback={<div><p>LOADING...</p></div>}>
+                <Suspense fallback={<div>1️⃣</div>}>
                     <Header />
                 </Suspense>
-                <Suspense fallback={<div><p>LOADING...</p></div>}>
+                <Suspense fallback={<div>2️⃣</div>}>
                     <Intro />
                 </Suspense>
-                <Form />
-                <Suspense fallback={<div><p>LOADING...</p></div>}>
+                <Suspense fallback={<div>3️⃣</div>}>
+                    <Form />
+                </Suspense>
+                <Suspense fallback={<div>4️⃣</div>}>
                     <Contact />
                 </Suspense>
-                <Suspense fallback={<div><p>LOADING...</p></div>}>
+                <Suspense fallback={<div>💥</div>}>
                     <Footer />
                 </Suspense>
             </>

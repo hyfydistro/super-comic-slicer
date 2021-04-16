@@ -1,7 +1,11 @@
 import React, { Suspense, lazy } from "react";
-import FormUpload from "./FormUpload";
-import FormSelect from "./FormSelect";
-import FormOptions from "./FormOptions";
+// import FormUpload from "./FormUpload";
+const FormUpload = lazy(() => import("./FormUpload.js"));
+// import FormSelect from "./FormSelect";
+const FormSelect = lazy(() => import("./FormSelect.js"));
+// import FormOptions from "./FormOptions";
+const FormOptions = lazy(() => import("./FormOptions.js"));
+
 // import FormResults from "./FormResults";
 const FormResults = lazy(() => import("./FormResults"));
 
@@ -802,42 +806,54 @@ export default class Form extends React.Component {
         return (
             <main>
                 <h2>Start Here</h2>
-                <FormUpload
-                    // EVENTS
-                    onHandleDrag={this.handleDrag}
-                    onHandleDragLeave={this.handleDragLeave}
-                    onHandleFileDrop={this.handleFileDrop}
-                    onRemoveSelf={this.handleRemoveSelf}
-                    onhandleDragEnd={this.handleDragEnd}
-                    onHandleClickToUpload={this.handleClickToUpload}
-                    onHandleInputChange={this.handleInputChange}
-                    onHandleClickToRemoveAll={this.handleClickToRemoveAll}
-                    // STYLED EVENTS
-                    toggleDropzoneBordersClass={this.state.isDragOver ? this.state.dropzoneBordersClass.highlight : this.state.dropzoneBordersClass.default}
-                    togglePreviewWrapperClass={this.state.inputDataAvailable ? this.state.previewWrapperClass.visible : this.state.previewWrapperClass.invisible}
-                    // ALERT MESSAGES
-                    getAlertErrorText={this.state.alertMessageError}
-                    isAlertMessageError={this.state.isAlertMessageError}
-                    getAlertSuccessText={this.state.alertMessageSuccess}
-                    isAlertMessageSuccess={this.state.isAlertMessageSuccess}
-                    isAlertMessageWarning={this.state.isAlertMessageWarning}
-                    getAlertWarningText={this.state.alertMessageWarning}
-                    // DATAS
-                    inputField={this.state.inputField}
-                    getTotalFileSize={this.state.totalFileSize}
-                />
-                <FormSelect
-                    getWebcomicsModel={webcomicsModel}
-                    onHandleSelectedWebcomic={this.handleSelectedWebcomic}
-                    isAlertMessageSelectFormError={this.state.isAlertMessageErrorOnSelectForm}
-                    getAlertMessageSelectFormText={this.state.alertMessageErrorOnSelectForm}
-                />
-                <FormOptions
-                    getFilExtensionsModel={filExtensionsModel}
-                    onHandleOptionsFileExtenions={this.handleOptionsFileExtenions}
-                    getSquashLevelModel={squashLevelModel}
-                    onHandleOptionsSquashLevel={this.handleOptionsSquashLevel}
-                />
+
+                <Suspense fallback={<div><p>LOADING...</p></div>}>
+                    <FormUpload
+                        // EVENTS
+                        onHandleDrag={this.handleDrag}
+                        onHandleDragLeave={this.handleDragLeave}
+                        onHandleFileDrop={this.handleFileDrop}
+                        onRemoveSelf={this.handleRemoveSelf}
+                        onhandleDragEnd={this.handleDragEnd}
+                        onHandleClickToUpload={this.handleClickToUpload}
+                        onHandleInputChange={this.handleInputChange}
+                        onHandleClickToRemoveAll={this.handleClickToRemoveAll}
+                        // STYLED EVENTS
+                        toggleDropzoneBordersClass={this.state.isDragOver ? this.state.dropzoneBordersClass.highlight : this.state.dropzoneBordersClass.default}
+                        togglePreviewWrapperClass={this.state.inputDataAvailable ? this.state.previewWrapperClass.visible : this.state.previewWrapperClass.invisible}
+                        // ALERT MESSAGES
+                        getAlertErrorText={this.state.alertMessageError}
+                        isAlertMessageError={this.state.isAlertMessageError}
+                        getAlertSuccessText={this.state.alertMessageSuccess}
+                        isAlertMessageSuccess={this.state.isAlertMessageSuccess}
+                        isAlertMessageWarning={this.state.isAlertMessageWarning}
+                        getAlertWarningText={this.state.alertMessageWarning}
+                        // DATAS
+                        inputField={this.state.inputField}
+                        getTotalFileSize={this.state.totalFileSize}
+                    />
+                </Suspense>
+
+
+                <Suspense fallback={<div><p>LOADING...</p></div>}>
+                    <FormSelect
+                        getWebcomicsModel={webcomicsModel}
+                        onHandleSelectedWebcomic={this.handleSelectedWebcomic}
+                        isAlertMessageSelectFormError={this.state.isAlertMessageErrorOnSelectForm}
+                        getAlertMessageSelectFormText={this.state.alertMessageErrorOnSelectForm}
+                    />
+                </Suspense>
+
+
+                <Suspense fallback={<div><p>LOADING...</p></div>}>
+                    <FormOptions
+                        getFilExtensionsModel={filExtensionsModel}
+                        onHandleOptionsFileExtenions={this.handleOptionsFileExtenions}
+                        getSquashLevelModel={squashLevelModel}
+                        onHandleOptionsSquashLevel={this.handleOptionsSquashLevel}
+                    />
+                </Suspense>
+
                 <div className="slice-btn-container">
                     <a
                         className="slice-btn"
