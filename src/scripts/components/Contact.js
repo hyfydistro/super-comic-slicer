@@ -22,7 +22,7 @@ export default function Contact() {
             <p>Send me an email and say "Hi"! Feedbacks are welcome. Any known issues found, let me know and I'll see what I can do. If there’s a feature you’d like me to add or more webcomic platforms I know none of, write me a mention. 😃</p>
 
             <div className="contact-form__wrapper">
-                <a href="mailto:hyfydistro@gmail.com" className="emai-link">hyfydistro@gmail.com</a>
+                <a href="mailto:hyfydistro@gmail.com" className="email-link">hyfydistro@gmail.com</a>
             </div>
 
             {/* <form action="mailto:hyfydistro@gmail.com">

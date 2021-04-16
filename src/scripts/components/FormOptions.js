@@ -84,7 +84,7 @@ export default function FormOptions(props) {
         <section className="form-options">
             <h3>3. Options</h3>
 
-            <p className="text-bold header-four">File Extensions</p>
+            <p className="form-header">File Extensions</p>
 
             <div className="radio-container-filetype">
                 <FileExtensionOptions
@@ -94,7 +94,7 @@ export default function FormOptions(props) {
             </div>
 
 
-            <p className="text-bold header-four">Squash</p>
+            <p className="form-header">Squash</p>
 
             <p className="margin-fix">Squash scale down image file size.</p>
 

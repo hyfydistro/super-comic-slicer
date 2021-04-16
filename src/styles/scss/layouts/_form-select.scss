@@ -1,4 +1,5 @@
 @use "../base";
+@use "../utils";
 
 // ============
 // FORM: SELECT
@@ -9,11 +10,18 @@
 
 .form-select {
     margin-bottom: base.$desktop-space-lv-1;
+    @include utils.mq-small{
+        margin-bottom: base.$mobile-space-lv-1;
+    }
 }
 
 .select-option {
     padding: 18px base.$desktop-space-lv-1;
     margin-bottom: base.$desktop-space-lv-half;
+    @include utils.mq-small{
+        padding: 14px base.$mobile-space-lv-1;
+        margin-bottom: base.$mobile-space-lv-half;
+    }
 }
 
 .select-label--wrapper {
@@ -34,6 +42,9 @@ input[type="checkbox"],
     width: 38px;
     height: 38px;
     margin-right: base.$desktop-space-lv-1;
+    @include utils.mq-small {
+        margin-right: base.$mobile-space-lv-1;
+    }
 }
 
 .select-label {
@@ -62,6 +73,9 @@ input[type="checkbox"] {
         font-size: 25px;
         margin-right: base.$desktop-space-lv-1;
         color: base.$text-color-50;
+        @include utils.mq-small {
+            margin-right: base.$mobile-space-lv-1;
+        }
     }
 
     &:checked + .select-label::before {
@@ -90,35 +104,5 @@ input[type="checkbox"] {
     }
     100% {
         transform: scale(1);
-    }
-}
-
-
-// #SML DEVICES
-
-@media all and (max-width: 576px) {
-    .form-select {
-        margin-bottom: base.$mobile-space-lv-1;
-    }
-
-    .select-option {
-        padding: 14px base.$mobile-space-lv-1;
-        margin-bottom: base.$mobile-space-lv-half;
-    }
-
-    // .select-option input {
-    //     margin-right: base.$mobile-space-lv-1;
-    //     margin-left: base.$mobile-space-lv-1;
-    // }
-
-    .select-option img {
-        margin-right: base.$mobile-space-lv-1;
-    }
-
-    // ELEMENT STATE
-    input[type="checkbox"] {
-        + .select-label::before {
-            margin-right: base.$mobile-space-lv-1;
-        }
     }
 }

@@ -1,39 +1,53 @@
 @use "../base";
+@use "../utils";
 
 // =============
 // FORM: CONTACT
 // =============
 
-
-// # DEFAULT || LGE DEVICES
-
 #contact {
     margin: 0 auto;
-    max-width: 992px;
+    max-width: utils.$MAX-WIDTH;
     padding-top: base.$desktop-space-lv-2;
     margin-bottom: base.$desktop-space-lv-2;
-    @include base.tablet-padding-preset;
     color: base.$text-color-70;
+    @include base.tablet-padding-preset;
+    @include utils.mq-small {
+        padding-top: base.$mobile-space-lv-2;
+        @include base.mobile-padding-preset;
+    }
 }
 
 #contact h2 {
     text-align: center;
     margin-bottom: base.$desktop-space-lv-1;
+    @include utils.mq-small {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
 }
 
 .contact-input-wrapper {
     padding-bottom: base.$desktop-space-lv-1;
+    @include utils.mq-small {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
 }
 
 #contact p {
     display: block;
     margin: auto 0;
     margin-bottom: base.$desktop-space-lv-1;
+    @include utils.mq-small {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
 }
 
 .contact-label {
     display: block;
     margin-bottom: base.$desktop-space-lv-half;
+    @include utils.mq-small {
+        margin-bottom: base.$mobile-space-lv-half;
+    }
 }
 
 .contact-input {
@@ -42,6 +56,10 @@
     padding: 18px;
     border-radius: 18px;
     border: 1px solid base.$text-color-70;
+    @include utils.mq-small {
+        padding: 14px;
+        border-radius: 14px;
+    }
 }
 
 // STATE ELEMENT
@@ -56,42 +74,12 @@
     justify-content: center;
 }
 
-.emai-link {
+.email-link {
     color: base.$link-color;
     text-decoration: underline;
 }
 
 // STATE ELEMENT
-.emai-link:hover {
+.email-link:hover {
     text-decoration: none;
-}
-
-// #SML DEVICES
-
-@media all and (max-width: 576px) {
-    #contact {
-        padding-top: base.$mobile-space-lv-2;
-        @include base.mobile-padding-preset;
-    }
-
-    #contact h2 {
-        margin-bottom: base.$mobile-space-lv-1;
-    }
-
-    .contact-input-wrapper {
-        margin-bottom: base.$mobile-space-lv-1;
-    }
-
-    #contact p {
-        margin-bottom: base.$mobile-space-lv-1;
-    }
-
-    .contact-label {
-        margin-bottom: base.$mobile-space-lv-half;
-    }
-
-    .contact-input {
-        padding: 14px;
-        border-radius: 14px;
-    }
 }

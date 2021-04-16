@@ -1,12 +1,9 @@
+@use 'type' as *;
+
 // =====
 // SPACE
 // =====
-
-@use 'type' as *;
-
 $line-height: 1.5;
-// $mobile-base-font-size: xx
-// $desktop-base-font-size: xx
 
 // MOBILE SPATIAL SYSTEM
 $mobile-space-lv-quarter: calc(#{$mobile-base-font-size} / $line-height / #{$line-height});

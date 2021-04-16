@@ -1,4 +1,5 @@
 @use "../base";
+@use "../utils";
 
 // ======
 // FOOTER
@@ -11,6 +12,11 @@ footer {
     padding-top: base.$desktop-space-lv-2;
     padding-bottom: base.$desktop-space-lv-2;
     @include base.tablet-padding-preset;
+    @include utils.mq-small {
+        padding-top: base.$mobile-space-lv-2;
+        padding-bottom: base.$mobile-space-lv-2;
+        @include base.mobile-padding-preset;
+    }
 }
 
 .column-wrapper {
@@ -114,6 +120,9 @@ footer {
 .share-container h3 {
     margin-bottom: base.$desktop-space-lv-1;
     color: base.$primary-color-80;
+    @include utils.mq-small {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
 }
 
 footer a {
@@ -122,11 +131,17 @@ footer a {
 
 .donate-icon-stack {
     margin-right: base.$desktop-space-lv-quarter;
+    @include utils.mq-small {
+        margin-right: base.$mobile-space-lv-quarter;
+    }
 }
 
 .contribute-container,
 .share-container {
     margin-bottom: base.$desktop-space-lv-2;
+    @include utils.mq-small {
+        margin-bottom: base.$mobile-space-lv-2;
+    }
 }
 
 #copy-link {
@@ -142,7 +157,7 @@ footer a {
 
 img.donate-image {
     height: 54px;
-    width: auto;
+    width: 192.350px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     transition: transform 100ms ease-in-out;
 }
@@ -176,33 +191,4 @@ img.donate-image:hover {
 
 .footer-notes a:active {
     color: base.$primary-color-10;
-}
-
-// #SML DEVICES
-
-@media all and (max-width: 576px) {
-    footer {
-        padding-top: base.$mobile-space-lv-2;
-        padding-bottom: base.$mobile-space-lv-2;
-        @include base.mobile-padding-preset;
-    }
-
-    .donate-container h3,
-    .contribute-container h3,
-    .share-container h3 {
-        margin-bottom: base.$mobile-space-lv-1;
-    }
-
-    .share-icon-stack {
-        margin-right: base.$mobile-space-lv-half;
-    }
-
-    .donate-icon-stack {
-        margin-right: base.$mobile-space-lv-quarter;
-    }
-
-    .contribute-container,
-    .share-container {
-        margin-bottom: base.$mobile-space-lv-2;
-    }
 }

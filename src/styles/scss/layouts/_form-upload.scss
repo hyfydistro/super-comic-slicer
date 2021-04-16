@@ -1,4 +1,5 @@
 @use "../base";
+@use "../utils";
 
 // ============
 // FORM: UPLOAD
@@ -17,6 +18,12 @@
         top: base.$desktop-space-lv-half;
         bottom: base.$desktop-space-lv-half;
     }
+    @include utils.mq-small {
+        padding: {
+            top: base.$mobile-space-lv-half;
+            bottom: base.$mobile-space-lv-half;
+        }
+    }
 }
 
 .dropzone {
@@ -34,6 +41,13 @@
     margin-bottom: base.$desktop-space-lv-1;
     cursor: pointer;
     border-radius: 18px;
+    @include utils.mq-small {
+        padding: {
+            top: base.$desktop-space-lv-1;
+            bottom: base.$desktop-space-lv-1;
+        }
+        margin-bottom: base.$desktop-space-lv-1;
+    }
 }
 
 // * Modifier
@@ -43,6 +57,9 @@
 
 .dropzone__upload-icon {
     margin-bottom: base.$desktop-space-lv-half;
+    @include utils.mq-small {
+        margin-bottom: base.$mobile-space-lv-half;
+    }
 }
 
 .icon-upload::before {
@@ -55,6 +72,9 @@
 
 .dropzone p {
     margin-bottom: base.$desktop-space-lv-half;
+    @include utils.mq-small {
+        margin-bottom: base.$mobile-space-lv-half;
+    }
 }
 
 .preview-wrapper {
@@ -63,6 +83,13 @@
         bottom: base.$desktop-space-lv-half;
     }
     margin-bottom: base.$desktop-space-lv-1;
+    @include utils.mq-small {
+        padding: {
+            top: base.$mobile-space-lv-half;
+            bottom: base.$mobile-space-lv-half;
+        }
+        margin-bottom: base.$mobile-space-lv-1;
+    }
 }
 
 .preview-container{
@@ -81,6 +108,16 @@
     margin-bottom: base.$desktop-space-lv-1;
     display: flex;
     flex-wrap: wrap;
+    @include utils.mq-small {
+        padding: {
+            bottom: base.$mobile-space-lv-1;
+            // L/R margins
+            left: 16px;
+            right: 16px;
+        }
+        border-radius: 5%;
+        margin-bottom: base.$mobile-space-lv-1;
+    }
 }
 
 // * Used with script
@@ -110,6 +147,10 @@
     // height: 214.5px; // ! Due to change
     height: 100%; // ! Due to change
     overflow: hidden;
+    @include utils.mq-small {
+        margin-top: base.$mobile-space-lv-1;
+        margin-right: base.$mobile-space-lv-1;
+    }
 }
 
 // !
@@ -118,9 +159,6 @@
     position: relative;
     width: 134.1px; // ! Due to change
     height: 214.5px; // ! Due to change
-    // background-color: aquamarine; // ! Due to change
-    // background: url("images/comic2.jpg") no-repeat;
-    // background: no-repeat;
     margin-top: base.$desktop-space-lv-1;
     margin-right: base.$desktop-space-lv-1;
     cursor: grab;
@@ -159,6 +197,9 @@
     display: flex;
     justify-content: space-between;
     @include base.tablet-padding-preset;
+    @include utils.mq-small {
+        @include base.mobile-padding-preset;
+    }
 }
 
 .preview__clear-btn {
@@ -172,6 +213,12 @@
     border-radius: 9999px;
     background-color: #ffffff;
     margin-bottom: base.$desktop-space-lv-1;
+    @include utils.mq-small {
+        height: 42px;
+        border: 1.5px solid base.$secondary-color-60;
+        padding: 14px calc(14px * 2);
+        margin-bottom: base.$mobile-space-lv-1;
+    }
 }
 
 // ELEMENT STATE:
@@ -209,7 +256,6 @@
     transition: 80ms ease-in;
     z-index: 99;
     outline: none;
-    // overflow: visible !important;
 }
 
 .close-btn:hover {
@@ -219,66 +265,4 @@
 .icon-remove {
     font-size: 22px;
     pointer-events: none;
-}
-
-// #SML DEVICES
-
-@media all and (max-width: 576px) {
-    .dropzone-container {
-        padding: {
-            top: base.$mobile-space-lv-half;
-            bottom: base.$mobile-space-lv-half;
-        }
-    }
-
-    .dropzone {
-        padding: {
-            top: base.$desktop-space-lv-1;
-            bottom: base.$desktop-space-lv-1;
-        }
-        margin-bottom: base.$desktop-space-lv-1;
-    }
-
-    .dropzone__upload-icon {
-        margin-bottom: base.$mobile-space-lv-half;
-    }
-
-    .dropzone p {
-        margin-bottom: base.$mobile-space-lv-half;
-    }
-
-    .preview-wrapper {
-        padding: {
-            top: base.$mobile-space-lv-half;
-            bottom: base.$mobile-space-lv-half;
-        }
-        margin-bottom: base.$mobile-space-lv-1;
-    }
-
-    .preview {
-        padding: {
-            bottom: base.$mobile-space-lv-1;
-            // L/R margins
-            left: 16px;
-            right: 16px;
-        }
-        border-radius: 5%;
-        margin-bottom: base.$mobile-space-lv-1;
-    }
-
-    .preview__thumbnail {
-        margin-top: base.$mobile-space-lv-1;
-        margin-right: base.$mobile-space-lv-1;
-    }
-
-    .preview__clear-btn-container {
-        @include base.mobile-padding-preset;
-    }
-
-    .preview__clear-btn {
-        height: 42px;
-        border: 1.5px solid base.$secondary-color-60;
-        padding: 14px calc(14px * 2);
-        margin-bottom: base.$mobile-space-lv-1;
-    }
 }

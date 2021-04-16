@@ -1,4 +1,5 @@
 @use "../base";
+@use "../utils";
 
 // =====
 // INTRO
@@ -8,14 +9,25 @@
 
 #intro {
     padding-bottom: base.$desktop-space-lv-2;
-    @include base.tablet-padding-preset;
-    max-width: 992px;
+    max-width: utils.$MAX-WIDTH;
     margin: 0 auto;
+    @include base.tablet-padding-preset;
+    @include utils.mq-small {
+        padding-bottom: base.$mobile-space-lv-2;
+        @include base.mobile-padding-preset;
+    }
 }
 
 #intro p {
     margin-bottom: base.$desktop-space-lv-1;
     color: base.$text-color-70;
+    @include utils.mq-small {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+}
+
+.intro--text p strong {
+    font-weight: base.$font-weight-bold;
 }
 
 #intro img {
@@ -24,28 +36,8 @@
         bottom: base.$desktop-space-lv-half;
     }
     width: 100%;
-    height: 60vh;
-}
-
-
-// # MED DEVICES
-
-@media all and (max-width: 992px) {}
-
-
-// #SML DEVICES
-
-@media all and (max-width: 576px) {
-    #intro {
-        padding-bottom: base.$mobile-space-lv-2;
-        @include base.mobile-padding-preset;
-    }
-
-    #intro p {
-        margin-bottom: base.$mobile-space-lv-1;
-    }
-
-    #intro img {
+    height: 100%;
+    @include utils.mq-small {
         padding: {
             top: base.$mobile-space-lv-half;
             bottom: base.$mobile-space-lv-half;

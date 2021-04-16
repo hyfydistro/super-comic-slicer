@@ -1,77 +1,92 @@
+// @use "../vendors/fonts";
+
 // ==========
 // TYPOGRAPHY
 // ==========
 
-// TODO
-// - add style guide typography here
+// =====================
+// # BASE CONFIGURATIONS
+// =====================
+// - typeface (font-family)
+// - Base Size
+// - Type Scale
+// - Line Height
+// - Weight
+// - Letter Spacing
 
-// # TYPEFACE #1
-// @font-face {
-//     font-family: "type1";
-//     src: url("./fonts/") format("truetype");
-//     font-weight: normal;
-//     font-style: normal;
-// }
 
-// @font-face {
-//     font-family: "type1";
-//     src: url("./fonts/") format("truetype");
-//     font-weight: normal;
-//     font-style: italic;
-// }
-
-// @font-face {
-//     font-family: "type1";
-//     src: url("./fonts/") format("truetype");
-//     font-weight: bold;
-//     font-style: normal;
-// }
-
-// // # TYPEFACE #2
-// @font-face {
-//     font-family: "type2";
-//     src: url("./fonts/") format("");
-//     font-weight: normal;
-//     font-style: normal;
-// }
-
-// @font-face {
-//     font-family: "type2";
-//     src: url("./fonts/") format("");
-//     font-weight: normal;
-//     font-style: italic;
-// }
-
-// @font-face  {
-//     font-family: "type2";
-//     src: url("./fonts/") format("");
-//     font-weight: bold;
-//     font-style: normal;
-// }
-
-// ! e.g. >>
-// FONT FACE
+// # FONT FAMILY
 $primary-fontface: Josefin Sans, sans-serif, "Arial";
 $secondary-fontface: Quicksand, sans-serif, "Arial";
 // $text-fontface: "type2", sans-serif,'Times New Roman';
 
-// BASE VALUE
+
+// # BASE SIZE
 $mobile-base-font-size: 14px;
 $desktop-base-font-size: 18px;
 
-// MDOULAR-SCALE
-// Mobile
-// $mobile-header-text-scale-ratio: 1.333;
-$mobile-body-text-scale-ratio: 1.25;
-// Tablet-Desktop
-// $desktop-header-text-scale-ratio: 1.5;
-$desktop-body-text-scale-ratio: 1.25;
-// ! <<
 
-// ================================
+// # Type Scale
+$scale-ratio: 1.25;
+
+$font-size-x-small: 0.64rem;
+// Use Case:
+// - In native iOS and Android applications
+
+$font-size-small: 0.8rem;
+// Use Case:
+// - Should be used sparingly for annotations, descriptions, and similar content
+
+$font-size-medium: 1rem;
+// Use Case:
+// - for the body text
+
+$font-size-large: 1.25rem;
+// Use Case:
+// - Use for small sub-headings
+// - for the main heading on mobile size (opt.)
+
+$font-size-x-large: 1.563rem;
+// Use Case:
+// - large sub-headings
+// - for the main heading on mobile size (opt.)
+
+$font-size-xx-large: 1.953rem;
+// Use Case:
+// for the main heading on tablet size
+
+$font-size-xxx-large: 2.441rem;
+// Use Case:
+// - for the main heading on desktop
+
+$font-size-xxxx-large: 3.052rem;
+// Use Case:
+// - for marketing purposes and banners
+
+
+// # Line Height
+$line-height-heading: 1.25;
+$line-height-reset: 1;
+$line-height-text: 1.5;
+// $line-height-text-emphasis: 1.7;
+// $line-height-text-on-dark: 2; // ? options: 2 or 1.8
+
+
+// # Weight
+
+$font-weight-bold: 700;
+$font-weight-bold-semi: 600;
+// $font-weight-light: 300;
+$font-weight-normal: 400; // regular (without font-weight)
+
+
+// # Letter Spacing
+// n/a
+
+
+// =========================
 // # DEFAULT || DESKTOP VIEW
-// ================================
-// ! e.g. >>
+// =========================
 // Font base: 18px
 
 // Modular Scale: 1.5
@@ -81,39 +96,26 @@ $desktop-body-text-scale-ratio: 1.25;
 // p - 18px | 1em
 // caption - 18px
 
-// Modular Scale: 1.414
-// h1 - 50.889px | 2.827em
-// h2 - 35.989px | 1.999em
-// h3 - 25.452px | 1.414em
-// p - 18px | 1em
-// caption 18px
-// ! <<
-
-// ? Consider:
-// Type
-// - letter spacing / tracking
-// Media query
-// - max-height
-
 html {
     font-size: $desktop-base-font-size;
     h1 {
+        font-size: $font-size-x-large;
         font-family: $primary-fontface;
-        font-weight: 600;
-        // line-height: calc(
-        //     1rem * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio} *
-        //         1.1
-        // );
+        font-weight: $font-weight-bold-semi;
+        line-height: $line-height-reset;
         text-transform: uppercase;
     }
     h2 {
+        font-size: $font-size-large;
         font-family: $secondary-fontface;
-        font-weight: bold;
-        // line-height: calc(1rem * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio} * 1.1);
+        font-weight: $font-weight-bold;
+        line-height: $line-height-reset;
     }
-    h3 {
+    h3,
+    .preview__clear-btn {
         font-family: $secondary-fontface;
-        font-weight: normal;
+        line-height: $line-height-reset;
+        font-size: $font-size-large;
     }
     p,
     ul li,
@@ -127,104 +129,38 @@ html {
     .donate-text,
     .contribute-text {
         font-family: $secondary-fontface;
-        font-weight: normal;
+        font-weight: $font-weight-normal;
         font-size: $desktop-base-font-size;
         line-height: 1.5;
+        font-weight: $font-weight-normal;
     }
-    // header {
-    //     h1 {
-    //         font-size: calc(
-    //             1rem * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio}
-    //         );
-    //     }
-    //     h2 {
-    //         font-size: calc(1rem * #{$desktop-header-text-scale-ratio} * #{$desktop-header-text-scale-ratio});
-    //     }
-    //     h3 {
-    //         font-size: calc(1rem * #{$desktop-header-text-scale-ratio});
-    //     }
-    // }
-    // main {
-    h1 {
-        font-size: calc(
-            1rem * #{$desktop-body-text-scale-ratio} * #{$desktop-body-text-scale-ratio} * #{$desktop-body-text-scale-ratio}
-        );
-    }
-    h2 {
-        font-size: calc(1rem * #{$desktop-body-text-scale-ratio} * #{$desktop-body-text-scale-ratio});
-    }
-    h3,
-    .preview__clear-btn {
-        font-size: calc(1rem * #{$desktop-body-text-scale-ratio});
-    }
-    // }
-    // footer {
-    //     p {
-    //         font-size: 10px;
-    //     }
-    // }
 }
 
-// # Font Styles
-.text-bold {
-    font-weight: bold;
-}
-
-p.text-small {
-    font-size: 12px;
-}
 
 // ========================
 // # TABLET VIEW AND LIMITS
 // ========================
-// ! e.g. >>
-// Font base: 18px
 
-// Modular Scale: 1.5
+// @media screen and (max-width: 1024px) {}
 
-// h1 - 60.75px | 3.375em
-// h2 - 40.5px | 2.25em
-// h3 - 27px | 1.5em
-// p - 18px | 1em
-// caption - 18px
-
-// Modular Scale: 1.414
-
-// h1 - 50.889px | 2.827em
-// h2 - 35.989px | 1.999em
-// h3 - 25.452px | 1.414em
-// p - 18px | 1em
-// caption 18px
-// ! <<
-
-@media screen and (max-width: 1024px) {
-}
-
-// styles go here
 
 // ========================
 // # MOBILE VIEW AND LIMITS
 // ========================
-// ! e.g. >>
-// Modular Scale: 1.333
-// h1 - 28.423px | 2.369em
-// h2 - 21.323px | 1.777em
-// h3 - 15.996px | 1.333em
-// p - 12px | 1em
-// caption - 12px
-
-// Modular Scale: 1.2
-// h1 - 20.736px | 1.728em
-// h2 - 17.28px | 1.44em
-// h3 - 14.4px | 1.2em
-// p - 12px | 1em
-// caption - 12px | 1em
-// footer - 10px
-// ! <<
 
 @media screen and (max-width: 576px) {
     html {
         font-size: $mobile-base-font-size;
+        h1 {
+            font-size: $font-size-x-large;
+        }
+        h2 {
+            font-size: $font-size-large;
+        }
+        h3,
+        .preview__clear-btn {
+            font-size: $font-size-medium;
+        }
         p,
         ul li,
         .emai-link,
@@ -237,44 +173,5 @@ p.text-small {
         .contribute-text {
             font-size: $mobile-base-font-size;
         }
-        // header {
-        //     h1 {
-        //         font-size: calc(
-        //             1rem * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio}
-        //         );
-        //         font-weight: bold;
-        //         text-transform: none;
-        //         line-height: calc(
-        //             1rem * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio} *
-        //                 1.1
-        //         );
-        //     }
-        //     h2 {
-        //         font-size: calc(1rem * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio});
-        //         line-height: calc(1rem * #{$mobile-header-text-scale-ratio} * #{$mobile-header-text-scale-ratio} * 1.1);
-        //     }
-        //     h3 {
-        //         font-size: calc(1rem * #{$mobile-header-text-scale-ratio});
-        //     }
-        // }
-        // main {
-        h1 {
-            font-size: calc(
-                1rem * #{$mobile-body-text-scale-ratio} * #{$mobile-body-text-scale-ratio} * #{$mobile-body-text-scale-ratio}
-            );
-        }
-        h2 {
-            font-size: calc(1rem * #{$mobile-body-text-scale-ratio} * #{$mobile-body-text-scale-ratio});
-        }
-        h3,
-        .preview__clear-btn {
-            font-size: calc(1rem * #{$mobile-body-text-scale-ratio});
-        }
-        // }
-        // footer {
-        //     p {
-        //         font-size: $mobile-base-font-size;
-        //     }
-        // }
     }
 }

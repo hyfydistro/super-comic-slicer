@@ -1,4 +1,5 @@
 @use "../base";
+@use "../utils";
 
 // =============
 // FORM: OPTIONS
@@ -10,16 +11,30 @@
 .form-options {
     margin-bottom: base.$desktop-space-lv-1;
     // @include base.tablet-margin-preset;
+    @include utils.mq-small {
+        margin-bottom: base.$mobile-space-lv-1;
+    }
+}
+
+.form-header {
+    font-weight: base.$font-weight-bold;
 }
 
 // * Hotfix: margin compensation
 p.margin-fix {
     margin-right: 32px;
+    @include utils.mq-small {
+        margin-right: 16px;
+    }
 }
 
 .radio-option {
     padding: 18px base.$desktop-space-lv-1;
     margin-bottom: base.$desktop-space-lv-half;
+    @include utils.mq-small {
+        padding: 18px base.$mobile-space-lv-1;
+        margin-bottom: base.$mobile-space-lv-half;
+    }
 }
 
 .radio-option label {
@@ -51,6 +66,9 @@ input[type="radio"] {
         font-size: 25px;
         margin-right: base.$desktop-space-lv-1;
         color: base.$text-color-50;
+        @include utils.mq-small {
+            margin-right: base.$mobile-space-lv-1;
+        }
     }
 
     &:checked + .select-text::before {
@@ -72,31 +90,4 @@ input[type="radio"] {
 
 ul {
     list-style-type: disc;
-}
-
-
-// #SML DEVICES
-
-@media all and (max-width: 576px) {
-    .form-options {
-        margin-bottom: base.$mobile-space-lv-1;
-    }
-
-    // * Hotfix: margin compensation
-    .margin-fix {
-        margin-right: 16px;
-    }
-
-    .radio-option {
-        padding: 18px base.$mobile-space-lv-1;
-        margin-bottom: base.$mobile-space-lv-half;
-    }
-
-    // ELEMENT STATE
-    input[type="radio"] {
-
-        + .select-text::before {
-            margin-right: base.$mobile-space-lv-1;
-        }
-    }
 }

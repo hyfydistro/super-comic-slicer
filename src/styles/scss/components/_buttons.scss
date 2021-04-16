@@ -1,0 +1,53 @@
+@use "../base";
+@use "../utils";
+
+// =======
+// BUTTONS
+// =======
+
+.send-message-btn-container,
+.slice-btn-container {
+    display: flex;
+    justify-content: center;
+    padding: {
+        top: base.$desktop-space-lv-1;
+        bottom: base.$desktop-space-lv-1;
+    }
+}
+
+.send-message-btn-container {
+    padding-top: 0;
+}
+
+.send-message-slice-btn,
+.slice-btn {
+    display: inline-block;
+    padding: 18px calc(18px * 2);
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.send-message-slice-btn,
+.slice-btn {
+    background-color: base.$primary-color-30;
+    color: base.$primary-color-80;
+    border: solid 1px base.$primary-color-80;
+}
+
+.send-message-slice-btn:hover,
+.send-message-slice-btn:focus,
+.slice-btn:hover,
+.slice-btn:focus {
+    background-color: base.$primary-color-50;
+}
+
+.send-message-slice-btn:active,
+.slice-btn:active {
+    background-color: base.$primary-color-10;
+}
+
+.send-message-slice-btn h3,
+.slice-btn h3 {
+    margin: 0;
+    padding: 0;
+}
