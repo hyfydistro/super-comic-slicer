@@ -4,41 +4,52 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const WorkboxPlugin = require("workbox-webpack-plugin");
+const webpack = require("webpack");
 
 
 // ? Option (Default) - Simple Configuration:
 // Coupled with setting NODE_ENV via npm "scripts"
-const mode = process.env.NODE_ENV === "production" ? "production" : "development";
+// const mode = process.env.NODE_ENV === "production" ? "production" : "development";
 
 // Temporary workaround for "browserslist" bug that is being patched in the near future
 // Bug: does not persist with webpack live server
-const target = process.env.NODE.ENV === "production" ? "browserslist" : "web";
+// const target = process.env.NOD_ENV === "production" ? "browserslist" : "web";
 
 // Runs slow for setup, then fast
 // const sourcemapMode = process.env.NODE.ENV === "production" ? "source-map" : "eval-source-map";
-const sourcemapMode = process.env.NODE.ENV === "production" ? "" : "eval-source-map";
+// const sourcemapMode = process.env.NODE_ENV === "production" ? "" : "eval-source-map";
+
+// Simple server setting
+// for Manually testing current user experience
+// const isUserExp = process.env.USER_EXP ===
+
+let mode = "development";
+let target = "web";
+let sourcemapMode = "eval-source-map";
+let isProduction = false;
 
 // ? Option - Complex Configuration:
-// if (process.env.NODE_ENV === "production") {
-//     mode = "production"
-//     isProduction = true
-//     target = "browserslist"
-//     cleanFiles = ['**/*']
-//     sourcemapMode = "source-map"
-// } else {
-//     mode = "development"
-//     isProduction = false
-//     target = "web"
-//     cleanFiles = [
-//         // ! Configure
-//         // add all image file names
-//         // or seriously find a shorter way
-//         '**/*',
-//         '!static-files*'
-//     ]
-//     sourcemapMode = "eval-source-map"
-// }
+if (process.env.NODE_ENV === "production") {
+    mode = "production";
+    target = "browserslist";
+    sourcemapMode = "source-map";
+    isProduction = true;
+    // cleanFiles = ['**/*']
+} else {
+    // cleanFiles = [
+    //     // ! Configure
+    //     // add all image file names
+    //     // or seriously find a shorter way
+    //     '**/*',
+    //     '!static-files*'
+    // ]
+}
 
+let isUserExp = false;
+if (process.env.USER_EXP == "pass") {
+    isUserExp = true;
+}
 
 module.exports = {
     mode: mode,
@@ -53,7 +64,7 @@ module.exports = {
         // shared: ["react", "react-dom"]
     },
     output: {
-        filename: "[name].bundle.js",
+        filename: "[name].bundle.[chunkhash].js",
         path: path.resolve(__dirname, "dist"),
         assetModuleFilename: "images/[hash][ext][query]"
     },
@@ -65,6 +76,7 @@ module.exports = {
         // turn on hot to true, and liveReload to false
         // hot: true,
         // liveReload: fasle
+        writeToDisk: isUserExp
     },
     module: {
         rules: [
@@ -155,7 +167,9 @@ module.exports = {
             {
                 test: /\.(s[ac]|c)ss$/i,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    "style-loader", // for inline CSS injection
+                    // { loader: 'style-loader', options: { attributes: {} } },
+                    // MiniCssExtractPlugin.loader,
                     "css-loader",
                     "postcss-loader",
                     "sass-loader",
@@ -194,17 +208,39 @@ module.exports = {
             },
             loader: true
         }),
-        new MiniCssExtractPlugin({
-            filename: "[name].css",
-            linkType: 'text/css',
-            insert: "document.head.appendChild(linkTag);"
-        }),
+        // new MiniCssExtractPlugin({
+        //     filename: "[name].css",
+        //     linkType: 'text/css',
+        //     // insert: "document.head.appendChild(linkTag);"
+        //     insert: "document.head.appendChild(linkTag);"
+        // }),
+        // Extract ALL dependency into one file for the entry point
+        // saved as "vendor"
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: "vendor",
+        //     minChunks: ({ resource }) => /node_modules/.test(resource)
+        // }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: "runtime",
+        //     minChunks: Infinity
+        // }),
+        new webpack.ids.HashedModuleIdsPlugin(),
         new HtmlWebpackPlugin({
-            title: "Supporting Modern Browsers with Webpack and React",
+            title: "Super Comic Slicer",
             template: "./src/index.html",
+            filename: "index.html",
             // minify: isProduction,
             // favicon: "./src/favicon.ico",
             inject: "body",
+        }),
+        new WorkboxPlugin.GenerateSW({
+            // Rename
+            swDest: "sw.js",
+            // these options encourage the ServiceWorkers to get in there fast
+            // and not allow any straggling "old" SWs to hang around
+            clientsClaim: true,
+            skipWaiting: true,
+            maximumFileSizeToCacheInBytes: 5*1024*1024
         })
     ],
 
@@ -233,7 +269,8 @@ module.exports = {
                 reactBeautifulDnd: {
                     test: /[\\/]node_modules[\\/]((react-beautiful-dnd).*)[\\/]/,
                     name: "reactreactBeautifulDnd",
-                    chunks: "all"
+                    chunks: "all",
+                    // priority: 1
                 }
             }
         }
