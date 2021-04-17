@@ -82,7 +82,7 @@ module.exports = {
         rules: [
             // # Target: Image files
             {
-                test: /\.(png|jpe?g|gif|svg)$/i,
+                test: /\.(png|jpe?g|gif|svg|webp)$/i,
                 use: [
                     {
                         loader: "file-loader",
@@ -203,7 +203,8 @@ module.exports = {
                     ["gifsicle", {
                         interlaced: true,
                         optimizationLevel: 3
-                    }]
+                    }],
+                    ["imagemin-webp"]
                 ],
             },
             loader: true
