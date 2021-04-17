@@ -1,4 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
 // libs
 import convertBytes from "../libs/convertBytes";
 
@@ -82,6 +83,7 @@ function Preview(props) {
                         )}
                     </Droppable>
                 </DragDropContext>
+
                 <div className="preview__clear-btn-container">
                     <div className="file-size__container">
                         <span className="file-size-text">Total File Size: {convertBytes(props.getTotalFileSize)}</span>

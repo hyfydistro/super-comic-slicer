@@ -104,7 +104,7 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
    */
 
   workbox.precacheAndRoute([{
-    "url": "assets.bundle.594e198adef8b1b8c165.js",
+    "url": "assets.bundle.7db67b8e8ca22da4a3a1.js",
     "revision": null
   }, {
     "url": "fonts/JosefinSans-SemiBold.ttf",
@@ -126,37 +126,40 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
     "revision": "5fb0e920a7001f23b1c182e3182a2890"
   }, {
     "url": "images/apple-touch-icon.png",
-    "revision": "557fe0e5ad5a0313c8585e072202327e"
+    "revision": "44a60adc5eccff0ee0ea9778a499d116"
   }, {
     "url": "images/bmc-btn.png",
-    "revision": "a051732a2612282e0dcf156f84c20f55"
+    "revision": "76eb1065f086d52221a54a4813c91d07"
   }, {
     "url": "images/favicon-32x32.png",
-    "revision": "6145982fb911b0a18f5649a8e653b264"
+    "revision": "3bbd526d8b00600f76be5ddd236f429b"
   }, {
-    "url": "images/header-bg.png",
-    "revision": "b87ab2418cca11c5b94ad066518be8fb"
+    "url": "images/header-bg.webp",
+    "revision": "fad365694e94cb7c93d35d6e68c3fa5e"
   }, {
     "url": "images/icomoon.svg",
     "revision": "56fd0297ecd0c40842fcb18cfb3aa031"
   }, {
+    "url": "images/loader-hamster.gif",
+    "revision": "dcb32925ae185da5282f4cae3d9f1aad"
+  }, {
     "url": "images/og-supercomicslicer.png",
-    "revision": "d12dcca1a19c4cdecb370a5d7e3f92c9"
+    "revision": "80b5d80507d59c821b1a2c66b59df67b"
   }, {
     "url": "images/salespitch.svg",
     "revision": "4dff486d7af62d6bf95cad7d2ecba856"
   }, {
     "url": "images/tapas-icon.png",
-    "revision": "3d6be825fa47843cf13e725f761925e8"
+    "revision": "522e79bb074f3a44188908fe469c8c6f"
   }, {
     "url": "images/webtoon-icon.svg",
     "revision": "140c74e82ea7dc88f25c4353f5f2765e"
   }, {
-    "url": "index.bundle.d08dbba58ebc1b9ec824.js",
+    "url": "index.bundle.86d8957aebbf6b3ff072.js",
     "revision": null
   }, {
     "url": "index.html",
-    "revision": "a04fd67c529048994e5b1bd11fc4626a"
+    "revision": "8dcae3b86f4b9946e0ca87cabff7effa"
   }, {
     "url": "libs.bundle.cce9f7a21a6ca852ff03.js",
     "revision": null
@@ -173,7 +176,7 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
     "url": "src_scripts_components_Contact_js.bundle.a0d718790a7b936769de.js",
     "revision": null
   }, {
-    "url": "src_scripts_components_Footer_js.bundle.e13d51edd6e2717ffc03.js",
+    "url": "src_scripts_components_Footer_js.bundle.e953c7b0b3932d42a1a4.js",
     "revision": null
   }, {
     "url": "src_scripts_components_FormOptions_js.bundle.2d2ff0766e64068b19f1.js",
@@ -185,10 +188,10 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
     "url": "src_scripts_components_FormSelect_js.bundle.abbee3e761850c825771.js",
     "revision": null
   }, {
-    "url": "src_scripts_components_FormUpload_js.bundle.af0b340a6e8b19a910ba.js",
+    "url": "src_scripts_components_FormUpload_js.bundle.7c3aa4704c6bd72024d3.js",
     "revision": null
   }, {
-    "url": "src_scripts_components_Form_js.bundle.6f71890d53028e68de24.js",
+    "url": "src_scripts_components_Form_js.bundle.619d6e017710bfb436ec.js",
     "revision": null
   }, {
     "url": "src_scripts_components_Header_js.bundle.3501e772d1a1ba209a2a.js",
