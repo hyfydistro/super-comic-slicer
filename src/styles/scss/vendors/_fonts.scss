@@ -6,7 +6,7 @@
 // # TYPEFACE #1
 @font-face {
     font-family: unquote("Josefin Sans");
-    src: url("./fonts/josefin-sans/JosefinSans-SemiBold.ttf") format("truetype");
+    src: url("./fonts/josefin-sans/JosefinSans-SemiBold.ttf") format("truetype"), url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap");
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -15,7 +15,7 @@
 // # TYPEFACE #2
 @font-face {
     font-family: unquote("Quicksand");
-    src: url("./fonts/quicksand/Quicksand-Regular.ttf") format("truetype");
+    src: url("./fonts/quicksand/Quicksand-Regular.ttf") format("truetype"), url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -23,7 +23,7 @@
 
 @font-face {
     font-family: unquote("Quicksand");
-    src: url("./fonts/quicksand/Quicksand-Bold.ttf") format("truetype");
+    src: url("./fonts/quicksand/Quicksand-Bold.ttf") format("truetype"), url("https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap");
     font-weight: 700; // bold
     font-style: normal;
     font-display: swap;

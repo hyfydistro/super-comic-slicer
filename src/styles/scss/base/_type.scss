@@ -16,8 +16,8 @@
 
 
 // # FONT FAMILY
-$primary-fontface: Josefin Sans, sans-serif, "Arial";
-$secondary-fontface: Quicksand, sans-serif, "Arial";
+$primary-fontface: Josefin Sans, sans-serif, "Verdana", "Arial";
+$secondary-fontface: Quicksand, sans-serif, "Trebuchet MS", "Arial";
 // $text-fontface: "type2", sans-serif,'Times New Roman';
 
 
@@ -119,6 +119,7 @@ html {
     }
     p,
     ul li,
+    a,
     .emai-link,
     .file-size-text,
     .alert-message-text--success,
@@ -163,6 +164,7 @@ html {
         }
         p,
         ul li,
+        a,
         .emai-link,
         .file-size-text,
         .alert-message-text--success,
