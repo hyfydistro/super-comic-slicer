@@ -17,11 +17,6 @@
     <meta name="author" content="Caroline Rozali">
     <meta name="description" content="A web application that crop, divide and scale your really long comic page." />
     <title>Super Comic Slicer</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Quicksand:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" defer>
     <!-- Open Graph - Optional -->
     <meta property="og:title" content="Super Comic Slicer - your webcomic utility for cropping! Plus scaling!" />
     <meta property="og:site_name" content="Super Comic Slicer" />
@@ -49,24 +44,53 @@
 </head>
 
 <body>
-    <div class="loader-container">
-        <div class="loader">
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-        </div>
-        <div class="loader-text">
-            <p>Loading</p>
-        </div>
+    <div
+        class="loader"
+        style="
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            padding-top: 40.5px;
+        "
+    >
+        <img
+        src="images/loader-hamster.gif"
+        style="
+            width: 250px;
+            height: 250px;
+            position: relative;
+            margin: 0 auto;
+            display: block;
+            "
+        >
+        <p
+        style="
+            margin-top: 27px;
+            padding: 18px !important;
+            background-color: #FFFFFF;
+            z-index: 800;
+            box-shadow: 0 8px 6px -6px grey;
+            text-align: center;
+            display: block;
+            position: relative;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 260px;
+            "
+        >
+            Initial load will take a while.
+        </p>
     </div>
 
     <div id="app"></div>
     <noscript>You need to upgrade to a modern browser (such as Google Chrome or Firefox), the script won't run in this
         browser.</noscript>
     <script>
-        const loaderImg = document.querySelector(".loader-container");
+        const loaderImg = document.querySelector(".loader");
 
         window.addEventListener("load", function () {
             loaderImg.style.display = "none";

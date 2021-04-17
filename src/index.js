@@ -1,8 +1,3 @@
-// ======
-// Styles
-// ======
-import "./main.styles.scss";
-
 import React, { Suspense, lazy } from "react";
 import * as ReactDOM from "react-dom";
 

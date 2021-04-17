@@ -1,3 +1,8 @@
+// ======
+// Styles
+// ======
+import "./main.styles.scss";
+
 // =====
 // Files
 // =====
@@ -10,7 +15,8 @@ import "./fonts/quicksand/Quicksand-Bold.ttf";
 import "./fonts/quicksand/Quicksand-Regular.ttf";
 import "./fonts/josefin-sans/JosefinSans-SemiBold.ttf";
 // Images
-import "./images/header-bg.png";
+import "./images/loader-hamster.gif";
+import "./images/header-bg.webp";
 import "./images/salespitch.svg";
 import "./images/webtoon-icon.svg";
 import "./images/tapas-icon.png";
