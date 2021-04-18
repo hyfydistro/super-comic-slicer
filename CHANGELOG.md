@@ -1,6 +1,20 @@
 # Changelog
 
-## 16/04/2021 - Version 1.0.7 (Current)
+## 16/04/2021 - Version 1.0.8 (Current)
+
+## Bug Fixes
+
+* Add `bg-header.png` as fallback for `.webp` file.
+
+Note: Older Safari versions does not support `.webp` files.
+
+## Features
+
+* Add image files for different devices splash screen, such as, Android.
+    - `android-chrome-192x192.png`
+    - `android-chrome-512x512.png`
+
+## 16/04/2021 - Version 1.0.7 (older versions)
 
 ## Performance Improvements
 
@@ -16,7 +30,7 @@ Reduced size from 1.18KB to 576KB
 * Revert to `loader-hamster.gif` file for preloading screen.
 Reduced size from 20KB to 7KB
 
-## 16/04/2021 - Version 1.0.6 (older versions)
+## 16/04/2021 - Version 1.0.6
 
 ### Performance Improvements
 
