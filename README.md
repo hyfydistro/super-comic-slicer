@@ -109,7 +109,7 @@ Not compatible with IE browsers.
 * [x] jest (optional; for Unit Testing)
 * [x] cross-env (allow environment variable setup for varous OS with on universal syntax)
 
-Simple Server (to seee current user experience)
+Simple Server (to see current user experience)
 * [X] http-server
 
 Image File Compressions
