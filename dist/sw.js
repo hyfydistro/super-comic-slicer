@@ -104,7 +104,7 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
    */
 
   workbox.precacheAndRoute([{
-    "url": "assets.bundle.7db67b8e8ca22da4a3a1.js",
+    "url": "assets.bundle.d7dd40a8e0d3722c2e40.js",
     "revision": null
   }, {
     "url": "fonts/JosefinSans-SemiBold.ttf",
@@ -134,6 +134,9 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
     "url": "images/favicon-32x32.png",
     "revision": "3bbd526d8b00600f76be5ddd236f429b"
   }, {
+    "url": "images/header-bg.png",
+    "revision": "fad365694e94cb7c93d35d6e68c3fa5e"
+  }, {
     "url": "images/header-bg.webp",
     "revision": "fad365694e94cb7c93d35d6e68c3fa5e"
   }, {
@@ -155,11 +158,11 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
     "url": "images/webtoon-icon.svg",
     "revision": "140c74e82ea7dc88f25c4353f5f2765e"
   }, {
-    "url": "index.bundle.86d8957aebbf6b3ff072.js",
+    "url": "index.bundle.5ddabffbb0a427d0c095.js",
     "revision": null
   }, {
     "url": "index.html",
-    "revision": "8dcae3b86f4b9946e0ca87cabff7effa"
+    "revision": "e9415ee3ed2ea0ad96e1ce14286c4101"
   }, {
     "url": "libs.bundle.cce9f7a21a6ca852ff03.js",
     "revision": null
@@ -179,19 +182,19 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
     "url": "src_scripts_components_Footer_js.bundle.e953c7b0b3932d42a1a4.js",
     "revision": null
   }, {
-    "url": "src_scripts_components_FormOptions_js.bundle.2d2ff0766e64068b19f1.js",
+    "url": "src_scripts_components_FormOptions_js.bundle.59c0a08093be71778ec2.js",
     "revision": null
   }, {
     "url": "src_scripts_components_FormResults_js.bundle.7c978f8f30ecb8f3ad54.js",
     "revision": null
   }, {
-    "url": "src_scripts_components_FormSelect_js.bundle.abbee3e761850c825771.js",
+    "url": "src_scripts_components_FormSelect_js.bundle.f440809d7b6ef15ef4b1.js",
     "revision": null
   }, {
     "url": "src_scripts_components_FormUpload_js.bundle.7c3aa4704c6bd72024d3.js",
     "revision": null
   }, {
-    "url": "src_scripts_components_Form_js.bundle.619d6e017710bfb436ec.js",
+    "url": "src_scripts_components_Form_js.bundle.b0fb37f605850e31f835.js",
     "revision": null
   }, {
     "url": "src_scripts_components_Header_js.bundle.3501e772d1a1ba209a2a.js",

@@ -242,7 +242,7 @@ module.exports = {
             clientsClaim: true,
             skipWaiting: true,
             maximumFileSizeToCacheInBytes: 5*1024*1024
-        })
+        }),
     ],
 
     // # File Extensions Options
