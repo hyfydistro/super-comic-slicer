@@ -1,14 +1,14 @@
 const webcomicsModel = [
     {
         htmlLabel: "webtoon",
-        imageSource: "images/webtoon-icon.svg",
+        imageSource: "images/icon-webtoon.svg",
         htmlAlt: "webtoon icon",
         text: "Webtoon",
         disabled: false
     },
     {
         htmlLabel: "tapas",
-        imageSource: "images/tapas-icon.png",
+        imageSource: "images/icon-tapas.png",
         htmlAlt: "tapas icon",
         text: "Tapas",
         disabled: true

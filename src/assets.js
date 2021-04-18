@@ -19,9 +19,9 @@ import "./images/loader-hamster.gif";
 import "./images/header-bg.webp";
 import "./images/header-bg.png";
 import "./images/salespitch.svg";
-import "./images/webtoon-icon.svg";
-import "./images/tapas-icon.png";
-import "./images/bmc-btn.png";
+import "./images/icon-webtoon.svg";
+import "./images/icon-tapas.png";
+import "./images/btn-bmc.png";
 import "./images/og-supercomicslicer.png";
 // Favicon
 import "./images/favicon-32x32.png";

@@ -87,7 +87,7 @@ export default function Footer() {
                     <div className="donate-container">
                         <h3>Donate</h3>
                         <a href="https://www.buymeacoffee.com/spectredox" className="donate-image__wrapper" rel="noopener">
-                            <img className="donate-image" src="images/bmc-btn.png" alt="Buy me a coffee" />
+                            <img className="donate-image" src="images/btn-bmc.png" alt="Buy me a coffee" />
                         </a>
 
                     </div>
