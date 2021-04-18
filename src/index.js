@@ -4,10 +4,10 @@ import * as ReactDOM from "react-dom";
 // ==========
 // COMPONENTS
 // ==========
-// import Header from "./scripts/components/Header.js";
-const Header = lazy(() => import("./scripts/components/Header.js"));
-// import Intro from "./scripts/components/Intro.js";
-const Intro = lazy(() => import("./scripts/components/Intro.js"));
+import Header from "./scripts/components/Header.js";
+// const Header = lazy(() => import("./scripts/components/Header.js"));
+import Intro from "./scripts/components/Intro.js";
+// const Intro = lazy(() => import("./scripts/components/Intro.js"));
 // import Form from "./scripts/components/Form.js";
 const Form = lazy(() => import("./scripts/components/Form.js"));
 // import Contact from "./scripts/components/Contact.js";
@@ -19,12 +19,12 @@ class App extends React.Component {
     render() {
         return (
             <>
-                <Suspense fallback={<div>1️⃣</div>}>
+                {/* <Suspense fallback={<div>1️⃣</div>}> */}
                     <Header />
-                </Suspense>
-                <Suspense fallback={<div>2️⃣</div>}>
+                {/* </Suspense> */}
+                {/* <Suspense fallback={<div>2️⃣</div>}> */}
                     <Intro />
-                </Suspense>
+                {/* </Suspense> */}
                 <Suspense fallback={<div>3️⃣</div>}>
                     <Form />
                 </Suspense>
