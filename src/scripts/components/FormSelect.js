@@ -1,6 +1,24 @@
+const webcomicsModel = [
+    {
+        htmlLabel: "webtoon",
+        imageSource: "images/webtoon-icon.svg",
+        htmlAlt: "webtoon icon",
+        text: "Webtoon",
+        disabled: false
+    },
+    {
+        htmlLabel: "tapas",
+        imageSource: "images/tapas-icon.png",
+        htmlAlt: "tapas icon",
+        text: "Tapas",
+        disabled: true
+    },
+];
+
 function WebcomicsOptions(props) {
 
-    const webcomicsList = props.getWebcomicsModel.map((currentWebcomic, tabindex) => {
+    // const webcomicsList = props.getWebcomicsModel.map((currentWebcomic, tabindex) => {
+    const webcomicsList = webcomicsModel.map((currentWebcomic, tabindex) => {
 
         if (currentWebcomic.disabled) {
             return (
@@ -50,7 +68,6 @@ export default function FormSelect(props) {
 
             <div className="select-container">
                 <WebcomicsOptions
-                    getWebcomicsModel={props.getWebcomicsModel}
                     onHandleSelectedWebcomic={props.onHandleSelectedWebcomic}
                 />
             </div>

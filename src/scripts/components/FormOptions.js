@@ -1,8 +1,52 @@
+// RADIO OPTIONS
+// Default CHECKED: squashLevelModel[0]
+const squashLevelModel = [
+    {
+        htmlLabel: "none",
+        pixelValue: 0,
+        text: "none"
+    },
+    {
+        htmlLabel: "400",
+        pixelValue: 400,
+        text: "400 width pixels"
+    },
+    {
+        htmlLabel: "500",
+        pixelValue: 500,
+        text: "500 width pixels"
+    },
+    {
+        htmlLabel: "600",
+        pixelValue: 600,
+        text: "600 width pixels"
+    },
+    {
+        htmlLabel: "700",
+        pixelValue: 700,
+        text: "700 width pixels"
+    }
+]
+
+// RADIO OPTIONS
+// Default CHECKED: filExtensionsModel[0]
+const filExtensionsModel = [
+    {
+        htmlLabel: "jpeg",
+        text: "JPEG"
+    },
+    {
+        htmlLabel: "png",
+        text: "PNG"
+    }
+];
+
+
 function SquashOptions(props) {
 
-    const squashLevelList = props.getSquashLevelModel.map((currentSquashLevel, index) => {
+    const squashLevelList = squashLevelModel.map((currentSquashLevel, index) => {
 
-        if (props.getSquashLevelModel[0] == currentSquashLevel) {
+        if (squashLevelModel[0] == currentSquashLevel) {
             return (
                 <div className="radio-option" key={index}>
                     <label htmlFor={currentSquashLevel.htmlLabel}>
@@ -41,8 +85,8 @@ function SquashOptions(props) {
 
 function FileExtensionOptions(props) {
 
-    const fileExtensionsList = props.getFilExtensionsModel.map((fileExtObj, index) => {
-        if (props.getFilExtensionsModel[0] === fileExtObj) {
+    const fileExtensionsList = filExtensionsModel.map((fileExtObj, index) => {
+        if (filExtensionsModel[0] === fileExtObj) {
             return (
                 <div className="radio-option" key={index}>
                     <label htmlFor={fileExtObj.htmlLabel}>
@@ -88,7 +132,6 @@ export default function FormOptions(props) {
 
             <div className="radio-container-filetype">
                 <FileExtensionOptions
-                    getFilExtensionsModel={props.getFilExtensionsModel}
                     onHandleOptionsFileExtenions={props.onHandleOptionsFileExtenions}
                 />
             </div>
@@ -105,7 +148,6 @@ export default function FormOptions(props) {
 
             <div className="radio-container-squash">
                 <SquashOptions
-                    getSquashLevelModel={props.getSquashLevelModel}
                     onHandleOptionsSquashLevel={props.onHandleOptionsSquashLevel}
                 />
             </div>

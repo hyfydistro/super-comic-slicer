@@ -70,66 +70,6 @@ const alertMessages = {
     }
 }
 
-const webcomicsModel = [
-    {
-        htmlLabel: "webtoon",
-        imageSource: "images/webtoon-icon.svg",
-        htmlAlt: "webtoon icon",
-        text: "Webtoon",
-        disabled: false
-    },
-    {
-        htmlLabel: "tapas",
-        imageSource: "images/tapas-icon.png",
-        htmlAlt: "tapas icon",
-        text: "Tapas",
-        disabled: true
-    },
-];
-
-// RADIO OPTIONS
-// Default CHECKED: filExtensionsModel[0]
-const filExtensionsModel = [
-    {
-        htmlLabel: "jpeg",
-        text: "JPEG"
-    },
-    {
-        htmlLabel: "png",
-        text: "PNG"
-    }
-];
-
-// RADIO OPTIONS
-// Default CHECKED: squashLevelModel[0]
-const squashLevelModel = [
-    {
-        htmlLabel: "none",
-        pixelValue: 0,
-        text: "none"
-    },
-    {
-        htmlLabel: "400",
-        pixelValue: 400,
-        text: "400 width pixels"
-    },
-    {
-        htmlLabel: "500",
-        pixelValue: 500,
-        text: "500 width pixels"
-    },
-    {
-        htmlLabel: "600",
-        pixelValue: 600,
-        text: "600 width pixels"
-    },
-    {
-        htmlLabel: "700",
-        pixelValue: 700,
-        text: "700 width pixels"
-    }
-]
-
 // Accepted file types
 const fileTypes = [
     'image/jpeg',
@@ -838,7 +778,6 @@ export default class Form extends React.Component {
 
                 <Suspense fallback={<div><p>LOADING...</p></div>}>
                     <FormSelect
-                        getWebcomicsModel={webcomicsModel}
                         onHandleSelectedWebcomic={this.handleSelectedWebcomic}
                         isAlertMessageSelectFormError={this.state.isAlertMessageErrorOnSelectForm}
                         getAlertMessageSelectFormText={this.state.alertMessageErrorOnSelectForm}
@@ -848,9 +787,7 @@ export default class Form extends React.Component {
 
                 <Suspense fallback={<div><p>LOADING...</p></div>}>
                     <FormOptions
-                        getFilExtensionsModel={filExtensionsModel}
                         onHandleOptionsFileExtenions={this.handleOptionsFileExtenions}
-                        getSquashLevelModel={squashLevelModel}
                         onHandleOptionsSquashLevel={this.handleOptionsSquashLevel}
                     />
                 </Suspense>
