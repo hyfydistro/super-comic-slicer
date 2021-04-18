@@ -11,7 +11,7 @@
     "test": "jest --coverage",
     "test:watch": "jest --watchAll",
     "stats": "webpack --json build-stats.json",
-    "dev:user": "cross-env USER_EXP=pass&&http-server dist"
+    "dev:user": "cross-env NODE_ENV=production&&webpack && cross-env USER_EXP=pass&&http-server dist"
   },
   "repository": {
     "type": "git",
