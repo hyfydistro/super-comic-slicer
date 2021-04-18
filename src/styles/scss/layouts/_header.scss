@@ -17,7 +17,7 @@ header {
 }
 
 .header-container {
-    background: url(images/header-bg.webp);
+    background-image: url(images/header-bg.webp), url(images/header-bg.png);
     background-size: 100% 100%;
     width: 992px;
     max-width: utils.$MAX-WIDTH;
