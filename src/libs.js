@@ -13,11 +13,9 @@ if ("serviceWorker" in navigator) {
       .register("/sw.js")
       .then((registrations ) => {
         console.log("SW registered: ", registrations)
-        for (let registration of registrations) {
-          console.log("SW registered - force update: ", registrations)
-          registration.update();
-        }
+        Promise.all(registrations.map((r) => r.unregister()))
       })
-      .catch((registrationError ) => console.log("SW registration failed: ", registrationError));
+      .then(() => window.location.reload())
+      .catch((registrationError) => console.log("SW registration failed: ", registrationError));
   });
 }
