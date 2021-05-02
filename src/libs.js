@@ -10,13 +10,8 @@ if ("serviceWorker" in navigator) {
   // * console.log("SW is supported");
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      // .register("/sw.js")
-      .getRegistrations()
-      .then((registrations) => {
-        console.log("SW registered: ", registrations)
-        Promise.all(registrations.map((r) => r.unregister()))
-      })
-      .then(() => window.location.reload())
-      .catch((registrationError) => console.log("SW registration failed: ", registrationError));
+      .register("/sw.js")
+      .then((registration ) => console.log("SW registered: ", registration))
+      .catch((registrationError ) => console.log("SW registration failed: ", registrationError));
   });
 }
