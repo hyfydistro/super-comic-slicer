@@ -252,6 +252,7 @@ module.exports = {
 
     // # Optimization - Treeshaking Options
     optimization: {
+        moduleIds: "deterministic",
         // providedExports: true, // default - true
         // usedExports: false, // dev - true; prod - false
         sideEffects: true,
