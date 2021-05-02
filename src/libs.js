@@ -11,10 +11,10 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("/sw.js")
-      .then((registration ) => {
-        console.log("SW registered: ", registration)
+      .then((registrations ) => {
+        console.log("SW registered: ", registrations)
         for (let registration of registrations) {
-          console.log("SW registered - force update: ", registration)
+          console.log("SW registered - force update: ", registrations)
           registration.update();
         }
       })
