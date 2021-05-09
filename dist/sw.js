@@ -95,7 +95,11 @@ define("./sw.js",['./workbox-58ab622e'], function (workbox) { 'use strict';
   * See https://goo.gl/2aRDsh
   */
 
-  self.skipWaiting();
+  self.addEventListener('message', event => {
+    if (event.data && event.data.type === 'SKIP_WAITING') {
+      self.skipWaiting();
+    }
+  });
   /**
    * The precacheAndRoute() method efficiently caches and responds to
    * requests for URLs in the manifest.
