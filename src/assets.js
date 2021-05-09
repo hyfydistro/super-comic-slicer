@@ -16,7 +16,7 @@ import "./fonts/quicksand/Quicksand-Regular.ttf";
 import "./fonts/josefin-sans/JosefinSans-SemiBold.ttf";
 // Images
 import "./images/loader-hamster.gif";
-import "./images/header-bg.webp";
+// import "./images/header-bg.webp";
 import "./images/header-bg.png";
 import "./images/salespitch.svg";
 import "./images/icon-webtoon.svg";

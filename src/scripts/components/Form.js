@@ -1,21 +1,21 @@
 import React, { Suspense, lazy } from "react";
 // import FormUpload from "./FormUpload";
 const FormUpload = lazy(() => import("./FormUpload.js"));
-// import FormSelect from "./FormSelect";
-const FormSelect = lazy(() => import("./FormSelect.js"));
-// import FormOptions from "./FormOptions";
-const FormOptions = lazy(() => import("./FormOptions.js"));
+import FormSelect from "./FormSelect";
+// const FormSelect = lazy(() => import("./FormSelect.js"));
+import FormOptions from "./FormOptions";
+// const FormOptions = lazy(() => import("./FormOptions.js"));
 
-// import FormResults from "./FormResults";
-const FormResults = lazy(() => import("./FormResults"));
+import FormResults from "./FormResults";
+// const FormResults = lazy(() => import("./FormResults"));
 
 // Modules
 // Dynamic imports
 // import { saveAs } from "file-saver";
 // import JSZip from "jszip";
 async function saveAndDownloadFiles(selectedFileExtension, processImages, Selectedwebcomics, webcomicIndex) {
-    const JSZip = await import("jszip/dist/jszip.js");
-    const fileSaver = await import("file-saver");
+    const JSZip = await import(/* webpackPrefetch: true */ "jszip");
+    const fileSaver = await import(/* webpackPrefetch: true */ "file-saver");
 
     const JSZipConstructor = JSZip.default;
     const saveAs = fileSaver.default;
@@ -776,21 +776,21 @@ export default class Form extends React.Component {
                 </Suspense>
 
 
-                <Suspense fallback={<div><p>LOADING...</p></div>}>
+                {/* <Suspense fallback={<div><p>LOADING...</p></div>}> */}
                     <FormSelect
                         onHandleSelectedWebcomic={this.handleSelectedWebcomic}
                         isAlertMessageSelectFormError={this.state.isAlertMessageErrorOnSelectForm}
                         getAlertMessageSelectFormText={this.state.alertMessageErrorOnSelectForm}
                     />
-                </Suspense>
+                {/* </Suspense> */}
 
 
-                <Suspense fallback={<div><p>LOADING...</p></div>}>
+                {/* <Suspense fallback={<div><p>LOADING...</p></div>}> */}
                     <FormOptions
                         onHandleOptionsFileExtenions={this.handleOptionsFileExtenions}
                         onHandleOptionsSquashLevel={this.handleOptionsSquashLevel}
                     />
-                </Suspense>
+                {/* </Suspense> */}
 
                 <div className="slice-btn-container">
                     <a
@@ -821,11 +821,11 @@ export default class Form extends React.Component {
                         </span>
                     </div>
                     : null}
-                <Suspense fallback={<div><p>LOADING...</p></div>}>
+                {/* <Suspense fallback={<div><p>LOADING...</p></div>}> */}
                     <FormResults
                         getImageData={this.state.processedFileData}
                     />
-                </Suspense>
+                {/* </Suspense> */}
             </main>
         )
     }
