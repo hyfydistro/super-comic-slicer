@@ -247,7 +247,7 @@ module.exports = {
             algorithm: "gzip",
 
             // test: /\.(js|css|html)$/,
-            test: /\.(js|css|html)$/,
+            test: /\.(js)$/,
 
             // level 9 is the highest fo gzip, other algorithm may vary (see doc)
             compressionOptions: {level: 9},
@@ -271,7 +271,7 @@ module.exports = {
             filename: "[path][base].br",
             algorithm: "brotliCompress",
             // test: /\.(js|css|html|svg)$/,
-            test: /\.(js|css|html)$/,
+            test: /\.(js)$/,
             compressionOptions: {
             params: {
                 [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
