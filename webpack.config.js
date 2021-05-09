@@ -6,7 +6,8 @@ const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const WorkboxPlugin = require("workbox-webpack-plugin");
 const webpack = require("webpack");
-
+const CompressionPlugin = require("compression-webpack-plugin");
+const zlib = require("zlib");
 
 // ? Option (Default) - Simple Configuration:
 // Coupled with setting NODE_ENV via npm "scripts"
@@ -172,6 +173,7 @@ module.exports = {
                     // MiniCssExtractPlugin.loader,
                     "css-loader",
                     "postcss-loader",
+                    "resolve-url-loader",
                     "sass-loader",
                 ]
             }
@@ -234,14 +236,121 @@ module.exports = {
             // favicon: "./src/favicon.ico",
             inject: "body",
         }),
+
+        // with gzip
+        new CompressionPlugin({
+            // exclude: /^(sw|workbox)/,
+            filename: "[path][base].gz",
+
+            // include: /src/
+            // include: /dist/
+            algorithm: "gzip",
+
+            // test: /\.(js|css|html)$/,
+            test: /\.(js|css|html)$/,
+
+            // level 9 is the highest fo gzip, other algorithm may vary (see doc)
+            compressionOptions: {level: 9},
+            // compressionOptions: {level: 9}
+
+            // Only assets bigger than this size are processed (in Bytes)
+            // threshold: 8192
+
+            // Only assets that compress better than this ratio are processed (minRatio = Compressed Size / Original Size)
+            // - you can use `1` value to process assets that are smaller than the original.
+            // - Use a value of `Infinity` to process all assets even if they are larger than the original size or their original size is 0 bytes (useful when you are pre-zipping all assets for AWS)
+            // Use a value of `Number.MAX_SAFE_INTEGER` to process all assets even if they are larger than the original size, excluding assets with their original size is `0` bytes
+            // minRaiot: 0.8 // Default
+
+            // deleteOriginalAssets: true,
+        }),
+
+        // with zilb (Brotl)
+        new CompressionPlugin({
+            // exclude: /^(sw|workbox)/,
+            filename: "[path][base].br",
+            algorithm: "brotliCompress",
+            // test: /\.(js|css|html|svg)$/,
+            test: /\.(js|css|html)$/,
+            compressionOptions: {
+            params: {
+                [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+            },
+            },
+            threshold: 10240,
+            minRatio: 0.8,
+            deleteOriginalAssets: false
+        }),
+
         new WorkboxPlugin.GenerateSW({
             // Rename
             swDest: "sw.js",
+            // swSrc: "",
             // these options encourage the ServiceWorkers to get in there fast
             // and not allow any straggling "old" SWs to hang around
-            clientsClaim: true,
+            // clientsClaim: true,
             skipWaiting: true,
-            maximumFileSizeToCacheInBytes: 5*1024*1024
+            maximumFileSizeToCacheInBytes: 5*1024*1024, // 5GB
+            // debug: true,
+
+            exclude: [
+                /\.map$/,
+                /manifest$/,
+                /\.htaccess$/,
+                /service-worker\.js$/,
+                /sw\.js$/,
+            ],
+
+            runtimeCaching: [
+                // Cache Assets - styles, scripts
+                {
+                    urlPattern: /\.(?:css|js)/,
+                    handler: "StaleWhileRevalidate",
+
+                    options: {
+                        cacheName: "assets",
+                        expiration: {
+                            maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
+                            maxEntries: 10
+                        }
+                    }
+                },
+
+                // Cache Fonts
+                {
+                    urlPattern: /\.(woff|woff2|eot|ttf|otf)$/i,
+                    handler: "CacheFirst",
+
+                    options: {
+                        cacheName: "fonts-styelsheet",
+                        cacheableResponse: {
+                            statuses: [0, 200]
+                        },
+                        expiration: {
+                            maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
+                            maxEntries: 10
+                        }
+                    }
+                },
+
+                // Cache Images
+                {
+                    urlPattern: /\.(png|jpe?g|gif|svg|webp)$/i,
+                    handler: "StaleWhileRevalidate",
+
+                    options: {
+                        cacheName: "images",
+                        cacheableResponse: {
+                            statuses: [0, 200]
+                        },
+                        expiration: {
+                            maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
+                            maxEntries: 10
+                        }
+                    }
+                }
+            ]
+
         }),
     ],
 
