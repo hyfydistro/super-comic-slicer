@@ -1,6 +1,21 @@
 # Changelog
 
-## 16/04/2021 - Version 1.0.8 (Current)
+## 9/05/2021 - Version 1.0.9 (Current)
+
+## Performance Improvements
+
+* Add text compression for gzip and brotli.
+* Reconfigure service worker strategies.
+
+## Bug Fixes
+
+* Allow url pathing for scss with `resolve-url-loader`.
+
+## revert
+
+* Add `bg-header.png` as fallback for `.webp` file.
+
+## 16/04/2021 - Version 1.0.8 (older versions)
 
 ## Bug Fixes
 
@@ -14,7 +29,7 @@ Note: Older Safari versions does not support `.webp` files.
     - `android-chrome-192x192.png`
     - `android-chrome-512x512.png`
 
-## 16/04/2021 - Version 1.0.7 (older versions)
+## 16/04/2021 - Version 1.0.7
 
 ## Performance Improvements
 
