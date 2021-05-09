@@ -81,7 +81,7 @@ if (!self.define) {
     });
   };
 }
-define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
+define("./sw.js",['./workbox-58ab622e'], function (workbox) { 'use strict';
 
   /**
   * Welcome to your Workbox-powered service worker!
@@ -96,7 +96,6 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
   */
 
   self.skipWaiting();
-  workbox.clientsClaim();
   /**
    * The precacheAndRoute() method efficiently caches and responds to
    * requests for URLs in the manifest.
@@ -104,7 +103,7 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
    */
 
   workbox.precacheAndRoute([{
-    "url": "assets.bundle.6c40d1c2b6bef9799a3f.js",
+    "url": "assets.bundle.cefaba37b840dad16db2.js",
     "revision": null
   }, {
     "url": "fonts/JosefinSans-SemiBold.ttf",
@@ -143,9 +142,6 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
     "url": "images/header-bg.png",
     "revision": "fad365694e94cb7c93d35d6e68c3fa5e"
   }, {
-    "url": "images/header-bg.webp",
-    "revision": "fad365694e94cb7c93d35d6e68c3fa5e"
-  }, {
     "url": "images/icomoon.svg",
     "revision": "56fd0297ecd0c40842fcb18cfb3aa031"
   }, {
@@ -164,11 +160,11 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
     "url": "images/salespitch.svg",
     "revision": "4dff486d7af62d6bf95cad7d2ecba856"
   }, {
-    "url": "index.bundle.d31b4726a65bea4af67d.js",
+    "url": "index.bundle.c5fc75f134f914481c83.js",
     "revision": null
   }, {
     "url": "index.html",
-    "revision": "9b7088c679e15fe91b506afb20767224"
+    "revision": "8c4caf753803de519684c7a034617f74"
   }, {
     "url": "libs.bundle.cce9f7a21a6ca852ff03.js",
     "revision": null
@@ -179,36 +175,43 @@ define("./sw.js",['./workbox-2a8a8a96'], function (workbox) { 'use strict';
     "url": "reactreactBeautifulDnd.bundle.228f68a468419461367b.js",
     "revision": null
   }, {
-    "url": "site.webmanifest",
-    "revision": "8474c35a3624eb9aa91897eeb2cdf167"
-  }, {
-    "url": "src_scripts_components_Contact_js.bundle.a0d718790a7b936769de.js",
-    "revision": null
-  }, {
-    "url": "src_scripts_components_Footer_js.bundle.3ef728719b1313573c8f.js",
-    "revision": null
-  }, {
-    "url": "src_scripts_components_FormOptions_js.bundle.59c0a08093be71778ec2.js",
-    "revision": null
-  }, {
-    "url": "src_scripts_components_FormResults_js.bundle.7c978f8f30ecb8f3ad54.js",
-    "revision": null
-  }, {
-    "url": "src_scripts_components_FormSelect_js.bundle.0b9af3e9ca711b59dc2e.js",
-    "revision": null
-  }, {
     "url": "src_scripts_components_FormUpload_js.bundle.7c3aa4704c6bd72024d3.js",
-    "revision": null
-  }, {
-    "url": "src_scripts_components_Form_js.bundle.b0fb37f605850e31f835.js",
     "revision": null
   }, {
     "url": "vendors-node_modules_babel_runtime_helpers_esm_inheritsLoose_js-node_modules_css-box-model_di-45dfde.bundle.e29fc9a184bcee477f26.js",
     "revision": null
   }, {
-    "url": "vendors-node_modules_jszip_dist_jszip_js.bundle.cbbe79bee8329d8df635.js",
+    "url": "vendors-node_modules_jszip_dist_jszip_min_js.bundle.2af804e2e283817cfe2e.js",
     "revision": null
   }], {});
+  workbox.registerRoute(/\.(?:css|js)/, new workbox.StaleWhileRevalidate({
+    "cacheName": "assets",
+    plugins: [new workbox.ExpirationPlugin({
+      maxAgeSeconds: 2592000,
+      maxEntries: 10,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(woff|woff2|eot|ttf|otf)$/i, new workbox.CacheFirst({
+    "cacheName": "fonts-styelsheet",
+    plugins: [new workbox.CacheableResponsePlugin({
+      statuses: [0, 200]
+    }), new workbox.ExpirationPlugin({
+      maxAgeSeconds: 2592000,
+      maxEntries: 10,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(png|jpe?g|gif|svg|webp)$/i, new workbox.StaleWhileRevalidate({
+    "cacheName": "images",
+    plugins: [new workbox.CacheableResponsePlugin({
+      statuses: [0, 200]
+    }), new workbox.ExpirationPlugin({
+      maxAgeSeconds: 2592000,
+      maxEntries: 10,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
 
 });
 //# sourceMappingURL=sw.js.map
