@@ -81,7 +81,7 @@ if (!self.define) {
     });
   };
 }
-define("./sw.js",['./workbox-271cd9a8'], function (workbox) { 'use strict';
+define("./sw.js",['./workbox-903cc191'], function (workbox) { 'use strict';
 
   /**
   * Welcome to your Workbox-powered service worker!
@@ -95,8 +95,11 @@ define("./sw.js",['./workbox-271cd9a8'], function (workbox) { 'use strict';
   * See https://goo.gl/2aRDsh
   */
 
-  self.skipWaiting();
-  workbox.clientsClaim();
+  self.addEventListener('message', event => {
+    if (event.data && event.data.type === 'SKIP_WAITING') {
+      self.skipWaiting();
+    }
+  });
   /**
    * The precacheAndRoute() method efficiently caches and responds to
    * requests for URLs in the manifest.
@@ -185,34 +188,6 @@ define("./sw.js",['./workbox-271cd9a8'], function (workbox) { 'use strict';
     "url": "vendors-node_modules_jszip_dist_jszip_min_js.bundle.2af804e2e283817cfe2e.js",
     "revision": null
   }], {});
-  workbox.registerRoute(/\.(?:css|js)/, new workbox.StaleWhileRevalidate({
-    "cacheName": "assets",
-    plugins: [new workbox.ExpirationPlugin({
-      maxAgeSeconds: 2592000,
-      maxEntries: 10,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
-  workbox.registerRoute(/\.(woff|woff2|eot|ttf|otf)$/i, new workbox.CacheFirst({
-    "cacheName": "fonts-styelsheet",
-    plugins: [new workbox.CacheableResponsePlugin({
-      statuses: [0, 200]
-    }), new workbox.ExpirationPlugin({
-      maxAgeSeconds: 2592000,
-      maxEntries: 10,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
-  workbox.registerRoute(/\.(png|jpe?g|gif|svg|webp)$/i, new workbox.StaleWhileRevalidate({
-    "cacheName": "images",
-    plugins: [new workbox.CacheableResponsePlugin({
-      statuses: [0, 200]
-    }), new workbox.ExpirationPlugin({
-      maxAgeSeconds: 2592000,
-      maxEntries: 10,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
 
 });
 //# sourceMappingURL=sw.js.map
