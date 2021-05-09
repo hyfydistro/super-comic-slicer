@@ -27,6 +27,8 @@ footer {
 }
 
 .contribute-text {
+    position: relative;
+    transform: translateY(7px);
     cursor: pointer;
     transition: transform 250ms ease-in-out;
 }
@@ -157,7 +159,7 @@ footer a {
 
 img.donate-image {
     height: 54px;
-    width: 192.350px;
+    width: 192.35px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     transition: transform 100ms ease-in-out;
 }
