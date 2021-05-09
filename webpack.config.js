@@ -288,8 +288,8 @@ module.exports = {
             // swSrc: "",
             // these options encourage the ServiceWorkers to get in there fast
             // and not allow any straggling "old" SWs to hang around
-            // clientsClaim: true,
-            // skipWaiting: true,
+            clientsClaim: true,
+            skipWaiting: true,
             maximumFileSizeToCacheInBytes: 5*1024*1024, // 5GB
             // debug: true,
 

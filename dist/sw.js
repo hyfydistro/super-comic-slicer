@@ -81,7 +81,7 @@ if (!self.define) {
     });
   };
 }
-define("./sw.js",['./workbox-58ab622e'], function (workbox) { 'use strict';
+define("./sw.js",['./workbox-271cd9a8'], function (workbox) { 'use strict';
 
   /**
   * Welcome to your Workbox-powered service worker!
@@ -95,11 +95,8 @@ define("./sw.js",['./workbox-58ab622e'], function (workbox) { 'use strict';
   * See https://goo.gl/2aRDsh
   */
 
-  self.addEventListener('message', event => {
-    if (event.data && event.data.type === 'SKIP_WAITING') {
-      self.skipWaiting();
-    }
-  });
+  self.skipWaiting();
+  workbox.clientsClaim();
   /**
    * The precacheAndRoute() method efficiently caches and responds to
    * requests for URLs in the manifest.

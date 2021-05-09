@@ -1,4 +1,4 @@
-define("./workbox-58ab622e.js",['exports'], function (exports) { 'use strict';
+define("./workbox-271cd9a8.js",['exports'], function (exports) { 'use strict';
 
     try {
       self['workbox:core:6.1.5'] && _();
@@ -3763,6 +3763,24 @@ define("./workbox-58ab622e.js",['exports'], function (exports) { 'use strict';
     }
 
     /*
+      Copyright 2019 Google LLC
+
+      Use of this source code is governed by an MIT-style
+      license that can be found in the LICENSE file or at
+      https://opensource.org/licenses/MIT.
+    */
+    /**
+     * Claim any currently available clients once the service worker
+     * becomes active. This is normally used in conjunction with `skipWaiting()`.
+     *
+     * @memberof module:workbox-core
+     */
+
+    function clientsClaim() {
+      self.addEventListener('activate', () => self.clients.claim());
+    }
+
+    /*
       Copyright 2020 Google LLC
       Use of this source code is governed by an MIT-style
       license that can be found in the LICENSE file or at
@@ -4917,8 +4935,9 @@ define("./workbox-58ab622e.js",['exports'], function (exports) { 'use strict';
     exports.CacheableResponsePlugin = CacheableResponsePlugin;
     exports.ExpirationPlugin = ExpirationPlugin;
     exports.StaleWhileRevalidate = StaleWhileRevalidate;
+    exports.clientsClaim = clientsClaim;
     exports.precacheAndRoute = precacheAndRoute;
     exports.registerRoute = registerRoute;
 
 });
-//# sourceMappingURL=workbox-58ab622e.js.map
+//# sourceMappingURL=workbox-271cd9a8.js.map
