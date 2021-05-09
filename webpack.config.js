@@ -288,8 +288,8 @@ module.exports = {
             // swSrc: "",
             // these options encourage the ServiceWorkers to get in there fast
             // and not allow any straggling "old" SWs to hang around
-            clientsClaim: true,
-            skipWaiting: true,
+            // clientsClaim: true,
+            // skipWaiting: true,
             maximumFileSizeToCacheInBytes: 5*1024*1024, // 5GB
             // debug: true,
 
@@ -301,55 +301,55 @@ module.exports = {
                 /sw\.js$/,
             ],
 
-            runtimeCaching: [
-                // Cache Assets - styles, scripts
-                {
-                    urlPattern: /\.(?:css|js)/,
-                    handler: "StaleWhileRevalidate",
+            // runtimeCaching: [
+            //     // Cache Assets - styles, scripts
+            //     {
+            //         urlPattern: /\.(?:css|js)/,
+            //         handler: "StaleWhileRevalidate",
 
-                    options: {
-                        cacheName: "assets",
-                        expiration: {
-                            maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
-                            maxEntries: 10
-                        }
-                    }
-                },
+            //         options: {
+            //             cacheName: "assets",
+            //             expiration: {
+            //                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
+            //                 maxEntries: 10
+            //             }
+            //         }
+            //     },
 
-                // Cache Fonts
-                {
-                    urlPattern: /\.(woff|woff2|eot|ttf|otf)$/i,
-                    handler: "CacheFirst",
+            //     // Cache Fonts
+            //     {
+            //         urlPattern: /\.(woff|woff2|eot|ttf|otf)$/i,
+            //         handler: "CacheFirst",
 
-                    options: {
-                        cacheName: "fonts-styelsheet",
-                        cacheableResponse: {
-                            statuses: [0, 200]
-                        },
-                        expiration: {
-                            maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
-                            maxEntries: 10
-                        }
-                    }
-                },
+            //         options: {
+            //             cacheName: "fonts-styelsheet",
+            //             cacheableResponse: {
+            //                 statuses: [0, 200]
+            //             },
+            //             expiration: {
+            //                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
+            //                 maxEntries: 10
+            //             }
+            //         }
+            //     },
 
-                // Cache Images
-                {
-                    urlPattern: /\.(png|jpe?g|gif|svg|webp)$/i,
-                    handler: "StaleWhileRevalidate",
+            //     // Cache Images
+            //     {
+            //         urlPattern: /\.(png|jpe?g|gif|svg|webp)$/i,
+            //         handler: "StaleWhileRevalidate",
 
-                    options: {
-                        cacheName: "images",
-                        cacheableResponse: {
-                            statuses: [0, 200]
-                        },
-                        expiration: {
-                            maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
-                            maxEntries: 10
-                        }
-                    }
-                }
-            ]
+            //         options: {
+            //             cacheName: "images",
+            //             cacheableResponse: {
+            //                 statuses: [0, 200]
+            //             },
+            //             expiration: {
+            //                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
+            //                 maxEntries: 10
+            //             }
+            //         }
+            //     }
+            // ]
 
         }),
     ],
