@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const WorkboxPlugin = require("workbox-webpack-plugin");
+const { InjectManifest, GenerateSW } = require("workbox-webpack-plugin");
 const webpack = require("webpack");
 const CompressionPlugin = require("compression-webpack-plugin");
 const zlib = require("zlib");
@@ -282,76 +282,91 @@ module.exports = {
             deleteOriginalAssets: false
         }),
 
-        new WorkboxPlugin.GenerateSW({
-            // Rename
+        // new GenerateSW({
+        //     // Rename
+        //     swDest: "sw.js",
+        //     // swSrc: "",
+        //     // these options encourage the ServiceWorkers to get in there fast
+        //     // and not allow any straggling "old" SWs to hang around
+        //     clientsClaim: true,
+        //     skipWaiting: true,
+        //     // maximumFileSizeToCacheInBytes: 1*1024*1024, // 1GB
+        //     // debug: true,
+
+        //     exclude: [
+        //         /\.map$/,
+        //         /manifest$/,
+        //         /\.htaccess$/,
+        //         /service-worker\.js$/,
+        //         /sw\.js$/,
+        //     ],
+
+        //     runtimeCaching: [
+        //         // Cache Assets - styles, scripts
+        //         {
+        //             urlPattern: /\.(?:css|js)/,
+        //             handler: "StaleWhileRevalidate",
+
+        //             options: {
+        //                 cacheName: "assets",
+        //                 expiration: {
+        //                     maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
+        //                     maxEntries: 10
+        //                 }
+        //             }
+        //         },
+
+        //         // Cache Fonts
+        //         {
+        //             urlPattern: /\.(woff|woff2|eot|ttf|otf)$/i,
+        //             handler: "CacheFirst",
+
+        //             options: {
+        //                 cacheName: "fonts-styelsheet",
+        //                 cacheableResponse: {
+        //                     statuses: [0, 200]
+        //                 },
+        //                 expiration: {
+        //                     maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
+        //                     maxEntries: 10
+        //                 }
+        //             }
+        //         },
+
+        //         // Cache Images
+        //         {
+        //             urlPattern: /\.(png|jpe?g|gif|svg|webp)$/i,
+        //             handler: "StaleWhileRevalidate",
+
+        //             options: {
+        //                 cacheName: "images",
+        //                 cacheableResponse: {
+        //                     statuses: [0, 200]
+        //                 },
+        //                 expiration: {
+        //                     maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
+        //                     maxEntries: 10
+        //                 }
+        //             }
+        //         }
+        //     ]
+
+        // }),
+
+        new InjectManifest({
+            swSrc: "./src/sw.js",
             swDest: "sw.js",
-            // swSrc: "",
-            // these options encourage the ServiceWorkers to get in there fast
-            // and not allow any straggling "old" SWs to hang around
-            // clientsClaim: true,
-            // skipWaiting: true,
-            maximumFileSizeToCacheInBytes: 5*1024*1024, // 5GB
+
             // debug: true,
 
             exclude: [
-                /\.map$/,
-                /manifest$/,
-                /\.htaccess$/,
-                /service-worker\.js$/,
-                /sw\.js$/,
+              /\.map$/,
+              /manifest$/,
+              /\.htaccess$/,
+              /service-worker\.js$/,
+              /sw\.js$/,
             ],
-
-            // runtimeCaching: [
-            //     // Cache Assets - styles, scripts
-            //     {
-            //         urlPattern: /\.(?:css|js)/,
-            //         handler: "StaleWhileRevalidate",
-
-            //         options: {
-            //             cacheName: "assets",
-            //             expiration: {
-            //                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
-            //                 maxEntries: 10
-            //             }
-            //         }
-            //     },
-
-            //     // Cache Fonts
-            //     {
-            //         urlPattern: /\.(woff|woff2|eot|ttf|otf)$/i,
-            //         handler: "CacheFirst",
-
-            //         options: {
-            //             cacheName: "fonts-styelsheet",
-            //             cacheableResponse: {
-            //                 statuses: [0, 200]
-            //             },
-            //             expiration: {
-            //                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
-            //                 maxEntries: 10
-            //             }
-            //         }
-            //     },
-
-            //     // Cache Images
-            //     {
-            //         urlPattern: /\.(png|jpe?g|gif|svg|webp)$/i,
-            //         handler: "StaleWhileRevalidate",
-
-            //         options: {
-            //             cacheName: "images",
-            //             cacheableResponse: {
-            //                 statuses: [0, 200]
-            //             },
-            //             expiration: {
-            //                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
-            //                 maxEntries: 10
-            //             }
-            //         }
-            //     }
-            // ]
-
-        }),
+          })
     ],
 
     // # File Extensions Options
