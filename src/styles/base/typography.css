@@ -1,0 +1,127 @@
+/* Local Fonts */
+
+/*
+ * Graphie
+ * Primary Font
+ */
+
+/* Regular */
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-Regular.otf") format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-Italic.otf") format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Bold */
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-Bold.otf") format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-BoldItalic.otf") format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Semi-Bold */
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-SemiBold.otf") format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-SemiBold.otf") format('opentype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Light */
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-Light.otf") format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-LightItalic.otf") format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Extra Light */
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-ExtraLight.otf") format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-ExtraLightItalic.otf") format('opentype');
+  font-weight: 200;
+  font-style: italic;
+}
+
+/* Thin */
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-Thin.otf") format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Graphie;
+  src: url("../../assets/fonts/graphie/Graphie-ThinItalic.otf") format('opentype');
+  font-weight: 100;
+  font-style: italic;
+}
+
+/*
+ * Distant Galaxy
+ * Signature Font
+ */
+
+ @font-face {
+  font-family: "Distant Galaxy";
+  src: url("../../assets/fonts/distant galaxy/distant galaxy 2.otf") format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Font Sizes */
+h1 { font-size: 20px; }
+
+h2 { font-size: 16px; }
+
+p { font-size: 12px; }
+
+label { font-size: 11px; }
+
+small { font-size: 10px; }
+
+/* @layer base {
+  h1 { @apply text-xl; }
+  h2 { @apply text-xg; }
+  p { @apply base; }
+  label { @apply  text-sm; }
+  small { @apply  text-xs; }
+} */
