@@ -17,7 +17,7 @@ module.exports = {
     * When working, you may remove the plugin.
     */
       clean: true,
-      // assetModuleFilename: "assets/[name][ext][query]"
+      assetModuleFilename: "public/assets/[name][ext][query]"
   },
   module: {
     rules: [
@@ -43,19 +43,37 @@ module.exports = {
             options: {
               postcssOptions: {
                 ident: "postcss",
-                /* autoprefixer included */
+                /* Note: autoprefixer included */
                 plugins: [postcssPresetEnv]
               }
             }
           }
         ]
+      },
+
+      // Miscellanouse assets
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: "public/assets/[name][ext]"
+        }
+      },
+
+      // Fonts asssets
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: "public/assets/fonts/[name][ext]"
+        }
       }
     ]
   },
   plugins: [
     /* Add additional miscellaneous plugins here */
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({ template: "./src/index.html" }),
+    new HtmlWebpackPlugin({ template: "./public/index.html" }),
   ],
   resolve: {
     extensions: [".js", ".ts", ".tsx"]
