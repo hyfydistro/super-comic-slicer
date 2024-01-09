@@ -1,4 +1,1 @@
-header {
-  background: yellow;
-  /*  */
-}
+@import "./base/index.css";

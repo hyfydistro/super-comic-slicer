@@ -1,4 +1,6 @@
-/* Local Fonts */
+/* Typography */
+
+/* # Local Fonts */
 
 /*
  * Graphie
@@ -8,14 +10,14 @@
 /* Regular */
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-Regular.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-Regular.otf") format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-Italic.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-Italic.otf") format('opentype');
   font-weight: 400;
   font-style: italic;
 }
@@ -23,14 +25,14 @@
 /* Bold */
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-Bold.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-Bold.otf") format('opentype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-BoldItalic.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-BoldItalic.otf") format('opentype');
   font-weight: 700;
   font-style: italic;
 }
@@ -38,14 +40,14 @@
 /* Semi-Bold */
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-SemiBold.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-SemiBold.otf") format('opentype');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-SemiBold.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-SemiBold.otf") format('opentype');
   font-weight: 600;
   font-style: italic;
 }
@@ -53,14 +55,14 @@
 /* Light */
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-Light.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-Light.otf") format('opentype');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-LightItalic.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-LightItalic.otf") format('opentype');
   font-weight: 300;
   font-style: italic;
 }
@@ -68,14 +70,14 @@
 /* Extra Light */
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-ExtraLight.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-ExtraLight.otf") format('opentype');
   font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-ExtraLightItalic.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-ExtraLightItalic.otf") format('opentype');
   font-weight: 200;
   font-style: italic;
 }
@@ -83,14 +85,14 @@
 /* Thin */
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-Thin.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-Thin.otf") format('opentype');
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
   font-family: Graphie;
-  src: url("../../assets/fonts/graphie/Graphie-ThinItalic.otf") format('opentype');
+  src: url("../../../public/assets/fonts/graphie/Graphie-ThinItalic.otf") format('opentype');
   font-weight: 100;
   font-style: italic;
 }
@@ -102,26 +104,101 @@
 
  @font-face {
   font-family: "Distant Galaxy";
-  src: url("../../assets/fonts/distant galaxy/distant galaxy 2.otf") format('truetype');
+  src: url("../../../public/assets/fonts/distant galaxy/distant galaxy 2.ttf") format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
-/* Font Sizes */
-h1 { font-size: 20px; }
+/* # Font Sizes */
+:root {
+  /** Font base */
+  /* Target: Small screens */
+  --font-base-mobile: 14px;
+  /* Target: Large screens */
+  --font-base-desktop: 18px;
 
-h2 { font-size: 16px; }
+  /** Type Scale */
+  --type-scale: 1.25;
 
-p { font-size: 12px; }
+  --font-size-x-small: 0.64;
+  --font-size-small: 0.8;
+  /* Use Case */
+  /* @description
+   - Should be used sparingly for annotations, descriptions, and similar content
+  */
 
-label { font-size: 11px; }
+  --font-size-medium: 1;
+  /* Use Case */
+  /* @description
+   - for the body text
+  */
 
-small { font-size: 10px; }
+  --font-size-large: 1.25;
+  /* Use Case */
+  /* @description
+   - Use for small sub-headings
+   - for the main heading on mobile size (opt.)
+  */
 
-/* @layer base {
-  h1 { @apply text-xl; }
-  h2 { @apply text-xg; }
-  p { @apply base; }
-  label { @apply  text-sm; }
-  small { @apply  text-xs; }
-} */
+  --font-size-x-large: 1.563;
+  /* Use Case */
+  /* @description
+   - large sub-headings
+   - for the main heading on mobile size (opt.)
+  */
+
+  --font-size-xx-large: 1.953;
+  --font-size-xxx-large: 2.441;
+  --font-size-xxxx-large: 3.052;
+
+  /** Default Line Height */
+  --line-height-headings: 1.25;
+  --line-height-body: 1.5;
+
+  /** Font Family */
+  --font-family: "Graphie", "Trebuchet MS", "Tahoma";
+  /* @description Note: The last two font family mentioned are Web Safe */
+}
+
+/* # Large Screens */
+/* @description For desktops and monitors */
+
+body {
+  font-family: var(--font-family);
+
+  h1 {
+    font-size: calc(var(--font-size-x-large) * var(--font-base-desktop));
+    line-height: var(--line-height-headings);
+  }
+
+  h2 {
+    font-size: calc(var(--font-size-large) * var(--font-base-desktop));
+    line-height: var(--line-height-headings);
+  }
+
+  p {
+    font-size: var(--font-base-desktop);
+    line-height: var(--line-height-body);
+  }
+
+  small,
+  label {
+    font-size: calc(var(--font-size-small) * var(--font-base-desktop));
+    line-height: var(--line-height-body);
+  }
+}
+
+/* # Small Screens */
+/* @description For mobile and small tablets */
+/* stylelint-disable-next-line media-feature-range-notation */
+@media screen and (max-width: 576px) {
+
+  h1 { font-size: calc(var(--font-size-x-large) * var(--font-base-mobile)); }
+
+  h2 { font-size: calc(var(--font-size-large) * var(--font-base-mobile)); }
+
+  p { font-size: var(--font-base-mobile); }
+
+  small,
+  label { font-size: calc(var(--font-size-small) * var(--font-base-mobile)); }
+}
