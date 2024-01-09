@@ -8,7 +8,7 @@ module.exports = {
   entry: "./src/index.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].js",
+    filename: "bundle.js",
     /*
     * option 'clean' does not work effectively.
     * There's an ongoing issue which can be found here:
