@@ -1,6 +1,8 @@
 {
     "extends": ["stylelint-config-standard"],
     "rules": {
-        "import-notation": "string"
+        "import-notation": "string",
+        "comment-empty-line-before": null,
+        "custom-property-empty-line-before": null
     }
 }
