@@ -8,7 +8,7 @@ module.exports = {
   entry: "./src/index.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "[name].js",
     /*
     * option 'clean' does not work effectively.
     * There's an ongoing issue which can be found here:
@@ -73,6 +73,18 @@ module.exports = {
   plugins: [
     /* Add additional miscellaneous plugins here */
     new CleanWebpackPlugin(),
+    // new copyPlugin({
+    //   patterns: [
+    //       {
+    //         from: path.resolve("src/manifest.json"),
+    //         to: path.resolve("dist")
+    //       },
+    //       {
+    //         from: "src/assets/icons/*.png",
+    //         to: "assets/icons/[name][ext]"
+    //       }
+    //     ]
+    // }),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),
   ],
   resolve: {
