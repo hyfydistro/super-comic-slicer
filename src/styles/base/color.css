@@ -1,0 +1,86 @@
+/* Color */
+
+:root {
+  /* # Main Color */
+
+  --warm-black-10: hsl(42 31% 94%);
+  --warm-black-20: hsl(42 32% 88%);
+  --warm-black-30: hsl(39 17% 71%);
+  --warm-black-40: hsl(37 9% 47%);
+  --warm-black-50: hsl(33 12% 18%);
+  --warm-black-60: hsl(32 21% 14%);
+  /* --warm-black-70: #000; !! Not in use */
+  --warm-black-80: hsl(21 41% 8%);
+  /* --warm-black-90: #000; !! Not in use */
+
+  /* --steel-blue-10: #000; !! Not in use */
+  /* --steel-blue-20: #000; !! Not in use */
+  --steel-blue-30: hsl(195 40% 90%);
+  --steel-blue-40: hsl(198 28% 83%);
+  --steel-blue-50: hsl(201 22% 75%);
+  --steel-blue-60: hsl(206 23% 60%);
+  --steel-blue-70: hsl(209 25% 46%);
+  --steel-blue-80: hsl(212 36% 34%);
+  --steel-blue-90: hsl(215 48% 26%);
+
+  /* --gold-yellow-10: #000; !! Not in use */
+  /* --gold-yellow-20: #000; !! Not in use */
+  /* --gold-yellow-30: #000; !! Not in use */
+  /* --gold-yellow-40: #000; !! Not in use */
+  --gold-yellow-50: hsl(47 100% 95%);
+  --gold-yellow-60: hsl(46 42% 76%);
+  --gold-yellow-70: hsl(44 32% 59%);
+  --gold-yellow-80: hsl(44 33% 43%);
+  --gold-yellow-90: hsl(42 46% 33%);
+
+  --superman-red-10: hsl(20 95% 92%);
+  --superman-red-20: hsl(13 95% 85%);
+  --superman-red-30: hsl(8 98% 77%);
+  --superman-red-40: hsl(4 97% 70%);
+  --superman-red-50: hsl(358 97% 61%);
+  --superman-red-60: hsl(353 69% 51%);
+  --superman-red-70: hsl(348 72% 41%);
+  --superman-red-80: hsl(342 79% 32%);
+  --superman-red-90: hsl(337 83% 26%);
+
+  /* Semantic Color */
+  --success-green-10: hsl(107 89% 93%);
+  --success-green-20: hsl(112 92% 86%);
+  --success-green-30: hsl(119 87% 78%);
+  --success-green-40: hsl(125 81% 72%);
+  --success-green-50: hsl(130 76% 62%);
+  --success-green-60: hsl(136 55% 51%);
+  --success-green-70: hsl(141 61% 41%);
+  --success-green-80: hsl(148 68% 31%);
+  --success-green-90: hsl(152 76% 25%);
+
+  --info-blue-10: hsl(187 96% 90%);
+  --info-blue-20: hsl(191 98% 80%);
+  --info-blue-30: hsl(194 93% 69%);
+  --info-blue-40: hsl(197 88% 60%);
+  --info-blue-50: hsl(201 98% 47%);
+  --info-blue-60: hsl(205 100% 40%);
+  --info-blue-70: hsl(209 99% 33%);
+  --info-blue-80: hsl(212 100% 27%);
+  --info-blue-90: hsl(216 100% 22%);
+
+  --warning-yellow-10: hsl(49 96% 91%);
+  --warning-yellow-20: hsl(47 94% 82%);
+  --warning-yellow-30: hsl(44 94% 73%);
+  --warning-yellow-40: hsl(42 92% 66%);
+  --warning-yellow-50: hsl(40 90% 54%);
+  --warning-yellow-60: hsl(38 79% 46%);
+  --warning-yellow-70: hsl(35 83% 37%);
+  --warning-yellow-80: hsl(33 86% 30%);
+  --warning-yellow-90: hsl(32 89% 24%);
+
+  --danger-red-10: hsl(12 94% 93%);
+  --danger-red-20: hsl(6 100% 86%);
+  --danger-red-30: hsl(0 93% 79%);
+  --danger-red-40: hsl(355 90% 73%);
+  --danger-red-50: hsl(348 86% 63%);
+  --danger-red-60: hsl(344 61% 52%);
+  --danger-red-70: hsl(338 63% 42%);
+  --danger-red-80: hsl(333 69% 33%);
+  --danger-red-90: hsl(327 77% 26%);
+}
