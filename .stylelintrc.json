@@ -5,6 +5,7 @@
         "comment-empty-line-before": null,
         "custom-property-empty-line-before": null,
         "color-function-notation": "modern",
-        "hue-degree-notation": "number"
+        "hue-degree-notation": "number",
+        "custom-property-pattern": null
     }
 }
