@@ -38,7 +38,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/i,
+        test: /\.((s(a|c)ss)|css)$/i,
         use: [
           "style-loader",
           "css-loader",
@@ -51,7 +51,9 @@ module.exports = {
                 plugins: [postcssPresetEnv]
               }
             }
-          }
+          },
+          "resolve-url-loader",
+          "sass-loader"
         ]
       },
 

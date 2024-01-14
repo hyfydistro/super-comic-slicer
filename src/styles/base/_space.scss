@@ -1,0 +1,25 @@
+/* Space */
+
+@use "./typography" as *;
+
+$line-height: $line-height-body;
+
+$space-quarter-desktop: calc($font-base-desktop / ($line-height) * 2);
+$space-half-desktop: calc($font-base-desktop / $line-height);
+$space-lv-1-desktop: calc($font-base-desktop * $line-height);
+$space-lv-2-desktop: calc($font-base-desktop * ($line-height * 2));
+$space-lv-3-desktop: calc($font-base-desktop * ($line-height * 3));
+$space-lv-4-desktop: calc($font-base-desktop * ($line-height * 4));
+$space-lv-5-desktop: calc($font-base-desktop * ($line-height * 5));
+
+$space-quarter-mobile: calc($font-base-mobile / ($line-height) * 2);
+$space-half-mobile: calc($font-base-mobile / $line-height);
+$space-lv-1-mobile: calc($font-base-mobile * $line-height);
+$space-lv-2-mobile: calc($font-base-mobile * ($line-height) * 2);
+$space-lv-3-mobile: calc($font-base-mobile * ($line-height) * 3);
+$space-lv-4-mobile: calc($font-base-mobile * ($line-height) * 4);
+$space-lv-5-mobile: calc($font-base-mobile * ($line-height) * 5);
+
+// # Margin Presets
+$margin-preset-desktop: 32px;
+$margin-preset-mobile: 16px;
