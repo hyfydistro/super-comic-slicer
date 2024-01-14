@@ -3,6 +3,10 @@ const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const postcssPresetEnv = require("postcss-preset-env");
+const copyPlugin = require("copy-webpack-plugin");
+
+//  TODO
+// - add Service Worker with workbox plugin
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -56,7 +60,7 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         generator: {
-          filename: "public/assets/[name][ext]"
+          filename: "public/assets/images/[name][ext]"
         }
       },
 
@@ -73,19 +77,23 @@ module.exports = {
   plugins: [
     /* Add additional miscellaneous plugins here */
     new CleanWebpackPlugin(),
-    // new copyPlugin({
-    //   patterns: [
-    //       {
-    //         from: path.resolve("src/manifest.json"),
-    //         to: path.resolve("dist")
-    //       },
-    //       {
-    //         from: "src/assets/icons/*.png",
-    //         to: "assets/icons/[name][ext]"
-    //       }
-    //     ]
-    // }),
-    new HtmlWebpackPlugin({ template: "./public/index.html" }),
+    new copyPlugin({
+      patterns: [
+        // Web manifest assets
+          {
+            from: path.resolve("public/site.manifest.json"),
+            to: path.resolve("dist")
+          },
+          {
+            from: "public/assets/icons/*.png",
+            to: "public/assets/icons/[name][ext]"
+          }
+        ]
+    }),
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+      favicon: "./public/favicon.ico"
+    }),
   ],
   resolve: {
     extensions: [".js", ".ts", ".tsx"]
