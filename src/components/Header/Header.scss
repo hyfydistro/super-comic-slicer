@@ -1,0 +1,129 @@
+@use "../../styles/base/index" as *;
+@use "../../styles/utils/index" as *;
+
+header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background: white;
+  border-bottom: $superman-red-50 2px solid;
+  padding: $space-lv-1-desktop;
+  height: 132px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  max-height: 132px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.header-main__logo {
+  position: absolute;
+  height: 112px;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  transform: translate(-50%, -50%);
+}
+
+.header-main__list {
+  list-style-type: none;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+
+  // ! TEMP
+  // Currently, there is no mobile designs for the header
+  @include mq-small {
+    display: none;
+  }
+}
+
+.nav-link {
+  color: $warm-black-40;
+  font-size: calc($font-size-large * $font-base-desktop);
+
+  @include mq-small {
+    font-size: calc($font-size-large * $font-base-mobile);
+  }
+
+  // * animation effects here
+  background-image: linear-gradient(
+    to right,
+    $warm-black-50,
+    $warm-black-50 50%,
+    $warm-black-40 50%
+  );
+  background-size: 200% 100%;
+  background-position: -100%;
+  padding: 5px 0;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+
+  &:before {
+    content: '';
+    background: $warm-black-50;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &:hover {
+    background-position: 0;
+   }
+
+  &:hover::before{
+    width: 100%;
+  }
+}
+
+.nav-link__button {
+  position: relative;
+  height: 85px;
+  min-width: 154px;
+  padding: $space-lv-1-desktop;
+  border: 2px $warm-black-40 solid;
+  color: $warm-black-40;
+
+  $base-size: calc($font-size-large * $font-base-desktop);
+  border-radius: $base-size;
+  font-size: $base-size;
+  font-style: normal;
+
+  @include mq-small {
+    min-width: 120px;
+    padding: $space-lv-1-mobile;
+
+    $base-size: calc($font-size-large * $font-base-mobile);
+    border-radius: $base-size;
+    font-size: $base-size;
+  }
+
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  transition-duration: 0.4s;
+
+  &:hover {
+    color: $gold-yellow-50;
+    background-color: $warm-black-50;
+    border: 2px $warm-black-50 solid;
+  }
+}
+
+.nav-link--active {
+  font-weight: bold;
+}
+
