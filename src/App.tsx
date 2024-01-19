@@ -1,17 +1,21 @@
-import React from 'react';
+import { ReactElement } from 'react';
+import { Route, Routes } from "react-router-dom";
+
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import UseTool from './pages/UseTool/UseTool';
+import About from './pages/About/About';
 
-function App(): React.ReactElement {
+
+function App(): ReactElement {
   return (
     <>
       <Header />
         {/* content herer */}
-        <h1>header 1</h1>
-        <h2>wow</h2>
-        <h3>nothing</h3>
-    <p>hello</p>
-    <p>ok</p>
+        <Routes>
+          <Route path="/" element={<UseTool/>} />
+          <Route path="/about" element={<About/>} />
+        </Routes>
 
       <Footer />
     </>

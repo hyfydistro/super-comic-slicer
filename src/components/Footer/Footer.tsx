@@ -1,6 +1,6 @@
-import React from 'react';
+import { ReactElement } from 'react';
 
-function Footer(): React.ReactElement {
+function Footer(): ReactElement {
   return (
     <footer>
       FOOTER
