@@ -53,7 +53,10 @@ module.exports = {
             }
           },
           "resolve-url-loader",
-          "sass-loader"
+          {
+            loader: "sass-loader",
+            options: { sourceMap: true }
+          }
         ]
       },
 
