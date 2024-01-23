@@ -14,29 +14,29 @@ $type-scale: 1.25;
 $font-size-x-small: 0.64;
 $font-size-small: 0.8;
 /* Use Case */
-/* @description
-  - Should be used sparingly for annotations, descriptions, and similar content
-*/
+// @description
+// - Should be used sparingly for annotations, descriptions, and similar content
+
 
 $font-size-medium: 1;
 /* Use Case */
-/* @description
-  - for the body text
-*/
+// @description
+// - for the body text
+
 
 $font-size-large: 1.25;
 /* Use Case */
-/* @description
-  - Use for small sub-headings
-  - for the main heading on mobile size (opt.)
-*/
+// @description
+// - Use for small sub-headings
+// - for the main heading on mobile size (opt.)
+
 
 $font-size-x-large: 1.563;
 /* Use Case */
-/* @description
-  - large sub-headings
-  - for the main heading on mobile size (opt.)
-*/
+// @description
+// - large sub-headings
+// - for the main heading on mobile size (opt.)
+
 
 $font-size-xx-large: 1.953;
 $font-size-xxx-large: 2.441;
@@ -48,11 +48,11 @@ $line-height-body: 1.5;
 
 // ** Font Family
 $font-family: "Graphie", "Trebuchet MS", "Tahoma";
-/* @description Note: The last two font family mentioned are Web Safe */
+// @description Note: The last two font family mentioned are Web Safe
 
 
 // # Large Screens
-/* @description For desktops and monitors */
+// @description For desktops and monitors
 
 body {
   font-family: $font-family;
@@ -80,8 +80,8 @@ body {
 }
 
 // # Small Screens
-/* @description For mobile and small tablets */
-@media screen and (max-width: 576px) {
+// @description For mobile and small tablets
+@media screen and (1px <= width <= 576px) {
 
   h1 { font-size: calc($font-size-x-large * $font-base-mobile); }
 

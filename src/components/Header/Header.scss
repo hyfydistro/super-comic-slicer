@@ -35,7 +35,7 @@ nav {
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
 
   // ! TEMP
@@ -64,11 +64,11 @@ nav {
   background-position: -100%;
   padding: 5px 0;
   position: relative;
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: all 0.3s ease-in-out;
 
-  &:before {
+  &::before {
     content: '';
     background: $warm-black-50;
     display: block;
@@ -98,15 +98,17 @@ nav {
   color: $warm-black-40;
 
   $base-size: calc($font-size-large * $font-base-desktop);
+
   border-radius: $base-size;
   font-size: $base-size;
   font-style: normal;
 
-  @include mq-small {
+  @include mq-medium {
     min-width: 120px;
     padding: $space-lv-1-mobile;
 
     $base-size: calc($font-size-large * $font-base-mobile);
+
     border-radius: $base-size;
     font-size: $base-size;
   }

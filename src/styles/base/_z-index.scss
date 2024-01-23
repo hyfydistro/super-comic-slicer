@@ -24,9 +24,9 @@ $z-index-negative:                   -9999;
 $z-index-default:                    1;
 $z-index-docked:                     4;
 
-$z-index-1--screenForeground:        $z-index-1;
-$z-index-1--followUpVisibility:      $z-index-1;
-$z-index-1--blockGroup:              $z-index-1;
+$z-index-1--screen-foreground:        $z-index-1;
+$z-index-1--follow-up-visibility:      $z-index-1;
+$z-index-1--block-group:              $z-index-1;
 
 $z-index-3--sticky:                  $z-index-3;
 $z-index-3--caption:                 $z-index-3;
@@ -34,7 +34,7 @@ $z-index-3--caption:                 $z-index-3;
 $z-index-4--header:                  $z-index-4;
 
 $z-index-5--toast:                   $z-index-5;
-$z-index-5--figureOverlay:           $z-index-5;
+$z-index-5--figure-overlay:           $z-index-5;
 
 $z-index-6--dropdown:                $z-index-6;
 
