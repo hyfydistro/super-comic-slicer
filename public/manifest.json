@@ -2,7 +2,7 @@
   "short_name": "SCS",
   "name": "Super Comic Slicer",
   "description": "An artist's long comic page cutter into their desired webcomic platform.",
-  "start_url": "/index.html",
+  "start_url": ".",
 
   "theme_color": "#fc3b42",
   "background_color": "#FFFFFF",
@@ -18,29 +18,50 @@
         "type": "image/x-icon"
       },
       {
-        "src": "assets/images/favicon-32x32.png",
+        "src": "/assets/icons/favicon-32x32.png",
         "sizes": "32x32",
         "type": "image/png"
       },
       {
-        "src": "assets/images/favicon-16x16.png",
+        "src": "/assets/icons/favicon-16x16.png",
         "sizes": "16x16",
         "type": "image/png"
       },
       {
-        "src": "assets/images/android-chrome-192x192.png",
+        "src": "/assets/icons/android-chrome-192x192.png",
         "sizes": "192x192",
         "type": "image/png"
       },
       {
-        "src": "assets/images/android-chrome-512x512.png",
+        "src": "/assets/icons/maskable_icon_x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/android-chrome-512x512.png",
         "sizes": "512x512",
         "type": "image/png"
       },
       {
-        "src": "assets/images/apple-touch-icon.png",
+        "src": "/assets/icons/apple-touch-icon.png",
         "sizes": "180x180",
         "type": "image/png"
       }
+  ],
+
+  "screenshots": [
+    {
+      "src": "/assets/images/screenshot1.png",
+      "type": "image/png",
+      "sizes": "540x720",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/assets/images/screenshot2.png",
+      "type": "image/png",
+      "sizes": "720x540",
+      "form_factor": "wide"
+    }
   ]
 }
