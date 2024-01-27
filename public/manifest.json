@@ -2,7 +2,7 @@
   "short_name": "SCS",
   "name": "Super Comic Slicer",
   "description": "An artist's long comic page cutter into their desired webcomic platform.",
-  "start_url": ".",
+  "start_url": "/",
 
   "theme_color": "#fc3b42",
   "background_color": "#FFFFFF",

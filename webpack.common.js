@@ -1,12 +1,9 @@
-
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const postcssPresetEnv = require("postcss-preset-env");
 const copyPlugin = require("copy-webpack-plugin");
-
-//  TODO
-// - add Service Worker with workbox plugin
+const { InjectManifest } = require("workbox-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -21,7 +18,7 @@ module.exports = {
     * When working, you may remove the plugin.
     */
       clean: true,
-      assetModuleFilename: "public/assets/[name][ext][query]"
+      assetModuleFilename: "assets/[name][ext][query]"
   },
   module: {
     rules: [
@@ -65,7 +62,7 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         generator: {
-          filename: "public/assets/images/[name][ext]"
+          filename: "assets/images/[name][ext]"
         }
       },
 
@@ -74,7 +71,7 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
         generator: {
-          filename: "public/assets/fonts/[name][ext]"
+          filename: "assets/fonts/[name][ext]"
         }
       }
     ]
@@ -82,38 +79,55 @@ module.exports = {
   plugins: [
     /* Add additional miscellaneous plugins here */
     new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "public/index.html"),
+      favicon: "./public/favicon.ico"
+    }),
     new copyPlugin({
       patterns: [
         // Web manifest assets
           {
-            from: path.resolve("public/site.manifest.json"),
+            from: path.resolve("public/manifest.json"),
             to: path.resolve("dist")
           },
           {
             from: "public/assets/icons/*.png",
-            to: "public/assets/icons/[name][ext]"
+            to: "assets/icons/[name][ext]"
+          },
+          {
+            from: "public/assets/images/*.png",
+            to: "assets/images/[name][ext]"
           }
         ]
     }),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-      favicon: "./public/favicon.ico"
-    }),
+    new InjectManifest({
+      swSrc: "/public/sw.js",
+      swDest:"sw.js",
+      // maximumFileSizeToCacheInBytes: 5000000,
+      exclude: [
+        /\.map$/,
+        /manifest$/,
+        /\.htaccess$/,
+        /service-worker\.js$/,
+        /sw\.js$/,
+      ]
+    })
   ],
   resolve: {
     extensions: [".js", ".ts", ".tsx"]
   },
   devServer: {
     watchFiles: ["src/**/*"],
-    devMiddleware: {
-      writeToDisk: true,
-      publicPath: path.resolve(__dirname, "src"),
-    },
-    hot: true,
+    // devMiddleware: {
+    //   writeToDisk: true,
+    //   publicPath: path.resolve(__dirname, "src"),
+    // },
+    // hot: true,
     port: 9000,
     // open: true,
-    compress: true,
-    static: { directory: path.resolve(__dirname, "dist") }
+    // compress: true,
+    static: { directory: path.resolve(__dirname, "dist") },
+    historyApiFallback: true
     // historyApiFallback: { index: "popup.html" }
   }
 };
