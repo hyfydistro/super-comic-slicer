@@ -22,6 +22,6 @@ export default function registerServiceWorker() {
 
     wb.register()
       .then((response) => console.log("service worker registered: :", response))
-      .catch((response) => console.log("service worker failed: ", response));
+      .catch((response) => console.warn("service worker failed: ", response));
   }
 }

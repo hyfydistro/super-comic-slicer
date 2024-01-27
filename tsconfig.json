@@ -17,6 +17,6 @@
     "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
     "allowSyntheticDefaultImports": true /* Need for Webpack config file */
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/models/index.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/models/index.d.ts", "public/sw.js"],
   "exclude": ["node_modules"]
 }

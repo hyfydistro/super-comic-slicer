@@ -6,6 +6,8 @@ import "./styles/app.scss";
 
 import App from "./App";
 
+import registerServiceWorker from "./libs/serviceWorkerRegistration";
+
 function init(): void {
   const appContainer = document.getElementById("root")
   if (!appContainer) return;
@@ -21,3 +23,5 @@ function init(): void {
 }
 
 init();
+
+registerServiceWorker();

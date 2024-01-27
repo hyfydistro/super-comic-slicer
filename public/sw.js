@@ -5,6 +5,10 @@ import { StaleWhileRevalidate, CacheFirst } from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 
+// TODO
+// - cleanup unuse variables
+// - target appropriate and specific assets to cache
+
 console.log("⚙ Hello from Service Worker");
 
 // This clientsClaim() should be at the top level
