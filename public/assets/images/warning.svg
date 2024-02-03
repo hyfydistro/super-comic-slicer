@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 38 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;">
+    <g transform="matrix(1,0,0,1,-13883,-13)">
+        <g id="warning" transform="matrix(1.15152,0,0,1.05556,-2047.06,-0.722222)">
+            <rect x="13834" y="13" width="33" height="36" style="fill:none;"/>
+            <g id="warning.svg" transform="matrix(0.0461029,0,0,0.0502941,13850.5,31)">
+                <clipPath id="_clip1">
+                    <rect x="-357.895" y="-336.842" width="715.789" height="673.684"/>
+                </clipPath>
+                <g clip-path="url(#_clip1)">
+                    <g transform="matrix(1,0,0,1,-400,-400)">
+                        <clipPath id="_clip2">
+                            <rect x="0" y="0" width="800" height="800"/>
+                        </clipPath>
+                        <g clip-path="url(#_clip2)">
+                            <path d="M210.309,300C286.498,166.667 332.277,100 400,100C477.023,100 525.663,186.239 622.943,358.717L635.063,380.21C715.903,523.537 756.323,595.2 719.79,647.6C683.26,700 592.88,700 412.123,700L387.877,700C207.119,700 116.739,700 80.209,647.6C48.499,602.117 74.769,542.117 135.124,433.333" style="fill:none;fill-rule:nonzero;stroke:rgb(210,141,24);stroke-width:50px;"/>
+                            <path d="M400,266.667L400,433.333" style="fill:none;fill-rule:nonzero;stroke:rgb(210,141,24);stroke-width:50px;"/>
+                            <circle cx="400" cy="533.333" r="33.333" style="fill:rgb(210,141,24);"/>
+                            <g id="close-02-neutral.svg" transform="matrix(0.0517411,0,0,0.0517411,87.6696,594.17)">
+                                <clipPath id="_clip3">
+                                    <rect x="-370.492" y="-370.492" width="734.426" height="734.426"/>
+                                </clipPath>
+                                <g clip-path="url(#_clip3)">
+                                    <g transform="matrix(1,0,0,1,-400,-400)">
+                                        <clipPath id="_clip4">
+                                            <rect x="0" y="0" width="800" height="800"/>
+                                        </clipPath>
+                                        <g clip-path="url(#_clip4)">
+                                            <path d="M483.333,316.667L316.667,483.333M316.666,316.667L483.333,483.333" style="fill:none;fill-rule:nonzero;stroke:rgb(208,59,99);stroke-width:50px;"/>
+                                            <path d="M233.333,111.261C282.362,82.899 339.287,66.667 400,66.667C584.093,66.667 733.333,215.905 733.333,400C733.333,584.093 584.093,733.333 400,733.333C215.905,733.333 66.667,584.093 66.667,400C66.667,339.287 82.899,282.362 111.261,233.333" style="fill:none;fill-rule:nonzero;stroke:rgb(208,59,99);stroke-width:50px;"/>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
