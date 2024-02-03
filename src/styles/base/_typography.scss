@@ -17,12 +17,10 @@ $font-size-small: 0.8;
 // @description
 // - Should be used sparingly for annotations, descriptions, and similar content
 
-
 $font-size-medium: 1;
 /* Use Case */
 // @description
 // - for the body text
-
 
 $font-size-large: 1.25;
 /* Use Case */
@@ -30,13 +28,11 @@ $font-size-large: 1.25;
 // - Use for small sub-headings
 // - for the main heading on mobile size (opt.)
 
-
 $font-size-x-large: 1.563;
 /* Use Case */
 // @description
 // - large sub-headings
 // - for the main heading on mobile size (opt.)
-
 
 $font-size-xx-large: 1.953;
 $font-size-xxx-large: 2.441;
@@ -60,11 +56,13 @@ body {
   h1 {
     font-size: calc($font-size-x-large * $font-base-desktop);
     line-height: $line-height-headings;
+    font-weight: 400;
   }
 
   h2 {
     font-size: calc($font-size-large * $font-base-desktop);
     line-height: $line-height-headings;
+    font-weight: 400;
   }
 
   p {

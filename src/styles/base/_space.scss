@@ -4,7 +4,7 @@
 
 $line-height: $line-height-body;
 
-$space-quarter-desktop: calc($font-base-desktop / ($line-height) * 2);
+$space-quarter-desktop: calc($font-base-desktop / ($line-height * 2));
 $space-half-desktop: calc($font-base-desktop / $line-height);
 $space-lv-1-desktop: calc($font-base-desktop * $line-height);
 $space-lv-2-desktop: calc($font-base-desktop * ($line-height * 2));
