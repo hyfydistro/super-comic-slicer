@@ -1,0 +1,18 @@
+@use "../../styles/base/index" as *;
+@use "../../styles/utils/index" as *;
+
+.step-title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.step-icon {
+  width: 16px;
+  height: 36px;
+
+  margin-right: $space-quarter-desktop;
+  @include mq-small {
+    margin-right: $space-quarter-mobile;
+  }
+}
