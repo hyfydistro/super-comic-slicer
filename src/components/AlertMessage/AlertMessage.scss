@@ -1,0 +1,43 @@
+@use "../../styles/base/index" as *;
+@use "../../styles/utils/index" as *;
+
+.alert-message-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 30px;
+  margin-top: $space-lv-1-desktop;
+  padding: $space-half-desktop $space-lv-1-desktop;
+  @include mq-small {
+    margin-top: $space-lv-1-mobile;
+    padding: $space-half-mobile $space-lv-1-mobile;
+  }
+}
+
+.message-icon {
+  width: 36px;
+  height: 36px;
+  margin-right: $space-quarter-desktop;
+  @include mq-small {
+    margin-right: $space-quarter-mobile;
+  }
+}
+
+.alert-message--success {
+  color: $success-green-90;
+  border: 2px solid $success-green-70;
+  background-color: $success-green-10;
+}
+
+.alert-message--warning {
+  color: $warning-yellow-90;
+  border: 2px solid $warning-yellow-50;
+  background-color: $warning-yellow-10;
+}
+
+.alert-message--danger {
+  color: $danger-red-90;
+  border: 2px solid $danger-red-60;
+  background-color: $danger-red-10;
+}
