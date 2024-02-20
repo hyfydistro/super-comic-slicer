@@ -1,0 +1,10 @@
+@use "../../../styles/base/index" as *;
+@use "../../../styles/utils/index" as *;
+
+
+.upload-container {
+  margin-bottom: $space-lv-2-desktop;
+  @include mq-small {
+    margin-bottom: $space-lv-2-mobile;
+  }
+}

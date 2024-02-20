@@ -1,0 +1,74 @@
+@use "../../../../../styles/base/index" as *;
+@use "../../../../../styles/utils/index" as *;
+
+.thumbnail-container {
+  position: relative;
+  width: 134.1px;
+  height: 214.5px;
+  margin-top: $space-lv-1-desktop;
+  margin-right: $space-lv-1-desktop;
+  @include mq-small {
+    margin-top: $space-lv-1-mobile;
+    margin-right: $space-lv-1-mobile;
+  }
+  cursor: grab;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.thumbnail {
+  position: relative;
+  display: block;
+  width: 134.1px;
+  height: 100%;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 76%;
+  object-fit: contain;
+}
+
+.remove-button {
+  position: absolute;
+  top: -11px;
+  left: 124px;
+  background-color: transparent;
+  width: 22px;
+  height: 22px;
+  border: none;
+  cursor: pointer;
+  transition: 80ms ease-in;
+  z-index: $z-index-1--follow-up-visibility;
+  outline: none;
+  visibility: visible;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.meta-container {
+  position: relative;
+  height: 55px;
+  width: 100%;
+  background-color: $warm-black-50;
+  padding: $space-quarter-desktop;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  label {
+    text-align: center;
+    color: $gold-yellow-50;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.onDrag {
+  opacity: 0.5;
+  box-shadow: rgb(63 63 68 / 5%) 0px 2px 0px 2px, rgb(34 33 81 / 15%) 0px 2px 3px 2px' : 'rgb(63 63 68 / 5%) 0px 0px 0px 1px, rgb(34 33 81 / 15%) 0px 1px 3px 0px;
+  transform: scale(1.05);
+}
