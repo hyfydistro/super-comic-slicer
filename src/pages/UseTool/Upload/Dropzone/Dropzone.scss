@@ -16,6 +16,7 @@
   border-radius: 50px;
   padding-top: $space-lv-1-desktop;
   padding-bottom: $space-lv-1-desktop;
+
   @include mq-small {
     padding-top: $space-lv-1-mobile;
     padding-bottom: $space-lv-1-mobile;
@@ -30,6 +31,7 @@
   width: 62px;
   height: 62px;
   margin-bottom: $space-lv-1-desktop;
+
   @include mq-small {
     margin-bottom: $space-lv-1-mobile;
   }

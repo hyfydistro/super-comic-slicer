@@ -10,8 +10,8 @@
 .step-icon {
   width: 16px;
   height: 36px;
-
   margin-right: $space-quarter-desktop;
+
   @include mq-small {
     margin-right: $space-quarter-mobile;
   }

@@ -4,6 +4,7 @@
 p {
   margin-top: $space-lv-1-desktop;
   margin-bottom: $space-lv-1-desktop;
+
   @include mq-small {
     margin-top: $space-lv-1-mobile;
     margin-bottom: $space-lv-1-mobile;
@@ -23,6 +24,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   padding: $space-lv-1-desktop;
+
   @include mq-small {
     padding: $space-lv-1-mobile;
   }
@@ -32,6 +34,7 @@ p {
   display: flex;
   justify-content: space-between;
   padding: $space-lv-1-desktop;
+
   @include mq-small {
     padding: $space-lv-1-mobile;
     flex-direction: column;
@@ -41,18 +44,20 @@ p {
 .file-size-container {
   display: flex;
   align-items: flex-end;
+
   @include mq-small {
     margin-bottom: $space-lv-1-mobile;
   }
 }
 
 .file-size-text {
+  color: $gold-yellow-90;
   font-family: $font-family;
   font-size: calc($font-size-large * $font-base-desktop);
+
   @include mq-small {
     font-size: calc($font-size-large * $font-base-mobile);
   }
-  color: $gold-yellow-90;
 }
 
 .clear-btn {
@@ -60,6 +65,7 @@ p {
   display: inline-block;
   padding: $font-base-desktop calc($font-base-desktop * 2);
   font-size: calc($font-size-large * $font-base-desktop);
+
   @include mq-small {
     padding: $font-base-mobile calc($font-base-mobile * 2);
     font-size: calc($font-size-large * $font-base-mobile);
@@ -69,15 +75,15 @@ p {
   color: $superman-red-60;
   border: 2px solid $superman-red-60;
   border-radius: 15px;
-  background-color: #ffffff;
+  background-color: #fff;
 
   &:hover {
-    color: #ffffff;
+    color: #fff;
     background-color: $superman-red-60;
   }
 
   &:active {
-    color: #ffffff;
+    color: #fff;
     background-color: $superman-red-80;
     border: 2px solid $superman-red-80;
   }

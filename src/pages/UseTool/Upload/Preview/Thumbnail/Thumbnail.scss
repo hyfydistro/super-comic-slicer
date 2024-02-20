@@ -7,13 +7,14 @@
   height: 214.5px;
   margin-top: $space-lv-1-desktop;
   margin-right: $space-lv-1-desktop;
+  cursor: grab;
+  opacity: 1;
+  transform: scale(1);
+
   @include mq-small {
     margin-top: $space-lv-1-mobile;
     margin-right: $space-lv-1-mobile;
   }
-  cursor: grab;
-  opacity: 1;
-  transform: scale(1);
 }
 
 .thumbnail {
@@ -69,6 +70,6 @@
 
 .onDrag {
   opacity: 0.5;
-  box-shadow: rgb(63 63 68 / 5%) 0px 2px 0px 2px, rgb(34 33 81 / 15%) 0px 2px 3px 2px' : 'rgb(63 63 68 / 5%) 0px 0px 0px 1px, rgb(34 33 81 / 15%) 0px 1px 3px 0px;
+  box-shadow: hsl(240deg 4% 26%) 0 2px 0 2px, hsl(240deg 42% 22%) 0 2px 3px 2px' : 'hsl(240deg 3.82% 25.69%) 0 0 0 1px, hsl(241deg 42% 22%) 0 1px 3px 0;
   transform: scale(1.05);
 }
