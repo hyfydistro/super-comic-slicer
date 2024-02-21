@@ -1,3 +1,6 @@
+import IconWebtoon from "../../public/assets/images/icon-webtoon.svg";
+import IconTapas from "../../public/assets/images/icon-tapas.png";
+
 // Accepted file types
 export const fileTypes = [
   "image/jpeg",
@@ -28,3 +31,20 @@ export const alertMessages = {
 }
 
 export const ALERT_MESSAGE_TIMER = 8000;
+
+export const webcomicOptions = [
+  {
+    htmlLabel: "webtoon",
+    imageSource: IconWebtoon,
+    htmlAlt: "webtoon icon",
+    name: "Webtoon",
+    isDisabled: false
+  },
+  {
+      htmlLabel: "tapas",
+      htmlAlt: "tapas icon",
+      imageSource: IconTapas,
+      name: "Tapas",
+      isDisabled: false
+  }
+];

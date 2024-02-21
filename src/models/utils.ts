@@ -15,3 +15,11 @@ export type IAlertMessageContent = {
   type: MESSAGE_TYPE;
   message: string;
 }
+
+export type IWebcomicOption = {
+  htmlLabel: string;
+  htmlAlt: string;
+  imageSource: string;
+  name: string;
+  isDisabled: boolean;
+};

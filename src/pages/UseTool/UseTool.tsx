@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useState, MouseEvent } from 'react';
 import { IDataImage } from '../../models/utils';
 
 import StepTitle from '../../components/StepTitle/StepTitle';
@@ -9,6 +9,8 @@ import Select from './Select/Select';
 
 function UseTool(): ReactElement {
   const [data, setData] = useState<IDataImage[]>([]);
+  const [selectedWebcomics, setSelectedWebcomics] = useState<string[]>([]);
+  // const [hasSelectFormError, setHasSelectFormError] = useState(false);
 
   // TODOs
   // - webcomic platform checked
@@ -20,16 +22,39 @@ function UseTool(): ReactElement {
   // - process results
   // - handle Slice Button
 
+  function handleSelectedWebcomic(e: MouseEvent<HTMLInputElement, globalThis.MouseEvent>): void {
+    const selectedWebcomicValue = (e.target as HTMLInputElement).value;
+
+    if (selectedWebcomics.includes(selectedWebcomicValue)) {
+      // UNCHECK INPUT
+      setSelectedWebcomics((current) => current.filter((value) => value !== selectedWebcomicValue));
+    } else {
+      //CHECK INPUT
+      setSelectedWebcomics((current) => ([...current, selectedWebcomicValue]));
+    }
+  }
+
+  function handleBeginSlice(): void {
+    // Check webcomic has been selected - mandatory
+    // else send warning message
+  }
+
   return (
     <main>
       <article>
         <h1>Use Tool</h1>
+
         <Upload
           data={data}
           setData={setData}
         />
 
-        <Select />
+        <Select
+          handleSelectedWebcomic={handleSelectedWebcomic}
+          // ! TOOD [POSTPHONE]
+          // Ready when working on Slice Button component
+          hasSelectFormError={false}
+        />
 
         <section>
           <StepTitle title="3. Options" />
