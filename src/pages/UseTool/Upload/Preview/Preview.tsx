@@ -1,6 +1,6 @@
 import { ReactElement, useState } from 'react';
 import { IAlertMessageContent, IDataImage, MESSAGE_TYPE } from '../../../../models/utils';
-import { convertByte } from '../../../../libs/utils';
+import { convertByte, totalFileSize } from '../../../../libs/utils';
 import { ALERT_MESSAGE_TIMER, alertMessages } from '../../../../models/constants';
 import { DndContext, DragEndEvent, DragOverlay, DragStartEvent, KeyboardSensor, PointerSensor, TouchSensor, UniqueIdentifier, closestCorners, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, rectSortingStrategy, arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
@@ -12,14 +12,11 @@ import "./Preview.scss";
 type IProps = {
   data: IDataImage[];
   setData: React.Dispatch<React.SetStateAction<IDataImage[]>>;
-  totalFileByte: number;
   setShowAlertMessage: React.Dispatch<React.SetStateAction<boolean>>;
   setAlertMessageContent: React.Dispatch<React.SetStateAction<IAlertMessageContent>>;
 };
 
-function Preview({ data, setData, totalFileByte, setShowAlertMessage, setAlertMessageContent }: IProps): ReactElement {
-  const [activeId, setActiveId] = useState<UniqueIdentifier|null>(null);
-
+function Preview({ data, setData, setShowAlertMessage, setAlertMessageContent }: IProps): ReactElement {
   const sensorsInterfaceAccess = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -34,10 +31,6 @@ function Preview({ data, setData, totalFileByte, setShowAlertMessage, setAlertMe
     return data.findIndex(datum => datum.id === id);
   }
 
-  function handleDragStart(event: DragStartEvent) {
-    setActiveId(event.active.id);
-  }
-
   function handleDragEnd(event: DragEndEvent) {
      const { active, over } = event;
 
@@ -49,12 +42,6 @@ function Preview({ data, setData, totalFileByte, setShowAlertMessage, setAlertMe
 
       return arrayMove(currentData, originalPos, newPos);
      });
-
-     setActiveId(null);
-  }
-
-  function handlDragCancel() {
-    setActiveId(null);
   }
 
   function handleRemoveSelf(id: number) {
@@ -79,9 +66,7 @@ function Preview({ data, setData, totalFileByte, setShowAlertMessage, setAlertMe
       <div className="preview-container">
         <DndContext
           collisionDetection={closestCorners}
-          onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
-          onDragCancel={handlDragCancel}
           sensors={sensorsInterfaceAccess}
         >
           <SortableContext items={data} strategy={rectSortingStrategy}>
@@ -101,7 +86,7 @@ function Preview({ data, setData, totalFileByte, setShowAlertMessage, setAlertMe
         <div className="clear-btn-container">
           <div className="file-size-container">
             <span className="file-size-text">
-              {`Total File Size: ${convertByte(totalFileByte)}`}
+              {`Total File Size: ${convertByte(totalFileSize(data))}`}
             </span>
           </div>
 

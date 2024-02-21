@@ -5,6 +5,7 @@ import StepTitle from '../../components/StepTitle/StepTitle';
 import Upload from './Upload/Upload';
 
 import "./UseTool.scss";
+import Select from './Select/Select';
 
 function UseTool(): ReactElement {
   const [data, setData] = useState<IDataImage[]>([]);
@@ -28,10 +29,7 @@ function UseTool(): ReactElement {
           setData={setData}
         />
 
-        <section>
-          <StepTitle title="2. Select" />
-          <p>Select webcomic platform to base slicing ratio. You may select more than one. *Currently, Webtoon is only available.</p>
-        </section>
+        <Select />
 
         <section>
           <StepTitle title="3. Options" />

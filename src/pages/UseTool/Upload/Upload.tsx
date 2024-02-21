@@ -20,8 +20,6 @@ function Upload({ data, setData }: IProps): ReactElement {
     message: ""
   });
 
-  const totalFileSize = !!data.length && data.map((obj) => obj.fileSize).reduce((accumulator, currentValue) => accumulator + currentValue) || 0;
-
   return (
     <section className="upload-container">
         <StepTitle title="1. Upload" />
@@ -39,7 +37,6 @@ function Upload({ data, setData }: IProps): ReactElement {
         (<Preview
           data={data}
           setData={setData}
-          totalFileByte={totalFileSize}
           setShowAlertMessage={setShowAlertMessage}
           setAlertMessageContent={setAlertMessageContent}
         />)}
