@@ -1,0 +1,70 @@
+@use "../../../styles/base/index" as *;
+@use "../../../styles/utils/index" as *;
+
+.options-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 4px $warm-black-20 solid;
+
+  &.remove-border {
+    border-bottom: 0;
+  }
+
+  .show-hide-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: $gold-yellow-90;
+    padding: $space-lv-1-desktop;
+    cursor: pointer;
+
+    @include mq-small {
+      padding: $space-lv-1-mobile;
+    }
+
+    &:hover {
+      color: $gold-yellow-70;
+    }
+
+    p {
+      font-size: $font-base-desktop;
+      padding: 0;
+      margin: 0;
+      margin-right: $space-half-desktop;
+
+      @include mq-small {
+        font-size: $font-base-mobile;
+        margin-right: $space-half-mobile;
+      }
+    }
+
+    img {
+      width: 18px;
+      height: 14px;
+      transform: rotate(180deg);
+
+      &.rotate {
+        transform: rotate(0deg);
+      }
+    }
+  }
+}
+
+.caret-rotate {
+  transform: rotate(180deg);
+}
+
+.options-content-wrapper {
+  display: flex;
+
+  &.open .options-content {
+    max-height: 100%;
+  }
+}
+
+.options-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease-out;
+}
