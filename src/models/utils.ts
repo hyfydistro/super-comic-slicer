@@ -23,3 +23,8 @@ export type IWebcomicOption = {
   name: string;
   isDisabled: boolean;
 };
+
+export type IFileExtenionOption = {
+  type: string;
+  label: string;
+};
