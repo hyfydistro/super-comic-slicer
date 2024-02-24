@@ -1,0 +1,18 @@
+@use "../../../../styles/base/index" as *;
+@use "../../../../styles/utils/index" as *;
+
+.radio-option-wrapper {
+  padding: $space-half-desktop 0;
+
+  @include mq-small {
+    padding: $space-half-mobile 0;
+  }
+}
+
+.file-extension-container {
+  margin-bottom: $space-lv-1-desktop;
+
+  @include mq-small {
+    margin-bottom: $space-lv-1-mobile;
+  }
+}

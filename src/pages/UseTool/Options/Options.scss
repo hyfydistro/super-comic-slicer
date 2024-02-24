@@ -51,10 +51,6 @@
   }
 }
 
-.caret-rotate {
-  transform: rotate(180deg);
-}
-
 .options-content-wrapper {
   display: flex;
 
@@ -67,4 +63,27 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 300ms ease-out;
+}
+
+.info-heading {
+  font-weight: bold;
+  margin-bottom: $space-half-desktop;
+}
+
+.info-content {
+  color: $warm-black-40;
+  display: flex;
+  flex-direction: row;
+
+  p {
+    margin-top: 0;
+    margin-bottom: $space-half-desktop;
+  }
+}
+
+.info-icon {
+  width: 20px;
+  height: 20px;
+  margin-top: $space-quarter-desktop;
+  margin-right: $space-half-desktop;
 }

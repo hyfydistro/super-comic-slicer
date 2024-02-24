@@ -10,6 +10,7 @@ import "./UseTool.scss";
 function UseTool(): ReactElement {
   const [data, setData] = useState<IDataImage[]>([]);
   const [selectedWebcomics, setSelectedWebcomics] = useState<string[]>([]);
+  const [fileExtension, setFileExtension] = useState<string>();
   // const [hasSelectFormError, setHasSelectFormError] = useState(false);
 
   // TODOs
@@ -34,9 +35,16 @@ function UseTool(): ReactElement {
     }
   }
 
+  function handleSelectedFileExtension(e: MouseEvent<HTMLInputElement, globalThis.MouseEvent>): void {
+    const newSelectedFileExtension = (e.target as HTMLInputElement).value;
+
+    setFileExtension(newSelectedFileExtension);
+  }
+
   function handleBeginSlice(): void {
-    // Check webcomic has been selected - mandatory
+    // - Check webcomic has been selected - mandatory
     // else send warning message
+    // - default value for file extension option
   }
 
   return (
@@ -56,7 +64,9 @@ function UseTool(): ReactElement {
           hasSelectFormError={false}
         />
 
-        <Options />
+        <Options
+          handleSelectedFileExtension={handleSelectedFileExtension}
+        />
       </article>
     </main>
   );
