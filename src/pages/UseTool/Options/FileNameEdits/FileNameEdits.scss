@@ -1,0 +1,28 @@
+@use "../../../../styles/base/index" as *;
+@use "../../../../styles/utils/index" as *;
+
+.file-name-edits-container {
+  margin-bottom: $space-lv-1-desktop;
+
+  @include mq-small {
+    margin-bottom: $space-lv-1-desktop;
+  }
+
+  .info-content {
+    ul {
+      margin-left: $space-lv-1-desktop;
+
+      @include mq-small {
+        margin-left: $space-lv-1-mobile;
+      }
+
+      li {
+        color: $warm-black-40;
+        font-size: $font-base-desktop;
+        line-height: $line-height-body;
+        margin-bottom: $space-half-desktop;
+      }
+    }
+
+  }
+}

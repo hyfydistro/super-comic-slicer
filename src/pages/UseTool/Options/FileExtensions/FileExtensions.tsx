@@ -1,13 +1,15 @@
-import { ReactElement, MouseEvent } from 'react';
+import { ReactElement } from 'react';
 import InfoIcon from "../../../../../public/assets/images/info.svg";
 import { filExtensionOptions } from '../../../../models/constants';
 
-import FileExtensionOption from './FileExtensionOption/FileExtensionOption';
+import RadioOption from '../../../../components/RadioOption/RadioOption';
 
 import "./FileExtensions.scss";
 
+const FILE_EXTENSION_COMMON_NAME = "fileType";
+
 type IProps = {
-  handleSelectedFileExtension: (e: MouseEvent<HTMLInputElement, globalThis.MouseEvent>) => void;
+  handleSelectedFileExtension: (value: string) => void;
 };
 
 function FileExtensions({ handleSelectedFileExtension }: IProps): ReactElement {
@@ -19,14 +21,15 @@ function FileExtensions({ handleSelectedFileExtension }: IProps): ReactElement {
         <p>PNG is a good choice for storing line drawings, text, and iconic graphics at a small file size. Unlike JPGs, which creat e a heavily compressed file and may blur images at a certain point, a PNG file will always look at least as sharp as the original image because of its “lossless” compression process.</p>
       </div>
 
-      {filExtensionOptions.map(({ type, label }, index) => (
-        <div className="radio-option-wrapper" key={index}>
-          <FileExtensionOption
-            type={type}
-            label={label}
-            handleSelectedFileExtension={handleSelectedFileExtension}
-          />
-        </div>
+      {filExtensionOptions.map(({type, label}, index) => (
+        <RadioOption
+          key={index}
+          commonRadioGroupName={FILE_EXTENSION_COMMON_NAME}
+          defaultCheckedValue={filExtensionOptions[0].type}
+          value={type}
+          label={label}
+          handleSelectedValue={handleSelectedFileExtension}
+        />
       ))}
     </div>
   );

@@ -11,7 +11,11 @@ function UseTool(): ReactElement {
   const [data, setData] = useState<IDataImage[]>([]);
   const [selectedWebcomics, setSelectedWebcomics] = useState<string[]>([]);
   const [fileExtension, setFileExtension] = useState<string>();
+  const [squashLevel, setSquashLevel] = useState<number>(0);
   // const [hasSelectFormError, setHasSelectFormError] = useState(false);
+
+  // TODO
+  // - set warning if incorrect input squash level
 
   // TODOs
   // - webcomic platform checked
@@ -35,10 +39,15 @@ function UseTool(): ReactElement {
     }
   }
 
-  function handleSelectedFileExtension(e: MouseEvent<HTMLInputElement, globalThis.MouseEvent>): void {
-    const newSelectedFileExtension = (e.target as HTMLInputElement).value;
+  // TODO Refactor 'handleSelectedFileExtension' and 'handleSelectedSquashLevel' are similar
+  function handleSelectedFileExtension(value: string): void {
+    // provide warning and unable to process with invalid value from custom pick
 
-    setFileExtension(newSelectedFileExtension);
+    setFileExtension(value);
+  }
+
+  function handleSelectedSquashLevel(value: string): void {
+    setSquashLevel(Number(value));
   }
 
   function handleBeginSlice(): void {
@@ -66,6 +75,7 @@ function UseTool(): ReactElement {
 
         <Options
           handleSelectedFileExtension={handleSelectedFileExtension}
+          handleSelectedSquashLevel={handleSelectedSquashLevel}
         />
       </article>
     </main>

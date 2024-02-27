@@ -9,11 +9,13 @@ import Squash from './Squash/Squash';
 import "./Options.scss";
 
 type IProps = {
-  handleSelectedFileExtension: (e: MouseEvent<HTMLInputElement, globalThis.MouseEvent>) => void;
+  handleSelectedFileExtension: (value: string) => void;
+  handleSelectedSquashLevel: (value: string) => void;
 };
 
-function Options({ handleSelectedFileExtension }: IProps): ReactElement {
-  const [isOpen, setIsOpen] = useState(false);
+function Options({ handleSelectedFileExtension, handleSelectedSquashLevel }: IProps): ReactElement {
+  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <section className="options-container">
@@ -38,7 +40,11 @@ function Options({ handleSelectedFileExtension }: IProps): ReactElement {
             <FileExtensions
               handleSelectedFileExtension={handleSelectedFileExtension}
             />
-            <Squash />
+
+            <Squash
+              handleSelectedSquashLevel={handleSelectedSquashLevel}
+            />
+
             <FileNameEdits />
           </div>
         </div>

@@ -23,11 +23,13 @@ export const alertMessages = {
       overMaxFileSize: "Total file size is over maximum. Remove some files to continue.",
       noFilesFound: "No images found to process. Upload some images to 'Begin Slice'!",
       selectFormMandatory: "Please check at least one webcomic platform under '2. Select'.",
-      selectFormMandatoryTarget: "Check at least one in order to continue."
+      selectFormMandatoryTarget: "Check at least one in order to continue.",
+      nonNumericValueFound: "Only numbers allowed."
 
   },
   onWarning: {
       nearMaxFileSize: "Total file size is near maximum!",
+      valueTooSmall: "Value found to be too small. It could cause image distortion."
   }
 }
 
@@ -58,5 +60,38 @@ export const filExtensionOptions: IFileExtenionOption[] = [
   {
       type: "png",
       label: "PNG"
+  }
+];
+
+export const squashLevelOptions = [
+  {
+    isCustom: false,
+    pixelValue: 0,
+    label: "none"
+  },
+  {
+    isCustom: false,
+    pixelValue: 400,
+    label: "400 width pixels"
+  },
+  {
+    isCustom: false,
+    pixelValue: 500,
+    label: "500 width pixels"
+  },
+  {
+    isCustom: false,
+    pixelValue: 600,
+    label: "600 width pixels"
+  },
+  {
+    isCustom: false,
+    pixelValue: 700,
+    label: "700 width pixels"
+  },
+  {
+    isCustom: true,
+    pixelValue: null,
+    label: null
   }
 ];
