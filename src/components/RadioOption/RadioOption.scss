@@ -1,0 +1,71 @@
+@use "../../styles/base/index" as *;
+@use "../../styles/utils/index" as *;
+
+.radio-option-wrapper {
+  padding: $space-half-desktop 0;
+
+  @include mq-small {
+    padding: $space-half-mobile 0;
+  }
+}
+
+.radio-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: max-content;
+  cursor: pointer;
+
+  p {
+    margin: 0;
+  }
+
+  @include mq-small {
+      padding: $space-half-mobile 0;
+      margin-bottom: $space-half-mobile;
+  }
+}
+
+.radio-option label {
+  display: inline-block;
+}
+
+.radio-input {
+  visibility: hidden;
+
+  + .radio-label::before {
+      content: url("../../../public/assets/images/radio-unchecked.svg");
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      font-size: 25px;
+      position: relative;
+      margin-right: $space-lv-1-desktop;
+      top: $space-quarter-desktop;
+
+      @include mq-small {
+          margin-right: $space-lv-1-mobile;
+          top: $space-half-mobile;
+      }
+  }
+
+  &:checked + .radio-label::before {
+      content: url("../../../public/assets/images/radio-checked.svg");
+      animation: checkpop 230ms ease-in;
+  }
+
+  &:disabled + .radio-label {
+      color: $warm-black-50;
+
+      &::before {
+        content: url("../../../public/assets/images/radio-unchecked.svg");
+      }
+  }
+}
