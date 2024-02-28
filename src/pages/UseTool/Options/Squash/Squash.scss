@@ -21,6 +21,11 @@
         font-size: $font-base-desktop;
         line-height: $line-height-body;
         margin-bottom: $space-half-desktop;
+
+        @include mq-small {
+          font-size: $font-base-mobile;
+          margin-bottom: $space-half-mobile;
+        }
       }
     }
   }
