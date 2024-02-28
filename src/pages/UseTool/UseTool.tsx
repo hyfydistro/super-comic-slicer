@@ -1,5 +1,5 @@
 import { ReactElement, useState, MouseEvent } from 'react';
-import { IDataImage } from '../../models/utils';
+import { EDIT_TYPE, IDataImage } from '../../models/utils';
 
 import Upload from './Upload/Upload';
 import Select from './Select/Select';
@@ -12,6 +12,9 @@ function UseTool(): ReactElement {
   const [selectedWebcomics, setSelectedWebcomics] = useState<string[]>([]);
   const [fileExtension, setFileExtension] = useState<string>();
   const [squashLevel, setSquashLevel] = useState<number>(0);
+  const [startFrom, setStartFrom] = useState<number>(0)
+  const [suffix, setSuffix] = useState<string>("");
+  const [prefix, setPrefix] = useState<string>("");
   // const [hasSelectFormError, setHasSelectFormError] = useState(false);
 
   // TODO
@@ -50,6 +53,18 @@ function UseTool(): ReactElement {
     setSquashLevel(Number(value));
   }
 
+  function handleFileNameEdits(value: string, type: EDIT_TYPE): void {
+    if (type === EDIT_TYPE.START_FROM) {
+      setStartFrom(Number(value));
+    }
+    if (type === EDIT_TYPE.SUFFIX) {
+      setSuffix(value);
+    }
+    if (type === EDIT_TYPE.PREFIX) {
+      setPrefix(value);
+    }
+  }
+
   function handleBeginSlice(): void {
     // - Check webcomic has been selected - mandatory
     // else send warning message
@@ -76,6 +91,7 @@ function UseTool(): ReactElement {
         <Options
           handleSelectedFileExtension={handleSelectedFileExtension}
           handleSelectedSquashLevel={handleSelectedSquashLevel}
+          handleFileNameEdits={handleFileNameEdits}
         />
       </article>
     </main>

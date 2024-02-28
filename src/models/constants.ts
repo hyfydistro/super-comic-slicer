@@ -1,6 +1,6 @@
 import IconWebtoon from "../../public/assets/images/icon-webtoon.svg";
 import IconTapas from "../../public/assets/images/icon-tapas.png";
-import { IFileExtenionOption, IWebcomicOption } from "./utils";
+import { EDIT_TYPE, IFileExtenionOption, IWebcomicOption } from "./utils";
 
 // Accepted file types
 export const fileTypes = [
@@ -93,5 +93,26 @@ export const squashLevelOptions = [
     isCustom: true,
     pixelValue: null,
     label: null
+  }
+];
+
+export const FileNameOption = [
+  {
+    label: "Start from",
+    example: "e.g. 000.png, 001.png, ... 101.png, 102.png",
+    editType: EDIT_TYPE.START_FROM,
+    regexPattern: new RegExp(/^[0-9]*$/)
+  },
+  {
+    label: "Suffix (after)",
+    example: "e.g. 01example.png, 02example.png",
+    editType: EDIT_TYPE.SUFFIX,
+    regexPattern: new RegExp(/^[a-zA-Z0-9]*$/)
+  },
+  {
+    label: "Prefix (before)",
+    example: "e.g. example01.png, example02.png",
+    editType: EDIT_TYPE.PREFIX,
+    regexPattern: new RegExp(/^[a-zA-Z0-9]*$/)
   }
 ];

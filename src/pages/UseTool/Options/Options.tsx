@@ -1,5 +1,6 @@
 import { ReactElement, useState, MouseEvent } from 'react';
 import showHideTriangle from "../../../../public/assets/images/show-hide-triangle.svg";
+import { EDIT_TYPE } from '../../../models/utils';
 
 import StepTitle from '../../../components/StepTitle/StepTitle';
 import FileExtensions from './FileExtensions/FileExtensions';
@@ -11,9 +12,10 @@ import "./Options.scss";
 type IProps = {
   handleSelectedFileExtension: (value: string) => void;
   handleSelectedSquashLevel: (value: string) => void;
+  handleFileNameEdits: (value: string, type: EDIT_TYPE) => void;
 };
 
-function Options({ handleSelectedFileExtension, handleSelectedSquashLevel }: IProps): ReactElement {
+function Options({ handleSelectedFileExtension, handleSelectedSquashLevel, handleFileNameEdits }: IProps): ReactElement {
   // const [isOpen, setIsOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
 
@@ -45,7 +47,9 @@ function Options({ handleSelectedFileExtension, handleSelectedSquashLevel }: IPr
               handleSelectedSquashLevel={handleSelectedSquashLevel}
             />
 
-            <FileNameEdits />
+            <FileNameEdits
+              handleFileNameEdits={handleFileNameEdits}
+            />
           </div>
         </div>
       </div>

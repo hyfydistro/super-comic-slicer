@@ -28,3 +28,9 @@ export type IFileExtenionOption = {
   type: string;
   label: string;
 };
+
+export enum EDIT_TYPE {
+  START_FROM,
+  SUFFIX,
+  PREFIX
+};
