@@ -56,9 +56,9 @@
 
 .radio-option-custom-input {
   width: 80px;
-  border: 4px solid $warm-black-30;
+  border: 4px solid $gold-yellow-80;
   border-radius: 6px;
-  padding: 6px 6px;
+  padding: 6px;
   margin-left: $space-half-desktop;
   margin-right: $space-half-desktop;
   margin-top: $space-quarter-desktop;
@@ -72,5 +72,9 @@
   &:focus {
     border: 4px solid $steel-blue-60;
     outline: none;
+  }
+
+  &:disabled {
+    border: 4px solid $warm-black-30;
   }
 }
