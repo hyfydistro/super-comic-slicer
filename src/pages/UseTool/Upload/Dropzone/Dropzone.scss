@@ -1,0 +1,48 @@
+@use "../../../../styles/base/index" as *;
+@use "../../../../styles/utils/index" as *;
+
+.dropzone-container {
+  display: flex;
+  justify-content: center;
+}
+
+.dropzone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: dashed 6px $gold-yellow-80;
+  width: 100%;
+  border-radius: 50px;
+  padding-top: $space-lv-1-desktop;
+  padding-bottom: $space-lv-1-desktop;
+
+  @include mq-small {
+    padding-top: $space-lv-1-mobile;
+    padding-bottom: $space-lv-1-mobile;
+  }
+}
+
+.dropzone--highlight {
+  border: solid 6px $gold-yellow-60 !important;
+}
+
+.download-icon {
+  width: 62px;
+  height: 62px;
+  margin-bottom: $space-lv-1-desktop;
+
+  @include mq-small {
+    margin-bottom: $space-lv-1-mobile;
+  }
+}
+
+.dropzone-text {
+  color: $gold-yellow-90;
+  max-width: 280px;
+  text-align: center;
+}
+
+.dropzone__input {
+  display: none;
+}
