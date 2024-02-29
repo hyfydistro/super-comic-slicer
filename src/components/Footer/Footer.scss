@@ -156,9 +156,10 @@ footer {
       display: flex;
       justify-content: center;
       color: $gold-yellow-80;
+      text-decoration: underline;
 
       &:hover {
-        text-decoration: underline;
+        text-decoration: none;
       }
     }
   }
@@ -171,9 +172,10 @@ footer {
 
     a {
       color: $gold-yellow-50;
+      text-decoration: underline;
 
       &:hover {
-        text-decoration: underline;
+        text-decoration: none;
       }
 
       &:active {
