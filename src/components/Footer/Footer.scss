@@ -52,6 +52,8 @@ footer {
   }
 
   .icon {
+    width: 42px;
+    height: 42px;
     transition: transform 250ms ease-in-out;
 
     &:hover {
@@ -67,11 +69,6 @@ footer {
     fill: $gold-yellow-70 !important;
   }
 
-  .icon {
-    width: 42px;
-    height: 42px;
-  }
-
   #copy-link {
     display: none;
   }
@@ -82,11 +79,19 @@ footer {
     @include mq-small {
       margin-bottom: $space-lv-2-mobile;
     }
-  }
 
-  .contribute-icon-container {
-    display: flex;
-    align-items: center;
+    .contribute-icon-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .contribute-text {
+      margin-left: $space-half-desktop;
+      color: $gold-yellow-80;
+      position: relative;
+      cursor: pointer;
+      transition: transform 250ms ease-in-out;
+    }
   }
 
   .contribute-icon-container:hover .contribute-text {
@@ -101,13 +106,6 @@ footer {
     fill: $gold-yellow-70 !important;
   }
 
-  .contribute-text {
-    margin-left: $space-half-desktop;
-    color: $gold-yellow-80;
-    position: relative;
-    cursor: pointer;
-    transition: transform 250ms ease-in-out;
-  }
 
   .translation-link {
     display: block;
@@ -129,58 +127,55 @@ footer {
   .donate-image {
     width: 150px;
     height: 42px;
-  }
-
-  .donate-image {
     transition: transform 100ms ease-in-out;
 
     &:hover {
       transform: translateY(-4px);
     }
   }
+}
 
-  .contact-container {
-    margin-bottom: $space-lv-2-desktop;
+.contact-container {
+  margin-bottom: $space-lv-2-desktop;
 
-    @include mq-small {
-      margin-bottom: $space-lv-2-mobile;
-    }
-
-    small {
-      display: block;
-      color: $warm-black-40;
-      margin-bottom: $space-half-desktop;
-    }
-
-    a {
-      display: flex;
-      justify-content: center;
-      color: $gold-yellow-80;
-      text-decoration: underline;
-
-      &:hover {
-        text-decoration: none;
-      }
-    }
+  @include mq-small {
+    margin-bottom: $space-lv-2-mobile;
   }
 
-  .footer-notes {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    color: $gold-yellow-50;
-
-    a {
-      color: $gold-yellow-50;
-      text-decoration: underline;
-
-      &:hover {
-        text-decoration: none;
-      }
-
-      &:active {
-        color: $gold-yellow-60;
-      }
-    }
+  small {
+    display: block;
+    color: $warm-black-40;
+    margin-bottom: $space-half-desktop;
   }
+}
+
+.contact-container a {
+  display: flex;
+  justify-content: center;
+  color: $gold-yellow-80;
+  text-decoration: underline;
+}
+
+.footer-notes a {
+  color: $gold-yellow-50;
+  text-decoration: underline;
+}
+
+.contact-container a:hover {
+  text-decoration: none;
+}
+
+.footer-notes {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: $gold-yellow-50;
+}
+
+.footer-notes a:hover {
+  text-decoration: none;
+}
+
+.footer-notes a:active {
+  color: $gold-yellow-60;
 }
