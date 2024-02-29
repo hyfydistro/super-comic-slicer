@@ -1,0 +1,26 @@
+@use "../../../../styles/base/index" as *;
+@use "../../../../styles/utils/index" as *;
+
+// .output-image {
+//   width: 164px;
+//   height: 532px;
+//   margin-left: $space-lv-2-desktop;
+// }
+
+.output-image {
+  width: 178px;
+  height: 284.8px;
+  margin-right: $space-lv-1-desktop;
+  margin-bottom: $space-lv-1-desktop;
+  @include mq-small {
+      width: 161px;
+      height: 501.2px;
+      margin-right: $space-lv-1-mobile;
+      margin-bottom: $space-lv-1-mobile;
+  }
+}
+
+.output-image img {
+  width: 178px;
+  height: 284.8px;
+}
