@@ -12,7 +12,7 @@ An artist's long comic page cutter into their desired webcomic platform.
 - Scale to optimize (or expand to lossless pixels)
 - Zip folder
 
-**Sample**
+### Sample
 ![splash](https://github.com/hyfydistro/super-comic-slicer/assets/24542308/385d507e-31c4-46a1-8f9a-52a2154631b7)
 
 ### Supports
@@ -31,7 +31,7 @@ Screenreaders will not be supported.
 - Service Worker [PENDING]
 - Offline app experience [PENDING]
 
-### Target Devices
+#### Target Devices
 - tablet
 - desktop (Window Desktop App WIP via Tauriel)
 
@@ -52,7 +52,7 @@ npm install
 Note: I work on windows, so cross-env is required to be implemented in the future.
 
 ## Feedbacks
-Send me an DM here: hyfydistro@gmail.com
+Send me an DM to my email hyfydistro@gmail.com or at Twitter @hyfydistro.
 
 ## TODO List
 
