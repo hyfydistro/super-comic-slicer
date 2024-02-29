@@ -54,6 +54,12 @@ Note: I work on windows, so cross-env is required to be implemented in the futur
 ## Feedbacks
 Send me an DM to my email hyfydistro@gmail.com or at Twitter @hyfydistro.
 
+## Translations
+
+[google sheet tranlsation open to fill up.](https://docs.google.com/spreadsheets/d/1HgGwzr13YISx56oih66LNoYBX6zEBpQkAjTMmKkit4E/edit?usp=sharing)
+
+Please DM me if you can't access it or if a translation set is finished. Lots appreciated!
+
 ## TODO List
 
 ### Phases
@@ -114,11 +120,14 @@ Optimizations:
 - use useCallback on functions to prevent re-renders
 
 User Experience:
-- [ ] loading component
+- [ ] skeleton loading component
 - [ ] sw
 
 NOTE:
 - dnd-kit has 1* moderate severity vulnerability.
+
+random package reminder maybe?
+https://mhnpd.github.io/react-loader-spinner/docs/components/watch
 
 ## FAQ
 Q. How large can a file be in client side?
