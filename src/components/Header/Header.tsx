@@ -13,7 +13,8 @@ function Header(): ReactElement {
           <img className="header-main__logo" src={SCSLogo} alt="logo" />
         </NavLink>
 
-        <ul className="header-main__list">
+        {/* // TODO Phase #3 */}
+        {/* <ul className="header-main__list">
           <li>
             <NavLink
               to="/"
@@ -30,7 +31,7 @@ function Header(): ReactElement {
               About
             </NavLink>
           </li>
-        </ul>
+        </ul> */}
       </nav>
     </header>
   );
