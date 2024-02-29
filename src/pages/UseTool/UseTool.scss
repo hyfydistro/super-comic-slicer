@@ -16,4 +16,38 @@ main {
   p {
     margin-bottom: $space-lv-1-desktop;
   }
+
+  .slice-btn {
+    outline: none;
+    padding: $font-base-desktop calc($font-base-desktop * 2);
+    font-size: calc($font-size-large * $font-base-desktop);
+
+    @include mq-small {
+      padding: $font-base-mobile calc($font-base-mobile * 2);
+      font-size: calc($font-size-large * $font-base-mobile);
+    }
+
+    // * Hotfix: center the text vertically
+    line-height: 0.8;
+    color: $gold-yellow-60;
+    border: 2px solid $warm-black-80;
+    border-radius: 15px;
+    background-color: $warm-black-80;
+
+    &:hover {
+      background-color: $superman-red-50;
+      border: 2px solid $superman-red-50;
+    }
+
+    &:active {
+      background-color: $superman-red-60;
+      border: 2px solid $superman-red-50;
+    }
+  }
+
+  .slice-btn-container {
+    display: flex;
+    justify-content: center;
+
+  }
 }
