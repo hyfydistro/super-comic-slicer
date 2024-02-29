@@ -46,6 +46,8 @@ function CheckboxTextInput({ label, example, editType, handleFileNameEdits, rege
   useEffect(() => {
     if (isDisabled === false) {
       inputTextRef.current?.focus();
+    } else {
+      setValue("");
     }
   }, [isDisabled]);
 

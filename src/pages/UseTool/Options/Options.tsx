@@ -16,8 +16,7 @@ type IProps = {
 };
 
 function Options({ handleSelectedFileExtension, handleSelectedSquashLevel, handleFileNameEdits }: IProps): ReactElement {
-  // const [isOpen, setIsOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <section className="options-container">
@@ -47,9 +46,10 @@ function Options({ handleSelectedFileExtension, handleSelectedSquashLevel, handl
               handleSelectedSquashLevel={handleSelectedSquashLevel}
             />
 
-            <FileNameEdits
+            {/* // TODO PHASE #2 */}
+            {/* <FileNameEdits
               handleFileNameEdits={handleFileNameEdits}
-            />
+            /> */}
           </div>
         </div>
       </div>
