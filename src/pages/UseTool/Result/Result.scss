@@ -12,6 +12,7 @@
     padding: $space-lv-1-desktop 32px;
     display: flex;
     flex-wrap: wrap;
+
     @include mq-small {
       padding: $space-lv-1-mobile 32px;
     }
