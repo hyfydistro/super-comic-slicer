@@ -9,6 +9,7 @@ import Options from './Options/Options';
 import Result from './Result/Result';
 
 import "./UseTool.scss";
+import Loader from '../../components/Loader/Loader';
 
 function UseTool(): ReactElement {
   const [data, setData] = useState<IDataImage[]>([]);
@@ -18,6 +19,7 @@ function UseTool(): ReactElement {
   const [startFrom, setStartFrom] = useState<number>(0)
   const [suffix, setSuffix] = useState<string>("");
   const [prefix, setPrefix] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
   const [processedImages, setProcessedImaged] = useState<string[]>([]);
   // Alert Messages
   const [hasSelectFormError, setHasSelectFormError] = useState(false);
@@ -90,8 +92,9 @@ function UseTool(): ReactElement {
       setTimeout(() => setHasSelectFormError(false), ALERT_MESSAGE_TIMER);
     }
 
-    // TODO
-    // add animation
+    // Animation
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 1500);
 
     // begin processing data/results
     processResults();
@@ -325,13 +328,19 @@ function UseTool(): ReactElement {
         />
 
         <div className="slice-btn-container">
-          <button
-            className="slice-btn"
-            onClick={handleBeginSlice}
-          >
-            Begin Slice!
-          </button>
-      </div>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <button
+              className="slice-btn"
+              onClick={handleBeginSlice}
+            >
+              Begin Slice!
+            </button>
+          )}
+        </div>
+
+
 
       {/* ALERT MESSAGES HERE */}
       {hasDataError && (

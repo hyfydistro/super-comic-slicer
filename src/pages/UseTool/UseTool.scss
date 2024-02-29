@@ -48,6 +48,10 @@ main {
   .slice-btn-container {
     display: flex;
     justify-content: center;
+    margin-bottom: $space-lv-1-desktop;
 
+    @include mq-small {
+      margin-bottom: $space-lv-1-mobile;
+    }
   }
 }

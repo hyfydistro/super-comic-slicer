@@ -2,9 +2,11 @@
 @use "../../../styles/utils/index" as *;
 
 .result-container {
+  margin-top: $space-lv-2-desktop;
   margin-bottom: $space-lv-2-desktop;
 
   @include mq-small {
+      margin-top: $space-lv-2-mobile;
       margin-bottom: $space-lv-2-mobile;
   }
 
