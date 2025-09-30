@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const postcssPresetEnv = require("postcss-preset-env");
 const copyPlugin = require("copy-webpack-plugin");
-const { InjectManifest } = require("workbox-webpack-plugin");
+// const { InjectManifest } = require("workbox-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -97,22 +97,30 @@ module.exports = {
           {
             from: "public/assets/images/*.png",
             to: "assets/images/[name][ext]"
-          }
+          },
+          /*
+          * Alternative way to add 'sw.js' file with fewer options
+          * in replacement of 'InjectManifest' constructor.
+          */
+          {
+            from: path.resolve("public/sw.js"),
+            to: path.resolve("dist")
+          },
         ]
     }),
-    // !! Ignore error message from use `InjectManifest` (See README for more info on the matter).
-    new InjectManifest({
-      swSrc: "/public/sw.js",
-      swDest:"sw.js",
-      maximumFileSizeToCacheInBytes: 5000000,
-      exclude: [
-        /\.map$/,
-        /manifest$/,
-        /\.htaccess$/,
-        /service-worker\.js$/,
-        /sw\.js$/,
-      ]
-    })
+    // !! Ineffective warning message from use `InjectManifest` (See README 'Warnings' for more info on the matter). Although nothing to worry about it interrupts development process. This will be comment until future fixes.
+    // new InjectManifest({
+    //   swSrc: "/public/sw.js",
+    //   swDest:"sw.js",
+    //   maximumFileSizeToCacheInBytes: 5000000,
+    //   exclude: [
+    //     /\.map$/,
+    //     /manifest$/,
+    //     /\.htaccess$/,
+    //     /service-worker\.js$/,
+    //     /sw\.js$/,
+    //   ]
+    // })
   ],
   resolve: {
     extensions: [".js", ".ts", ".tsx"]
