@@ -51,6 +51,15 @@ npm install
 
 Note: I work on windows, so cross-env is required to be implemented in the future.
 
+## Warnings
+The following warning can be ignored. The error message revolves around `--watch` line with the `workbox-webpack-plugin`.
+```
+WARNING in InjectManifest has been called multiple times, perhaps due to running webpack in --watch mode. The precache manifest generated after the first call may be inaccurate! Please see https://github.com/GoogleChrome/workbox/issues/1790 for more information.
+```
+
+[source#01](https://github.com/GoogleChrome/workbox/issues/2826)
+[source#02](https://github.com/GoogleChrome/workbox/issues/1790)
+
 ## Feedbacks
 Send me an DM to my email hyfydistro@gmail.com or at Twitter @hyfydistro.
 
