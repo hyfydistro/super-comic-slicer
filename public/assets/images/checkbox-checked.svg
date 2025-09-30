@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-14144.5,-13)">
+        <g id="input-checkbox-checked" serif:id="input-checkbox checked" transform="matrix(0.909091,0,0,0.833333,1568.14,2.16667)">
+            <rect x="13834" y="13" width="33" height="36" style="fill:none;"/>
+            <clipPath id="_clip1">
+                <rect x="13834" y="13" width="33" height="36"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <g transform="matrix(0.54,0,0,0.611321,12431.1,-1580.14)">
+                    <path d="M2656,2614.3C2656,2611.38 2653.54,2609 2650.5,2609L2606.5,2609C2603.46,2609 2601,2611.38 2601,2614.3L2601,2656.7C2601,2659.62 2603.46,2662 2606.5,2662L2650.5,2662C2653.54,2662 2656,2659.62 2656,2656.7L2656,2614.3Z" style="fill:none;stroke:rgb(147,127,74);stroke-width:8px;"/>
+                </g>
+                <g id="checkbox-00-neutral.svg" transform="matrix(0.0530357,0,0,0.0578571,13850.9,31)">
+                    <g transform="matrix(1,0,0,1,-400,-400)">
+                        <g id="Interface---Checkbox_Check" serif:id="Interface / Checkbox_Check">
+                            <path id="Vector" d="M366.667,500L266.667,400" style="fill:none;fill-rule:nonzero;stroke:rgb(147,127,74);stroke-width:66.67px;stroke-linejoin:round;stroke-miterlimit:4;"/>
+                            <path id="Vector1" serif:id="Vector" d="M366.667,500L533.333,300" style="fill:none;fill-rule:nonzero;stroke:rgb(147,127,74);stroke-width:66.67px;stroke-linejoin:round;stroke-miterlimit:4;"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

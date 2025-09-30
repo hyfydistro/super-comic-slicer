@@ -1,0 +1,26 @@
+@use "../../../styles/base/index" as *;
+@use "../../../styles/utils/index" as *;
+
+.result-container {
+  margin-top: $space-lv-2-desktop;
+  margin-bottom: $space-lv-2-desktop;
+
+  @include mq-small {
+      margin-top: $space-lv-2-mobile;
+      margin-bottom: $space-lv-2-mobile;
+  }
+
+  .result {
+    padding: $space-lv-1-desktop 32px;
+    display: flex;
+    flex-wrap: wrap;
+
+    @include mq-small {
+      padding: $space-lv-1-mobile 32px;
+    }
+  }
+}
+
+#canvas {
+  display: none;
+}

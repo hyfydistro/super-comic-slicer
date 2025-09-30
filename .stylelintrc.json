@@ -1,0 +1,16 @@
+{
+    "extends": ["stylelint-config-standard-scss"],
+    "rules": {
+        "import-notation": "string",
+        "comment-empty-line-before": null,
+        "custom-property-empty-line-before": null,
+        "color-function-notation": "modern",
+        "hue-degree-notation": "angle",
+        "custom-property-pattern": null,
+        "selector-class-pattern": null,
+        "scss/dollar-variable-empty-line-before": null,
+        "scss/double-slash-comment-empty-line-before": null,
+        "scss/dollar-variable-colon-space-after": "at-least-one-space",
+        "scss/dollar-variable-pattern": "(\\w|\\d|\\$)+(\\w|\\d|-)+"
+    }
+}
