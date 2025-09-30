@@ -100,10 +100,11 @@ module.exports = {
           }
         ]
     }),
+    // !! Ignore error message from use `InjectManifest` (See README for more info on the matter).
     new InjectManifest({
       swSrc: "/public/sw.js",
       swDest:"sw.js",
-      // maximumFileSizeToCacheInBytes: 5000000,
+      maximumFileSizeToCacheInBytes: 5000000,
       exclude: [
         /\.map$/,
         /manifest$/,
@@ -118,10 +119,10 @@ module.exports = {
   },
   devServer: {
     watchFiles: ["src/**/*"],
-    // devMiddleware: {
-    //   writeToDisk: true,
-    //   publicPath: path.resolve(__dirname, "src"),
-    // },
+    devMiddleware: {
+      writeToDisk: true, // serve file from a directory (i.e."dist")
+      publicPath: path.resolve(__dirname, "src"),
+    },
     // hot: true,
     port: 9000,
     // open: true,
@@ -131,4 +132,3 @@ module.exports = {
     // historyApiFallback: { index: "popup.html" }
   }
 };
-

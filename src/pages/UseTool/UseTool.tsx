@@ -1,4 +1,4 @@
-import { ReactElement, useState, MouseEvent, useRef } from 'react';
+import { ReactElement, useState, MouseEvent, useRef, RefObject } from 'react';
 import { EDIT_TYPE, IDataImage, MESSAGE_TYPE } from '../../models/utils';
 import { ALERT_MESSAGE_TIMER, alertMessages } from '../../models/constants';
 
@@ -365,7 +365,7 @@ function UseTool(): ReactElement {
       )}
 
         <Result
-          canvasRef={canvasRef}
+          canvasRef={canvasRef as RefObject<HTMLCanvasElement>}
           processedImages={processedImages}
         />
       </article>
